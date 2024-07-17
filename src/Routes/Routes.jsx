@@ -19,6 +19,7 @@ import Notification from "../Pages/Notification.jsx";
 import ProjectDetails from "../Pages/ProjectDetails.jsx";
 import SurveyComment from "../Pages/SurveyComment.jsx";
 import SurveyBasedUser from "../Pages/SurveyBasedUser.jsx";
+import Login from "../Pages/Auth/Login.jsx";
 
 
 export const router = createBrowserRouter([
@@ -108,6 +109,11 @@ export const router = createBrowserRouter([
             {
                 path: '/survey-user/id',
                 element: <SurveyBasedUser/>,
+            },
+
+            {
+                path: '/auth/login',
+                element: <Login/>,
             },
         ]
     },

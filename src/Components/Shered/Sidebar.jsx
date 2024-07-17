@@ -10,6 +10,8 @@ import { RiFeedbackLine } from 'react-icons/ri'
 import { SiHomeassistantcommunitystore } from 'react-icons/si'
 import { Link, NavLink } from 'react-router-dom'
 import { RiBarChart2Line } from "react-icons/ri";
+import {LogoutOutlined} from "@ant-design/icons";
+import {CiLogout} from "react-icons/ci";
 const Sidebar = () => {
     const [openIndex, setOpenIndex] = useState(null);
     const contentRefs = useRef([]);
@@ -80,7 +82,18 @@ const Sidebar = () => {
                 },
             ]
         },
+
+        // {
+        //     path: '/logout',
+        //     label: 'Log Out',
+        //     icon: <LogoutOutlined />,
+        //     sub_menu: false
+        // },
     ]
+    const handleLogOut = ()=>{
+        navigate("/auth")
+        window.location.reload();
+    }
     const toggleAccordion = (index) => {
         setOpenIndex((prevIndex) => (prevIndex === index ? null : index));
     };
@@ -142,6 +155,17 @@ const Sidebar = () => {
                     })
                 }
             </div>
+
+
+            <div
+                onClick={handleLogOut}
+                className="flex text-[#FDFDFD] items-center gap-3 cursor-pointer px-6 hover:bg-yellow-500 py-2 mt-10 transition-all"
+            >
+                <CiLogout size={24} color="#FDFDFD"/>
+                Log Out
+            </div>
+
+
         </div>
     )
 }
