@@ -97,7 +97,7 @@ const Sidebar = () => {
     return (
         <div id='sidebar' className=' w-full h-full mt-10'>
             <div className="log mb-5">
-                <Link to={`/`}><img src="../../../src/assets/logo.png" alt="Logo"/></Link>
+                <Link to={`/`}><img src="../../../src/assets/logo.png" alt="Logo" /></Link>
             </div>
 
             <div className='start-start flex-col gap-5 text-white'>
@@ -110,21 +110,21 @@ const Sidebar = () => {
                                 <div className='start-center gap-2 w-full py-2 bg-[var(--color-3)] px-4 cursor-pointer'>
                                     {item?.icon}
                                     {item?.label}
-                                    <IoIosArrowForward/>
+                                    <IoIosArrowForward />
                                 </div>
                                 <div ref={(el) => (contentRefs.current[index] = el)}
-                                     className=' accordion-content overflow-hidden transition-max-height duration-300 ease-in-out cursor-pointer mt-1 bg-[var(--color-1)]'
-                                     style={{
-                                         maxHeight: openIndex === index ? `${contentRefs.current[index]?.scrollHeight}px` : '0px'
-                                     }}
+                                    className=' accordion-content overflow-hidden transition-max-height duration-300 ease-in-out cursor-pointer mt-1 bg-[var(--color-1)]'
+                                    style={{
+                                        maxHeight: openIndex === index ? `${contentRefs.current[index]?.scrollHeight}px` : '0px'
+                                    }}
                                 >
                                     {
                                         item?.sub_menu?.map((sub_item, index) => <NavLink to={sub_item?.path}
-                                                                                          key={index}
-                                                                                          className=' start-center px-4 gap-2 w-full py-2 bg-[var(--color-3)] cursor-pointer my-1'>
-                                                {sub_item?.icon}
-                                                {sub_item?.label}
-                                            </NavLink>
+                                            key={index}
+                                            className=' start-center px-4 gap-2 w-full py-2 bg-[var(--color-3)] cursor-pointer my-1'>
+                                            {sub_item?.icon}
+                                            {sub_item?.label}
+                                        </NavLink>
                                         )
                                     }
                                 </div>
