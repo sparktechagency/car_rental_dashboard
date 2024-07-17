@@ -18,6 +18,7 @@ import SurveyResult from "../Pages/SurveyResult";
 import Notification from "../Pages/Notification.jsx";
 import ProjectDetails from "../Pages/ProjectDetails.jsx";
 import SurveyComment from "../Pages/SurveyComment.jsx";
+import ProjectUsers from "../Pages/ProjectUsers.jsx";
 
 
 export const router = createBrowserRouter([
@@ -94,6 +95,10 @@ export const router = createBrowserRouter([
                 element: <ProjectDetails />,
             },
 
+            {
+                path: '/project-users/:id',
+                element: <ProjectUsers/>,
+            },
             {
                 path: '/survey-comments/:id',
                 element: <SurveyComment/>,

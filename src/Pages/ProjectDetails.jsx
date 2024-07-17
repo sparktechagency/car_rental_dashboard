@@ -1,12 +1,13 @@
 import React, { useState } from 'react'
 import { IoArrowBackSharp } from 'react-icons/io5'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { Input, Select } from "antd";
 import { FaPlus } from "react-icons/fa6";
 import { CiSearch } from "react-icons/ci";
 import Chart from "../Pages/Chart.jsx"
 const ProjectDetails = () => {
     const data = ['https://i.ibb.co/0sF5Fk3/images-19.jpg', 'https://i.ibb.co/YpR8Mbw/Ellipse-307.png', 'https://i.ibb.co/JFZhZ7m/Ellipse-311.png', 'https://i.ibb.co/5cXN4Bw/Ellipse-310.png', 'https://i.ibb.co/gz2CbVj/1-intro-photo-final.jpg', 'https://i.ibb.co/7xc44sq/profile-picture-smiling-young-african-260nw-1873784920.webp', 'https://i.ibb.co/sQPHfnR/images-20.jpg']
+    const navigate = useNavigate()
     return (
         <div className='bg-[var(--color-7)] p-4 rounded-md'>
             <div className='between-center px-3 my-2 pt-5 pb-5'>
@@ -50,7 +51,9 @@ const ProjectDetails = () => {
                 {
                     data.map(item => <img className='w-20 h-20 rounded-full -ml-8' key={item} src={item} alt="" />)
                 }
-                <div className='h-20 w-20 rounded-full bg-black bg-opacity-60 -ml-20 flex justify-center items-center text-white cursor-pointer select-none
+                <div onClick={()=>{
+                    navigate('/project-users/2386')
+                }} className='h-20 w-20 rounded-full bg-black bg-opacity-60 -ml-20 flex justify-center items-center text-white cursor-pointer select-none
                 '>
                     65+
                 </div>
