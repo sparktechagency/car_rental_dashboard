@@ -20,6 +20,7 @@ import ProjectDetails from "../Pages/ProjectDetails.jsx";
 import SurveyComment from "../Pages/SurveyComment.jsx";
 import SurveyBasedUser from "../Pages/SurveyBasedUser.jsx";
 import Login from "../Pages/Auth/Login.jsx";
+import ProjectUsers from "../Pages/ProjectUsers.jsx";
 
 
 export const router = createBrowserRouter([
@@ -92,12 +93,16 @@ export const router = createBrowserRouter([
             },
 
             {
-                path: '/project-details/id',
+                path: '/project-details/:id',
                 element: <ProjectDetails />,
             },
 
             {
-                path: '/survey-comments/id',
+                path: '/project-users/:id',
+                element: <ProjectUsers/>,
+            },
+            {
+                path: '/survey-comments/:id',
                 element: <SurveyComment/>,
             },
 
@@ -115,6 +120,10 @@ export const router = createBrowserRouter([
                 path: '/auth/login',
                 element: <Login/>,
             },
+            // {
+            //     path: '/line-chart/:id',
+            //     element: <Chart/>,
+            // },
         ]
     },
 ]);
