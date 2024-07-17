@@ -90,19 +90,19 @@ export const router = createBrowserRouter([
             },
 
             {
-                path: '/project-details/id',
+                path: '/project-details/:id',
                 element: <ProjectDetails />,
             },
 
             {
-                path: '/survey-comments/id',
+                path: '/survey-comments/:id',
                 element: <SurveyComment/>,
             },
 
-            {
-                path: '/line-chart/id',
-                element: <chart/>,
-            },
+            // {
+            //     path: '/line-chart/:id',
+            //     element: <Chart/>,
+            // },
         ]
     },
 ]);
