@@ -18,6 +18,7 @@ import SurveyResult from "../Pages/SurveyResult";
 import Notification from "../Pages/Notification.jsx";
 import ProjectDetails from "../Pages/ProjectDetails.jsx";
 import SurveyComment from "../Pages/SurveyComment.jsx";
+import SurveyBasedUser from "../Pages/SurveyBasedUser.jsx";
 
 
 export const router = createBrowserRouter([
@@ -102,6 +103,11 @@ export const router = createBrowserRouter([
             {
                 path: '/line-chart/id',
                 element: <chart/>,
+            },
+
+            {
+                path: '/survey-user/id',
+                element: <SurveyBasedUser/>,
             },
         ]
     },
