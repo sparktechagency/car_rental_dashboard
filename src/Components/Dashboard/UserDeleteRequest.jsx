@@ -44,7 +44,7 @@ const sarvayData = [
     { name: 'Customer Feedback', id: '8' },
     { name: 'Customer Feedback', id: '9' },
 ]
-const SurveyRequest = () => {
+const UserDeleteRequest = () => {
     const [openAllowModal, setOpenAllowModal] = useState(false)
     const [selectedID, setSelectedID] = useState([])
     // console.log(openAllowModal)
@@ -83,24 +83,6 @@ const SurveyRequest = () => {
             }
         },
 
-        {
-            title: 'Actions',
-            dataIndex: 'key',
-            key: 'key',
-            // render: (_, record) => {
-            //     return (<div className='start-center gap-1'>
-            //         <button onClick={() => setOpenAllowModal(true)} className='px-4 py-2 rounded-3xl text-white font-semibold bg-green-600'> Allow </button>
-            //     </div>)
-            // }
-            render: (_, record) => {
-                return (<div onClick={() => setOpenAllowModal(true)} className='start-center text-2xl gap-1'>
-                    {/*<Link to={`/add-project`}>*/}
-                        <FaEdit className='cursor-pointer'/>
-                    {/*</Link>*/}
-                </div>)
-            }
-        },
-
 
     ];
     return (
@@ -111,31 +93,18 @@ const SurveyRequest = () => {
                 footer={false}
                 open={openAllowModal}
                 onCancel={() => setOpenAllowModal(false)}
+                width={400}
             >
-                <div className=' capitalize'>
-                    <p className='mb-5 text-left text-xl my-2'>Assign Project</p>
-                    <div className='grid grid-cols-3 gap-4 justify-start items-center '>
-                        {
-                            sarvayData?.map((item) => <div key={item?.id} onClick={() => {
-                                const findId = selectedID.find(id => item?.id === id)
-                                if (findId) {
-                                    const filterID = selectedID.filter(id => item?.id !== id)
-                                    setSelectedID(filterID)
-                                } else {
-                                    setSelectedID([...selectedID, item?.id])
-                                }
-                            }} className={`w-full p-4 py-6 rounded-md text-white font-semibold text-center cursor-pointer select-none ${selectedID.includes(item?.id) ? 'bg-[#BD8E05]' : 'bg-[var(--color-2)]'}`}>
-                                <p className='text-base'>{item?.name}</p>
-                            </div>)
-                        }
+                    <div style={{textAlign: 'center', height: '100px'}} className='capitalize '>
+                        <div className='mb-7'>
+                            <p>Do you want to delete the user?</p>
+                        </div>
+                        <button className='p-3 px-8 mr-3 bg-[var(--color-2)]'>Yes</button>
+                        <button className='p-3 px-8 mr-3 bg-[var(--color-2)]'>No</button>
                     </div>
-                    <button className='p-2 mt-5 w-full bg-[var(--color-2)]'>
-                        save
-                    </button>
-                </div>
             </Modal>
         </div>
     )
 }
 
-export default SurveyRequest
+export default UserDeleteRequest

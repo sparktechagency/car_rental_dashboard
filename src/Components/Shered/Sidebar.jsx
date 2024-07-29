@@ -8,13 +8,22 @@ import { LuFilePlus } from 'react-icons/lu'
 import { MdDashboard, MdEvent } from 'react-icons/md'
 import { RiFeedbackLine } from 'react-icons/ri'
 import { SiHomeassistantcommunitystore } from 'react-icons/si'
-import { Link, NavLink } from 'react-router-dom'
+import {Link, NavLink, useNavigate} from 'react-router-dom'
 import { RiBarChart2Line } from "react-icons/ri";
 import {LogoutOutlined} from "@ant-design/icons";
 import {CiLogout} from "react-icons/ci";
+import SuperAdminDashboard from "../../Pages/SuperAdmin/SuperAdminDashboard.jsx";
+import SCompanyManage from "../../Pages/SuperAdmin/CompanyManage.jsx";
+import SCompanyDetails from "../../Pages/SuperAdmin/SCompanyDetails.jsx";
+
+
+
 const Sidebar = () => {
     const [openIndex, setOpenIndex] = useState(null);
     const contentRefs = useRef([]);
+
+    const admin = false;
+
     const links = [
         {
             path: '/',
@@ -82,6 +91,29 @@ const Sidebar = () => {
                 },
             ]
         },
+        admin && {
+            path: '/super-admin',
+            label: 'Dashboard',
+            icon: <MdDashboard />,
+            sub_menu: false,
+        },
+
+
+        admin &&{
+            path: '/super-admin/company-manage',
+            label: 'Manage Company',
+            sub_menu: false,
+            icon: <SiHomeassistantcommunitystore />,
+            condition: admin,
+        },
+
+        admin &&{
+            path: '/super-admin/company-details',
+            label: 'Company Details',
+            sub_menu: false,
+            icon: <BsArchive />,
+            condition: admin,
+        },
 
         // {
         //     path: '/logout',
@@ -90,9 +122,10 @@ const Sidebar = () => {
         //     sub_menu: false
         // },
     ]
+
+    const navigate = useNavigate();
     const handleLogOut = ()=>{
-        navigate("/auth")
-        window.location.reload();
+        navigate("/auth/login")
     }
     const toggleAccordion = (index) => {
         setOpenIndex((prevIndex) => (prevIndex === index ? null : index));

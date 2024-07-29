@@ -15,8 +15,8 @@ const Header = () => {
             </Link>
             </div>
             <div onClick={()=>navigate('/profile')} className='end-center gap-1 border-gray-400 p-[2px] px-4 rounded-md cursor-pointer'>
-                <img className='h-10 w-10 rounded-full' src="https://i.ibb.co/NsQSrWd/images-15.jpg" alt="" />
-                <p className='font-medium'>Mohammad Jusef</p>
+                <img className='h-10 w-10 rounded-full' src="https://dcassetcdn.com/design_img/2531172/542774/542774_13559578_2531172_d07764e6_image.png" alt="" />
+                <p className='font-medium'>Xyz Company</p>
             </div>
         </div>
     )

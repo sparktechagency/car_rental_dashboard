@@ -78,7 +78,7 @@ const DriverGrowth = () => {
     return (
         <>
             <div className='between-center'>
-                <p className='text-2xl'>Driver Growth</p>
+                <p className='text-2xl'>Survey Response</p>
                 <Select
                     defaultValue="2024"
                     style={{ width: 120 }}

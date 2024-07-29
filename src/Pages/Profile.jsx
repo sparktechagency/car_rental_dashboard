@@ -1,9 +1,13 @@
 import { RiEditLine } from "react-icons/ri";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa6";
 import { Button, Form, Input } from "antd";
 import { CiEdit } from "react-icons/ci";
+import {Link} from "react-router-dom";
+import {IoArrowBackSharp} from "react-icons/io5";
 // import Swal from "sweetalert2";
+
+const admin = false;
 const Profile = () => {
     const [image, setImage] = useState();
     const [form] = Form.useForm()
@@ -49,13 +53,20 @@ const Profile = () => {
 //   }, [user])
     return (
         <div>
+            {(admin &&
+            <div className='start-center gap-2 mb-3 p-5'>
+                <Link to={-1}
+                      className='bg-[var(--color-2)] py-1 px-2 rounded-md start-center gap-1 text-white'><IoArrowBackSharp/>back</Link>
+                <p className='text-xl'>Admin Profile</p>
+            </div>
+            )}
             <div className='container pb-16'>
 
-                <div className='bg-base py-9 px-10 rounded flex items-center justify-center flex-col gap-6' >
+                <div className='bg-base py-9 px-10 rounded flex items-center justify-center flex-col gap-6'>
                     <div className='relative w-[140px] h-[124px] mx-auto'>
-                        <input type="file" onInput={handleChange} id='img' style={{ display: "none" }} />
+                        <input type="file" onInput={handleChange} id='img' style={{display: "none"}}/>
                         <img
-                            style={{ width: 140, height: 140, borderRadius: "100%" }}
+                            style={{width: 140, height: 140, borderRadius: "100%"}}
                             src={`https://dcassetcdn.com/design_img/2531172/542774/542774_13559578_2531172_d07764e6_image.png`}
                             alt=""
                         />
@@ -76,7 +87,7 @@ const Profile = () => {
                             cursor-pointer
                         '
                             >
-                                <CiEdit color='#929394' />
+                                <CiEdit color='#929394'/>
                             </label>
                         }
 
@@ -106,8 +117,6 @@ const Profile = () => {
                         Change Password
                     </p>
                 </div>
-
-
                 {
                     tab === "Profile"
                         ?
@@ -117,7 +126,8 @@ const Profile = () => {
                                 boxShadow: "rgba(50, 50, 105, 0.15) 0px 2px 5px 0px, rgba(0, 0, 0, 0.05) 0px 1px 1px 0px"
                             }}
                         >
-                            <h1 className='text-center text-secondary leading-7 text-2xl font-medium mb-7'>Edit Company Profile</h1>
+                            <h1 className='text-center text-secondary leading-7 text-2xl font-medium mb-7'>Edit Company
+                                Profile</h1>
                             <Form
                                 onFinish={onEditProfile}
                                 layout="vertical"
@@ -125,7 +135,8 @@ const Profile = () => {
                             >
                                 <Form.Item
                                     name="fullName"
-                                    label={<p className="text-[#919191] text-[16px] leading-5 font-normal">Company Name</p>}
+                                    label={<p className="text-[#919191] text-[16px] leading-5 font-normal">Company
+                                        Name</p>}
                                 >
                                     <Input
                                         style={{
@@ -161,7 +172,8 @@ const Profile = () => {
 
                                 <Form.Item
                                     name="mobileNumber"
-                                    label={<p className="text-[#919191] text-[16px] leading-5 font-normal">Contact Number</p>}
+                                    label={<p className="text-[#919191] text-[16px] leading-5 font-normal">Contact
+                                        Number</p>}
                                 >
                                     <Input
                                         style={{
@@ -195,7 +207,12 @@ const Profile = () => {
                                 </Form.Item>
 
                                 <Form.Item
-                                    style={{ marginBottom: 0, display: "flex", alignItems: "center", justifyContent: "center" }}
+                                    style={{
+                                        marginBottom: 0,
+                                        display: "flex",
+                                        alignItems: "center",
+                                        justifyContent: "center"
+                                    }}
                                 >
                                     <Button
                                         type="primary"
@@ -205,7 +222,7 @@ const Profile = () => {
                                             width: 197,
                                             height: 48,
                                             color: "#FCFCFC",
-                                            background:'#F27405'
+                                            background: '#F27405'
                                         }}
                                         className='font-normal text-[16px] leading-6 bg-primary'
                                     >
@@ -221,7 +238,8 @@ const Profile = () => {
                                 boxShadow: "rgba(50, 50, 105, 0.15) 0px 2px 5px 0px, rgba(0, 0, 0, 0.05) 0px 1px 1px 0px"
                             }}
                         >
-                            <h1 className='text-center text-secondary leading-7 text-2xl font-medium mb-7'>Change Password</h1>
+                            <h1 className='text-center text-secondary leading-7 text-2xl font-medium mb-7'>Change
+                                Password</h1>
                             <Form
                                 layout='vertical'
                                 onFinish={onFinish}
@@ -229,7 +247,8 @@ const Profile = () => {
                             >
                                 <Form.Item
                                     name="current_password"
-                                    label={<p className="text-[#415D71] text-sm leading-5 poppins-semibold">Current Password</p>}
+                                    label={<p className="text-[#415D71] text-sm leading-5 poppins-semibold">Current
+                                        Password</p>}
                                     rules={[
                                         {
                                             required: true,
@@ -261,7 +280,8 @@ const Profile = () => {
                                             message: "Please Enter New Password!"
                                         }
                                     ]}
-                                    label={<p className="text-[#415D71] text-sm leading-5 poppins-semibold">New Password</p>}
+                                    label={<p className="text-[#415D71] text-sm leading-5 poppins-semibold">New
+                                        Password</p>}
                                 >
                                     <Input.Password
                                         style={{
@@ -279,7 +299,8 @@ const Profile = () => {
                                 </Form.Item>
 
                                 <Form.Item
-                                    label={<p className="text-[#415D71] text-sm leading-5 poppins-semibold">Confirm Password</p>}
+                                    label={<p className="text-[#415D71] text-sm leading-5 poppins-semibold">Confirm
+                                        Password</p>}
                                     name="confirm_password"
                                     rules={[
                                         {
@@ -304,7 +325,12 @@ const Profile = () => {
                                 </Form.Item>
                                 {passError && <p className="text-red-600 -mt-4 mb-2">{passError}</p>}
                                 <Form.Item
-                                    style={{ marginBottom: 0, display: "flex", alignItems: "center", justifyContent: "center" }}
+                                    style={{
+                                        marginBottom: 0,
+                                        display: "flex",
+                                        alignItems: "center",
+                                        justifyContent: "center"
+                                    }}
                                 >
                                     <Button
                                         type="primary"
@@ -314,7 +340,7 @@ const Profile = () => {
                                             width: 197,
                                             height: 48,
                                             color: "#FCFCFC",
-                                            background:'#F27405'
+                                            background: '#F27405'
                                         }}
                                         className='font-normal text-[16px] leading-6 bg-primary'
                                     >
