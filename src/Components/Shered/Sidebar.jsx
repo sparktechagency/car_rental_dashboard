@@ -12,9 +12,6 @@ import {Link, NavLink, useNavigate} from 'react-router-dom'
 import { RiBarChart2Line } from "react-icons/ri";
 import {LogoutOutlined} from "@ant-design/icons";
 import {CiLogout} from "react-icons/ci";
-import SuperAdminDashboard from "../../Pages/SuperAdmin/SuperAdminDashboard.jsx";
-import SCompanyManage from "../../Pages/SuperAdmin/CompanyManage.jsx";
-import SCompanyDetails from "../../Pages/SuperAdmin/SCompanyDetails.jsx";
 
 
 
@@ -31,6 +28,14 @@ const Sidebar = () => {
             icon: <MdDashboard />,
             sub_menu: false
         },
+
+        {
+            path: '/income',
+            label: 'Income',
+            icon: <MdDashboard />,
+            sub_menu: false
+        },
+
         {
             path: '/create-project',
             label: 'Create Project',
@@ -75,52 +80,30 @@ const Sidebar = () => {
             icon: <IoSettings />,
             sub_menu: [
                 {
-                    path: '/privacy-policy',
-                    label: 'Privacy Policy',
-                    icon: <></>,
-                },
-                {
-                    path: '/terms',
-                    label: 'Terms & Condition',
-                    icon: <></>,
-                },
-                {
                     path: '/profile',
                     label: 'Profile',
                     icon: <></>,
                 },
+                {
+                    path: '/terms',
+                    label: 'About Us',
+                    icon: <></>,
+                },
+                {
+                    path: '/terms',
+                    label: 'Rules & Regulations',
+                    icon: <></>,
+                },
+                {
+                    path: '/terms',
+                    label: 'Facts',
+                    icon: <></>,
+                },
+                
             ]
         },
-        admin && {
-            path: '/super-admin',
-            label: 'Dashboard',
-            icon: <MdDashboard />,
-            sub_menu: false,
-        },
 
 
-        admin &&{
-            path: '/super-admin/company-manage',
-            label: 'Manage Company',
-            sub_menu: false,
-            icon: <SiHomeassistantcommunitystore />,
-            condition: admin,
-        },
-
-        admin &&{
-            path: '/super-admin/company-details',
-            label: 'Company Details',
-            sub_menu: false,
-            icon: <BsArchive />,
-            condition: admin,
-        },
-
-        // {
-        //     path: '/logout',
-        //     label: 'Log Out',
-        //     icon: <LogoutOutlined />,
-        //     sub_menu: false
-        // },
     ]
 
     const navigate = useNavigate();
@@ -146,20 +129,20 @@ const Sidebar = () => {
                 <Link to={`/`}><img src="../../../src/assets/logo.png" alt="Logo" /></Link>
             </div>
 
-            <div className='start-start flex-col gap-5 text-white'>
+            <div className='start-start flex-col gap-5 text-black'>
                 {
                     links.map((item, index) => {
                         if (item?.sub_menu) {
                             return (<div onClick={() => {
                                 toggleAccordion(index)
                             }} key={index} className='w-full'>
-                                <div className='start-center gap-2 w-full py-2 bg-[var(--color-3)] px-4 cursor-pointer'>
+                                <div className='start-center gap-2 w-full py-2 bg-[var(--color-7)] px-4 cursor-pointer'>
                                     {item?.icon}
                                     {item?.label}
                                     <IoIosArrowForward />
                                 </div>
                                 <div ref={(el) => (contentRefs.current[index] = el)}
-                                    className=' accordion-content overflow-hidden transition-max-height duration-300 ease-in-out cursor-pointer mt-1 bg-[var(--color-1)]'
+                                    className=' accordion-content overflow-hidden transition-max-height duration-300 ease-in-out cursor-pointer mt-1 bg-[var(--color-8)]'
                                     style={{
                                         maxHeight: openIndex === index ? `${contentRefs.current[index]?.scrollHeight}px` : '0px'
                                     }}
@@ -167,7 +150,7 @@ const Sidebar = () => {
                                     {
                                         item?.sub_menu?.map((sub_item, index) => <NavLink to={sub_item?.path}
                                             key={index}
-                                            className=' start-center px-4 gap-2 w-full py-2 bg-[var(--color-3)] cursor-pointer my-1'>
+                                            className=' start-center px-4 gap-2 w-full py-2 bg-[var(--color-7)] cursor-pointer my-1'>
                                             {sub_item?.icon}
                                             {sub_item?.label}
                                         </NavLink>
@@ -178,7 +161,7 @@ const Sidebar = () => {
                         } else {
                             return (
                                 <NavLink
-                                    className='mt-4 start-center gap-2 w-full py-2 bg-[var(--color-3)] px-4 cursor-pointer'
+                                    className='mt-4 start-center gap-2 w-full py-2 bg-[var(--color-7)] px-4 cursor-pointer'
                                     to={item?.path}>
                                     {item?.icon}
                                     {item?.label}
@@ -192,7 +175,7 @@ const Sidebar = () => {
 
             <div
                 onClick={handleLogOut}
-                className="flex text-[#FDFDFD] items-center gap-3 cursor-pointer px-6 hover:bg-yellow-500 py-2 mt-10 transition-all"
+                className="flex text-[#FDFDFD] items-center gap-3 cursor-pointer px-6 hover:bg-white-500 py-2 mt-10 transition-all"
             >
                 <CiLogout size={24} color="#FDFDFD"/>
                 Log Out

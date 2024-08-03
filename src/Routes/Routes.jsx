@@ -1,7 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import Root from "../Pages/Root";
 import App from "../App";
-import TotalSurveyRequest from "../Pages/TotalSurveyRequest";
+import TotalJoinRequest from "../Pages/TotalJoinRequest.jsx";
 import DriverProfile from "../Pages/DriverProfile";
 import UserTable from "../Components/Dashboard/UserTable";
 import PrivacyPolicy from "../Pages/PrivacyPolicy";
@@ -28,6 +28,8 @@ import SCompanyManage from "../Pages/SuperAdmin/CompanyManage.jsx";
 import SCompanyDetails from "../Pages/SuperAdmin/SCompanyDetails.jsx";
 import Otp from "../Pages/Auth/Otp.jsx";
 import UpdatePassword from "../Pages/Auth/UpdatePassword.jsx";
+import SingleUserDetails from "../Pages/SingleUserDetails.jsx";
+import Income from "../Pages/Income.jsx";
 // import Otp from "../Pages/Auth/Otp.jsx";
 
 
@@ -42,8 +44,12 @@ export const router = createBrowserRouter([
                 element: <App />,
             },
             {
-                path: '/total-survey-request',
-                element: <TotalSurveyRequest />,
+                path: '/total-join-request',
+                element: <TotalJoinRequest />,
+            },
+            {
+                path: '/income',
+                element: <Income />,
             },
             {
                 path: '/driver-details/:id',
@@ -139,6 +145,11 @@ export const router = createBrowserRouter([
                 path: '/super-admin/company-details',
                 element: <SCompanyDetails />,
             },
+
+            {
+                path: '/single-user-details/id',
+                element: <SingleUserDetails />,
+            }
 
         ]
     },

@@ -1,5 +1,4 @@
 
-
 import React, { useState, useRef, useMemo, useEffect } from 'react';
 import JoditEditor from 'jodit-react';
 import { Link } from 'react-router-dom';
@@ -21,8 +20,9 @@ const Terms = () => {
     return (
         <>
             <div className='start-center gap-2 mb-3'>
-                <Link to={-1} className='bg-[#ECB206] py-1 px-2 rounded-md start-center gap-1 text-white'><IoArrowBackSharp />back</Link> <p>Terms & Condition</p>
+                <Link to={-1} className='bg-[#3475F1] py-1 px-2 rounded-md start-center gap-1 text-white'><IoArrowBackSharp />back</Link> <p>About Us</p>
             </div>
+            
             <div>
                 <JoditEditor
                     ref={editor}
@@ -34,7 +34,7 @@ const Terms = () => {
                 />
             </div>
             <div className='text-center mt-3'>
-                <button disabled={isLoading} onClick={handleTerms} className='px-8 py-2 rounded-2xl  bg-[#ECB206] text-[var(--color-7)]' >Update</button>
+                <button disabled={isLoading} onClick={handleTerms} className='px-8 py-2 rounded-2xl  bg-[#3475F1] text-[var(--color-7)]' >Update</button>
             </div>
         </>
     )

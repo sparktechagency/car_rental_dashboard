@@ -2,7 +2,7 @@
 import { Link } from 'react-router-dom'
 import '../../App.css'
 import Overview from "../../Components/Dashboard/Overview.jsx";
-import DriverGrowth from "../../Components/Dashboard/DriverGrowth.jsx";
+import DriverGrowth from "../../Components/Dashboard/SubscriptionGrowth.jsx";
 import UserDeleteRequest from "../../Components/Dashboard/UserDeleteRequest.jsx";
 
 const SuperAdminDashboard = () => {

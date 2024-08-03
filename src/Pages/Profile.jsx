@@ -53,13 +53,13 @@ const Profile = () => {
 //   }, [user])
     return (
         <div>
-            {(admin &&
+            {/* {(admin &&
             <div className='start-center gap-2 mb-3 p-5'>
                 <Link to={-1}
                       className='bg-[var(--color-2)] py-1 px-2 rounded-md start-center gap-1 text-white'><IoArrowBackSharp/>back</Link>
                 <p className='text-xl'>Admin Profile</p>
             </div>
-            )}
+            )} */}
             <div className='container pb-16'>
 
                 <div className='bg-base py-9 px-10 rounded flex items-center justify-center flex-col gap-6'>
@@ -93,7 +93,7 @@ const Profile = () => {
 
                     </div>
                     <div className='w-fit'>
-                        <p className=' text-[#575757] text-[24px] leading-[32px] font-semibold  '>{`XYZ Company`}</p>
+                        <p className=' text-[#575757] text-[24px] leading-[32px] font-semibold  '>{`Mr. Admin`}</p>
                     </div>
                 </div>
 
@@ -101,7 +101,7 @@ const Profile = () => {
                     <p
                         onClick={() => handlePageChange("Profile")}
                         className={`
-                        ${tab === "Profile" ? "border-[#F27405] border-b-2 font-semibold text-[#F27405]" : "border-b-2 border-transparent font-normal text-gray-600"}
+                        ${tab === "Profile" ? "border-[#3475F1] border-b-2 font-semibold text-[#3475F1]" : "border-b-2 border-transparent font-normal text-gray-600"}
                         pb-2 cursor-pointer text-[16px] leading-5  
                     `}
                     >
@@ -110,7 +110,7 @@ const Profile = () => {
                     <p
                         onClick={() => handlePageChange("Change Password")}
                         className={`
-                        ${tab === "Change Password" ? "border-[#F27405] border-b-2 font-semibold text-[#F27405]" : "border-b-2 border-transparent font-normal  text-gray-600"}
+                        ${tab === "Change Password" ? "border-[#3475F1] border-b-2 font-semibold text-[#3475F1]" : "border-b-2 border-transparent font-normal  text-gray-600"}
                         pb-2 cursor-pointer text-base leading-[18px]  
                     `}
                     >
@@ -126,7 +126,7 @@ const Profile = () => {
                                 boxShadow: "rgba(50, 50, 105, 0.15) 0px 2px 5px 0px, rgba(0, 0, 0, 0.05) 0px 1px 1px 0px"
                             }}
                         >
-                            <h1 className='text-center text-secondary leading-7 text-2xl font-medium mb-7'>Edit Company
+                            <h1 className='text-center text-secondary leading-7 text-2xl font-medium mb-7'>Edit 
                                 Profile</h1>
                             <Form
                                 onFinish={onEditProfile}
@@ -135,7 +135,7 @@ const Profile = () => {
                             >
                                 <Form.Item
                                     name="fullName"
-                                    label={<p className="text-[#919191] text-[16px] leading-5 font-normal">Company
+                                    label={<p className="text-[#919191] text-[16px] leading-5 font-normal">User
                                         Name</p>}
                                 >
                                     <Input
@@ -148,7 +148,7 @@ const Profile = () => {
                                             outline: "none"
                                         }}
                                         className='text-[16px] leading-5'
-                                        placeholder="XYZ Company"
+                                        placeholder="name123"
                                     />
                                 </Form.Item>
                                 <Form.Item
@@ -166,7 +166,7 @@ const Profile = () => {
                                             outline: "none"
                                         }}
                                         className='text-[16px] leading-5'
-                                        placeholder={`user email`}
+                                        placeholder={`xyz@gmail.com`}
                                     />
                                 </Form.Item>
 
@@ -185,7 +185,7 @@ const Profile = () => {
                                             outline: "none"
                                         }}
                                         className='text-[16px] leading-5'
-                                        placeholder="Enter Contact Number"
+                                        placeholder="+9900700007"
                                     />
                                 </Form.Item>
                                 <Form.Item
@@ -202,7 +202,7 @@ const Profile = () => {
                                             outline: "none"
                                         }}
                                         className='text-[16px] leading-5'
-                                        placeholder="Enter Address"
+                                        placeholder="79/A Joker Vila, Gotham City"
                                     />
                                 </Form.Item>
 
@@ -222,7 +222,7 @@ const Profile = () => {
                                             width: 197,
                                             height: 48,
                                             color: "#FCFCFC",
-                                            background: '#F27405'
+                                            background: '#3475F1'
                                         }}
                                         className='font-normal text-[16px] leading-6 bg-primary'
                                     >
@@ -339,8 +339,8 @@ const Profile = () => {
                                         style={{
                                             width: 197,
                                             height: 48,
-                                            color: "#FCFCFC",
-                                            background: '#F27405'
+                                            color: "#FFFFFF",
+                                            background: '#3475F1'
                                         }}
                                         className='font-normal text-[16px] leading-6 bg-primary'
                                     >

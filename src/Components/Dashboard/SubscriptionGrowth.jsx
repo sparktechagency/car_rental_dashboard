@@ -71,14 +71,14 @@ const items = [
         key: "2026",
     },
 ];
-const DriverGrowth = () => {
+const SubscriptionGrowth = () => {
     const handleChange = (value) => {
         console.log(`selected ${value}`);
     };
     return (
         <>
             <div className='between-center'>
-                <p className='text-2xl'>Survey Response</p>
+                <p className='text-2xl'>Subscription Growth</p>
                 <Select
                     defaultValue="2024"
                     style={{ width: 120 }}
@@ -103,7 +103,7 @@ const DriverGrowth = () => {
                         <XAxis dataKey="name" />
                         <YAxis />
                         <Tooltip />
-                        <Area type="monotone" dataKey="uv" stroke="#ECB206" opacity={1} fillOpacity={1} fill="#ECB206" />
+                        <Area type="monotone" dataKey="uv" stroke="#3475F1" opacity={1} fillOpacity={1} fill="#3475F1" />
                     </AreaChart>
                 </ResponsiveContainer>
             </div>
@@ -111,4 +111,4 @@ const DriverGrowth = () => {
     )
 }
 
-export default DriverGrowth
+export default SubscriptionGrowth

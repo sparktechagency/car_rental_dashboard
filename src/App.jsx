@@ -2,28 +2,37 @@
 import { Link } from 'react-router-dom'
 import './App.css'
 
-import DriverGrowth from './Components/Dashboard/DriverGrowth'
 import Overview from './Components/Dashboard/Overview'
-import SurveyRequest from './Components/Dashboard/SurveyRequest'
+import SubscriptionGrowth from './Components/Dashboard/SubscriptionGrowth'
+import JoinRequest from './Components/Dashboard/JoinRequest'
 
 function App() {
   const data = [
     {
-      title: 'Total Project',
+      title: 'Total User',
       count: 5480,
     },
     {
-      title: 'Total Survey',
+      title: 'Total Income',
       count: 1480,
     },
     {
-      title: 'Total Responses',
+      title: 'Gold User',
+      count: 548,
+    },
+    {
+      title: 'Platinum User',
+      count: 548,
+    },
+
+    {
+      title: 'Diamond User',
       count: 548,
     },
   ]
   return (
     <>
-      <div className='grid-3 gap-3'>
+      <div className='grid-5 gap-3'>
         {
           data?.map((item, index) => <div className='w-full h-full center-center flex-col gap-3 py-7 bg-[var(--color-7)] p-2 rounded-md' key={index}>
             <p className='text-2xl'>{item?.title}</p>
@@ -33,20 +42,21 @@ function App() {
         }
       </div>
       <div className='grid-2 mt-3 gap-3'>
+      <div className='w-full h-full bg-white p-4 rounded-md'>
+          <SubscriptionGrowth />
+        </div>
         <div className='w-full h-full bg-white p-4 rounded-md'>
           <Overview />
         </div>
-        <div className='w-full h-full bg-white p-4 rounded-md'>
-          <DriverGrowth />
-        </div>
+      
       </div>
       <div className='mt-3 bg-white rounded-md'>
         <div className='between-center gap-2 mb-3 p-5'>
-          <p className='text-xl'>Project Request</p> <Link to={`/total-survey-request`}>
+          <p className='text-xl'>New Membership Request</p> <Link to={`/total-join-request`}>
           View All
           </Link>
         </div>
-        <SurveyRequest />
+        <JoinRequest />
       </div>
     </>
   )

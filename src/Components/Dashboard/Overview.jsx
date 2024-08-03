@@ -103,7 +103,7 @@ const Overview = () => {
     return (
         <>
             <div className='between-center'>
-                <p className='text-2xl'>Survey and User Overview</p>
+                <p className='text-2xl'>User Growth</p>
                 <Select
                     defaultValue="2024"
                     style={{ width: 120 }}
@@ -129,8 +129,8 @@ const Overview = () => {
                         <YAxis />
                         <Tooltip />
                         <Legend />
-                        <Bar dataKey="pv" stackId="a" fill="#D4A005" />
-                        <Bar dataKey="uv" stackId="a" fill="#ECB206" />
+                        <Bar dataKey="pv" stackId="a" fill="#3475F1" />
+                        <Bar dataKey="uv" stackId="a" fill="#3475F1" />
                     </BarChart>
                 </ResponsiveContainer>
             </div>

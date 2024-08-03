@@ -11,6 +11,7 @@
   --color-5: #F3FBEE;
   --color-6: #F7F7FB;
   --color-7: #FDFDFD;
+  --color-8: #3475F1;
   font-family: "Poppins", sans-serif;
 }
 
@@ -50,13 +51,17 @@
   .grid-4 {
     @apply grid grid-cols-4 items-center justify-start
   }
+  .grid-5
+  {
+    @apply md:grid md:grid-cols-2 flex flex-col justify-start items-start md:items-center lg:grid-cols-3 xl:grid-cols-5 gap-4
+  }
 }
 
 *::-webkit-scrollbar {
   display: none;
 }
 #sidebar .active{
-  background: var(--color-2);
+  background: var(--color-7);
 }
 
 /* .questions .ant-space-item{
