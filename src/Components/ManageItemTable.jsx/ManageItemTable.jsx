@@ -1,59 +1,85 @@
-import { Form, Input, Modal, Table } from 'antd';
-import React, { useState } from 'react'
-import { CgLayoutGrid } from 'react-icons/cg';
-import { CiSearch } from 'react-icons/ci';
-import { FaEdit, FaRegEye, FaStar } from 'react-icons/fa';
-import { FaArrowLeftLong, FaPlus } from 'react-icons/fa6';
-import { GoArrowLeft } from 'react-icons/go';
-import { IoArrowBackSharp } from 'react-icons/io5';
-import { MdOutlineDelete } from 'react-icons/md';
-import { Select } from 'antd'
-import { TbCopyCheck } from 'react-icons/tb';
-import { RxCross2 } from 'react-icons/rx';
-import ManageItemTable from '../Components/ManageItemTable.jsx/ManageItemTable';
-const dataSource = [
-    {
-        id: '1',
-        ProjectName: 'Mike',
-        date: '05/12/2024',
-    }
-]
-
-const ManageItems = () => {
+import { Form, Input, Modal, Select, Table } from "antd";
+import userImage from '../../assets/images/user22.png'
+import { MdBlockFlipped } from "react-icons/md";
+import { RiDeleteBin6Line } from "react-icons/ri";
+import { CiEdit } from "react-icons/ci";
+import { useState } from "react";
+import { TbCopyCheck } from "react-icons/tb";
+import { RxCross2 } from "react-icons/rx";
+const ManageItemTable = () => {
     const [openAddModal, setOpenAddModal] = useState(false)
-    const [category, setCategory] = useState(false)
     const columns = [
         {
-            title: 'Serial No',
-            dataIndex: 'id',
-            key: 'id',
+            title: 'SL No.',
+            dataIndex: 'sno',
+            key: 'sno',
         },
         {
-            title: 'Projects Name',
-            dataIndex: 'ProjectName',
-            key: 'ProjectName ',
+            title: 'Category',
+            dataIndex: 'category',
+            key: 'category',
+            render: (text, record) => (
+                <div style={{ display: 'flex', alignItems: 'center' }}>
+                    <img src={userImage} alt="user" style={{ width: 30, height: 30, marginRight: 8 }} />
+                    {text}
+                </div>
+            ),
         },
         {
-            title: 'Date',
-            dataIndex: 'date',
-            key: 'date  ',
+            title: 'Sub Category',
+            dataIndex: 'SubCategory',
+            key: 'SubCategory',
         },
         {
-            title: 'Actions',
-            dataIndex: 'key',
-            key: 'key',
-            render: (_, record) => {
-                return (<div className='start-center text-2xl gap-1 text-red-600'>
-                    {/* <MdEdit className='cursor-pointer' /> */}
-                    <MdOutlineDelete className='cursor-pointer' />
-                </div>)
-            }
+            title: 'Eligible Swap Member',
+            dataIndex: 'eligibleSwapMember',
+            key: 'eligibleSwapMember',
+        },
+        {
+            title: 'Action',
+            dataIndex: 'action',
+            key: 'action',
+            render: (text, record) => (
+                <div className="flex items-center gap-2">
+                    {/* Replace the action content with what you need, for example, icons */}
+                    <a href="#delete" onClick={() => setOpenAddModal(true)} className="bg-[#3475F1] text-white p-1 rounded-md"><CiEdit size={20} /></a>
+                    <a href="#delete" className="bg-red-500 text-white p-1 rounded-md"><RiDeleteBin6Line size={20} /></a>
+                </div>
+            ),
         },
     ];
+
+
+    // Columns data
+    const data = [
+        {
+            key: '1',
+            sno: '1',
+            category: 'dindinrya',
+            SubCategory: '24/08/22',
+            eligibleSwapMember: 'Gold',
+        },
+        {
+            key: '2',
+            sno: '2',
+            category: 'dindinrya',
+            SubCategory: '24/08/22',
+            eligibleSwapMember: 'Gold',
+        },
+        {
+            key: '3',
+            sno: '3',
+            category: 'dindinrya',
+            SubCategory: '24/08/22',
+            eligibleSwapMember: 'Gold',
+        },
+
+    ];
+
+
     const onFinish = (value) => {
 
     }
-
 
     const handleCategoryChange = (value) => {
         console.log(value);
@@ -64,50 +90,18 @@ const ManageItems = () => {
 
 
     return (
-        <div className='rounded-md'>
-            <div className='  my-2 pt-5'>
-                <div className='start-center gap-2 mb-3 p-5'>
+        <div className="p-2 ">
 
-                    <p className='flex items-center gap-2'> <GoArrowLeft />Manage Items</p>
-                </div>
-                <div className='flex justify-between items-center'>
-                    {/* <Input className='max-w-[250px] h-10' prefix={<CiSearch className='text-2xl' />} placeholder="Search" /> */}
-                    <div className='flex items-center gap-5'>
-                        <button onClick={() => setCategory(true)} className={` ${category ? 'bg-[#3475F1] text-white' : 'border border-[#3475F1] text-[#3475F1]'} px-4 rounded-sm start-center gap-1 py-2  flex justify-center items-center whitespace-nowrap`}>
+            <Table columns={columns} dataSource={data} bordered pagination={{
+                pageSize: 5,
+                showTotal: (total, range) => `Showing ${range[0]}-${range[1]} out of ${total}`,
+                locale: {
+                    items_per_page: '',
+                    prev_page: 'Previous',
+                    next_page: 'Next',
+                },
+            }} />
 
-                            Category
-                        </button>
-                        <button onClick={() => setCategory(false)} className={` ${category ? 'border border-[#3475F1] text-[#3475F1]' : 'bg-[#3475F1] text-white'}  px-4 rounded-sm start-center gap-1 py-2  flex justify-center items-center whitespace-nowrap`}>
-
-                            Items
-                        </button>
-                    </div>
-                    <button onClick={() => setOpenAddModal(true)} className='bg-[#3475F1] px-4 rounded-sm start-center gap-1 py-2 text-white flex justify-center items-center whitespace-nowrap'>
-                        <FaPlus />
-                        Add Item
-                    </button>
-                </div>
-            </div>
-
-
-            {/* Category section */}
-
-            <div className='flex justify-between item-center my-5'>
-                <div>
-                    <p className=''>Category</p>
-
-                </div>
-                <div>
-                    <p>Sub Category</p>
-                </div>
-                <div>
-                    <p>Eligible Swap Member</p>
-                </div>
-            </div>
-
-            {
-                category ? <p>shukumar</p> : <ManageItemTable/>
-            }
 
             <Modal
                 open={openAddModal}
@@ -209,8 +203,9 @@ const ManageItems = () => {
                     </Form>
                 </div>
             </Modal>
+
         </div>
     )
 }
 
-export default ManageItems;
+export default ManageItemTable;
