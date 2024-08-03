@@ -8,7 +8,7 @@ import PrivacyPolicy from "../Pages/PrivacyPolicy";
 import Terms from "../Pages/Terms";
 import Profile from "../Pages/Profile";
 // import FeedBack from "../Pages/FeedBack";
-import CreateProject from "../Pages/CreateProject";
+// import CreateProject from "../Pages/CreateProject";
 import CreateSurvey from "../Pages/CreateSurvey";
 import ManageCompany from "../Pages/ManageCompany";
 import AddProject from "../Pages/AddProject";
@@ -30,6 +30,9 @@ import Otp from "../Pages/Auth/Otp.jsx";
 import UpdatePassword from "../Pages/Auth/UpdatePassword.jsx";
 import SingleUserDetails from "../Pages/SingleUserDetails.jsx";
 import Income from "../Pages/Income.jsx";
+import Subscription from "../Pages/Subscription.jsx";
+import UserDetails from "../Pages/UserDetails.jsx";
+import ManageItems from "../Pages/ManageItems.jsx";
 // import Otp from "../Pages/Auth/Otp.jsx";
 
 
@@ -52,6 +55,19 @@ export const router = createBrowserRouter([
                 element: <Income />,
             },
             {
+                path : '/subscription',
+                element : <Subscription/>
+            },
+            {
+                path : '/user-details',
+                element : <UserDetails/>
+            },
+            {
+                path : '/manage-items',
+                element : <ManageItems/>
+            },
+
+            {
                 path: '/driver-details/:id',
                 element: <DriverProfile />,
             },
@@ -71,10 +87,10 @@ export const router = createBrowserRouter([
                 path: '/profile',
                 element: <Profile />,
             }, 
-            {
-                path: '/create-project',
-                element: <CreateProject />,
-            },
+            // {
+            //     path: '/create-project',
+            //     element: <CreateProject />,
+            // },
             {
                 path: '/create-survey',
                 element: <CreateSurvey />,

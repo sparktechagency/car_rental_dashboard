@@ -6,12 +6,13 @@ import { IoIosArrowForward } from 'react-icons/io'
 import { IoSettings } from 'react-icons/io5'
 import { LuFilePlus } from 'react-icons/lu'
 import { MdDashboard, MdEvent } from 'react-icons/md'
-import { RiFeedbackLine } from 'react-icons/ri'
+import { RiBarChartGroupedFill, RiFeedbackLine } from 'react-icons/ri'
 import { SiHomeassistantcommunitystore } from 'react-icons/si'
-import {Link, NavLink, useNavigate} from 'react-router-dom'
+import { Link, NavLink, useNavigate } from 'react-router-dom'
 import { RiBarChart2Line } from "react-icons/ri";
-import {LogoutOutlined} from "@ant-design/icons";
-import {CiLogout} from "react-icons/ci";
+import { LogoutOutlined } from "@ant-design/icons";
+import { CiLogout } from "react-icons/ci";
+import { HiOutlineUser } from 'react-icons/hi'
 
 
 
@@ -35,6 +36,25 @@ const Sidebar = () => {
             icon: <MdDashboard />,
             sub_menu: false
         },
+        {
+            path: '/subscription',
+            label: 'Subscription',
+            icon: <RiBarChartGroupedFill />,
+            sub_menu: false
+        },
+        {
+            path: '/user-details',
+            label: 'User Details',
+            icon: <HiOutlineUser />,
+            sub_menu: false
+        },
+
+        {
+            path: '/manage-items',
+            label: 'Manage Items',
+            icon: <MdEvent />,
+            sub_menu: false
+        },
 
         {
             path: '/create-project',
@@ -52,12 +72,6 @@ const Sidebar = () => {
             path: '/manage-company',
             label: 'Manage Company',
             icon: <SiHomeassistantcommunitystore />,
-            sub_menu: false
-        },
-        {
-            path: '/manage-event',
-            label: 'Manage Event',
-            icon: <MdEvent />,
             sub_menu: false
         },
 
@@ -99,7 +113,7 @@ const Sidebar = () => {
                     label: 'Facts',
                     icon: <></>,
                 },
-                
+
             ]
         },
 
@@ -107,7 +121,7 @@ const Sidebar = () => {
     ]
 
     const navigate = useNavigate();
-    const handleLogOut = ()=>{
+    const handleLogOut = () => {
         navigate("/auth/login")
     }
     const toggleAccordion = (index) => {
@@ -177,7 +191,7 @@ const Sidebar = () => {
                 onClick={handleLogOut}
                 className="flex text-[#FDFDFD] items-center gap-3 cursor-pointer px-6 hover:bg-white-500 py-2 mt-10 transition-all"
             >
-                <CiLogout size={24} color="#FDFDFD"/>
+                <CiLogout size={24} color="#FDFDFD" />
                 Log Out
             </div>
 
