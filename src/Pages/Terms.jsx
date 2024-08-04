@@ -17,17 +17,19 @@ const Terms = () => {
             height: 400,
         },
         buttons: [
-            'image','fontsize','bold', 'italic', 'underline',  '|',
-            'font',  'brush',
+            'image', 'fontsize', 'bold', 'italic', 'underline', '|',
+            'font', 'brush',
             'align'
-          ]
+        ]
     }
     return (
         <>
-            <div className='start-center gap-2 mb-3'>
-                <Link to={-1} className='py-1 px-2 rounded-md start-center gap-1 '><IoArrowBackSharp /></Link> <p>About Us</p>
+            <div className='start-center gap-2 mb-3 relative'>
+                <div className='absolute top-6 left-2 flex items-center'>
+                    <Link to={-1} className='py-1 px-2 rounded-md start-center gap-1  '><IoArrowBackSharp /></Link> <p>About Us</p>
+                </div>
             </div>
-            
+
             <div className="custom-jodit-editor">
                 <JoditEditor
                     ref={editor}

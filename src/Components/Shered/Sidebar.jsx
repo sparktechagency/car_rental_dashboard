@@ -1,18 +1,13 @@
-import React, { useEffect, useRef, useState } from 'react'
-import { BsArchive } from 'react-icons/bs'
-import { FaUserLarge, FaUsersLine } from 'react-icons/fa6'
-import { GoProjectRoadmap } from 'react-icons/go'
+import  { useEffect, useRef, useState } from 'react'
 import { IoIosArrowForward } from 'react-icons/io'
 import { IoSettings } from 'react-icons/io5'
-import { LuFilePlus } from 'react-icons/lu'
-import { MdDashboard, MdEvent } from 'react-icons/md'
-import { RiBarChartGroupedFill, RiFeedbackLine } from 'react-icons/ri'
-import { SiHomeassistantcommunitystore } from 'react-icons/si'
+import { MdDashboard, MdEvent, MdOutlineCategory } from 'react-icons/md'
+import { RiBarChartGroupedFill,  } from 'react-icons/ri'
 import { Link, NavLink, useNavigate } from 'react-router-dom'
-import { RiBarChart2Line } from "react-icons/ri";
-import { LogoutOutlined } from "@ant-design/icons";
 import { CiLogout } from "react-icons/ci";
 import { HiOutlineUser } from 'react-icons/hi'
+import { FaArrowTrendUp } from 'react-icons/fa6'
+import { CgNotes } from 'react-icons/cg'
 
 
 
@@ -20,7 +15,7 @@ const Sidebar = () => {
     const [openIndex, setOpenIndex] = useState(null);
     const contentRefs = useRef([]);
 
-    const admin = false;
+    // const admin = false;
 
     const links = [
         {
@@ -33,7 +28,7 @@ const Sidebar = () => {
         {
             path: '/income',
             label: 'Income',
-            icon: <MdDashboard />,
+            icon: <FaArrowTrendUp />,
             sub_menu: false
         },
         {
@@ -52,13 +47,13 @@ const Sidebar = () => {
         {
             path: '/manage-items',
             label: 'Manage Items',
-            icon: <MdEvent />,
+            icon: <MdOutlineCategory />,
             sub_menu: false
         },
         {
             path: '/media-settings',
             label: 'Media Settings',
-            icon: <MdEvent />,
+            icon: <CgNotes />,
             sub_menu: false
         },
 

@@ -28,19 +28,11 @@
   /* Jodit react for rich text */
 
   /* Custom CSS to align toolbar buttons to the right */
-.custom-jodit-editor .jodit_toolbar {
-  display: flex;
-  justify-content: flex-end; /* Align buttons to the right */
-}
 
-.custom-jodit-editor .jodit_toolbar_group {
-  display: flex;
-  justify-content: flex-end; /* Ensure buttons within groups are also aligned to the right */
-}
 
-.custom-jodit-editor .jodit_toolbar_button {
-  margin-left: 0.5rem; /* Add some spacing between buttons */
-}
+
+
+
 .custom-jodit-editor .jodit-react-container .jodit-container .jodit-toolbar__box .jodit-toolbar-editor-collection {
   align-items: flex-end
 }
@@ -54,3 +46,12 @@
 .custom-jodit-editor .jodit-toolbar__box:not(:empty) {
   border-bottom: 0px;
 }
+
+.custom-jodit-editor .jodit-container:not(.jodit_inline){
+  background-color: #F6F6F6;
+  border: none;
+}
+/* .custom-jodit-editor .jodit-toolbar__box:not(:empty):not(:empty){
+  background-color: #F6F6F6;
+
+} */
