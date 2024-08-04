@@ -5,19 +5,12 @@ import { CiSearch } from 'react-icons/ci';
 import { FaEdit, FaRegEye, FaStar } from 'react-icons/fa';
 import { FaArrowLeftLong, FaPlus } from 'react-icons/fa6';
 import { GoArrowLeft } from 'react-icons/go';
-import { IoArrowBackSharp } from 'react-icons/io5';
 import { MdOutlineDelete } from 'react-icons/md';
 import { Select } from 'antd'
 import { TbCopyCheck } from 'react-icons/tb';
 import { RxCross2 } from 'react-icons/rx';
 import ManageItemTable from '../Components/ManageItemTable.jsx/ManageItemTable';
-const dataSource = [
-    {
-        id: '1',
-        ProjectName: 'Mike',
-        date: '05/12/2024',
-    }
-]
+import ManageCategoryTable from '../Components/ManageCategoryTable/ManageCategoryTable';
 
 const ManageItems = () => {
     const [openAddModal, setOpenAddModal] = useState(false)
@@ -106,7 +99,7 @@ const ManageItems = () => {
             </div>
 
             {
-                category ? <p>shukumar</p> : <ManageItemTable/>
+                category ? <ManageCategoryTable/> : <ManageItemTable/>
             }
 
             <Modal
