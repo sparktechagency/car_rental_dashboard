@@ -13,7 +13,7 @@ const UserDetailsTable = () => {
             title: 'Name',
             dataIndex: 'name',
             key: 'name',
-            render: (text, record) => (
+            render: (text) => (
                 <div style={{ display: 'flex', alignItems: 'center' }}>
                     <img src={userImage} alt="user" style={{ width: 30, height: 30, marginRight: 8 }} />
                     {text}
@@ -49,7 +49,7 @@ const UserDetailsTable = () => {
             title: 'Action',
             dataIndex: 'action',
             key: 'action',
-            render: (text, record) => (
+            render: () => (
                 <div>
                     {/* Replace the action content with what you need, for example, icons */}
                     <a href="#delete"><MdBlockFlipped /></a>
@@ -169,15 +169,20 @@ const UserDetailsTable = () => {
     return (
         <div className="p-2 ">
 
-            <Table columns={columns} dataSource={data} bordered pagination={{
-                pageSize: 5,
-                showTotal: (total, range) => `Showing ${range[0]}-${range[1]} out of ${total}`,
-                locale: {
-                    items_per_page: '',
-                    prev_page: 'Previous',
-                    next_page: 'Next',
-                },
-            }} />
+            <Table
+                columns={columns}
+                dataSource={data}
+                pagination={{
+                    pageSize: 5,
+                    showTotal: (total, range) => `Showing ${range[0]}-${range[1]} out of ${total}`,
+                    locale: {
+                        items_per_page: '',
+                        prev_page: 'Previous',
+                        next_page: 'Next',
+                    },
+                }}
+                className="custom-pagination"  // Apply the custom CSS class
+            />
 
         </div>
     )

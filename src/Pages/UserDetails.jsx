@@ -5,8 +5,7 @@ import UserDetailsTable from "../Components/UserDetailsTable/UserDetailsTable"
 
 
 
-const UserDetails = ({ income }) => {
-    console.log(income)
+const UserDetails = () => {
     return (
         <div className="p-2 shadow-md">
             <div className="flex justify-between item-center ">
