@@ -33,6 +33,7 @@ import Income from "../Pages/Income.jsx";
 import Subscription from "../Pages/Subscription.jsx";
 import UserDetails from "../Pages/UserDetails.jsx";
 import ManageItems from "../Pages/ManageItems.jsx";
+import MediaSettings from "../Pages/MediaSettings/MediaSettings.jsx";
 // import Otp from "../Pages/Auth/Otp.jsx";
 
 
@@ -65,6 +66,10 @@ export const router = createBrowserRouter([
             {
                 path : '/manage-items',
                 element : <ManageItems/>
+            },
+            {
+                path : '/media-settings',
+                element : <MediaSettings/>
             },
 
             {

@@ -55,6 +55,12 @@ const Sidebar = () => {
             icon: <MdEvent />,
             sub_menu: false
         },
+        {
+            path: '/media-settings',
+            label: 'Media Settings',
+            icon: <MdEvent />,
+            sub_menu: false
+        },
 
         {
             path: '/create-project',

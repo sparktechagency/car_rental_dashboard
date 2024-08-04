@@ -1,11 +1,7 @@
-import { Col, Form, Input, Modal, Row, Table } from 'antd';
-import React, { useState } from 'react'
-import { CgLayoutGrid } from 'react-icons/cg';
-import { CiSearch } from 'react-icons/ci';
-import { FaEdit, FaRegEye, FaStar } from 'react-icons/fa';
-import { FaArrowLeftLong, FaPlus } from 'react-icons/fa6';
+import { Col, Form, Input, Modal, Row, } from 'antd';
+import { useState } from 'react'
+import {  FaPlus } from 'react-icons/fa6';
 import { GoArrowLeft } from 'react-icons/go';
-import { MdOutlineDelete } from 'react-icons/md';
 import { Select } from 'antd'
 import { TbCopyCheck } from 'react-icons/tb';
 import { RxCross2 } from 'react-icons/rx';
@@ -17,36 +13,9 @@ const ManageItems = () => {
     const [openAddModal, setOpenAddModal] = useState(false)
     const [category, setCategory] = useState(false)
     const [openCategoryModal, setOpenCategoryModal] = useState(false)
-    const columns = [
-        {
-            title: 'Serial No',
-            dataIndex: 'id',
-            key: 'id',
-        },
-        {
-            title: 'Projects Name',
-            dataIndex: 'ProjectName',
-            key: 'ProjectName ',
-        },
-        {
-            title: 'Date',
-            dataIndex: 'date',
-            key: 'date  ',
-        },
-        {
-            title: 'Actions',
-            dataIndex: 'key',
-            key: 'key',
-            render: (_, record) => {
-                return (<div className='start-center text-2xl gap-1 text-red-600'>
-                    {/* <MdEdit className='cursor-pointer' /> */}
-                    <MdOutlineDelete className='cursor-pointer' />
-                </div>)
-            }
-        },
-    ];
+   
     const onFinish = (value) => {
-
+        console.log(value);
     }
 
 
