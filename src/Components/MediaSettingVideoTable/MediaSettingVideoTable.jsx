@@ -2,14 +2,20 @@ import {  Table } from "antd";
 import { useState } from "react";
 import { CiEdit } from "react-icons/ci";
 import { RiDeleteBin6Line } from "react-icons/ri";
-
-
 import img from '../../assets/images/adsVideo.png'
-import CategoryModal from "../CategoryModal/CategoryModal";
 import { MdCheck, MdDragHandle } from "react-icons/md";
 import { IoMdClose } from "react-icons/io";
+import MediaSettingModal from "../MediaSettingModal/MediaSettingModal";
 const MediaSettingVideoTable = () => {
     const [openAddModal, setOpenAddModal] = useState(false)
+    const [modalTitle, setModalTitle] = useState('')
+
+
+    const handelEditVideo = ()=>{
+        setModalTitle('Edit')
+        setOpenAddModal(true)
+    }
+
 
     const columns = [
         {
@@ -56,7 +62,7 @@ const MediaSettingVideoTable = () => {
             render: (text, record) => (
                 <div className="flex items-center gap-2">
                     {/* Replace the action content with what you need, for example, icons */}
-                    <a href="#delete" onClick={() => setOpenAddModal(true)} className="bg-[#3475F1] text-white p-1 rounded-md"><CiEdit size={20} /></a>
+                    <a href="#delete" onClick={() => handelEditVideo()} className="bg-[#3475F1] text-white p-1 rounded-md"><CiEdit size={20} /></a>
                     <a href="#delete" className="bg-[#D9000A] text-white p-1 rounded-md"><RiDeleteBin6Line size={20} /></a>
                 </div>
             ),
@@ -109,7 +115,7 @@ const MediaSettingVideoTable = () => {
             pagination={false}
            
             />
-            <CategoryModal openAddModal={openAddModal} setOpenAddModal={setOpenAddModal} />
+            <MediaSettingModal openAddModal={openAddModal} setOpenAddModal={setOpenAddModal} modalTitle={modalTitle} />
 
             
 

@@ -4,7 +4,7 @@ import { RxCross2 } from "react-icons/rx";
 import { TbCopyCheck } from "react-icons/tb";
 
 // eslint-disable-next-line react/prop-types
-const MediaSettingModal = ({ openAddModal, setOpenAddModal }) => {
+const MediaSettingModal = ({ openAddModal, setOpenAddModal , modalTitle }) => {
     const uploadProps = {
         beforeUpload: () => {
             // Handle file upload
@@ -35,7 +35,7 @@ const MediaSettingModal = ({ openAddModal, setOpenAddModal }) => {
             onCancel={() => setOpenAddModal(false)}
         >
             <div>
-                <p className='text-xl text-center py-2 font-semibold'>Add New Video</p>
+                <p className='text-xl text-center py-2 font-semibold'>{modalTitle}</p>
                 <Form className=''
                     layout='vertical'
                     onFinish={onFinish}

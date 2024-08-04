@@ -8,8 +8,19 @@ import MediaSettingVideoTable from "../../Components/MediaSettingVideoTable/Medi
 const MediaSettings = () => {
     const [ads, setAds] = useState(true)
     const [openAddModal, setOpenAddModal] = useState(false)
+    const [modalTitle, setModalTitle] = useState('')
     // const [openCategoryModal, setOpenCategoryModal] = useState(false)
 
+
+    const handleAdsModal =()=>{
+        setModalTitle('Add New Ads')
+        setAds(true)
+    }
+
+    const handleVideoModal = ()=>{
+        setModalTitle('Add New Video')
+        setAds(false)
+    }
 
     return (
         <div className='rounded-md'>
@@ -21,11 +32,11 @@ const MediaSettings = () => {
                 <div className='flex justify-between items-center'>
                     {/* <Input className='max-w-[250px] h-10' prefix={<CiSearch className='text-2xl' />} placeholder="Search" /> */}
                     <div className='flex items-center gap-5'>
-                        <button onClick={() => setAds(true)} className={` ${ads ? 'bg-[#3475F1] text-white' : 'border border-[#3475F1] text-[#3475F1]'} px-4 rounded-sm start-center gap-1 py-2  flex justify-center items-center whitespace-nowrap`}>
+                        <button onClick={() => handleAdsModal()} className={` ${ads ? 'bg-[#3475F1] text-white' : 'border border-[#3475F1] text-[#3475F1]'} px-4 rounded-sm start-center gap-1 py-2  flex justify-center items-center whitespace-nowrap`}>
 
                             Ads
                         </button>
-                        <button onClick={() => setAds(false)} className={` ${ads ? 'border border-[#3475F1] text-[#3475F1]' : 'bg-[#3475F1] text-white'}  px-4 rounded-sm start-center gap-1 py-2  flex justify-center items-center whitespace-nowrap`}>
+                        <button onClick={() => handleVideoModal()} className={` ${ads ? 'border border-[#3475F1] text-[#3475F1]' : 'bg-[#3475F1] text-white'}  px-4 rounded-sm start-center gap-1 py-2  flex justify-center items-center whitespace-nowrap`}>
 
                             Video
                         </button>
@@ -53,7 +64,7 @@ const MediaSettings = () => {
 
 
                     {/* Media setting Modal */}
-            <MediaSettingModal openAddModal={openAddModal} setOpenAddModal={setOpenAddModal} />
+            <MediaSettingModal openAddModal={openAddModal} setOpenAddModal={setOpenAddModal} modalTitle={modalTitle} />
         </div>
     );
 };
