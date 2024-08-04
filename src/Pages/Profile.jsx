@@ -122,9 +122,7 @@ const Profile = () => {
                         ?
                         <div
                             className='max-w-[481px] mx-auto rounded-lg p-6'
-                            style={{
-                                boxShadow: "rgba(50, 50, 105, 0.15) 0px 2px 5px 0px, rgba(0, 0, 0, 0.05) 0px 1px 1px 0px"
-                            }}
+                            
                         >
                             <h1 className='text-center text-secondary leading-7 text-2xl font-medium mb-7'>Edit 
                                 Profile</h1>
@@ -141,10 +139,11 @@ const Profile = () => {
                                     <Input
                                         style={{
                                             width: "100%",
-                                            height: 48,
+                                            height: 40,
                                             border: "1px solid #DCDDDE",
                                             borderRadius: "8px",
                                             color: "#919191",
+                                            backgroundColor : "#F6F6F6",
                                             outline: "none"
                                         }}
                                         className='text-[16px] leading-5'
@@ -156,11 +155,11 @@ const Profile = () => {
                                     label={<p className="text-[#919191] text-[16px] leading-5 font-normal">Email</p>}
                                 >
                                     <Input
-                                        disabled
                                         style={{
                                             width: "100%",
                                             height: 48,
                                             border: "1px solid #DCDDDE",
+                                            backgroundColor : "#F6F6F6",
                                             borderRadius: "8px",
                                             color: "#919191",
                                             outline: "none"
@@ -173,12 +172,13 @@ const Profile = () => {
                                 <Form.Item
                                     name="mobileNumber"
                                     label={<p className="text-[#919191] text-[16px] leading-5 font-normal">Contact
-                                        Number</p>}
+                                        no</p>}
                                 >
                                     <Input
                                         style={{
                                             width: "100%",
                                             height: 48,
+                                            backgroundColor : "#F6F6F6",
                                             border: "1px solid #DCDDDE",
                                             borderRadius: "8px",
                                             color: "#919191",
@@ -196,6 +196,7 @@ const Profile = () => {
                                         style={{
                                             width: "100%",
                                             height: 48,
+                                            backgroundColor : "#F6F6F6",
                                             border: "1px solid #DCDDDE",
                                             borderRadius: "8px",
                                             color: "#919191",
@@ -226,7 +227,7 @@ const Profile = () => {
                                         }}
                                         className='font-normal text-[16px] leading-6 bg-primary'
                                     >
-                                        Save Changes
+                                        Save & Changes
                                     </Button>
                                 </Form.Item>
                             </Form>
@@ -234,9 +235,7 @@ const Profile = () => {
                         :
                         <div
                             className='max-w-[481px] mx-auto rounded-lg p-6'
-                            style={{
-                                boxShadow: "rgba(50, 50, 105, 0.15) 0px 2px 5px 0px, rgba(0, 0, 0, 0.05) 0px 1px 1px 0px"
-                            }}
+                            
                         >
                             <h1 className='text-center text-secondary leading-7 text-2xl font-medium mb-7'>Change
                                 Password</h1>
@@ -261,6 +260,7 @@ const Profile = () => {
                                             width: "100%",
                                             height: "42px",
                                             border: "1px solid #DCDDDE",
+                                            backgroundColor : "#F6F6F6",
                                             borderRadius: "8px",
                                             color: "black",
                                             outline: "none",
@@ -288,6 +288,7 @@ const Profile = () => {
                                             width: "100%",
                                             height: "42px",
                                             border: "1px solid #DCDDDE",
+                                            backgroundColor : "#F6F6F6",
                                             borderRadius: "8px",
                                             color: "black",
                                             outline: "none",
@@ -314,6 +315,7 @@ const Profile = () => {
                                             width: "100%",
                                             height: "42px",
                                             border: "1px solid #DCDDDE",
+                                            backgroundColor : "#F6F6F6",
                                             borderRadius: "8px",
                                             color: "black",
                                             outline: "none",

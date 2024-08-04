@@ -181,7 +181,7 @@ const UserDetailsTable = () => {
                         next_page: 'Next',
                     },
                 }}
-                className="custom-pagination"  // Apply the custom CSS class
+                className="custom-pagination"  
             />
 
         </div>

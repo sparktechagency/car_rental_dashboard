@@ -1,6 +1,5 @@
 import { Form, Input, Modal, Select, Table } from "antd";
 import userImage from '../../assets/images/user22.png'
-import { MdBlockFlipped } from "react-icons/md";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { CiEdit } from "react-icons/ci";
 import { useState } from "react";
@@ -43,7 +42,7 @@ const ManageItemTable = () => {
                 <div className="flex items-center gap-2">
                     {/* Replace the action content with what you need, for example, icons */}
                     <a href="#delete" onClick={() => setOpenAddModal(true)} className="bg-[#3475F1] text-white p-1 rounded-md"><CiEdit size={20} /></a>
-                    <a href="#delete" className="bg-red-500 text-white p-1 rounded-md"><RiDeleteBin6Line size={20} /></a>
+                    <a href="#delete" className="bg-[#D9000A] text-white p-1 rounded-md"><RiDeleteBin6Line size={20} /></a>
                 </div>
             ),
         },
@@ -78,7 +77,7 @@ const ManageItemTable = () => {
 
 
     const onFinish = (value) => {
-
+        console.log(value);
     }
 
     const handleCategoryChange = (value) => {
@@ -90,9 +89,9 @@ const ManageItemTable = () => {
 
 
     return (
-        <div className="p-2 ">
+        <div className="">
 
-            <Table columns={columns} dataSource={data} bordered pagination={{
+            <Table columns={columns} dataSource={data} pagination={{
                 pageSize: 5,
                 showTotal: (total, range) => `Showing ${range[0]}-${range[1]} out of ${total}`,
                 locale: {
@@ -100,7 +99,9 @@ const ManageItemTable = () => {
                     prev_page: 'Previous',
                     next_page: 'Next',
                 },
-            }} />
+            }} 
+            className="custom-pagination" 
+            />
 
 
             <Modal

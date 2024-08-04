@@ -1,4 +1,4 @@
-import {  Table } from "antd";
+import { Table } from "antd";
 import { useState } from "react";
 import { CiEdit } from "react-icons/ci";
 import { RiDeleteBin6Line } from "react-icons/ri";
@@ -36,7 +36,7 @@ const ManageCategoryTable = () => {
                 <div className="flex items-center gap-2">
                     {/* Replace the action content with what you need, for example, icons */}
                     <a href="#delete" onClick={() => setOpenAddModal(true)} className="bg-[#3475F1] text-white p-1 rounded-md"><CiEdit size={20} /></a>
-                    <a href="#delete" className="bg-red-500 text-white p-1 rounded-md"><RiDeleteBin6Line size={20} /></a>
+                    <a href="#delete" className="bg-[#D9000A] text-white p-1 rounded-md"><RiDeleteBin6Line size={20} /></a>
                 </div>
             ),
         },
@@ -67,7 +67,7 @@ const ManageCategoryTable = () => {
     ];
 
 
-    
+
 
 
 
@@ -83,7 +83,10 @@ const ManageCategoryTable = () => {
                     prev_page: 'Previous',
                     next_page: 'Next',
                 },
-            }} />
+            }}
+            className="custom-pagination" 
+
+            />
             <CategoryModal openAddModal={openAddModal} setOpenAddModal={setOpenAddModal} />
 
             {/* <Modal
