@@ -81,6 +81,6 @@ const data = [
   },
 ];
 
-const TransactionTable = () => <Table columns={columns} dataSource={data} bordered pagination={false} />;
+const TransactionTable = () => <Table columns={columns} dataSource={data}  pagination={false} />;
 
 export default TransactionTable;

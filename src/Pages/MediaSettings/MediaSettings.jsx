@@ -2,6 +2,7 @@ import { useState } from "react";
 import { FaPlus } from "react-icons/fa6";
 import { GoArrowLeft } from "react-icons/go";
 import MediaSettingModal from "../../Components/MediaSettingModal/MediaSettingModal";
+import MediaSettingTable from "../../Components/MediaSettingTable/MediaSettingTable";
 
 const MediaSettings = () => {
     const [ads, setAds] = useState(true)
@@ -19,11 +20,11 @@ const MediaSettings = () => {
                 <div className='flex justify-between items-center'>
                     {/* <Input className='max-w-[250px] h-10' prefix={<CiSearch className='text-2xl' />} placeholder="Search" /> */}
                     <div className='flex items-center gap-5'>
-                        <button onClick={() => setAds(true)} className={` ${ads? 'bg-[#3475F1] text-white' : 'border border-[#3475F1] text-[#3475F1]'} px-4 rounded-sm start-center gap-1 py-2  flex justify-center items-center whitespace-nowrap`}>
+                        <button onClick={() => setAds(true)} className={` ${ads ? 'bg-[#3475F1] text-white' : 'border border-[#3475F1] text-[#3475F1]'} px-4 rounded-sm start-center gap-1 py-2  flex justify-center items-center whitespace-nowrap`}>
 
                             Ads
                         </button>
-                        <button onClick={() => setAds(false)} className={` ${ads? 'border border-[#3475F1] text-[#3475F1]' : 'bg-[#3475F1] text-white'}  px-4 rounded-sm start-center gap-1 py-2  flex justify-center items-center whitespace-nowrap`}>
+                        <button onClick={() => setAds(false)} className={` ${ads ? 'border border-[#3475F1] text-[#3475F1]' : 'bg-[#3475F1] text-white'}  px-4 rounded-sm start-center gap-1 py-2  flex justify-center items-center whitespace-nowrap`}>
 
                             Video
                         </button>
@@ -41,6 +42,11 @@ const MediaSettings = () => {
                 </div>
             </div>
 
+            <MediaSettingTable/>
+
+
+
+                    {/* Media setting Modal */}
             <MediaSettingModal openAddModal={openAddModal} setOpenAddModal={setOpenAddModal} />
         </div>
     );

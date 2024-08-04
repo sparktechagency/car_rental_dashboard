@@ -1,13 +1,8 @@
-import { Form, Input, Modal, Select, Table } from "antd";
+import {  Table } from "antd";
 import { useState } from "react";
 import { CiEdit } from "react-icons/ci";
 import { RiDeleteBin6Line } from "react-icons/ri";
-import { RxCross2 } from "react-icons/rx";
-import { TbCopyCheck } from "react-icons/tb";
-import { FileImageOutlined, InboxOutlined, UploadOutlined } from '@ant-design/icons';
-import {  Upload } from 'antd';
 
-const { Dragger } = Upload;
 
 import img from '../../assets/images/user22.png'
 import CategoryModal from "../CategoryModal/CategoryModal";
@@ -36,6 +31,7 @@ const ManageCategoryTable = () => {
             title: 'Action',
             dataIndex: 'action',
             key: 'action',
+            // eslint-disable-next-line no-unused-vars
             render: (text, record) => (
                 <div className="flex items-center gap-2">
                     {/* Replace the action content with what you need, for example, icons */}

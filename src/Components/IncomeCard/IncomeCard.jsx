@@ -2,8 +2,8 @@ import { BsCurrencyDollar } from "react-icons/bs"
 
 
 
+// eslint-disable-next-line react/prop-types
 const IncomeCard = ({income}) => {
-    console.log(income)
     return (
         <div className={`bg-[${income?.color}] p-[24px] rounded-md text-white`}>
             <img className="bg-white p-2 rounded-full" src={income?.img} alt="" />
