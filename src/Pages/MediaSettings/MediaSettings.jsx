@@ -3,6 +3,7 @@ import { FaPlus } from "react-icons/fa6";
 import { GoArrowLeft } from "react-icons/go";
 import MediaSettingModal from "../../Components/MediaSettingModal/MediaSettingModal";
 import MediaSettingTable from "../../Components/MediaSettingTable/MediaSettingTable";
+import MediaSettingVideoTable from "../../Components/MediaSettingVideoTable/MediaSettingVideoTable";
 
 const MediaSettings = () => {
     const [ads, setAds] = useState(true)
@@ -42,7 +43,12 @@ const MediaSettings = () => {
                 </div>
             </div>
 
-            <MediaSettingTable/>
+
+            {
+                ads ? <MediaSettingTable/>  : <MediaSettingVideoTable/>
+            }
+
+            
 
 
 
