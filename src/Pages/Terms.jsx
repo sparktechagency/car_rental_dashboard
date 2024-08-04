@@ -15,15 +15,20 @@ const Terms = () => {
         placeholder: 'Start typings...',
         style: {
             height: 400,
-        }
+        },
+        buttons: [
+            'image','fontsize','bold', 'italic', 'underline',  '|',
+            'font',  'brush',
+            'align'
+          ]
     }
     return (
         <>
             <div className='start-center gap-2 mb-3'>
-                <Link to={-1} className='bg-[#3475F1] py-1 px-2 rounded-md start-center gap-1 text-white'><IoArrowBackSharp />back</Link> <p>About Us</p>
+                <Link to={-1} className='py-1 px-2 rounded-md start-center gap-1 '><IoArrowBackSharp /></Link> <p>About Us</p>
             </div>
             
-            <div>
+            <div className="custom-jodit-editor">
                 <JoditEditor
                     ref={editor}
                     value={content}
@@ -33,9 +38,9 @@ const Terms = () => {
                     onChange={newContent => { }}
                 />
             </div>
-            <div className='text-center mt-3'>
+            {/* <div className='text-center mt-3'>
                 <button disabled={isLoading} onClick={handleTerms} className='px-8 py-2 rounded-2xl  bg-[#3475F1] text-[var(--color-7)]' >Update</button>
-            </div>
+            </div> */}
         </>
     )
 }

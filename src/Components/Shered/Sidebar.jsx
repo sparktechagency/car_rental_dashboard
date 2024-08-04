@@ -62,38 +62,38 @@ const Sidebar = () => {
             sub_menu: false
         },
 
-        {
-            path: '/create-project',
-            label: 'Create Project',
-            icon: <GoProjectRoadmap />,
-            sub_menu: false
-        },
-        {
-            path: '/create-survey',
-            label: 'Create Survey',
-            icon: <LuFilePlus />,
-            sub_menu: false
-        },
-        {
-            path: '/manage-company',
-            label: 'Manage Company',
-            icon: <SiHomeassistantcommunitystore />,
-            sub_menu: false
-        },
+        // {
+        //     path: '/create-project',
+        //     label: 'Create Project',
+        //     icon: <GoProjectRoadmap />,
+        //     sub_menu: false
+        // },
+        // {
+        //     path: '/create-survey',
+        //     label: 'Create Survey',
+        //     icon: <LuFilePlus />,
+        //     sub_menu: false
+        // },
+        // {
+        //     path: '/manage-company',
+        //     label: 'Manage Company',
+        //     icon: <SiHomeassistantcommunitystore />,
+        //     sub_menu: false
+        // },
 
-        {
-            path: '/survey-result',
-            label: 'Survey Result',
-            icon: <RiBarChart2Line />,
-            sub_menu: false
-        },
+        // {
+        //     path: '/survey-result',
+        //     label: 'Survey Result',
+        //     icon: <RiBarChart2Line />,
+        //     sub_menu: false
+        // },
 
-        {
-            path: '/archive',
-            label: 'Archive',
-            icon: <BsArchive />,
-            sub_menu: false
-        },
+        // {
+        //     path: '/archive',
+        //     label: 'Archive',
+        //     icon: <BsArchive />,
+        //     sub_menu: false
+        // },
         {
             path: '#',
             label: 'Settings',

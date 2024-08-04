@@ -1,35 +1,8 @@
-// import React from 'react'
-// import { Input } from 'antd'
-// import { CiSearch } from 'react-icons/ci'
-// import { Link } from 'react-router-dom'
-// import { IoArrowBackSharp } from 'react-icons/io5'
 
-// const SingleUserDetails = () => {
-//     return (
-//         <div>
-//             <div className='between-center px-3 my-2 pt-5'>
-//                 <div className='start-center gap-2 mb-3 p-5'>
-//                     <Link to={-1} className='bg-[var(--color-8)] py-1 px-2 rounded-md start-center gap-1 text-white'><IoArrowBackSharp />back</Link>
-//                     <p className='text-xl'>New Membership Request</p>
-//                 </div>
 
-//                 <div className='grid-2'>
-//                     <div>Table one</div>
-//                     <div>Table two</div>
-//                 </div>
-
-//             </div>
-
-//         </div>
-//     )
-// }
-
-// export default SingleUserDetails
-
-import React from "react";
 import { Link } from "react-router-dom";
 import { IoArrowBackSharp } from "react-icons/io5";
-import { MdOutlineLibraryAddCheck, MdPadding } from "react-icons/md";
+import { MdOutlineLibraryAddCheck,  } from "react-icons/md";
 import { IoMdClose } from "react-icons/io";
 
 const SingleUserDetails = () => {
