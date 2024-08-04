@@ -11,10 +11,12 @@ import { TbCopyCheck } from 'react-icons/tb';
 import { RxCross2 } from 'react-icons/rx';
 import ManageItemTable from '../Components/ManageItemTable.jsx/ManageItemTable';
 import ManageCategoryTable from '../Components/ManageCategoryTable/ManageCategoryTable';
+import CategoryModal from '../Components/CategoryModal/CategoryModal';
 
 const ManageItems = () => {
     const [openAddModal, setOpenAddModal] = useState(false)
     const [category, setCategory] = useState(false)
+    const [openCategoryModal, setOpenCategoryModal] = useState(false)
     const columns = [
         {
             title: 'Serial No',
@@ -75,10 +77,16 @@ const ManageItems = () => {
                             Items
                         </button>
                     </div>
-                    <button onClick={() => setOpenAddModal(true)} className='bg-[#3475F1] px-4 rounded-sm start-center gap-1 py-2 text-white flex justify-center items-center whitespace-nowrap'>
+
+                    {
+                        category ?  <button onClick={() => setOpenCategoryModal(true)}  className='bg-[#3475F1] px-4 rounded-sm start-center gap-1 py-2 text-white flex justify-center items-center whitespace-nowrap'>
+                        <FaPlus />
+                        Add category
+                    </button> :  <button onClick={() => setOpenAddModal(true)} className='bg-[#3475F1] px-4 rounded-sm start-center gap-1 py-2 text-white flex justify-center items-center whitespace-nowrap'>
                         <FaPlus />
                         Add Item
                     </button>
+                    }
                 </div>
             </div>
 
@@ -101,6 +109,8 @@ const ManageItems = () => {
             {
                 category ? <ManageCategoryTable/> : <ManageItemTable/>
             }
+
+            <CategoryModal setOpenAddModal={setOpenCategoryModal} openAddModal={openCategoryModal} />
 
             <Modal
                 open={openAddModal}

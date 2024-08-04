@@ -5,7 +5,7 @@ import { RiDeleteBin6Line } from "react-icons/ri";
 import { RxCross2 } from "react-icons/rx";
 import { TbCopyCheck } from "react-icons/tb";
 import { FileImageOutlined, InboxOutlined, UploadOutlined } from '@ant-design/icons';
-import { message, Upload } from 'antd';
+import {  Upload } from 'antd';
 
 const { Dragger } = Upload;
 
@@ -71,19 +71,7 @@ const ManageCategoryTable = () => {
     ];
 
 
-    const onFinish = (value) => {
-
-    }
-
-
-
-
-    const uploadProps = {
-        beforeUpload: file => {
-          // Handle file upload
-          return false; // Prevent automatic upload
-        },
-      };
+    
 
 
 
