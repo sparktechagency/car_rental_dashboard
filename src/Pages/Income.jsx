@@ -60,7 +60,7 @@ const Income = () => {
             {/* Income Card Section */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mt-5">
                 {
-                    IncomeItems.map(income => <IncomeCard income={income} />)
+                    IncomeItems.map((income , i) => <IncomeCard key={i}  income={income} />)
                 }
             </div>
 

@@ -110,15 +110,16 @@ const Sidebar = () => {
                     icon: <></>,
                 },
                 {
-                    path: '/terms',
+                    path: '/rules-regulation',
                     label: 'Rules & Regulations',
                     icon: <></>,
                 },
                 {
-                    path: '/terms',
+                    path: '/facts',
                     label: 'Facts',
                     icon: <></>,
                 },
+                
 
             ]
         },

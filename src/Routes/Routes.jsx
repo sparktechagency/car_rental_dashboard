@@ -34,6 +34,8 @@ import Subscription from "../Pages/Subscription.jsx";
 import UserDetails from "../Pages/UserDetails.jsx";
 import ManageItems from "../Pages/ManageItems.jsx";
 import MediaSettings from "../Pages/MediaSettings/MediaSettings.jsx";
+import RulesAndRegulation from "../Pages/RulesAndRegulation.jsx";
+import Facts from "../Pages/Facts.jsx";
 // import Otp from "../Pages/Auth/Otp.jsx";
 
 
@@ -85,8 +87,16 @@ export const router = createBrowserRouter([
                 element: <PrivacyPolicy />,
             },
             {
+                path: '/facts',
+                element: <Facts />,
+            },
+            {
                 path: '/terms',
                 element: <Terms />,
+            },
+            {
+                path: '/rules-regulation',
+                element: <RulesAndRegulation />,
             },
             {
                 path: '/profile',
