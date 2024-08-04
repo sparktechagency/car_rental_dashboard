@@ -1,4 +1,3 @@
-import React from 'react';
 import { Table } from 'antd';
 import './subscription.css';
 
@@ -49,8 +48,8 @@ const columns = [
         title: 'Action',
         dataIndex: 'action',
         key: 'action',
-        render: (text, record) => (
-            <a href="#edit">Edit</a>
+        render: () => (
+            <a href="#edit" className='text-[#3475F1]'>Edit</a>
         ),
     },
 ];
@@ -94,7 +93,7 @@ const SubscriptionTable = () => {
         return index % 2 === 0 ? 'even-row' : '';
       };
     return (<div className="specific-page-table">
-        <Table   columns={columns} dataSource={data} bordered pagination={false} components={{
+        <Table   columns={columns} dataSource={data} pagination={false} components={{
             header: {
                 cell: (props) => (
                     <th {...props} style={specificPageHeaderStyle} />

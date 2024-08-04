@@ -1,10 +1,9 @@
-import { BsArrowLeftShort, BsCurrencyDollar } from "react-icons/bs"
+import { BsArrowLeftShort } from "react-icons/bs"
 import SubscriptionTable from "../Components/SubscriptionTable/SubscriptionTable"
 
 
 
-const Subscription = ({ income }) => {
-    console.log(income)
+const Subscription = () => {
     return (
         <div className="p-2 shadow-md">
             <div className="flex items-center gap-2 pb-5">
