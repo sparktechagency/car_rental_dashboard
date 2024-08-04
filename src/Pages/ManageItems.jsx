@@ -1,4 +1,4 @@
-import { Form, Input, Modal, Table } from 'antd';
+import { Col, Form, Input, Modal, Row, Table } from 'antd';
 import React, { useState } from 'react'
 import { CgLayoutGrid } from 'react-icons/cg';
 import { CiSearch } from 'react-icons/ci';
@@ -12,7 +12,7 @@ import { RxCross2 } from 'react-icons/rx';
 import ManageItemTable from '../Components/ManageItemTable.jsx/ManageItemTable';
 import ManageCategoryTable from '../Components/ManageCategoryTable/ManageCategoryTable';
 import CategoryModal from '../Components/CategoryModal/CategoryModal';
-
+const { Option } = Select;
 const ManageItems = () => {
     const [openAddModal, setOpenAddModal] = useState(false)
     const [category, setCategory] = useState(false)
@@ -79,13 +79,13 @@ const ManageItems = () => {
                     </div>
 
                     {
-                        category ?  <button onClick={() => setOpenCategoryModal(true)}  className='bg-[#3475F1] px-4 rounded-sm start-center gap-1 py-2 text-white flex justify-center items-center whitespace-nowrap'>
-                        <FaPlus />
-                        Add category
-                    </button> :  <button onClick={() => setOpenAddModal(true)} className='bg-[#3475F1] px-4 rounded-sm start-center gap-1 py-2 text-white flex justify-center items-center whitespace-nowrap'>
-                        <FaPlus />
-                        Add Item
-                    </button>
+                        category ? <button onClick={() => setOpenCategoryModal(true)} className='bg-[#3475F1] px-4 rounded-sm start-center gap-1 py-2 text-white flex justify-center items-center whitespace-nowrap'>
+                            <FaPlus />
+                            Add category
+                        </button> : <button onClick={() => setOpenAddModal(true)} className='bg-[#3475F1] px-4 rounded-sm start-center gap-1 py-2 text-white flex justify-center items-center whitespace-nowrap'>
+                            <FaPlus />
+                            Add Item
+                        </button>
                     }
                 </div>
             </div>
@@ -93,21 +93,40 @@ const ManageItems = () => {
 
             {/* Category section */}
 
-            <div className='flex justify-between item-center my-5'>
-                <div>
-                    <p className=''>Category</p>
-
-                </div>
-                <div>
-                    <p>Sub Category</p>
-                </div>
-                <div>
-                    <p>Eligible Swap Member</p>
-                </div>
-            </div>
+            <Form layout="horizontal">
+                <Row gutter={16}>
+                    <Col span={8}>
+                        <Form.Item label="Category" labelCol={{span : 24}} wrapperCol={{ span: 24 }}>
+                            <Select defaultValue="All">
+                                <Option value="all">All</Option>
+                                <Option value="category1">Category 1</Option>
+                                <Option value="category2">Category 2</Option>
+                            </Select>
+                        </Form.Item>
+                    </Col>
+                    <Col span={8}>
+                        <Form.Item label="Sub Category" labelCol={{span : 24}} wrapperCol={{ span: 24 }} className='pb-0' >
+                            <Select defaultValue="All">
+                                <Option value="all">All</Option>
+                                <Option value="subcategory1">Sub Category 1</Option>
+                                <Option value="subcategory2">Sub Category 2</Option>
+                            </Select>
+                        </Form.Item>
+                    </Col>
+                    <Col span={8}>
+                        <Form.Item label="Eligible Swap Member" labelCol={{span : 24}} wrapperCol={{ span: 24 }} >
+                            <Select defaultValue="All">
+                                <Option value="all">All</Option>
+                                <Option value="member1">Member 1</Option>
+                                <Option value="member2">Member 2</Option>
+                            </Select>
+                        </Form.Item>
+                    </Col>
+                </Row>
+            </Form>
 
             {
-                category ? <ManageCategoryTable/> : <ManageItemTable/>
+                category ? <ManageCategoryTable /> : <ManageItemTable />
             }
 
             <CategoryModal setOpenAddModal={setOpenCategoryModal} openAddModal={openCategoryModal} />
