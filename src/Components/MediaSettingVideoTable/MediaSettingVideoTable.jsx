@@ -24,7 +24,7 @@ const MediaSettingVideoTable = () => {
             key: 'changeOrder',
         },
         {
-            title: 'Image',
+            title: 'Video',
             dataIndex: 'imageUrl',
             key: 'image',
             render: (text, record) => <img src={record.imageUrl} alt={record.name} style={{ width: 50, height: 50 }} />,

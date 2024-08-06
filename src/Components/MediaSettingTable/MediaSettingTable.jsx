@@ -23,9 +23,9 @@ const MediaSettingTable = () => {
             key: 'changeOrder',
         },
         {
-            title: 'Image',
+            title: 'Ads',
             dataIndex: 'imageUrl',
-            key: 'image',
+            key: 'ads',
             render: (text, record) => <img src={record.imageUrl} alt={record.name} style={{ width: 50, height: 50 }} />,
         },
         {

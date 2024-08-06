@@ -45,10 +45,10 @@ const MediaSettings = () => {
                     {
                         ads ? <button onClick={() => setOpenAddModal(true)} className='bg-[#3475F1] px-4 rounded-sm start-center gap-1 py-2 text-white flex justify-center items-center whitespace-nowrap'>
                             <FaPlus />
-                            New Video
+                            New Ads
                         </button> : <button onClick={() => setOpenAddModal(true)} className='bg-[#3475F1] px-4 rounded-sm start-center gap-1 py-2 text-white flex justify-center items-center whitespace-nowrap'>
                             <FaPlus />
-                            New Ads
+                            New Videos
                         </button>
                     }
                 </div>
