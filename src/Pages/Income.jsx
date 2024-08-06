@@ -77,7 +77,7 @@ const Income = () => {
                     </Link>
                 </div>
                 {/* Transaction Table */}
-                <TransactionTable />
+                <TransactionTable pagination={false} />
             </div>
 
 

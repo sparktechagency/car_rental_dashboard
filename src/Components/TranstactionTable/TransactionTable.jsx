@@ -51,36 +51,36 @@ const data = [
   {
     key: '#12333',
     name: 'John Brown',
-    Membership_Type : "Gold",
-    Date_Of_Payment : "12/06/24",
-    Payment_Type  : "Online Payment",
-    Payment_Status : "paid",
-    Paid_Amount :   "$19.99" 
+    Membership_Type: "Gold",
+    Date_Of_Payment: "12/06/24",
+    Payment_Type: "Online Payment",
+    Payment_Status: "paid",
+    Paid_Amount: "$19.99"
   },
   {
     key: '#12333',
     name: 'Jim Green',
-    Membership_Type : "Platinum",
-    Date_Of_Payment : "12/06/24",
-    Payment_Type  : "Online Payment",
-    Payment_Status : "paid",
-    Paid_Amount :   "$19.99" 
+    Membership_Type: "Platinum",
+    Date_Of_Payment: "12/06/24",
+    Payment_Type: "Online Payment",
+    Payment_Status: "paid",
+    Paid_Amount: "$19.99"
 
 
   },
   {
     key: '#12333',
     name: 'Joe Black',
-    Membership_Type : "Gold",
-    Date_Of_Payment : "12/06/24",
-    Payment_Type  : "Online Payment",
-    Payment_Status : "paid",
-    Paid_Amount :   "$19.99" 
+    Membership_Type: "Gold",
+    Date_Of_Payment: "12/06/24",
+    Payment_Type: "Online Payment",
+    Payment_Status: "paid",
+    Paid_Amount: "$19.99"
 
 
   },
 ];
 
-const TransactionTable = () => <Table columns={columns} dataSource={data}  pagination={false} />;
+const TransactionTable = ({pagination}) => <Table columns={columns} dataSource={data} pagination={pagination} className="custom-pagination" />;
 
 export default TransactionTable;
