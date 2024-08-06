@@ -1,13 +1,14 @@
 import  { useEffect, useRef, useState } from 'react'
 import { IoIosArrowForward } from 'react-icons/io'
 import { IoSettings } from 'react-icons/io5'
-import { MdDashboard, MdEvent, MdOutlineCategory } from 'react-icons/md'
+import { MdOutlineCategory } from 'react-icons/md'
 import { RiBarChartGroupedFill,  } from 'react-icons/ri'
 import { Link, NavLink, useNavigate } from 'react-router-dom'
 import { CiLogout } from "react-icons/ci";
 import { HiOutlineUser } from 'react-icons/hi'
 import { FaArrowTrendUp } from 'react-icons/fa6'
 import { CgNotes } from 'react-icons/cg'
+import { WiTime2 } from 'react-icons/wi'
 
 
 
@@ -21,39 +22,39 @@ const Sidebar = () => {
         {
             path: '/',
             label: 'Dashboard',
-            icon: <MdDashboard />,
+            icon: <WiTime2 size={25} />,
             sub_menu: false
         },
 
         {
-            path: '/income',
+            path: '/income', 
             label: 'Income',
-            icon: <FaArrowTrendUp />,
+            icon: <FaArrowTrendUp size={25} />,
             sub_menu: false
         },
         {
             path: '/subscription',
             label: 'Subscription',
-            icon: <RiBarChartGroupedFill />,
+            icon: <RiBarChartGroupedFill size={25} />,
             sub_menu: false
         },
         {
             path: '/user-details',
             label: 'User Details',
-            icon: <HiOutlineUser />,
+            icon: <HiOutlineUser size={25} />,
             sub_menu: false
         },
 
         {
             path: '/manage-items',
             label: 'Manage Items',
-            icon: <MdOutlineCategory />,
+            icon: <MdOutlineCategory size={25} />,
             sub_menu: false
         },
         {
             path: '/media-settings',
             label: 'Media Settings',
-            icon: <CgNotes />,
+            icon: <CgNotes size={25} />,
             sub_menu: false
         },
 
@@ -145,7 +146,7 @@ const Sidebar = () => {
                 <Link to={`/`}><img src="../../../src/assets/logo.png" alt="Logo" /></Link>
             </div>
 
-            <div className='start-start flex-col gap-5 text-black'>
+            <div className='start-start flex-col gap-5 mt-5 text-black'>
                 {
                     links.map((item, index) => {
                         if (item?.sub_menu) {
