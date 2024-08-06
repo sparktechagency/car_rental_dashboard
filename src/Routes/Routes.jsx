@@ -36,6 +36,7 @@ import ManageItems from "../Pages/ManageItems.jsx";
 import MediaSettings from "../Pages/MediaSettings/MediaSettings.jsx";
 import RulesAndRegulation from "../Pages/RulesAndRegulation.jsx";
 import Facts from "../Pages/Facts.jsx";
+import TransactionHistory from "../Pages/TransactionHistory.jsx";
 // import Otp from "../Pages/Auth/Otp.jsx";
 
 
@@ -52,6 +53,10 @@ export const router = createBrowserRouter([
             {
                 path: '/total-join-request',
                 element: <TotalJoinRequest />,
+            },
+            {
+                path : "/transaction-history",
+                element : <TransactionHistory/>
             },
             {
                 path: '/income',

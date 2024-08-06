@@ -4,6 +4,7 @@ import IncomeCard from "../Components/IncomeCard/IncomeCard"
 import img1 from '../assets/images/dollar_gold.png'
 import img2 from '../assets/images/dollar_green.png'
 import TransactionTable from "../Components/TranstactionTable/TransactionTable"
+import { Link } from "react-router-dom"
 
 const Income = () => {
 
@@ -60,7 +61,7 @@ const Income = () => {
             {/* Income Card Section */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mt-5">
                 {
-                    IncomeItems.map((income , i) => <IncomeCard key={i}  income={income} />)
+                    IncomeItems.map((income, i) => <IncomeCard key={i} income={income} />)
                 }
             </div>
 
@@ -71,10 +72,12 @@ const Income = () => {
 
                 <div className="flex justify-between items-center">
                     <h1 className="font-semibold text-[20px]">Transaction History</h1>
+                    <Link to={`/transaction-history`}>
                     <p className="border-b cursor-pointer text-[12px] border-[#4E4E4E] text-[#4E4E4E]">View All</p>
+                    </Link>
                 </div>
                 {/* Transaction Table */}
-                <TransactionTable/>
+                <TransactionTable />
             </div>
 
 
