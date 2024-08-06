@@ -104,9 +104,9 @@ const JoinRequest = () => {
           <div className="start-center gap-1">
             {/* <button className='px-4 py-2 rounded-3xl text-black font-semibold bg-green-600'> View </button> */}
             <button className="px-6 py-2 rounded-3xl text-black font-semibold bg-transparent border border-blue-500 hover:bg-blue-500 hover:text-white">
-               <Link to={`/single-user-details/id`}>
-               View
-               </Link>
+              <Link to={`/single-user-details/id`}>
+                View
+              </Link>
             </button>
           </div>
         );
@@ -116,7 +116,15 @@ const JoinRequest = () => {
   ];
   return (
     <div className="bg-[var(--color-7)] rounded-md">
-      <Table dataSource={dataSource} columns={columns} />
+      <Table dataSource={dataSource} columns={columns} className="custom-pagination" pagination={{
+        pageSize: 5,
+        showTotal: (total, range) => `Showing ${range[0]}-${range[1]} out of ${total}`,
+        locale: {
+          items_per_page: '',
+          prev_page: 'Previous',
+          next_page: 'Next',
+        },
+      }} />
       <Modal
         centered
         footer={false}
@@ -138,11 +146,10 @@ const JoinRequest = () => {
                     setSelectedID([...selectedID, item?.id]);
                   }
                 }}
-                className={`w-full p-4 py-6 rounded-md text-white font-semibold text-center cursor-pointer select-none ${
-                  selectedID.includes(item?.id)
+                className={`w-full p-4 py-6 rounded-md text-white font-semibold text-center cursor-pointer select-none ${selectedID.includes(item?.id)
                     ? "bg-[#BD8E05]"
                     : "bg-[var(--color-2)]"
-                }`}
+                  }`}
               >
                 <p className="text-base">{item?.name}</p>
               </div>
