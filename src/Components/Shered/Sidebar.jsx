@@ -9,7 +9,13 @@ import { HiOutlineUser } from 'react-icons/hi'
 import { FaArrowTrendUp } from 'react-icons/fa6'
 import { CgNotes } from 'react-icons/cg'
 import { WiTime2 } from 'react-icons/wi'
-
+import media from '../../assets/images/media.png'
+import sub from '../../assets/images/sub.png'
+import dash from '../../assets/images/dashboard.png'
+import income1 from '../../assets/images/income1.png'
+import user from '../../assets/images/userSide.png'
+import category from '../../assets/images/category.png'
+import setting from '../../assets/images/setting.png'
 
 
 const Sidebar = () => {
@@ -22,39 +28,39 @@ const Sidebar = () => {
         {
             path: '/',
             label: 'Dashboard',
-            icon: <WiTime2 size={25} />,
+            icon:<img src={dash}  style={{ fill: 'black' }} /> ,
             sub_menu: false
         },
 
         {
             path: '/income', 
             label: 'Income',
-            icon: <FaArrowTrendUp size={25} />,
+            icon: <img src={income1}  />,
             sub_menu: false
         },
         {
             path: '/subscription',
             label: 'Subscription',
-            icon: <RiBarChartGroupedFill size={25} />,
+            icon: <img src={sub}  />,
             sub_menu: false
         },
         {
             path: '/user-details',
             label: 'User Details',
-            icon: <HiOutlineUser size={25} />,
+            icon: <img src={user}  />,
             sub_menu: false
         },
 
         {
             path: '/manage-items',
             label: 'Manage Items',
-            icon: <MdOutlineCategory size={25} />,
+            icon: <img src={category}  />,
             sub_menu: false
         },
         {
             path: '/media-settings',
             label: 'Media Settings',
-            icon: <CgNotes size={25} />,
+            icon: <img src={media}  />,
             sub_menu: false
         },
 
@@ -93,7 +99,7 @@ const Sidebar = () => {
         {
             path: '#',
             label: 'Settings',
-            icon: <IoSettings />,
+            icon: <img src={setting}  />,
             sub_menu: [
                 {
                     path: '/profile',
