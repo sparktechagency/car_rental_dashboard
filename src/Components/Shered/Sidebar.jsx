@@ -137,7 +137,7 @@ const Sidebar = () => {
                         const isSubMenuActive = item.sub_menu && item.sub_menu.some(subItem => subItem.path === pathname);
                         if (item?.sub_menu) {
                             return (
-                                <div key={index} className='w-full'>
+                                <div key={index} className='w-full mt-5'>
                                     {
                                         isSubMenuActive ? <div className='absolute left-0  bg-white h-[38px] w-2  ' style={{
                                             borderRadius: "0 10px 10px 0",
@@ -168,7 +168,7 @@ const Sidebar = () => {
                                                     <NavLink
                                                         to={sub_item?.path}
                                                         key={subIndex}
-                                                        className={`start-center px-10 gap-2 w-full py-2 cursor-pointer my-1 ${isSubItemActive ? "text-blue-500" : "bg-[var(--color-7)]"}`}
+                                                        className={`start-center px-10 gap-2 w-full py-2 cursor-pointer  ${isSubItemActive ? "text-blue-500 bg-white " : "bg-[var(--color-7)]"}`}
                                                     >
                                                         {sub_item?.icon}
                                                         {sub_item?.label}
@@ -208,62 +208,14 @@ const Sidebar = () => {
 
 
 
-            {/* <div className='start-start flex-col gap-5 mt-5 text-black'>
-                {
-                    links.map((item, index) => {
-                        if (item?.sub_menu) {
-                            return (<div onClick={() => {
-                                toggleAccordion(index)
-                            }} key={index} className='w-full'>
-
-                                <div className='start-center gap-2 w-full py-2 bg-[var(--color-7)] px-4 cursor-pointer'>
-                                    {item?.icon}
-                                    {item?.label}
-                                    <IoIosArrowForward />
-                                </div>
-                                <div ref={(el) => (contentRefs.current[index] = el)}
-                                    className=' accordion-content overflow-hidden transition-max-height duration-300 ease-in-out cursor-pointer mt-1 bg-[var(--color-8)]'
-                                    style={{
-                                        maxHeight: openIndex === index ? `${contentRefs.current[index]?.scrollHeight}px` : '0px'
-                                    }}
-                                >
-                                    {
-                                        item?.sub_menu?.map((sub_item, index) => <NavLink to={sub_item?.path}
-                                            key={index}
-                                            className=' start-center px-4 gap-2 w-full py-2 bg-[var(--color-7)] cursor-pointer my-1'>
-                                            {sub_item?.icon}
-                                            {sub_item?.label}
-                                        </NavLink>
-                                        )
-                                    }
-                                </div>
-                            </div>)
-                        } else {
-                            return (<>
-
-                                <NavLink
-                                    className={`mt-4 start-center gap-2 w-full py-2 ${item?.path === pathname ? "text-blue-500" : "bg-[var(--color-7)]"}  px-4 cursor-pointer`}
-
-                                    to={item?.path}>
-                                    {
-                                        item?.path === pathname ? item?.icon2 : item?.icon
-                                    }
-
-                                    {item?.label}
-                                </NavLink>
-                            </>
-                            )
-                        }
-                    })
-                }
-            </div> */}
+           
 
 
             <div
                 onClick={handleLogOut}
-                className="flex text-[#FDFDFD] items-center gap-3 cursor-pointer px-6 hover:bg-white-500 py-2 mt-10 transition-all"
+                className="flex text-[4E4E4E]  items-center bg-white gap-3 ml-10 cursor-pointer px-6 hover:bg-white-500 py-2 mt-32 transition-all"
             >
-                <CiLogout size={24} color="#FDFDFD" />
+                <CiLogout size={24} color="text-[4E4E4E]" />
                 Log Out
             </div>
 

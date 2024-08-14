@@ -15,7 +15,7 @@ function App() {
     {
       title: 'Total User',
       icon : user,
-      count: 5480,
+      count: 852650,
     },
     {
       title: 'Total Income',
