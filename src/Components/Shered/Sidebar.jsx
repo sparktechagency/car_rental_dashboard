@@ -17,6 +17,7 @@ import user2 from '../../assets/images/user_color.png'
 import cat2 from '../../assets/images/item_cat.png'
 import media2 from '../../assets/images/media_color.png'
 import setting2 from '../../assets/images/setting_color.png'
+import logo  from "../../../src/assets/logo.png"
 
 const Sidebar = () => {
     const [openIndex, setOpenIndex] = useState(null);
@@ -127,7 +128,7 @@ const Sidebar = () => {
     return (
         <div id='sidebar' className=' w-full h-full mt-10'>
             <div className="log mb-5 ml-10">
-                <Link to={`/`}><img src="../../../src/assets/logo.png" alt="Logo" /></Link>
+                <Link to={`/`}><img src={logo} alt="Logo" /></Link>
             </div>
 
             <div className='start-start flex-col gap-4 mt-5 text-black '>
