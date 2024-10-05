@@ -10,33 +10,37 @@ import income from './assets/images/income.png'
 import platinum from './assets/images/platinumn.png'
 import gold from './assets/images/dollar_gold.png'
 import diamond from './assets/images/daimond.png'
+import { useTotalUserCountQuery } from './redux/Api/dashboardApi'
 function App() {
+  /** Get total user statistics API */
+  const {data :  allUser} =useTotalUserCountQuery()
+  console.log(allUser?.data);
   const data = [
     {
       title: 'Total User',
       icon : user,
-      count: 852650,
+      count: allUser?.data?.totalUser,
     },
     {
       title: 'Total Income',
       icon : income,
-      count: 1480,
+      count: allUser?.data?.totalIncome,
     },
     {
       title: 'Gold User',
       icon : gold,
-      count: 548,
+      count: allUser?.data?.goldUsers,
     },
     {
       title: 'Platinum User',
       icon : platinum,
-      count: 548,
+      count: allUser?.data?.platinumUsers,
     },
 
     {
       title: 'Diamond User',
       icon : diamond,
-      count: 548,
+      count: allUser?.data?.diamondUsers,
     },
   ]
   return (
