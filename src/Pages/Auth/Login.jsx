@@ -3,12 +3,23 @@ import React, { useEffect } from "react";
 import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
 import img from '../../assets/images/login.png'
+import { useLoginAdminMutation } from "../../redux/Api/userApi";
+import { toast } from "sonner";
 
 const Login = () => {
+    const [loginAdmin] = useLoginAdminMutation()
     const navigate = useNavigate();
 
     const onFinish = (values) => {
-        console.log(values);
+        loginAdmin(values).unwrap()
+            .then((payload) => {
+                if(payload?.data?.accessToken){
+                    navigate('/')
+                    localStorage.setItem('token', JSON.stringify(payload?.data?.accessToken));
+                    toast.success(payload?.message)
+                }
+            })
+            .catch((error) => toast.error(error?.data?.message));
     };
 
     return (
@@ -129,10 +140,9 @@ const Login = () => {
                         <Button
                             type="primary"
                             htmlType="submit"
-                            className="login-form-button"
+                            className="login-form-button py-5"
                             block
                             style={{
-                                height: "52px",
                                 fontWeight: "400px",
                                 fontSize: "18px",
                                 background: "#3475F1",
