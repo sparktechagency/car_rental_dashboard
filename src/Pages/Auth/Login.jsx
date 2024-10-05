@@ -1,65 +1,21 @@
-import { LockOutlined, MailOutlined } from "@ant-design/icons";
 import { Button, Checkbox, Form, Input } from "antd";
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router";
-// import loginImage from "../../assets/loginImage.png";
 import { Link } from "react-router-dom";
-import Swal from "sweetalert2";
-// import { UserData, reset } from "../../ReduxSlices/SigninSlice";
-
-// import { useDispatch, useSelector } from "react-redux";
+import img from '../../assets/images/login.png'
 
 const Login = () => {
     const navigate = useNavigate();
-    // const dispatch = useDispatch();
-    // const { isLoading, isError, isSuccess, userData, accessToken, message } =
-    //     useSelector((state) => state.UserData);
-    // useEffect(() => {
-    //   if (isError == true) {
-    //     Swal.fire({
-    //       icon: "error",
-    //       title: "Oops...",
-    //       text: message,
-    //     });
-    //   }
-    //   if (isSuccess == true) {
-    //     localStorage.setItem("yourInfo", JSON.stringify(userData));
-    //     window.location.href = "/";
-    //   }
-
-    //   dispatch(reset());
-    // }, [isLoading, isError, isSuccess, dispatch, navigate]);
 
     const onFinish = (values) => {
-        // dispatch(UserData(values)).then((res) => {
-        //     if (res.type == 'UserData/fulfilled') {
-        //         navigate('/')
-        //         location.reload()
-        //     } else {
-        //         Swal.fire({
-        //             icon: "error",
-        //             title: "Oops...",
-        //             text: res?.payload?.message,
-        //             showCloseButton: false,
-        //             showConfirmButton: false,
-        //             timer: 1500
-        //         });
-        //     }
-        // });
+        console.log(values);
     };
 
     return (
-        <div
-            className="gap-0 flex-col flex justify-center items-center"
-            style={{
-                width: "100%",
-                background: "#BD8E05",
-                height: "100vh",
-            }}
-        >
-            {/*<div className="flex justify-center items-center">*/}
-            {/*    <img src={loginImage} alt="" />*/}
-            {/*</div>*/}
+        <div className="grid grid-cols-2 items-center h-[100vh]">
+            <div className="bg-[#C0D4FB] h-full flex items-center justify-center">
+                <img src={img} className="" alt="" />
+            </div>
             <div className="bg-white flex justify-center items-center">
                 <Form
                     name="normal_login"
@@ -82,9 +38,9 @@ const Login = () => {
                     </h1>
 
                     <p
-                        style = {{ color: "#7D7E8A", textAlign: "center"}}
+                        style={{ color: "#7D7E8A", textAlign: "center" }}
                     >
-                        Please Sign In to Login Your Account
+                        Please enter your email and password to continue
                     </p>
                     <div style={{ marginBottom: "24px" }}>
                         <label
@@ -162,7 +118,7 @@ const Login = () => {
                         </Form.Item>
                         <Link
                             className="login-form-forgot "
-                            style={{ color: "#B47000" }}
+                            style={{ color: "#3475F1" }}
                             to="/auth/forgot-password"
                         >
                             Forgot Password
@@ -179,7 +135,7 @@ const Login = () => {
                                 height: "52px",
                                 fontWeight: "400px",
                                 fontSize: "18px",
-                                background: "#ECB206",
+                                background: "#3475F1",
                                 marginTop: "56px",
                             }}
                         >
