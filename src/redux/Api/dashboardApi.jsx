@@ -9,8 +9,15 @@ const useApi = baseApi.injectEndpoints({
                 method : 'GET',
                } 
             }
+        }),
+        getUserGrowth :  builder.query({
+            query  :(year)=>{
+                return {
+                    url :`/dashboard/user-growth?year=${year}`,method : 'GET'
+                }
+            }
         })
     })
 })
 
-export const {useTotalUserCountQuery} = useApi
+export const {useTotalUserCountQuery, useGetUserGrowthQuery} = useApi

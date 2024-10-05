@@ -14,7 +14,7 @@ import { useTotalUserCountQuery } from './redux/Api/dashboardApi'
 function App() {
   /** Get total user statistics API */
   const {data :  allUser} =useTotalUserCountQuery()
-  console.log(allUser?.data);
+
   const data = [
     {
       title: 'Total User',
@@ -43,6 +43,7 @@ function App() {
       count: allUser?.data?.diamondUsers,
     },
   ]
+  
   return (
     <>
       <div className='grid-5 gap-3'>
