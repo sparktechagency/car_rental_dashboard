@@ -43,7 +43,7 @@ function App() {
       count: allUser?.data?.diamondUsers,
     },
   ]
-  
+
   return (
     <>
       <div className='grid-5 gap-3'>

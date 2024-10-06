@@ -2,13 +2,14 @@ import { Table } from "antd";
 import { useState } from "react";
 import { CiEdit } from "react-icons/ci";
 import { RiDeleteBin6Line } from "react-icons/ri";
-
-
-import img from '../../assets/images/user22.png'
 import CategoryModal from "../CategoryModal/CategoryModal";
-const ManageCategoryTable = () => {
-    const [openAddModal, setOpenAddModal] = useState(false)
+import { useGetAllCategoryQuery } from "../../redux/Api/dashboardApi";
+import { imageUrl } from "../../redux/Api/baseApi";
 
+const ManageCategoryTable = () => {
+    const [openAddModal, setOpenAddModal] = useState(false);
+    const { data: getAllCategory } = useGetAllCategoryQuery()
+    console.log(getAllCategory?.data);
     const columns = [
         {
             title: 'SL No.',
@@ -25,16 +26,14 @@ const ManageCategoryTable = () => {
             title: 'Image',
             dataIndex: 'imageUrl',
             key: 'image',
-            render: (text, record) => <img src={record.imageUrl} alt={record.name} style={{ width: 50, height: 50 }} />,
+            render: (text, record) => <img className="object-contain" src={record.imageUrl} alt={record.name} style={{ width: 60, height: 60 }} />,
         },
         {
             title: 'Action',
             dataIndex: 'action',
             key: 'action',
-            // eslint-disable-next-line no-unused-vars
             render: (text, record) => (
                 <div className="flex items-center gap-2">
-                    {/* Replace the action content with what you need, for example, icons */}
                     <a href="#delete" onClick={() => setOpenAddModal(true)} className="bg-[#3475F1] text-white p-1 rounded-md"><CiEdit size={20} /></a>
                     <a href="#delete" className="bg-[#D9000A] text-white p-1 rounded-md"><RiDeleteBin6Line size={20} /></a>
                 </div>
@@ -42,40 +41,22 @@ const ManageCategoryTable = () => {
         },
     ];
 
-
-    // Columns data
-    const data = [
+    /** Category data */
+    const dataTable = getAllCategory?.data?.map((category, i) => (
         {
-            key: '1',
-            sno: '1',
-            category: 'dindinrya',
-            imageUrl: img
-        },
-        {
-            key: '2',
-            sno: '2',
-            category: 'dindinrya',
-            imageUrl: img
-        },
-        {
-            key: '3',
-            sno: '3',
-            category: 'dindinrya',
-            imageUrl: img
-        },
-
-    ];
-
-
-
-
+            key: i + 1,
+            sno: i + 1,
+            category: category?.name,
+            imageUrl: `${imageUrl}${category?.image}`
+        }
+    ))
 
 
 
     return (
         <div className="p-2 ">
 
-            <Table columns={columns} dataSource={data} pagination={{
+            <Table columns={columns} dataSource={dataTable} pagination={{
                 pageSize: 5,
                 showTotal: (total, range) => `Showing ${range[0]}-${range[1]} out of ${total}`,
                 locale: {
@@ -84,7 +65,7 @@ const ManageCategoryTable = () => {
                     next_page: 'Next',
                 },
             }}
-            className="custom-pagination" 
+                className="custom-pagination"
 
             />
             <CategoryModal openAddModal={openAddModal} setOpenAddModal={setOpenAddModal} />

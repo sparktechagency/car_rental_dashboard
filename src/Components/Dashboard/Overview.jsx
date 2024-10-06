@@ -8,7 +8,6 @@ const Overview = () => {
     const [year, setYear] = useState('2024')
     /**user growth API */
     const {data  : getUserGrowth} = useGetUserGrowthQuery(year);
-    console.log(getUserGrowth?.data?.data);
     const chartData =  getUserGrowth?.data?.data?.map(data =>(
         {
             name : data?.month,

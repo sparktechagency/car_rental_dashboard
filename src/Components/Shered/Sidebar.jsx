@@ -23,7 +23,6 @@ const Sidebar = () => {
     const [openIndex, setOpenIndex] = useState(null);
     const contentRefs = useRef([]);
     const { pathname } = useLocation();
-    console.log(pathname)
 
     // const admin = false;
 
