@@ -27,8 +27,26 @@ const useApi = baseApi.injectEndpoints({
                     body : email
                 }
             }
+        }),
+        verifyOtp : builder.mutation({
+            query : (data)=>{
+                return {
+                    url : '/auth/verify-otp',
+                    method : 'POST',
+                    body :  data
+                }
+            }
+        }) ,
+        resetPassword :  builder.mutation({
+            query : (data)=>{
+                return {
+                    url : '/auth/reset-password',
+                    method : 'POST',
+                    body : data
+                }
+            }
         })
     })
 })
 
-export const {useLoginAdminMutation , useGetProfileQuery , useForgotPasswordMutation } = useApi
+export const {useLoginAdminMutation , useGetProfileQuery , useForgotPasswordMutation , useVerifyOtpMutation , useResetPasswordMutation } = useApi

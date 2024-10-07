@@ -3,14 +3,17 @@
 // import OTPInput from "react-otp-input";
 // import { useDispatch } from "react-redux";
 import OtpInput from 'react-otp-input';
-import {Link, useNavigate} from "react-router-dom";
-import React, {useState} from "react";
-import {Button} from "antd";
+import { Link, useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import { Button } from "antd";
+import { useVerifyOtpMutation } from '../../redux/Api/userApi';
+import { toast } from 'sonner';
 // import Swal from "sweetalert2";
 // import { ForgetPass } from "../../ReduxSlices/Authentication/ForgetPassSlice";
 // import { VerifyCode } from "../../ReduxSlices/Authentication/VerifyCodeSlice";
 
 const Otp = () => {
+    const [verifyOtp] = useVerifyOtpMutation()
     const navigate = useNavigate();
     const [otp, setOtp] = useState("");
     const [err, setErr] = useState("");
@@ -19,7 +22,18 @@ const Otp = () => {
 
     }
     const handleVerifyOtp = () => {
-            
+        const data = {
+            code: otp,
+            email: localStorage.getItem('email')
+        }
+        verifyOtp(data).unwrap()
+            .then((payload) => {
+                toast.success('Verify successfully!')
+                navigate('/auth/update-password')
+            })
+            .catch((error) => toast.error(error?.data?.message));
+        
+        console.log(data);
     }
 
     return (
@@ -75,13 +89,8 @@ const Otp = () => {
                 >
 
 
-                    <Link
-                        className="login-form-forgot "
-                        style={{ color: "#FFF" }}
-                        to="/auth/update-password"
-                    >
-                        Verify
-                    </Link>
+
+                    Verify
                 </Button>
                 <p style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
                     Didn’t receive code?
