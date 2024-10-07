@@ -4,7 +4,9 @@ import { Link, useParams } from "react-router-dom";
 import { IoArrowBackSharp } from "react-icons/io5";
 import { MdOutlineLibraryAddCheck, } from "react-icons/md";
 import { IoMdClose } from "react-icons/io";
-import { useGetSingleSubscribePlanQuery } from "../redux/Api/dashboardApi";
+import { useApproveDeclineMemberRequestMutation, useGetSingleSubscribePlanQuery } from "../redux/Api/dashboardApi";
+import { toast } from "sonner";
+import { Spin } from "antd";
 
 
 
@@ -12,9 +14,10 @@ import { useGetSingleSubscribePlanQuery } from "../redux/Api/dashboardApi";
 
 
 const SingleUserDetails = () => {
-  const {id} = useParams()
+  const [approvedDecline , {isLoading  : loadingApprovedDecline}] = useApproveDeclineMemberRequestMutation()
+  const { id } = useParams()
 
-  const { data : getSingleSubscriber } = useGetSingleSubscribePlanQuery(id);
+  const { data: getSingleSubscriber, isLoading } = useGetSingleSubscribePlanQuery(id);
 
   const userDetails = [
     { "label": "Name", "value": `${getSingleSubscriber?.data?.name}` },
@@ -24,7 +27,7 @@ const SingleUserDetails = () => {
     { "label": "Passport", "value": `${getSingleSubscriber?.data?.passport_number}` },
 
     { "label": "Email", "value": `${getSingleSubscriber?.data?.email}` },
-    { "label": "Phone Number", "value": `${getSingleSubscriber?.data?.phone_number}`},
+    { "label": "Phone Number", "value": `${getSingleSubscriber?.data?.phone_number}` },
     { "label": "Profession", "value": `${getSingleSubscriber?.data?.profession}` },
     { "label": "What's your religion?", "value": `${getSingleSubscriber?.data?.religion || 'Not available'}` },
     { "label": "Do you have children?", "value": `${getSingleSubscriber?.data?.haveChildren}` },
@@ -32,8 +35,8 @@ const SingleUserDetails = () => {
     { "label": "Do you own a vehicle?", "value": `${getSingleSubscriber?.data?.haveVehicle}` },
     { "label": "Are you willing to swap your vehicles?", "value": `${getSingleSubscriber?.data?.willingVehicle}` },
     { "label": "Are you owning or leasing your property?", "value": `${getSingleSubscriber?.data?.ownerOfProperty}` },
-    { "label": "Will you be able to provide approval from owner for temp swap?", "value": `${getSingleSubscriber?.data?.ableApproveForm}`},
-    { "label": "Is your property insured?", "value": `${getSingleSubscriber?.data?.propertyInsured}`}
+    { "label": "Will you be able to provide approval from owner for temp swap?", "value": `${getSingleSubscriber?.data?.ableApproveForm}` },
+    { "label": "Is your property insured?", "value": `${getSingleSubscriber?.data?.propertyInsured}` }
   ]
 
   const userDetails1 = [
@@ -53,28 +56,17 @@ const SingleUserDetails = () => {
       "question": "Dates of travel?",
       "answer": `${getSingleSubscriber?.data?.datesOfTravel?.split('T')[0]}`
     },
-    // {
-    //   "question": "Travel Start",
-    //   "destination": "New York",
-    //   "state": "St. Celina",
-    //   "county": "Rd. Santa Ana",
-    //   "country": "USA"
-    // },
-    // {
-    //   "question": "Travel End",
-    //   "destination": "3891 Ranchview",
-    //   "state": "California",
-    //   "county": "Delaware",
-    //   "country": "USA"
-    // },
-    // {
-    //   "question": "Purpose of travel?",
-    //   "answer": "Business"
-    // }
-  ]
-  
 
-  console.log(getSingleSubscriber?.data);
+  ]
+
+  /** Handle approved and delete request user */
+  const handleUserRequest = (status) => {
+    approvedDecline({id, status }).unwrap()
+      .then((payload) => toast.success(payload?.message))
+      .catch((error) => toast.error(error?.data?.message));
+
+  }
+
   return (
 
     // <div className="container mx-auto p-5">
@@ -138,7 +130,7 @@ const SingleUserDetails = () => {
             </p>
             <p className="col-span-4">: {getSingleSubscriber?.data?.travelStartCountry}</p>
           </div>
-          
+
           <h1 className="text-xl font-medium py-5">Travel End</h1>
 
           <div className="grid grid-cols-12 items-center py-1">
@@ -153,7 +145,7 @@ const SingleUserDetails = () => {
             </p>
             <p className="col-span-4">: {getSingleSubscriber?.data?.endState}</p>
           </div>
-          
+
           <div className="grid grid-cols-12 items-center py-1">
             <p className="text-[16px] mr-28 font-medium col-span-8">
               Country
@@ -164,14 +156,16 @@ const SingleUserDetails = () => {
             <p className="text-[16px] mr-28 font-medium col-span-8">
               Proposal Travel
             </p>
-            <p className="col-span-4">: Business</p>
+            <p className="col-span-4">: {getSingleSubscriber?.data?.purposeOfTravel}</p>
           </div>
         </div>
       </div>
       <div className="flex justify-center gap-4 mt-4 pb-5">
-        <button className="bg-blue-500 text-white py-1 px-4 rounded flex items-center gap-1 text-sm">
-          <MdOutlineLibraryAddCheck /><span>Approved</span>
+        <button disabled={loadingApprovedDecline} onClick={() => handleUserRequest("approved")} className={`bg-blue-500 text-white py-1 px-4 rounded flex items-center gap-1 text-sm ${loadingApprovedDecline ? 'opacity-50 cursor-not-allowed' : ""}`}>
+          {loadingApprovedDecline ? 'Loading..': <><MdOutlineLibraryAddCheck /><span>Approved</span></>}
         </button>
+
+        {/** todo list */}
         <button className="bg-red-500 text-white py-1 px-4 rounded flex items-center text-sm">
           <IoMdClose /> <span>Decline</span>
         </button>

@@ -53,8 +53,16 @@ const useApi = baseApi.injectEndpoints({
                 }
             }
         }),
+        approveDeclineMemberRequest : builder.mutation({
+            query : ({id,status})=>{
+                return {
+                    url : `/plan/subscribe/${id}/request?status=${status}`,
+                    method : 'PATCH'
+                }
+            }
+        })
         
     })
 })
 
-export const {useTotalUserCountQuery, useGetUserGrowthQuery , usePlanSubscriberQuery , useGetAllCategoryQuery , useCreateCategoryMutation , useGetSingleSubscribePlanQuery} = useApi
+export const {useTotalUserCountQuery, useGetUserGrowthQuery , usePlanSubscriberQuery , useGetAllCategoryQuery , useCreateCategoryMutation , useGetSingleSubscribePlanQuery , useApproveDeclineMemberRequestMutation} = useApi
