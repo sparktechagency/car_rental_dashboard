@@ -18,8 +18,17 @@ const useApi = baseApi.injectEndpoints({
                     method : 'GET'
                 }
             }
+        }),
+        forgotPassword : builder.mutation({
+            query : (email)=>{
+                return {
+                    url : '/auth/forgot-password',
+                    method : 'POST',
+                    body : email
+                }
+            }
         })
     })
 })
 
-export const {useLoginAdminMutation , useGetProfileQuery } = useApi
+export const {useLoginAdminMutation , useGetProfileQuery , useForgotPasswordMutation } = useApi

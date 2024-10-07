@@ -1,28 +1,37 @@
-import { Button, Form, Input, Typography } from "antd";
+import { Button, Form, Input, } from "antd";
 import React from "react";
-import {Link, useNavigate} from "react-router-dom";
-import Swal from "sweetalert2";
-// import forgatePass from "../../assets/forgatePass.png";
-// import { useDispatch } from "react-redux";
-// import { ForgetPass } from "../../ReduxSlices/Authentication/ForgetPassSlice";
+import { Link, useNavigate } from "react-router-dom";
+import { useForgotPasswordMutation } from "../../redux/Api/userApi";
+import img from '../../assets/images/forget.png'
+import { toast } from "sonner";
 
 const ForgotPassword = () => {
-    // const dispatch = useDispatch()
+    const [forgotPassword] = useForgotPasswordMutation()
     const navigate = useNavigate();
     const onFinish = (values) => {
-        navigate("/auth/otp")
+        console.log(values);
+        forgotPassword(values).unwrap()
+            .then((payload) => {
+                toast.success(payload?.message)
+                navigate('/auth/otp')
+                localStorage.setItem('email',  values?.email)
+            })
+            .catch((error) => toast.error(error?.data?.message));
+        // navigate("/auth/otp")
     };
     return (
-        <div className="bg-white flex justify-center items-center gap-0 "
-             style={{
-                 width: "100%",
-                 background: "#BD8E05",
-                 height: "100vh",
-             }}
+        <div className="grid grid-cols-2 items-center h-[100vh]"
+            style={{
+                width: "100%",
+                // background: "#BD8E05",
+                height: "100vh",
+            }}
         >
-            {/*<div className="flex justify-center items-center">*/}
-            {/*    <img src={forgatePass} alt="" />*/}
-            {/*</div>*/}
+
+
+            <div className="bg-[#C0D4FB] h-full flex items-center justify-center ">
+                <img src={img} className="object-contain h-[50%]" alt="" />
+            </div>
             <div className=" bg-white flex justify-center items-center">
                 <Form
                     name="normal_login"
@@ -74,7 +83,7 @@ const ForgotPassword = () => {
                                 height: "45px",
                                 fontWeight: "400px",
                                 fontSize: "18px",
-                                background: "#ECB206",
+                                background: "#3475F1",
                                 color: "white",
                                 alignSelf: "bottom",
                                 marginTop: "30px",

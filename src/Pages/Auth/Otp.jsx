@@ -19,14 +19,14 @@ const Otp = () => {
 
     }
     const handleVerifyOtp = () => {
-
+            
     }
 
     return (
         <div
             style={{
                 width: "100%",
-                background: "#BD8E05",
+                background: "#C0D4FB",
                 height: "100vh",
                 display: "flex",
                 alignItems: "center",
@@ -66,7 +66,7 @@ const Otp = () => {
                         fontWeight: "400px",
                         fontSize: "18px",
                         color: "white",
-                        background: "#ECB206",
+                        background: "#3475F1",
                         marginTop: "30px",
                         border: "none",
                         outline: "none",
@@ -85,7 +85,7 @@ const Otp = () => {
                 </Button>
                 <p style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
                     Didn’t receive code?
-                    <p onClick={handleResendCode} style={{ color: "#B47000", textDecoration: "underline", cursor: "pointer" }}>Resend </p>
+                    <p onClick={handleResendCode} style={{ color: "#3475F1", textDecoration: "underline", cursor: "pointer" }}>Resend </p>
                 </p>
             </div>
         </div>
