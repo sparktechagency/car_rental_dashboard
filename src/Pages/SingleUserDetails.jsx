@@ -1,69 +1,80 @@
 
 
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { IoArrowBackSharp } from "react-icons/io5";
 import { MdOutlineLibraryAddCheck, } from "react-icons/md";
 import { IoMdClose } from "react-icons/io";
+import { useGetSingleSubscribePlanQuery } from "../redux/Api/dashboardApi";
 
-const userDetails = [
-  { "label": "Name", "value": "Foysal Rahman" },
-  { "label": "Date of Birth", "value": "24/04/2002" },
-  { "label": "Place of Birth", "value": "Tokyo, Japan" },
-  { "label": "License No", "value": "4546454675" },
-  { "label": "Passport", "value": "658567899769" },
-  { "label": "Email", "value": "williejennings@gmail.com" },
-  { "label": "Phone Number", "value": "(702) 555-0122" },
-  { "label": "Profession", "value": "Businessman" },
-  { "label": "What's your religion?", "value": "Islam" },
-  { "label": "Do you have children?", "value": "Yes" },
-  { "label": "Do you have pets?", "value": "Yes" },
-  { "label": "Do you own a vehicle?", "value": "Yes" },
-  { "label": "Are you willing to swap your vehicles?", "value": "Yes" },
-  { "label": "Are you owning or leasing your property?", "value": "Yes" },
-  { "label": "Will you be able to provide approval from owner for temp swap?", "value": "Yes" },
-  { "label": "Is your property insured?", "value": "Yes" }
-]
 
-const userDetails1 = [
-  {
-    "question": "Will your utilities be up to date for swap?",
-    "answer": "Yes"
-  },
-  {
-    "question": "What do you want to swap and for how long?",
-    "answer": "I want to swap for anything from low to high-value products and want to swap for a long time, at least 2-5 years."
-  },
-  {
-    "question": "Do you want to arrive on departure or depart on arrival?",
-    "answer": "Arrive on departure"
-  },
-  {
-    "question": "Dates of travel?",
-    "answer": "12/01/23"
-  },
-  {
-    "question": "Travel Start",
-    "destination": "New York",
-    "state": "St. Celina",
-    "county": "Rd. Santa Ana",
-    "country": "USA"
-  },
-  {
-    "question": "Travel End",
-    "destination": "3891 Ranchview",
-    "state": "California",
-    "county": "Delaware",
-    "country": "USA"
-  },
-  {
-    "question": "Purpose of travel?",
-    "answer": "Business"
-  }
-]
+
 
 
 
 const SingleUserDetails = () => {
+  const {id} = useParams()
+
+  const { data : getSingleSubscriber } = useGetSingleSubscribePlanQuery(id);
+
+  const userDetails = [
+    { "label": "Name", "value": `${getSingleSubscriber?.data?.name}` },
+    { "label": "Date of Birth", "value": `${getSingleSubscriber?.data?.date_of_birth?.split("T")[0]}` },
+    { "label": "Place of Birth", "value": `${getSingleSubscriber?.data?.place_of_birth}` },
+    { "label": "License No", "value": `${getSingleSubscriber?.data?.license_number}` },
+    { "label": "Passport", "value": `${getSingleSubscriber?.data?.passport_number}` },
+
+    { "label": "Email", "value": `${getSingleSubscriber?.data?.email}` },
+    { "label": "Phone Number", "value": `${getSingleSubscriber?.data?.phone_number}`},
+    { "label": "Profession", "value": `${getSingleSubscriber?.data?.profession}` },
+    { "label": "What's your religion?", "value": `${getSingleSubscriber?.data?.religion || 'Not available'}` },
+    { "label": "Do you have children?", "value": `${getSingleSubscriber?.data?.haveChildren}` },
+    { "label": "Do you have pets?", "value": `${getSingleSubscriber?.data?.havePets}` },
+    { "label": "Do you own a vehicle?", "value": `${getSingleSubscriber?.data?.haveVehicle}` },
+    { "label": "Are you willing to swap your vehicles?", "value": `${getSingleSubscriber?.data?.willingVehicle}` },
+    { "label": "Are you owning or leasing your property?", "value": `${getSingleSubscriber?.data?.ownerOfProperty}` },
+    { "label": "Will you be able to provide approval from owner for temp swap?", "value": `${getSingleSubscriber?.data?.ableApproveForm}`},
+    { "label": "Is your property insured?", "value": `${getSingleSubscriber?.data?.propertyInsured}`}
+  ]
+
+  const userDetails1 = [
+    {
+      "question": "Will your utilities be up to date for swap?",
+      "answer": `${getSingleSubscriber?.data?.utilitiesUptoDate}`
+    },
+    {
+      "question": "What do you want to swap and for how long?",
+      "answer": `${getSingleSubscriber?.data?.aboutSwap}`
+    },
+    {
+      "question": "Do you want to arrive on departure or depart on arrival?",
+      "answer": `${getSingleSubscriber?.data?.departureArrival?.split('T')[0]}`
+    },
+    {
+      "question": "Dates of travel?",
+      "answer": `${getSingleSubscriber?.data?.datesOfTravel?.split('T')[0]}`
+    },
+    // {
+    //   "question": "Travel Start",
+    //   "destination": "New York",
+    //   "state": "St. Celina",
+    //   "county": "Rd. Santa Ana",
+    //   "country": "USA"
+    // },
+    // {
+    //   "question": "Travel End",
+    //   "destination": "3891 Ranchview",
+    //   "state": "California",
+    //   "county": "Delaware",
+    //   "country": "USA"
+    // },
+    // {
+    //   "question": "Purpose of travel?",
+    //   "answer": "Business"
+    // }
+  ]
+  
+
+  console.log(getSingleSubscriber?.data);
   return (
 
     // <div className="container mx-auto p-5">
@@ -76,7 +87,7 @@ const SingleUserDetails = () => {
           >
             <IoArrowBackSharp />
           </Link>
-          <p className="text-xl">Membership Application of Faysal Rahman</p>
+          <p className="text-xl">Membership Application of {getSingleSubscriber?.data?.name}</p>
         </div>
       </div>
       <div className="grid grid-cols-2 gap-4 p-6">
@@ -113,51 +124,41 @@ const SingleUserDetails = () => {
             <p className="text-[16px] mr-28 font-medium col-span-8">
               Destination
             </p>
-            <p className="col-span-4">: New Work</p>
+            <p className="col-span-4">: {getSingleSubscriber?.data?.startDestination}</p>
           </div>
           <div className="grid grid-cols-12 items-center py-1">
             <p className="text-[16px] mr-28 font-medium col-span-8">
               State
             </p>
-            <p className="col-span-4">: St. selena</p>
+            <p className="col-span-4">: {getSingleSubscriber?.data?.startState}</p>
           </div>
           <div className="grid grid-cols-12 items-center py-1">
             <p className="text-[16px] mr-28 font-medium col-span-8">
               Country
             </p>
-            <p className="col-span-4">: Rd. Stanat ana</p>
+            <p className="col-span-4">: {getSingleSubscriber?.data?.travelStartCountry}</p>
           </div>
-          <div className="grid grid-cols-12 items-center py-1">
-            <p className="text-[16px] mr-28 font-medium col-span-8">
-              Country
-            </p>
-            <p className="col-span-4">: Usa</p>
-          </div>
+          
           <h1 className="text-xl font-medium py-5">Travel End</h1>
 
           <div className="grid grid-cols-12 items-center py-1">
             <p className="text-[16px] mr-28 font-medium col-span-8">
               Destination
             </p>
-            <p className="col-span-4">: New Work</p>
+            <p className="col-span-4">: {getSingleSubscriber?.data?.endDestination}</p>
           </div>
           <div className="grid grid-cols-12 items-center py-1">
             <p className="text-[16px] mr-28 font-medium col-span-8">
               State
             </p>
-            <p className="col-span-4">: St. selena</p>
+            <p className="col-span-4">: {getSingleSubscriber?.data?.endState}</p>
           </div>
+          
           <div className="grid grid-cols-12 items-center py-1">
             <p className="text-[16px] mr-28 font-medium col-span-8">
               Country
             </p>
-            <p className="col-span-4">: Rd. Stanat ana</p>
-          </div>
-          <div className="grid grid-cols-12 items-center py-1">
-            <p className="text-[16px] mr-28 font-medium col-span-8">
-              Country
-            </p>
-            <p className="col-span-4">: Usa</p>
+            <p className="col-span-4">: {getSingleSubscriber?.data?.endCountry}</p>
           </div>
           <div className="grid grid-cols-12 items-center py-1">
             <p className="text-[16px] mr-28 font-medium col-span-8">

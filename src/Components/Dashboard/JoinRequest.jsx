@@ -40,18 +40,21 @@ const dataSource = [
 const JoinRequest = () => {
   /** Get new member request */
   const { data: getSubscriber } = usePlanSubscriberQuery()
-
+  console.log(getSubscriber);
   const tableData = getSubscriber?.data?.data?.map((user, i) => (
     {
       key: i + 1,
+      id : user?._id,
       name: user?.user_id?.name,
-      img: user?.profile_image,
+      img: user?.user_id?.profile_image,
       contact : user?.phone_number,
       email : user?.email,
-      // location : user?.
+      location : user?.place_of_birth
+
     }
   ))
-  console.log(getSubscriber?.data?.data);
+  // console.log(tableData);
+  // console.log(getSubscriber?.data?.data);
   const columns = [
     {
       title: "Sl No.",
@@ -100,11 +103,9 @@ const JoinRequest = () => {
       render: (_, record) => {
         return (
           <div className="start-center gap-1">
-            <button className="px-6 py-2 rounded-3xl text-black font-semibold bg-transparent border border-blue-500 hover:bg-blue-500 hover:text-white">
-              <Link to={`/single-user-details/id`}>
+              <Link className="px-6 py-2 rounded-3xl text-black font-semibold bg-transparent border border-blue-500 hover:bg-blue-500 hover:text-white" to={`/single-user-details/${record?.id}`}>
                 View
               </Link>
-            </button>
           </div>
         );
       },
@@ -112,7 +113,7 @@ const JoinRequest = () => {
   ];
   return (
     <div className="bg-[var(--color-7)] rounded-md">
-      <Table dataSource={dataSource} columns={columns} className="custom-pagination" pagination={false
+      <Table dataSource={tableData} columns={columns} className="custom-pagination" pagination={false
         //   {
         //   pageSize: 5,
         //   showTotal: (total, range) => `Showing ${range[0]}-${range[1]} out of ${total}`,

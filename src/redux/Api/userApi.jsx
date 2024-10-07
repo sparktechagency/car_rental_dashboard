@@ -10,8 +10,16 @@ const useApi = baseApi.injectEndpoints({
                 body : data
                } 
             }
+        }),
+        getProfile :  builder.query({
+            query : ()=>{
+                return{
+                    url : '/auth/profile',
+                    method : 'GET'
+                }
+            }
         })
     })
 })
 
-export const {useLoginAdminMutation} = useApi
+export const {useLoginAdminMutation , useGetProfileQuery } = useApi

@@ -25,6 +25,7 @@ const useApi = baseApi.injectEndpoints({
                 }
             }
         }),
+       
         getAllCategory : builder.query({
             query : ()=>{
                 return {
@@ -43,8 +44,17 @@ const useApi = baseApi.injectEndpoints({
                 }
             },
             invalidatesTags : ['allCategory']
-        }) 
+        }),
+        getSingleSubscribePlan : builder.query({
+            query : (id)=>{
+                return {
+                    url : `/plan/subscribe/${id}`,
+                    method : 'GET'
+                }
+            }
+        }),
+        
     })
 })
 
-export const {useTotalUserCountQuery, useGetUserGrowthQuery , usePlanSubscriberQuery , useGetAllCategoryQuery , useCreateCategoryMutation} = useApi
+export const {useTotalUserCountQuery, useGetUserGrowthQuery , usePlanSubscriberQuery , useGetAllCategoryQuery , useCreateCategoryMutation , useGetSingleSubscribePlanQuery} = useApi

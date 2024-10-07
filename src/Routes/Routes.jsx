@@ -183,7 +183,7 @@ export const router = createBrowserRouter([
             },
 
             {
-                path: '/single-user-details/id',
+                path: '/single-user-details/:id',
                 element: <SingleUserDetails />,
             }
 

@@ -1,4 +1,4 @@
-import { Table } from "antd";
+import { Popconfirm, Table } from "antd";
 import { useState } from "react";
 import { CiEdit } from "react-icons/ci";
 import { RiDeleteBin6Line } from "react-icons/ri";
@@ -35,11 +35,23 @@ const ManageCategoryTable = () => {
             render: (text, record) => (
                 <div className="flex items-center gap-2">
                     <a href="#delete" onClick={() => setOpenAddModal(true)} className="bg-[#3475F1] text-white p-1 rounded-md"><CiEdit size={20} /></a>
-                    <a href="#delete" className="bg-[#D9000A] text-white p-1 rounded-md"><RiDeleteBin6Line size={20} /></a>
+                    <Popconfirm
+                        title="Delete the task"
+                        description="Are you sure to delete this task?"
+                        okText="Yes"
+                        cancelText="No"
+                    >
+                    <a href="#delete" onClick={()=> handleDeleteCategory(record)} className="bg-[#D9000A] text-white p-1 rounded-md"><RiDeleteBin6Line size={20} /></a>
+                    </Popconfirm>
                 </div>
             ),
         },
     ];
+
+    /** Delete category */
+    const handleDeleteCategory =(values)=>{
+        console.log(values);
+    }
 
     /** Category data */
     const dataTable = getAllCategory?.data?.map((category, i) => (
@@ -47,7 +59,8 @@ const ManageCategoryTable = () => {
             key: i + 1,
             sno: i + 1,
             category: category?.name,
-            imageUrl: `${imageUrl}${category?.image}`
+            imageUrl: `${imageUrl}${category?.image}`,
+            
         }
     ))
 
@@ -57,7 +70,7 @@ const ManageCategoryTable = () => {
         <div className="p-2 ">
 
             <Table columns={columns} dataSource={dataTable} pagination={{
-                pageSize: 5,
+                pageSize: 10,
                 showTotal: (total, range) => `Showing ${range[0]}-${range[1]} out of ${total}`,
                 locale: {
                     items_per_page: '',
