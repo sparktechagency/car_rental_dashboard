@@ -1,68 +1,88 @@
 import { baseApi } from "./baseApi";
 
 const useApi = baseApi.injectEndpoints({
-    endpoints : (builder)=>({
-        totalUserCount : builder.query({
-            query : (data)=>{
-               return {
-                url : '/dashboard/total-user_count',
-                method : 'GET',
-               } 
-            }
-        }),
-        getUserGrowth :  builder.query({
-            query  :(year)=>{
+    endpoints: (builder) => ({
+        totalUserCount: builder.query({
+            query: (data) => {
                 return {
-                    url :`/dashboard/user-growth?year=${year}`,method : 'GET'
+                    url: '/dashboard/total-user_count',
+                    method: 'GET',
                 }
             }
         }),
-        planSubscriber : builder.query({
-            query : ()=>{
+        getUserGrowth: builder.query({
+            query: (year) => {
                 return {
-                    url : '/plan/subscribers',
-                    method : 'GET'
+                    url: `/dashboard/user-growth?year=${year}`, method: 'GET'
                 }
             }
         }),
-       
-        getAllCategory : builder.query({
-            query : ()=>{
+        planSubscriber: builder.query({
+            query: () => {
                 return {
-                    url : '/category/get-all',
-                    method : 'GET'
+                    url: '/plan/subscribers',
+                    method: 'GET'
+                }
+            }
+        }),
+
+        getAllCategory: builder.query({
+            query: () => {
+                return {
+                    url: '/category/get-all',
+                    method: 'GET'
                 }
             },
-            providesTags : ['allCategory']
+            providesTags: ['allCategory']
         }),
-        createCategory : builder.mutation({
-            query : (data)=>{
+        createCategory: builder.mutation({
+            query: (data) => {
                 return {
-                    url : '/category/add-category',
+                    url: '/category/add-category',
                     method: "POST",
-                    body :  data
+                    body: data
                 }
             },
-            invalidatesTags : ['allCategory']
+            invalidatesTags: ['allCategory']
         }),
-        getSingleSubscribePlan : builder.query({
+        getSingleSubscribePlan: builder.query({
+            query: (id) => {
+                return {
+                    url: `/plan/subscribe/${id}`,
+                    method: 'GET'
+                }
+            }
+        }),
+        approveDeclineMemberRequest: builder.mutation({
+            query: ({ id, status }) => {
+                return {
+                    url: `/plan/subscribe/${id}/request?status=${status}`,
+                    method: 'PATCH'
+                }
+            }
+        }),
+        /** Get all Notification */
+        getAllNotification: builder.query({
+            query: () => {
+                return {
+                    url: '/notification/get-all-notifications',
+                    method: 'GET'
+                }
+            },
+            providesTags : ['notification']
+        }),
+        /** Delete Notification */
+        deleteNotification : builder.mutation({
             query : (id)=>{
                 return {
-                    url : `/plan/subscribe/${id}`,
-                    method : 'GET'
+                    url : `/notification/delete/${id}`,
+                    method : 'DELETE'
                 }
-            }
-        }),
-        approveDeclineMemberRequest : builder.mutation({
-            query : ({id,status})=>{
-                return {
-                    url : `/plan/subscribe/${id}/request?status=${status}`,
-                    method : 'PATCH'
-                }
-            }
+            },
+            invalidatesTags :['notification']
         })
-        
+
     })
 })
 
-export const {useTotalUserCountQuery, useGetUserGrowthQuery , usePlanSubscriberQuery , useGetAllCategoryQuery , useCreateCategoryMutation , useGetSingleSubscribePlanQuery , useApproveDeclineMemberRequestMutation} = useApi
+export const { useTotalUserCountQuery, useGetUserGrowthQuery, usePlanSubscriberQuery, useGetAllCategoryQuery, useCreateCategoryMutation, useGetSingleSubscribePlanQuery, useApproveDeclineMemberRequestMutation , useGetAllNotificationQuery , useDeleteNotificationMutation } = useApi

@@ -11,7 +11,7 @@ const Header = () => {
         <div className='w-full py-4 bg-[var(--color-8)] end-center  gap-4'>
             <div onClick={() => navigate('/notification')}>
                 <Link to="/feedback" style={{ boxShadow: "0px 0px 10px 2px rgba(0,0,0,0.24)" }} className=' bg-[#F2F2F2] h-10 flex items-center w-10 rounded-full p-2'>
-                    <Badge color="#C30303" count={1}>
+                    <Badge color="#C30303" >
                         <IoIosNotificationsOutline color="#6A6A6A" size={24} />
                     </Badge>
                 </Link>
