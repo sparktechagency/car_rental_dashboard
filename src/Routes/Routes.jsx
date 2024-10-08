@@ -38,6 +38,7 @@ import RulesAndRegulation from "../Pages/RulesAndRegulation.jsx";
 import Facts from "../Pages/Facts.jsx";
 import TransactionHistory from "../Pages/TransactionHistory.jsx";
 import PrivateRoute from "./PrivateRoute.jsx";
+import PrivateLogin from "./PrivateLogin.jsx";
 // import Otp from "../Pages/Auth/Otp.jsx";
 
 
@@ -192,7 +193,7 @@ export const router = createBrowserRouter([
     },
     {
         path: '/auth/login',
-        element: <Login/>
+        element: <PrivateLogin><Login/></PrivateLogin>
     },
     {
         path: '/auth/forgot-password',

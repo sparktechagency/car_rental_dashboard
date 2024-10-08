@@ -1,17 +1,23 @@
 import React, { useEffect, useState } from "react";
 import { Button, Form, Input, Spin } from "antd";
 import { CiEdit } from "react-icons/ci";
-import { useGetProfileQuery, useUpdateProfileMutation } from "../redux/Api/userApi";
+import { useChangePasswordMutation, useGetProfileQuery, useUpdateProfileMutation } from "../redux/Api/userApi";
 import { toast } from "sonner";
 import { LoadingOutlined } from "@ant-design/icons";
 import { imageUrl } from "../redux/Api/baseApi";
+import { useNavigate } from "react-router-dom";
 
 
 
 const admin = false;
 const Profile = () => {
+    /** all API */
     const { data: getProfile } = useGetProfileQuery()
-    const [updateProfile , {isLoading}] = useUpdateProfileMutation()
+    const [updateProfile, { isLoading }] = useUpdateProfileMutation()
+    const [changePassword, { isLoading: changePasswordLoading }] = useChangePasswordMutation()
+    
+    const navigate = useNavigate()
+
     const [image, setImage] = useState();
     const [form] = Form.useForm()
     const [tab, setTab] = useState(new URLSearchParams(window.location.search).get('tab') || "Profile");
@@ -30,24 +36,31 @@ const Profile = () => {
     }
 
     const onFinish = (values) => {
-        if (values?.new_password === values.current_password) {
-            return setPassError('your old password cannot be your new password')
+        if (values?.newPassword === values.currentPassword) {
+            return setPassError('Your old password cannot be your new password')
         }
-        if (values?.new_password !== values?.confirm_password) {
+        if (values?.newPassword !== values?.confirmPassword) {
             return setPassError("Confirm password doesn't match")
         } else {
             setPassError('')
         }
+        changePassword(values).unwrap()
+            .then((payload) => {
+                toast.success("Your password change successfully Please login again!")
+                localStorage.removeItem('token')
+                navigate('/auth/login')
+            })
+            .catch((error) => toast.error(error?.data?.message));
     };
     const onEditProfile = (values) => {
         const formData = new FormData()
         if (image) {
             formData.append("profile_image", image);
         }
-        formData.append('name' , values?.fullName)
-        formData.append('email' , values?.email)
-        formData.append('phone_number' , values?.mobileNumber)
-        formData.append('address' , values?.address)
+        formData.append('name', values?.fullName)
+        formData.append('email', values?.email)
+        formData.append('phone_number', values?.mobileNumber)
+        formData.append('address', values?.address)
         updateProfile(formData).unwrap()
             .then((payload) => toast.success(payload?.message))
             .catch((error) => toast.error(error?.data?.message));
@@ -61,7 +74,7 @@ const Profile = () => {
         }
         form.setFieldsValue(data)
     }, [getProfile])
-    
+
     return (
         <div>
 
@@ -229,7 +242,7 @@ const Profile = () => {
                                         disabled={isLoading}
                                         className='font-normal text-[16px] leading-6 bg-primary'
                                     >
-                                        {isLoading ?  <Spin indicator={<LoadingOutlined style={{ fontSize: 24, color: '#ffffff' }} spin />} /> :  "Save & Changes"}
+                                        {isLoading ? <Spin indicator={<LoadingOutlined style={{ fontSize: 24, color: '#ffffff' }} spin />} /> : "Save & Changes"}
                                     </Button>
                                 </Form.Item>
                             </Form>
@@ -247,7 +260,7 @@ const Profile = () => {
                                 form={form}
                             >
                                 <Form.Item
-                                    name="current_password"
+                                    name="oldPassword"
                                     label={<p className="text-[#415D71] text-sm leading-5 poppins-semibold">Current
                                         Password</p>}
                                     rules={[
@@ -275,7 +288,7 @@ const Profile = () => {
 
 
                                 <Form.Item
-                                    name="new_password"
+                                    name="newPassword"
                                     rules={[
                                         {
                                             required: true,
@@ -304,7 +317,7 @@ const Profile = () => {
                                 <Form.Item
                                     label={<p className="text-[#415D71] text-sm leading-5 poppins-semibold">Confirm
                                         Password</p>}
-                                    name="confirm_password"
+                                    name="confirmPassword"
                                     rules={[
                                         {
                                             required: true,
@@ -327,7 +340,7 @@ const Profile = () => {
                                         placeholder="***************"
                                     />
                                 </Form.Item>
-                                {passError && <p className="text-red-600 -mt-4 mb-2">{passError}</p>}
+                                {passError && <p className="text-red-600 -mt-4 mb-2 text-center">{passError}</p>}
                                 <Form.Item
                                     style={{
                                         marginBottom: 0,
@@ -346,9 +359,10 @@ const Profile = () => {
                                             color: "#FFFFFF",
                                             background: '#3475F1'
                                         }}
+                                        disabled={changePasswordLoading}
                                         className='font-normal text-[16px] leading-6 bg-primary'
                                     >
-                                        Save Changes
+                                        {changePasswordLoading ? <Spin indicator={<LoadingOutlined style={{ fontSize: 24, color: '#ffffff' }} spin />} /> : 'Save Changes'}
                                     </Button>
                                 </Form.Item>
                             </Form>

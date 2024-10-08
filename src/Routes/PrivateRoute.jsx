@@ -2,7 +2,6 @@ import React from 'react'
 import { Navigate, useLocation } from 'react-router-dom'
 import { useGetProfileQuery } from '../redux/Api/userApi';
 import { Skeleton } from 'antd';
-import { toast } from 'sonner';
 
 const PrivateRoute = ({children}) => {
     const location = useLocation()
