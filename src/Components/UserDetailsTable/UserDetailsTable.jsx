@@ -1,10 +1,9 @@
 import { Table } from "antd";
-import userImage from '../../assets/images/user22.png'
 import { MdBlockFlipped } from "react-icons/md";
 import { useGetAllUserQuery } from "../../redux/Api/dashboardApi";
 import { imageUrl } from "../../redux/Api/baseApi";
-const UserDetailsTable = () => {
-    const {data :getAllUser, isLoading}  = useGetAllUserQuery()
+    const UserDetailsTable = ({search}) => {
+    const {data :getAllUser, isLoading}  = useGetAllUserQuery({search})
     const columns = [
         {
             title: 'S. No.',

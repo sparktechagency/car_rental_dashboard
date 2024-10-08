@@ -83,9 +83,9 @@ const useApi = baseApi.injectEndpoints({
         }),
         /** Get all user */
         getAllUser : builder.query({
-            query : ()=>{
+            query : ({search})=>{
                 return {
-                    url : '/auth/users',
+                    url : `/auth/users?searchTerm=${search}`,
                     method : 'GET'
                 }
             }
