@@ -1,8 +1,10 @@
 import { Table } from "antd";
 import userImage from '../../assets/images/user22.png'
 import { MdBlockFlipped } from "react-icons/md";
+import { useGetAllUserQuery } from "../../redux/Api/dashboardApi";
+import { imageUrl } from "../../redux/Api/baseApi";
 const UserDetailsTable = () => {
-
+    const {data :getAllUser, isLoading}  = useGetAllUserQuery()
     const columns = [
         {
             title: 'S. No.',
@@ -13,9 +15,9 @@ const UserDetailsTable = () => {
             title: 'Name',
             dataIndex: 'name',
             key: 'name',
-            render: (text) => (
+            render: (text , record) => (
                 <div style={{ display: 'flex', alignItems: 'center' }}>
-                    <img src={userImage} alt="user" style={{ width: 30, height: 30, marginRight: 8 }} />
+                    <img src={record?.img} alt="user" style={{ width: 30, height: 30, marginRight: 8 }} />
                     {text}
                 </div>
             ),
@@ -58,111 +60,23 @@ const UserDetailsTable = () => {
         },
     ];
 
+    const formattedTableData = getAllUser?.data?.map((user , i)=>{
+        return  {
+                key: user?._id,
+                sno: i+1,
+                name: user?.name,
+                img : `${imageUrl}${user?.profile_image}`,
+                memberSince: user?.createdAt?.split("T")[0],
+                membershipType: user?.userType,
+                email: user?.email,
+                contactNumber: user?.phone_number,
+                location: user?.address || 'Not Available',
+        }
+    })
+
 
     // Columns data
-    const data = [
-        {
-            key: '1',
-            sno: '1',
-            name: 'dindinrya',
-            memberSince: '24/08/22',
-            membershipType: 'Gold',
-            email: 'bockelboy@att.com',
-            contactNumber: '(201) 555-0124',
-            location: 'Kent, Utah',
-        },
-        {
-            key: '2',
-            sno: '2',
-            name: 'Halima',
-            memberSince: '20/05/23',
-            membershipType: 'Gold',
-            email: 'callisver@verizon.com',
-            contactNumber: '(219) 555-0140',
-            location: 'Great Falls, Maryland',
-        },
-        {
-            key: '3',
-            sno: '3',
-            name: 'Halima',
-            memberSince: '20/05/23',
-            membershipType: 'Gold',
-            email: 'callisver@verizon.com',
-            contactNumber: '(219) 555-0140',
-            location: 'Great Falls, Maryland',
-        },
-        {
-            key: '4',
-            sno: '4',
-            name: 'Halima',
-            memberSince: '20/05/23',
-            membershipType: 'Gold',
-            email: 'callisver@verizon.com',
-            contactNumber: '(219) 555-0140',
-            location: 'Great Falls, Maryland',
-        },
-        {
-            key: '5',
-            sno: '5',
-            name: 'Halima',
-            memberSince: '20/05/23',
-            membershipType: 'Gold',
-            email: 'callisver@verizon.com',
-            contactNumber: '(219) 555-0140',
-            location: 'Great Falls, Maryland',
-        },
-        {
-            key: '6',
-            sno: '6',
-            name: 'Halima',
-            memberSince: '20/05/23',
-            membershipType: 'Gold',
-            email: 'callisver@verizon.com',
-            contactNumber: '(219) 555-0140',
-            location: 'Great Falls, Maryland',
-        },
-        {
-            key: '7',
-            sno: '7',
-            name: 'Halima',
-            memberSince: '20/05/23',
-            membershipType: 'Gold',
-            email: 'callisver@verizon.com',
-            contactNumber: '(219) 555-0140',
-            location: 'Great Falls, Maryland',
-        },
-        {
-            key: '8',
-            sno: '8',
-            name: 'Halima',
-            memberSince: '20/05/23',
-            membershipType: 'Gold',
-            email: 'callisver@verizon.com',
-            contactNumber: '(219) 555-0140',
-            location: 'Great Falls, Maryland',
-        },
-        {
-            key: '9',
-            sno: '9',
-            name: 'Halima',
-            memberSince: '20/05/23',
-            membershipType: 'Gold',
-            email: 'callisver@verizon.com',
-            contactNumber: '(219) 555-0140',
-            location: 'Great Falls, Maryland',
-        },
-        {
-            key: '10',
-            sno: '10',
-            name: 'Halima',
-            memberSince: '20/05/23',
-            membershipType: 'Gold',
-            email: 'callisver@verizon.com',
-            contactNumber: '(219) 555-0140',
-            location: 'Great Falls, Maryland',
-        },
-        // Add more data as per your table
-    ];
+   
 
 
 
@@ -171,7 +85,7 @@ const UserDetailsTable = () => {
 
             <Table
                 columns={columns}
-                dataSource={data}
+                dataSource={formattedTableData}
                 pagination={{
                     pageSize: 5,
                     showTotal: (total, range) => `Showing ${range[0]}-${range[1]} out of ${total}`,

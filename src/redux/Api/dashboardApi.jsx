@@ -80,9 +80,18 @@ const useApi = baseApi.injectEndpoints({
                 }
             },
             invalidatesTags :['notification']
+        }),
+        /** Get all user */
+        getAllUser : builder.query({
+            query : ()=>{
+                return {
+                    url : '/auth/users',
+                    method : 'GET'
+                }
+            }
         })
 
     })
 })
 
-export const { useTotalUserCountQuery, useGetUserGrowthQuery, usePlanSubscriberQuery, useGetAllCategoryQuery, useCreateCategoryMutation, useGetSingleSubscribePlanQuery, useApproveDeclineMemberRequestMutation , useGetAllNotificationQuery , useDeleteNotificationMutation } = useApi
+export const { useTotalUserCountQuery, useGetUserGrowthQuery, usePlanSubscriberQuery, useGetAllCategoryQuery, useCreateCategoryMutation, useGetSingleSubscribePlanQuery, useApproveDeclineMemberRequestMutation , useGetAllNotificationQuery , useDeleteNotificationMutation, useGetAllUserQuery } = useApi
