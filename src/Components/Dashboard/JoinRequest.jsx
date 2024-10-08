@@ -2,45 +2,11 @@ import { Table } from "antd";
 import React from "react";
 import { Link } from "react-router-dom";
 import { usePlanSubscriberQuery } from "../../redux/Api/dashboardApi";
-const dataSource = [
-  {
-    key: "1",
-    name: "Mike",
-    img: "https://i.ibb.co/F3jcwjJ/artworks-YCx-Rfx-OOf-T5l-Dm-J9-K5q-X2-A-t500x500.jpg",
-    contact: 324189454648487,
-    email: "gmail@gmail.com",
-    location: "xyz road, y house",
-  },
-  {
-    key: "2",
-    name: "Mike",
-    img: "https://i.ibb.co/F3jcwjJ/artworks-YCx-Rfx-OOf-T5l-Dm-J9-K5q-X2-A-t500x500.jpg",
-    contact: 324189454648487,
-    email: "gmail@gmail.com",
-    location: "xyz road, y house",
-  },
-  {
-    key: "3",
-    name: "Mike",
-    img: "https://i.ibb.co/F3jcwjJ/artworks-YCx-Rfx-OOf-T5l-Dm-J9-K5q-X2-A-t500x500.jpg",
-    contact: 324189454648487,
-    email: "gmail@gmail.com",
-    location: "xyz road, y house",
-  },
-  {
-    key: "4",
-    name: "Mike",
-    img: "https://i.ibb.co/F3jcwjJ/artworks-YCx-Rfx-OOf-T5l-Dm-J9-K5q-X2-A-t500x500.jpg",
-    contact: 324189454648487,
-    email: "gmail@gmail.com",
-    location: "xyz road, y house",
-  },
-];
+
 
 const JoinRequest = () => {
   /** Get new member request */
   const { data: getSubscriber } = usePlanSubscriberQuery()
-  console.log(getSubscriber);
   const tableData = getSubscriber?.data?.data?.map((user, i) => (
     {
       key: i + 1,

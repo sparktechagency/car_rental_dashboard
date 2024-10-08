@@ -45,8 +45,19 @@ const useApi = baseApi.injectEndpoints({
                     body : data
                 }
             }
+        }),
+        updateProfile : builder.mutation({
+            query : (data)=>{
+                return {
+                    url : '/auth/edit-profile',
+                    method : 'PATCH',
+                    body : data
+                }
+            }
         })
     })
 })
 
-export const {useLoginAdminMutation , useGetProfileQuery , useForgotPasswordMutation , useVerifyOtpMutation , useResetPasswordMutation } = useApi
+export const {useLoginAdminMutation , useGetProfileQuery , useForgotPasswordMutation , useVerifyOtpMutation , useResetPasswordMutation , useUpdateProfileMutation
+    
+ } = useApi

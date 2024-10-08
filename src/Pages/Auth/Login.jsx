@@ -13,10 +13,13 @@ const Login = () => {
     const onFinish = (values) => {
         loginAdmin(values).unwrap()
             .then((payload) => {
-                if(payload?.data?.accessToken){
-                    navigate('/')
+                if(payload?.data?.user?.role === 'ADMIN'){
+
                     localStorage.setItem('token', JSON.stringify(payload?.data?.accessToken));
                     toast.success(payload?.message)
+                   return navigate('/')
+                }else{
+                    return toast.error('You are not authorized!')
                 }
             })
             .catch((error) => toast.error(error?.data?.message));

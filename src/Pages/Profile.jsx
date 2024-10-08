@@ -1,14 +1,15 @@
-import { RiEditLine } from "react-icons/ri";
 import React, { useEffect, useState } from "react";
-import { FaEye, FaEyeSlash } from "react-icons/fa6";
 import { Button, Form, Input } from "antd";
 import { CiEdit } from "react-icons/ci";
-import {Link} from "react-router-dom";
-import {IoArrowBackSharp} from "react-icons/io5";
-// import Swal from "sweetalert2";
+import { useGetProfileQuery, useUpdateProfileMutation } from "../redux/Api/userApi";
+import { toast } from "sonner";
+
+
 
 const admin = false;
 const Profile = () => {
+    const { data: getProfile } = useGetProfileQuery()
+    const [updateProfile] = useUpdateProfileMutation()
     const [image, setImage] = useState();
     const [form] = Form.useForm()
     const [tab, setTab] = useState(new URLSearchParams(window.location.search).get('tab') || "Profile");
@@ -36,45 +37,42 @@ const Profile = () => {
         }
     };
     const onEditProfile = (values) => {
-        const data = {
-            profile_image: image,
-            name: values.fullName,
-            contact: values.mobileNumber,
-            address: values.address
+        const formData = new FormData()
+        if (image) {
+            formData.append("profile_image", image);
         }
+        formData.append('name' , values?.fullName)
+        formData.append('email' , values?.email)
+        formData.append('phone_number' , values?.mobileNumber)
+        formData.append('address' , values?.address)
+        updateProfile(formData).unwrap()
+            .then((payload) => toast.success(payload?.message))
+            .catch((error) => toast.error(error?.data?.message));
     }
-//   useEffect(() => {
-//     const data = {
-//       fullName: user.name,
-//       mobileNumber: user.phone_number,
-//       address: user.address
-//     }
-//     form.setFieldsValue(data)
-//   }, [user])
+    useEffect(() => {
+        const data = {
+            fullName: getProfile?.data?.name,
+            email: getProfile?.data?.email,
+            mobileNumber: getProfile?.data?.phone_number,
+            address: getProfile?.data?.address
+        }
+        form.setFieldsValue(data)
+    }, [getProfile])
+    console.log(getProfile?.data);
     return (
         <div>
-            {/* {(admin &&
-            <div className='start-center gap-2 mb-3 p-5'>
-                <Link to={-1}
-                      className='bg-[var(--color-2)] py-1 px-2 rounded-md start-center gap-1 text-white'><IoArrowBackSharp/>back</Link>
-                <p className='text-xl'>Admin Profile</p>
-            </div>
-            )} */}
+
             <div className='container pb-16'>
 
                 <div className='bg-base py-9 px-10 rounded flex items-center justify-center flex-col gap-6'>
                     <div className='relative w-[140px] h-[124px] mx-auto'>
-                        <input type="file" onInput={handleChange} id='img' style={{display: "none"}}/>
+                        <input type="file" onInput={handleChange} id='img' style={{ display: "none" }} />
                         <img
-                            style={{width: 140, height: 140, borderRadius: "100%"}}
-                            src={`https://dcassetcdn.com/design_img/2531172/542774/542774_13559578_2531172_d07764e6_image.png`}
+                            style={{ width: 140, height: 140, borderRadius: "100%" }}
+                            src={`${image ? URL.createObjectURL(image) : `${getProfile?.data?.profile_image}`}`}
                             alt=""
                         />
-                        {/* <img
-              style={{ width: 140, height: 140, borderRadius: "100%" }}
-              src={`${image ? URL.createObjectURL(image) : user?.profile_image?.includes('http') ? 'https://i.ibb.co/d4RSbKx/Ellipse-980.png' : `${ServerUrl}${user.profile_image}`}`}
-              alt=""
-            /> */}
+
                         {
                             tab === "Profile" && <label
                                 htmlFor="img"
@@ -87,13 +85,13 @@ const Profile = () => {
                             cursor-pointer
                         '
                             >
-                                <CiEdit color='#929394'/>
+                                <CiEdit color='#929394' />
                             </label>
                         }
 
                     </div>
                     <div className='w-fit'>
-                        <p className=' text-[#575757] text-[24px] leading-[32px] font-semibold  '>{`Mr. Admin`}</p>
+                        <p className=' text-[#575757] text-[24px] leading-[32px] font-semibold  '>{getProfile?.data?.name}</p>
                     </div>
                 </div>
 
@@ -122,9 +120,9 @@ const Profile = () => {
                         ?
                         <div
                             className='max-w-[481px] mx-auto rounded-lg p-6'
-                            
+
                         >
-                            <h1 className='text-center text-secondary leading-7 text-2xl font-medium mb-7'>Edit 
+                            <h1 className='text-center text-secondary leading-7 text-2xl font-medium mb-7'>Edit
                                 Profile</h1>
                             <Form
                                 onFinish={onEditProfile}
@@ -143,7 +141,7 @@ const Profile = () => {
                                             border: "1px solid #DCDDDE",
                                             borderRadius: "8px",
                                             color: "#919191",
-                                            backgroundColor : "#F6F6F6",
+                                            backgroundColor: "#F6F6F6",
                                             outline: "none"
                                         }}
                                         className='text-[16px] leading-5'
@@ -159,7 +157,7 @@ const Profile = () => {
                                             width: "100%",
                                             height: 48,
                                             border: "1px solid #DCDDDE",
-                                            backgroundColor : "#F6F6F6",
+                                            backgroundColor: "#F6F6F6",
                                             borderRadius: "8px",
                                             color: "#919191",
                                             outline: "none"
@@ -178,7 +176,7 @@ const Profile = () => {
                                         style={{
                                             width: "100%",
                                             height: 48,
-                                            backgroundColor : "#F6F6F6",
+                                            backgroundColor: "#F6F6F6",
                                             border: "1px solid #DCDDDE",
                                             borderRadius: "8px",
                                             color: "#919191",
@@ -196,7 +194,7 @@ const Profile = () => {
                                         style={{
                                             width: "100%",
                                             height: 48,
-                                            backgroundColor : "#F6F6F6",
+                                            backgroundColor: "#F6F6F6",
                                             border: "1px solid #DCDDDE",
                                             borderRadius: "8px",
                                             color: "#919191",
@@ -235,7 +233,7 @@ const Profile = () => {
                         :
                         <div
                             className='max-w-[481px] mx-auto rounded-lg p-6'
-                            
+
                         >
                             <h1 className='text-center text-secondary leading-7 text-2xl font-medium mb-7'>Change
                                 Password</h1>
@@ -260,7 +258,7 @@ const Profile = () => {
                                             width: "100%",
                                             height: "42px",
                                             border: "1px solid #DCDDDE",
-                                            backgroundColor : "#F6F6F6",
+                                            backgroundColor: "#F6F6F6",
                                             borderRadius: "8px",
                                             color: "black",
                                             outline: "none",
@@ -288,7 +286,7 @@ const Profile = () => {
                                             width: "100%",
                                             height: "42px",
                                             border: "1px solid #DCDDDE",
-                                            backgroundColor : "#F6F6F6",
+                                            backgroundColor: "#F6F6F6",
                                             borderRadius: "8px",
                                             color: "black",
                                             outline: "none",
@@ -315,7 +313,7 @@ const Profile = () => {
                                             width: "100%",
                                             height: "42px",
                                             border: "1px solid #DCDDDE",
-                                            backgroundColor : "#F6F6F6",
+                                            backgroundColor: "#F6F6F6",
                                             borderRadius: "8px",
                                             color: "black",
                                             outline: "none",
