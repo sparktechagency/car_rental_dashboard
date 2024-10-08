@@ -1,9 +1,11 @@
 import { Table } from "antd";
 import { MdBlockFlipped } from "react-icons/md";
-import { useGetAllUserQuery } from "../../redux/Api/dashboardApi";
+import { useBlockUserMutation, useGetAllUserQuery } from "../../redux/Api/dashboardApi";
 import { imageUrl } from "../../redux/Api/baseApi";
-    const UserDetailsTable = ({search}) => {
-    const {data :getAllUser, isLoading}  = useGetAllUserQuery({search})
+import { toast } from "sonner";
+const UserDetailsTable = ({ search }) => {
+    const { data: getAllUser, isLoading } = useGetAllUserQuery({ search })
+    const [blockUser] = useBlockUserMutation()
     const columns = [
         {
             title: 'S. No.',
@@ -14,7 +16,7 @@ import { imageUrl } from "../../redux/Api/baseApi";
             title: 'Name',
             dataIndex: 'name',
             key: 'name',
-            render: (text , record) => (
+            render: (text, record) => (
                 <div style={{ display: 'flex', alignItems: 'center' }}>
                     <img src={record?.img} alt="user" style={{ width: 30, height: 30, marginRight: 8 }} />
                     {text}
@@ -50,32 +52,41 @@ import { imageUrl } from "../../redux/Api/baseApi";
             title: 'Action',
             dataIndex: 'action',
             key: 'action',
-            render: () => (
-                <div>
-                    {/* Replace the action content with what you need, for example, icons */}
-                    <a href="#delete"><MdBlockFlipped /></a>
+            render: (_, render) => (
+                <div onClick={() => handleBlockUser(render?.key)} className={`cursor-pointer   ${render?.isBlock ? "text-red-500" : 'text-gray-500'}`}>
+                    <MdBlockFlipped size={20} />
                 </div>
             ),
         },
     ];
 
-    const formattedTableData = getAllUser?.data?.map((user , i)=>{
-        return  {
-                key: user?._id,
-                sno: i+1,
-                name: user?.name,
-                img : `${imageUrl}${user?.profile_image}`,
-                memberSince: user?.createdAt?.split("T")[0],
-                membershipType: user?.userType,
-                email: user?.email,
-                contactNumber: user?.phone_number,
-                location: user?.address || 'Not Available',
+    /** handle block user  */
+    const handleBlockUser = (id) => {
+        blockUser(id).unwrap()
+            .then((payload) => {
+                toast.success(payload?.message)
+            })
+            .catch((error) => toast.error(error?.data?.message));
+    }
+
+    const formattedTableData = getAllUser?.data?.map((user, i) => {
+        return {
+            key: user?._id,
+            sno: i + 1,
+            name: user?.name,
+            img: `${imageUrl}${user?.profile_image}`,
+            memberSince: user?.createdAt?.split("T")[0],
+            membershipType: user?.userType,
+            email: user?.email,
+            contactNumber: user?.phone_number,
+            location: user?.address || 'Not Available',
+            isBlock : user?.is_block
         }
     })
 
 
     // Columns data
-   
+
 
 
 
@@ -94,7 +105,7 @@ import { imageUrl } from "../../redux/Api/baseApi";
                         next_page: 'Next',
                     },
                 }}
-                className="custom-pagination"  
+                className="custom-pagination"
             />
 
         </div>

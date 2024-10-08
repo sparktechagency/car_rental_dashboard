@@ -88,10 +88,22 @@ const useApi = baseApi.injectEndpoints({
                     url : `/auth/users?searchTerm=${search}`,
                     method : 'GET'
                 }
-            }
+            },
+            providesTags : ['blockUser']
+        }),
+        /** Block user */
+        blockUser : builder.mutation({
+            query : (id)=>{
+                return {
+                    url : `/auth/user-block-unblock/${id}`,
+                    method : 'PATCH',
+                
+                }
+            },
+            invalidatesTags : ['blockUser']
         })
 
     })
 })
 
-export const { useTotalUserCountQuery, useGetUserGrowthQuery, usePlanSubscriberQuery, useGetAllCategoryQuery, useCreateCategoryMutation, useGetSingleSubscribePlanQuery, useApproveDeclineMemberRequestMutation , useGetAllNotificationQuery , useDeleteNotificationMutation, useGetAllUserQuery } = useApi
+export const { useTotalUserCountQuery, useGetUserGrowthQuery, usePlanSubscriberQuery, useGetAllCategoryQuery, useCreateCategoryMutation, useGetSingleSubscribePlanQuery, useApproveDeclineMemberRequestMutation , useGetAllNotificationQuery , useDeleteNotificationMutation, useGetAllUserQuery , useBlockUserMutation } = useApi
