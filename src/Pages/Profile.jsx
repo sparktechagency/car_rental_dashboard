@@ -87,6 +87,7 @@ const Profile = () => {
                             style={{ width: 140, height: 140, borderRadius: "100%" }}
                             src={`${image ? URL.createObjectURL(image) : `${imageUrl}${getProfile?.data?.profile_image}`}`}
                             alt=""
+                            className="border-blue-500 border-2 shadow-2xl"
                         />
 
                         {
@@ -178,6 +179,7 @@ const Profile = () => {
                                             color: "#919191",
                                             outline: "none"
                                         }}
+                                        disabled
                                         className='text-[16px] leading-5'
                                         placeholder={`xyz@gmail.com`}
                                     />

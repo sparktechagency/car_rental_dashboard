@@ -1,9 +1,11 @@
 import { Badge } from 'antd'
-// import React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { IoIosNotificationsOutline } from "react-icons/io";
+import { useGetProfileQuery } from '../../redux/Api/userApi';
+import { imageUrl } from '../../redux/Api/baseApi';
 
 const Header = () => {
+    const { data: getUserInfo,isError, isLoading } = useGetProfileQuery();
     const navigate = useNavigate()
     return (
         <div className='w-full py-4 bg-[var(--color-8)] end-center  gap-4'>
@@ -14,10 +16,10 @@ const Header = () => {
                     </Badge>
                 </Link>
             </div>
-            <div onClick={() => navigate('/profile')} className='end-center gap-1 border-gray-400 p-[2px] px-4 rounded-md cursor-pointer'>
-                <img className='h-10 w-10 rounded-full' src="https://dcassetcdn.com/design_img/2531172/542774/542774_13559578_2531172_d07764e6_image.png" alt="" />
-                <p className='font-medium text-white'>Xyz Company</p>
-            </div>
+            <Link to={'/profile'} className='end-center gap-1 border-gray-400 p-[2px] px-4 rounded-md cursor-pointer'>
+                <img className='h-10 w-10 rounded-full object-cover shadow-md border-2' src={`${imageUrl}${getUserInfo?.data?.profile_image}`} alt="" />
+                <p className='font-medium text-white'>{getUserInfo?.data?.name || "Not available"}</p>
+            </Link>
         </div>
     )
 }

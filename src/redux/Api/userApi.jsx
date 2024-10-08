@@ -17,7 +17,8 @@ const useApi = baseApi.injectEndpoints({
                     url : '/auth/profile',
                     method : 'GET'
                 }
-            }
+            },
+            providesTags : ['updateProfile']
         }),
         forgotPassword : builder.mutation({
             query : (email)=>{
@@ -53,7 +54,8 @@ const useApi = baseApi.injectEndpoints({
                     method : 'PATCH',
                     body : data
                 }
-            }
+            },
+            invalidatesTags : ['updateProfile']
         }),
         changePassword :  builder.mutation({
             query : (data)=>{
