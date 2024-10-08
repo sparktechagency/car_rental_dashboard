@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { Button, Form, Input } from "antd";
+import { Button, Form, Input, Spin } from "antd";
 import { CiEdit } from "react-icons/ci";
 import { useGetProfileQuery, useUpdateProfileMutation } from "../redux/Api/userApi";
 import { toast } from "sonner";
+import { LoadingOutlined } from "@ant-design/icons";
+import { imageUrl } from "../redux/Api/baseApi";
 
 
 
 const admin = false;
 const Profile = () => {
     const { data: getProfile } = useGetProfileQuery()
-    const [updateProfile] = useUpdateProfileMutation()
+    const [updateProfile , {isLoading}] = useUpdateProfileMutation()
     const [image, setImage] = useState();
     const [form] = Form.useForm()
     const [tab, setTab] = useState(new URLSearchParams(window.location.search).get('tab') || "Profile");
@@ -26,6 +28,7 @@ const Profile = () => {
         setImage(file)
 
     }
+
     const onFinish = (values) => {
         if (values?.new_password === values.current_password) {
             return setPassError('your old password cannot be your new password')
@@ -58,7 +61,7 @@ const Profile = () => {
         }
         form.setFieldsValue(data)
     }, [getProfile])
-    console.log(getProfile?.data);
+    
     return (
         <div>
 
@@ -69,7 +72,7 @@ const Profile = () => {
                         <input type="file" onInput={handleChange} id='img' style={{ display: "none" }} />
                         <img
                             style={{ width: 140, height: 140, borderRadius: "100%" }}
-                            src={`${image ? URL.createObjectURL(image) : `${getProfile?.data?.profile_image}`}`}
+                            src={`${image ? URL.createObjectURL(image) : `${imageUrl}${getProfile?.data?.profile_image}`}`}
                             alt=""
                         />
 
@@ -223,9 +226,10 @@ const Profile = () => {
                                             color: "#FCFCFC",
                                             background: '#3475F1'
                                         }}
+                                        disabled={isLoading}
                                         className='font-normal text-[16px] leading-6 bg-primary'
                                     >
-                                        Save & Changes
+                                        {isLoading ?  <Spin indicator={<LoadingOutlined style={{ fontSize: 24, color: '#ffffff' }} spin />} /> :  "Save & Changes"}
                                     </Button>
                                 </Form.Item>
                             </Form>
