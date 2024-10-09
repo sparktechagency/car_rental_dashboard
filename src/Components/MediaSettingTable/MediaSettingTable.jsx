@@ -6,7 +6,8 @@ import img from '../../assets/images/ads.png'
 import { MdCheck, MdDragHandle } from "react-icons/md";
 import { IoMdClose } from "react-icons/io";
 import MediaSettingModal from "../MediaSettingModal/MediaSettingModal";
-const MediaSettingTable = () => {
+const MediaSettingTable = ({getAllAds}) => {
+    
     const [openAddModal, setOpenAddModal] = useState(false)
     const [modalTitle, setModalTitle] = useState('')
 
@@ -68,38 +69,19 @@ const MediaSettingTable = () => {
         },
     ];
 
-
-    // Columns data
-    const data = [
-        {
-            key: '1',
+    
+    const formattedData = getAllAds?.data?.map((add , i)=>{
+        return   {
+            key: i+1,
             changeOrder: <MdDragHandle size={20} />,
-            imageUrl: img,
-            viewOrder: '01',
-            active : <MdCheck className="text-green-500" />,
-            private : <IoMdClose className="text-red-600" />,
-            url : 'https://www.google.com'
-        },
-        {
-            key: '2',
-            changeOrder: <MdDragHandle size={20}  />,
-            imageUrl: img,
-            viewOrder: '02',
-            active : <MdCheck className="text-green-500" />,
-            private : <IoMdClose className="text-red-600" />,
-            url : 'https://www.google.com'
-        },
-        {
-            key: '3',
-            changeOrder: <MdDragHandle size={20}  />,
-            imageUrl: img,
-            viewOrder: '03',
-            active : <MdCheck className="text-green-500" />,
-            private : <IoMdClose className="text-red-600" />,
-            url : 'https://www.google.com'
-        },
-
-    ];
+            imageUrl: add?.url,
+            viewOrder: add?.order,
+            active : add?.isActive ? <MdCheck className="text-green-500" /> :  <IoMdClose className="text-red-600" />,
+            private : add?.isPrivate ? <MdCheck className="text-green-500" /> :  <IoMdClose className="text-red-600" />,
+            url : add?.url
+        }
+    })
+  
 
 
     
@@ -110,7 +92,7 @@ const MediaSettingTable = () => {
     return (
         <div className="p-2 ">
 
-            <Table columns={columns} dataSource={data} 
+            <Table columns={columns} dataSource={formattedData} 
             pagination={false}
             // pagination={{
             //     pageSize: 5,

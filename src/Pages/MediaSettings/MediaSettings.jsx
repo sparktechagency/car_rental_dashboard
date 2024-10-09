@@ -4,8 +4,13 @@ import { GoArrowLeft } from "react-icons/go";
 import MediaSettingModal from "../../Components/MediaSettingModal/MediaSettingModal";
 import MediaSettingTable from "../../Components/MediaSettingTable/MediaSettingTable";
 import MediaSettingVideoTable from "../../Components/MediaSettingVideoTable/MediaSettingVideoTable";
+import { useGetAllAdsQuery } from "../../redux/Api/MediaSettingApi";
 
 const MediaSettings = () => {
+
+    /** all APIs */
+    const {data : getAllAds} = useGetAllAdsQuery()
+    console.log(getAllAds?.data);
     const [ads, setAds] = useState(true)
     const [openAddModal, setOpenAddModal] = useState(false)
     const [modalTitle, setModalTitle] = useState('')
@@ -56,7 +61,7 @@ const MediaSettings = () => {
 
 
             {
-                ads ? <MediaSettingTable/>  : <MediaSettingVideoTable/>
+                ads ? <MediaSettingTable getAllAds={getAllAds}  />  : <MediaSettingVideoTable/>
             }
 
             
