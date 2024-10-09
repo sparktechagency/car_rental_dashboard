@@ -1,14 +1,23 @@
 import JoditEditor from "jodit-react";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { IoArrowBackSharp } from "react-icons/io5";
 import { Link } from "react-router-dom";
+import { useGetRulesAndRegulationQuery, useUpdateRulesAndRegulationMutation } from "../redux/Api/dashboardApi";
+import { toast } from "sonner";
 
 const RulesAndRegulation = () => {
+    const { data: getRulesAndRegulation } = useGetRulesAndRegulationQuery()
+    const [updateRules, { isLoading }] = useUpdateRulesAndRegulationMutation()
     const editor = useRef(null);
     const [content, setContent] = useState('');
-    const [isLoading, seLoading] = useState(false)
+    // const [isLoading, seLoading] = useState(false)
     const handleTerms = () => {
-        console.log(content)
+        const data = {
+            description: content
+        }
+        updateRules(data).unwrap()
+            .then((payload) => toast.success(payload?.message))
+            .catch((error) => toast.error(error?.data?.message));
     }
     const config = {
         readonly: false,
@@ -22,6 +31,9 @@ const RulesAndRegulation = () => {
             'align'
         ]
     }
+    useEffect(() => {
+        setContent(getRulesAndRegulation?.data?.description);
+    }, [getRulesAndRegulation])
     return (
         <div>
             <div className='start-center gap-2 mb-3 relative'>
@@ -39,9 +51,9 @@ const RulesAndRegulation = () => {
                     onChange={newContent => { }}
                 />
             </div>
-            {/* <div className='text-center mt-3'>
+            <div className='text-center mt-3'>
                 <button disabled={isLoading} onClick={handleTerms} className='px-8 py-2 rounded-sm bg-[#3475F1]  text-[var(--color-7)]' >Save</button>
-            </div> */}
+            </div>
         </div>
     );
 };

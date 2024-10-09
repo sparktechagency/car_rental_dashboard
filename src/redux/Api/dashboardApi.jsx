@@ -101,9 +101,67 @@ const useApi = baseApi.injectEndpoints({
                 }
             },
             invalidatesTags : ['blockUser']
-        })
+        }),
+        /** Setting APIs */
+        getAboutUs : builder.query({
+            query : ()=>{
+                return {
+                    url : '/rules/get-about-us',
+                    method : 'GET'
+                }
+            },
+            providesTags : ['aboutUs']
+        }),
+        updateAboutUs : builder.mutation({
+            query : (data)=>{
+                return {
+                    url : '/rules/add-about-us',
+                    method : "POST",
+                    body :  data
+                }
+            },invalidatesTags :['aboutUs']
+        }),
+        getRulesAndRegulation :  builder.query({
+            query : ()=>{
+                return {
+                    url : '/rules/get-rules',
+                    method : 'GET'
+                }
+            },
+
+            providesTags : ['terms']
+        }),
+        updateRulesAndRegulation : builder.mutation({
+            query :  (data)=>{
+                return {
+                    url : '/rules/add-rules',
+                    method : 'POST',
+                    body : data
+                }
+            }
+        }),
+        getFacts :  builder.query({
+            query : ()=>{
+                return {
+                    url : '/rules/get-facts',
+                    method : 'GET'
+                }
+            },
+
+            providesTags : ['terms']
+        }),
+        updateFacts : builder.mutation({
+            query :  (data)=>{
+                return {
+                    url : '/rules/add-facts',
+                    method : 'POST',
+                    body : data
+                }
+            }
+        }),
+        
 
     })
 })
 
-export const { useTotalUserCountQuery, useGetUserGrowthQuery, usePlanSubscriberQuery, useGetAllCategoryQuery, useCreateCategoryMutation, useGetSingleSubscribePlanQuery, useApproveDeclineMemberRequestMutation , useGetAllNotificationQuery , useDeleteNotificationMutation, useGetAllUserQuery , useBlockUserMutation } = useApi
+export const { useTotalUserCountQuery, useGetUserGrowthQuery, usePlanSubscriberQuery, useGetAllCategoryQuery, useCreateCategoryMutation, useGetSingleSubscribePlanQuery, useApproveDeclineMemberRequestMutation , useGetAllNotificationQuery , useDeleteNotificationMutation, useGetAllUserQuery , useBlockUserMutation , useUpdateAboutUsMutation , useGetAboutUsQuery , useGetRulesAndRegulationQuery, useUpdateRulesAndRegulationMutation , useUpdateFactsMutation, useGetFactsQuery} = useApi

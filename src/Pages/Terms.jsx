@@ -3,12 +3,23 @@ import React, { useState, useRef, useMemo, useEffect } from 'react';
 import JoditEditor from 'jodit-react';
 import { Link } from 'react-router-dom';
 import { IoArrowBackSharp } from 'react-icons/io5';
+import { useGetAboutUsQuery, useUpdateAboutUsMutation } from '../redux/Api/dashboardApi';
+import { toast } from 'sonner';
 const Terms = () => {
+    const { data: getAbout } = useGetAboutUsQuery();
+    const [updateAbout] = useUpdateAboutUsMutation()
     const editor = useRef(null);
     const [content, setContent] = useState('');
     const [isLoading, seLoading] = useState(false)
     const handleTerms = () => {
-        console.log(content)
+        // console.log(content)
+        const data = {
+            description: content
+        }
+        console.log(data);
+        updateAbout(data).unwrap()
+            .then((payload) => toast.success("Update about successfully!"))
+            .catch((error) => toast.error(error?.data?.message));
     }
     const config = {
         readonly: false,
@@ -22,6 +33,10 @@ const Terms = () => {
             'align'
         ]
     }
+
+    useEffect(()=>{
+        setContent(getAbout?.data?.description)
+    },[getAbout])
     return (
         <>
             <div className='start-center gap-2 mb-3 relative'>
@@ -40,9 +55,9 @@ const Terms = () => {
                     onChange={newContent => { }}
                 />
             </div>
-            {/* <div className='text-center mt-3'>
-                <button disabled={isLoading} onClick={handleTerms} className='px-8 py-2 rounded-2xl  bg-[#3475F1] text-[var(--color-7)]' >Update</button>
-            </div> */}
+            <div className='text-center mt-3'>
+                <button  onClick={handleTerms} className='px-8 py-2 rounded-sm  bg-[#3475F1] text-[var(--color-7)]' >Update</button>
+            </div>
         </>
     )
 }

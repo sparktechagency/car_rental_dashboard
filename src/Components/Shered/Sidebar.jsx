@@ -109,6 +109,7 @@ const Sidebar = () => {
 
     const navigate = useNavigate();
     const handleLogOut = () => {
+        localStorage.removeItem('token')
         navigate("/auth/login")
     }
     const toggleAccordion = (index) => {

@@ -1,14 +1,23 @@
 import JoditEditor from "jodit-react";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { IoArrowBackSharp } from "react-icons/io5";
 import { Link } from "react-router-dom";
+import { useGetFactsQuery, useUpdateFactsMutation } from "../redux/Api/dashboardApi";
+import { toast } from "sonner";
 
 const Facts = () => {
+    const { data: getFacts } = useGetFactsQuery()
+    const [updateFacts] = useUpdateFactsMutation()
     const editor = useRef(null);
     const [content, setContent] = useState('');
     const [isLoading, setLoading] = useState(false)
     const handleTerms = () => {
-        console.log(content)
+        const data = {
+            description: content
+        }
+        updateFacts(data).unwrap()
+            .then((payload) => toast.success(payload?.message))
+            .catch((error) => toast.error(error?.data?.message));
     }
     const config = {
         readonly: false,
@@ -22,6 +31,10 @@ const Facts = () => {
             'align'
         ]
     }
+
+    useEffect(()=>{
+        setContent(getFacts?.data?.description)
+    },[getFacts])
     return (
         <div>
             <div className='start-center gap-2 mb-3 relative'>
@@ -39,9 +52,9 @@ const Facts = () => {
                     onChange={newContent => { }}
                 />
             </div>
-            {/* <div className='text-center mt-3'>
+            <div className='text-center mt-3'>
                 <button disabled={isLoading} onClick={handleTerms} className='px-8 py-2 rounded-sm bg-[#3475F1]  text-[var(--color-7)]' >Save</button>
-            </div> */}
+            </div>
         </div>
     );
 };
