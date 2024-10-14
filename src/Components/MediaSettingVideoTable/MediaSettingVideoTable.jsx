@@ -6,7 +6,8 @@ import img from '../../assets/images/adsVideo.png'
 import { MdCheck, MdDragHandle } from "react-icons/md";
 import { IoMdClose } from "react-icons/io";
 import MediaSettingModal from "../MediaSettingModal/MediaSettingModal";
-const MediaSettingVideoTable = () => {
+import { isAction } from "@reduxjs/toolkit";
+const MediaSettingVideoTable = ({getAllVideos}) => {
     const [openAddModal, setOpenAddModal] = useState(false)
     const [modalTitle, setModalTitle] = useState('')
 
@@ -69,38 +70,20 @@ const MediaSettingVideoTable = () => {
         },
     ];
 
-
+    // console.log(getAllVideos?.data);
     // Columns data
-    const data = [
-        {
-            key: '1',
+    const formattedTableData = getAllVideos?.data?.map((video, i)=>{
+        return  {
+            key: i + 1,
             changeOrder: <MdDragHandle size={20} />,
             imageUrl: img,
-            viewOrder: '01',
-            active : <MdCheck className="text-green-500" />,
-            private : <IoMdClose className="text-red-600" />,
-            url : 'https://www.google.com'
-        },
-        {
-            key: '2',
-            changeOrder: <MdDragHandle size={20}  />,
-            imageUrl: img,
-            viewOrder: '02',
-            active : <MdCheck className="text-green-500" />,
-            private : <IoMdClose className="text-red-600" />,
-            url : 'https://www.google.com'
-        },
-        {
-            key: '3',
-            changeOrder: <MdDragHandle size={20}  />,
-            imageUrl: img,
-            viewOrder: '03',
-            active : <MdCheck className="text-green-500" />,
-            private : <IoMdClose className="text-red-600" />,
-            url : 'https://www.google.com'
-        },
-
-    ];
+            viewOrder: video?.order,
+            active : video?.isActive ? <MdCheck className="text-green-500" /> : <IoMdClose className="text-red-600" />,
+            private : video?.isPrivate ? <MdCheck className="text-green-500" /> : <IoMdClose className="text-red-600" />,
+            url : video?.url
+        }
+    })
+   
 
 
     
@@ -111,7 +94,7 @@ const MediaSettingVideoTable = () => {
     return (
         <div className="p-2 ">
 
-            <Table columns={columns} dataSource={data} 
+            <Table columns={columns} dataSource={formattedTableData} 
             pagination={false}
            
             />

@@ -6,6 +6,7 @@ import img from '../../assets/images/ads.png'
 import { MdCheck, MdDragHandle } from "react-icons/md";
 import { IoMdClose } from "react-icons/io";
 import MediaSettingModal from "../MediaSettingModal/MediaSettingModal";
+import { imageUrl } from "../../redux/Api/baseApi";
 const MediaSettingTable = ({getAllAds}) => {
     
     const [openAddModal, setOpenAddModal] = useState(false)
@@ -74,7 +75,7 @@ const MediaSettingTable = ({getAllAds}) => {
         return   {
             key: i+1,
             changeOrder: <MdDragHandle size={20} />,
-            imageUrl: add?.url,
+            imageUrl: `${imageUrl}${add?.image}`,
             viewOrder: add?.order,
             active : add?.isActive ? <MdCheck className="text-green-500" /> :  <IoMdClose className="text-red-600" />,
             private : add?.isPrivate ? <MdCheck className="text-green-500" /> :  <IoMdClose className="text-red-600" />,

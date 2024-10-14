@@ -22,7 +22,9 @@ const Login = () => {
                     return toast.error('You are not authorized!')
                 }
             })
-            .catch((error) => toast.error(error?.data?.message));
+            .catch((error) => {
+                toast.error(error?.data?.message)
+            });
     };
 
     return (

@@ -1,31 +1,60 @@
-import { FileImageOutlined } from "@ant-design/icons";
-import { Checkbox, Form, Input, Modal, Select, Upload } from "antd";
+import { Checkbox, Form, Input, Modal, Select, Spin, Upload } from "antd";
 import { RxCross2 } from "react-icons/rx";
 import { TbCopyCheck } from "react-icons/tb";
-
+import { PlusOutlined } from '@ant-design/icons';
+import { useState } from "react";
+import { useCreateAdsMutation } from "../../redux/Api/MediaSettingApi";
+import { toast } from "sonner";
+import { LoadingOutlined } from "@ant-design/icons";
 // eslint-disable-next-line react/prop-types
-const MediaSettingModal = ({ openAddModal, setOpenAddModal , modalTitle }) => {
-    const uploadProps = {
-        beforeUpload: () => {
-            // Handle file upload
-            return false; // Prevent automatic upload
-        },
-    };
+const MediaSettingModal = ({ openAddModal, setOpenAddModal, modalTitle }) => {
+    const [createAds, { isLoading }] = useCreateAdsMutation()
+    const [fileList, setFileList] = useState([]);
+    const [isPrivate, setIsPrivate] = useState()
+    const [isActive, setIsActive] = useState()
+
 
     const onFinish = (value) => {
         console.log(value);
+        const formData = new FormData();
+        formData.append('image', fileList[0].originFileObj)
+        formData.append('isPrivate', isPrivate)
+        formData.append('isActive', isActive)
+        formData.append('url', value?.Url)
+        formData.append('order', value?.viewOrder)
+        console.log();
+        createAds(formData).unwrap()
+            .then((payload) => {
+                toast.success(payload?.message)
+                setOpenAddModal(false)
+            })
+            .catch((error) => toast.error(error?.data?.message));
     }
 
 
 
     //   Checkbox value
     const onChange = (e) => {
-        console.log(`checked = ${e.target.checked}`);
+        setIsPrivate(e.target.checked);
     };
+    const handleIsActive = (e) => {
+        setIsActive(e.target.checked);
+    }
 
-    const handleSelectItemChange = (value) =>{
+    const handleSelectItemChange = (value) => {
         console.log(value);
     }
+
+
+    // handle upload image 
+    const handleUploadChange = ({ fileList: newFileList }) => {
+        setFileList(newFileList);
+    };
+
+    const handleRemove = (file) => {
+        setFileList(fileList.filter((item) => item.uid !== file.uid));
+    };
+
 
     return (
         <Modal
@@ -42,7 +71,7 @@ const MediaSettingModal = ({ openAddModal, setOpenAddModal , modalTitle }) => {
                 >
 
 
-                    <Form.Item name={`View Order`}
+                    <Form.Item name={`viewOrder`}
                         label={`View Order`}
                         rules={[
                             {
@@ -50,31 +79,10 @@ const MediaSettingModal = ({ openAddModal, setOpenAddModal , modalTitle }) => {
 
                             }
                         ]}>
-
-                        <Select
-                            defaultValue="lucy"
-                            // style={{
-                            //     width: 
-                            // }}
-                            onChange={handleSelectItemChange}
-                            options={[
-                                {
-                                    value: 'jack',
-                                    label: 'Jack',
-                                },
-                                {
-                                    value: 'lucy',
-                                    label: 'Lucy',
-                                },
-                                {
-                                    value: 'Yiminghe',
-                                    label: 'yiminghe',
-                                },
-                            ]}
-                        />
+                        <Input />
 
                     </Form.Item>
-                    <Checkbox className="my-2" onChange={onChange} checked >Active</Checkbox>
+                    <Checkbox className="my-2" onChange={handleIsActive} >Active</Checkbox>
 
                     <Form.Item
                         name={`Url`}
@@ -89,27 +97,30 @@ const MediaSettingModal = ({ openAddModal, setOpenAddModal , modalTitle }) => {
                         <Input className=' border outline-none' placeholder='' />
                     </Form.Item>
                     <Checkbox onChange={onChange}>Private</Checkbox>
-                    <p  className="pb-5">By making a video private, it will be visible only the selected members. </p>
+                    <p className="pb-5">By making a video private, it will be visible only the selected members. </p>
 
                     <Form.Item
                         name="image"
                         label="Image"
                     >
-                        <Upload.Dragger {...uploadProps}>
-
-                            <p className="ant-upload-text">Drop image file here to upload (or click)</p>
-                            <p className="ant-upload-hint">Suggested dimension [344x184]</p>
-                            <p className="ant-upload-drag-icon">
-                                <FileImageOutlined />
-                            </p>
-                        </Upload.Dragger>
+                        <Upload
+                            listType="picture-card"
+                            onChange={handleUploadChange}
+                            onRemove={handleRemove}
+                            beforeUpload={() => false}
+                            multiple={false}
+                            maxCount={1}
+                        >
+                            <PlusOutlined />
+                            <div >Add Image</div>
+                        </Upload>
                     </Form.Item>
 
                     <div className='flex justify-center items-center gap-2'>
-                        <button className='flex items-center gap-1 py-2 px-4 bg-[#3475F1]  text-white font-semibold rounded-sm'>
-                            <TbCopyCheck /> save
+                        <button disabled={isLoading} className='flex items-center gap-1 py-2 px-4 bg-[#3475F1]  text-white font-semibold rounded-sm'>
+                            {isLoading  ? <Spin indicator={<LoadingOutlined style={{ fontSize: 24, color: '#ffffff' }} spin />} />  : <><TbCopyCheck /> save</>}
                         </button>
-                        <button className='py-2 px-4 flex items-center gap-1 bg-red-600 text-white font-semibold rounded-sm'>
+                        <button onClick={()=> setOpenAddModal(false)} disabled={isLoading} className='py-2 px-4 flex items-center gap-1 bg-red-600 text-white font-semibold rounded-sm'>
                             <RxCross2 /> Cancel
                         </button>
                     </div>
