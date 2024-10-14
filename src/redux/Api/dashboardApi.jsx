@@ -25,7 +25,7 @@ const useApi = baseApi.injectEndpoints({
                 }
             }
         }),
-
+        /** category api integration */
         getAllCategory: builder.query({
             query: () => {
                 return {
@@ -41,6 +41,15 @@ const useApi = baseApi.injectEndpoints({
                     url: '/category/add-category',
                     method: "POST",
                     body: data
+                }
+            },
+            invalidatesTags: ['allCategory']
+        }),
+        deleteCategory : builder.mutation({
+            query : (id)=>{
+                return {
+                    url : `/category/delete/${id}`,
+                    method : 'DELETE'
                 }
             },
             invalidatesTags: ['allCategory']
@@ -164,4 +173,4 @@ const useApi = baseApi.injectEndpoints({
     })
 })
 
-export const { useTotalUserCountQuery, useGetUserGrowthQuery, usePlanSubscriberQuery, useGetAllCategoryQuery, useCreateCategoryMutation, useGetSingleSubscribePlanQuery, useApproveDeclineMemberRequestMutation , useGetAllNotificationQuery , useDeleteNotificationMutation, useGetAllUserQuery , useBlockUserMutation , useUpdateAboutUsMutation , useGetAboutUsQuery , useGetRulesAndRegulationQuery, useUpdateRulesAndRegulationMutation , useUpdateFactsMutation, useGetFactsQuery} = useApi
+export const { useTotalUserCountQuery, useGetUserGrowthQuery, usePlanSubscriberQuery, useGetAllCategoryQuery, useCreateCategoryMutation, useGetSingleSubscribePlanQuery, useApproveDeclineMemberRequestMutation , useGetAllNotificationQuery , useDeleteNotificationMutation, useGetAllUserQuery , useBlockUserMutation , useUpdateAboutUsMutation , useGetAboutUsQuery , useGetRulesAndRegulationQuery, useUpdateRulesAndRegulationMutation , useUpdateFactsMutation, useGetFactsQuery , useDeleteCategoryMutation} = useApi

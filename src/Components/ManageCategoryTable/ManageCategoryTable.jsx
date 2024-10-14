@@ -3,13 +3,14 @@ import { useState } from "react";
 import { CiEdit } from "react-icons/ci";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import CategoryModal from "../CategoryModal/CategoryModal";
-import { useGetAllCategoryQuery } from "../../redux/Api/dashboardApi";
+import { useDeleteCategoryMutation, useGetAllCategoryQuery } from "../../redux/Api/dashboardApi";
 import { imageUrl } from "../../redux/Api/baseApi";
+import { toast } from "sonner";
 
 const ManageCategoryTable = () => {
     const [openAddModal, setOpenAddModal] = useState(false);
     const { data: getAllCategory } = useGetAllCategoryQuery()
-    console.log(getAllCategory?.data);
+    const [deleteCategory, { isLoading }] = useDeleteCategoryMutation()
     const columns = [
         {
             title: 'SL No.',
@@ -34,14 +35,15 @@ const ManageCategoryTable = () => {
             key: 'action',
             render: (text, record) => (
                 <div className="flex items-center gap-2">
-                    <a href="#delete" onClick={() => setOpenAddModal(true)} className="bg-[#3475F1] text-white p-1 rounded-md"><CiEdit size={20} /></a>
+                    <a href="#edit" onClick={() => setOpenAddModal(true)} className="bg-[#3475F1] text-white p-1 rounded-md"><CiEdit size={20} /></a>
                     <Popconfirm
-                        title="Delete the task"
-                        description="Are you sure to delete this task?"
+                        title="Delete the category!"
+                        description="Are you sure to delete this category?"
                         okText="Yes"
                         cancelText="No"
+                        onConfirm={() => handleDeleteCategory(record?.key)}
                     >
-                    <a href="#delete" onClick={()=> handleDeleteCategory(record)} className="bg-[#D9000A] text-white p-1 rounded-md"><RiDeleteBin6Line size={20} /></a>
+                        <a href="#delete" className="bg-[#D9000A] text-white p-1 rounded-md"><RiDeleteBin6Line size={20} /></a>
                     </Popconfirm>
                 </div>
             ),
@@ -49,18 +51,22 @@ const ManageCategoryTable = () => {
     ];
 
     /** Delete category */
-    const handleDeleteCategory =(values)=>{
+    const handleDeleteCategory = (values) => {
         console.log(values);
+        deleteCategory(values).unwrap()
+            .then((payload) => toast.success(payload?.message))
+            .catch((error) => toast.error(error?.data?.message));
+
     }
 
     /** Category data */
     const dataTable = getAllCategory?.data?.map((category, i) => (
         {
-            key: i + 1,
+            key: category?._id,
             sno: i + 1,
             category: category?.name,
             imageUrl: `${imageUrl}${category?.image}`,
-            
+
         }
     ))
 

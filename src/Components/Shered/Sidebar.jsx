@@ -110,9 +110,7 @@ const Sidebar = () => {
 
     const handleLogOut = () => {
         localStorage.removeItem('token')
-        setTimeout(() => {
             navigate("/auth/login");
-        }, 1000);
     }
     const toggleAccordion = (index) => {
         setOpenIndex((prevIndex) => (prevIndex === index ? null : index));

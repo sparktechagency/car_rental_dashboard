@@ -11,7 +11,7 @@ import CategoryModal from '../Components/CategoryModal/CategoryModal';
 const { Option } = Select;
 const ManageItems = () => {
     const [openAddModal, setOpenAddModal] = useState(false)
-    const [category, setCategory] = useState(false)
+    const [category, setCategory] = useState(true)
     const [openCategoryModal, setOpenCategoryModal] = useState(false)
 
     const onFinish = (value) => {
