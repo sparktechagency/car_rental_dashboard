@@ -1,12 +1,34 @@
-import { Form, Input, Modal, Select, Table } from "antd";
-import userImage from '../../assets/images/user22.png'
+import { Form, Input, Modal, Popconfirm, Select, Table } from "antd";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { CiEdit } from "react-icons/ci";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { TbCopyCheck } from "react-icons/tb";
 import { RxCross2 } from "react-icons/rx";
+import { useDeleteSubCategoryMutation, useEditSubCategoryMutation, useGetAllSubCategoryQuery } from "../../redux/Api/subCategoryApi";
+import { toast } from "sonner";
+import { imageUrl } from "../../redux/Api/baseApi";
+import { useGetAllCategoryQuery } from "../../redux/Api/dashboardApi";
+
 const ManageItemTable = () => {
+    const [categories, setCategories] = useState([]);
+    const [editSubCategoryData, setEditSubCategoryData] = useState()
+    /** All Apis */
+    const { data: getAllSubCategory } = useGetAllSubCategoryQuery();
+    const { data: getAllCategory } = useGetAllCategoryQuery()
+    const [updateSubCategory] = useEditSubCategoryMutation()
+    const [deleteSubCategory] = useDeleteSubCategoryMutation()
     const [openAddModal, setOpenAddModal] = useState(false)
+    const [form] = Form.useForm()
+
+    /** Get all category */
+    useEffect(() => {
+        if (getAllCategory?.data) {
+            setCategories(getAllCategory?.data)
+        }
+    }, [getAllCategory])
+
+
+
     const columns = [
         {
             title: 'SL No.',
@@ -19,7 +41,7 @@ const ManageItemTable = () => {
             key: 'category',
             render: (text, record) => (
                 <div style={{ display: 'flex', alignItems: 'center' }}>
-                    <img src={userImage} alt="user" style={{ width: 30, height: 30, marginRight: 8 }} />
+                    <img src={record?.img} alt="user" style={{ width: 30, height: 30, marginRight: 8 }} />
                     {text}
                 </div>
             ),
@@ -41,57 +63,78 @@ const ManageItemTable = () => {
             render: (text, record) => (
                 <div className="flex items-center gap-2">
                     {/* Replace the action content with what you need, for example, icons */}
-                    <a href="#delete" onClick={() => setOpenAddModal(true)} className="bg-[#3475F1] text-white p-1 rounded-md"><CiEdit size={20} /></a>
-                    <a href="#delete" className="bg-[#D9000A] text-white p-1 rounded-md"><RiDeleteBin6Line size={20} /></a>
+                    <a href="#edit" onClick={() => {
+                        setEditSubCategoryData(record)
+                        setOpenAddModal(true)
+                    }} className="bg-[#3475F1] text-white p-1 rounded-md"><CiEdit size={20} /></a>
+                    <Popconfirm
+                        title="Delete the sub category!"
+                        description="Are you sure to delete this sub category?"
+                        okText="Yes"
+                        cancelText="No"
+                        onConfirm={() => handleDeleteSubCategory(record?.key)}
+                    >
+                        <a href="#delete" className="bg-[#D9000A] text-white p-1 rounded-md"><RiDeleteBin6Line size={20} /></a>
+                    </Popconfirm>
                 </div>
             ),
         },
     ];
 
 
-    // Columns data
-    const data = [
-        {
-            key: '1',
-            sno: '1',
-            category: 'dindinrya',
-            SubCategory: '24/08/22',
-            eligibleSwapMember: 'Gold',
-        },
-        {
-            key: '2',
-            sno: '2',
-            category: 'dindinrya',
-            SubCategory: '24/08/22',
-            eligibleSwapMember: 'Gold',
-        },
-        {
-            key: '3',
-            sno: '3',
-            category: 'dindinrya',
-            SubCategory: '24/08/22',
-            eligibleSwapMember: 'Gold',
-        },
+    /** delete sub category function */
+    const handleDeleteSubCategory = (values) => {
+        deleteSubCategory(values).unwrap()
+            .then((payload) => toast.success(payload?.message))
+            .catch((error) => toast.error(error?.data?.message));
+    }
 
-    ];
+
+    // Columns data
+    const tableData = getAllSubCategory?.data?.map((sub, i) => (
+        {
+            key: sub?._id,
+            sno: i + 1,
+            categoryId: sub?.category?._id,
+            category: sub?.category?.name,
+            img: `${imageUrl}${sub?.category?.image}`,
+            SubCategory: sub?.name,
+            eligibleSwapMember: sub?.swapLevel,
+        }
+    ))
+
+
 
 
     const onFinish = (value) => {
-        console.log(value);
+        const id = editSubCategoryData?.key;
+        const data = {
+            name: value?.ItemName,
+            swapLevel: value?.EligibleSwapLevel?.value,
+            category: value?.Category?.value
+
+        }
+        updateSubCategory({ id, data }).unwrap()
+            .then((payload) => {
+                toast.success(payload?.message)
+                setOpenAddModal(false)
+            })
+            .catch((error) => toast.error(error?.data?.message));
     }
 
-    const handleCategoryChange = (value) => {
-        console.log(value);
-    };
-    const handleEligibleSwapChange = (value) => {
-        console.log(value);
-    };
 
+    useEffect(() => {
+        if (editSubCategoryData) {
+            form.setFieldsValue({
+                ItemName: editSubCategoryData?.SubCategory
+            })
+        }
+    }, [form, editSubCategoryData])
 
     return (
         <div className="">
 
-            <Table columns={columns} dataSource={data} pagination={{
+            <Table columns={columns} dataSource={tableData} pagination={{
                 pageSize: 5,
                 showTotal: (total, range) => `Showing ${range[0]}-${range[1]} out of ${total}`,
                 locale: {
@@ -99,8 +142,8 @@ const ManageItemTable = () => {
                     prev_page: 'Previous',
                     next_page: 'Next',
                 },
-            }} 
-            className="custom-pagination" 
+            }}
+                className="custom-pagination"
             />
 
 
@@ -111,13 +154,25 @@ const ManageItemTable = () => {
                 onCancel={() => setOpenAddModal(false)}
             >
                 <div>
-                    <p className='text-xl text-center py-2 font-semibold'>Add Item</p>
+                    <p className='text-xl text-center py-2 font-semibold'>Edit Sub Category</p>
                     <Form className=''
                         layout='vertical'
                         onFinish={onFinish}
+                        form={form}
+                        initialValues={{
+                            ItemName: editSubCategoryData?.SubCategory || '',
+                            Category: {
+                                value: editSubCategoryData?.categoryId || '',
+                                label: editSubCategoryData?.category || 'Select a category'
+                            },
+                            'EligibleSwapLevel': {
+                                value: editSubCategoryData?.swapLevel || 'Gold',
+                                label: editSubCategoryData?.swapLevel || 'Gold'
+                            }
+                        }}
                     >
                         <Form.Item
-                            name={`Item Name`}
+                            name={`ItemName`}
                             label={`Item Name`}
                             rules={[
                                 {
@@ -134,60 +189,54 @@ const ManageItemTable = () => {
                             rules={[
                                 {
                                     message: 'Category is required',
-
+                                    required: true
                                 }
                             ]}
                         >
                             <Select
                                 labelInValue
                                 defaultValue={{
-                                    value: 'lucy',
-                                    label: 'Lucy (101)',
+                                    value: editSubCategoryData?._id,
+                                    label: editSubCategoryData?.category,
                                 }}
-                                style={{
-                                    // width: ,
-                                }}
-                                onChange={handleCategoryChange}
-                                options={[
+
+                                options={categories?.map(category => (
                                     {
-                                        value: 'jack',
-                                        label: 'Jack (100)',
-                                    },
-                                    {
-                                        value: 'lucy',
-                                        label: 'Lucy (101)',
-                                    },
-                                ]}
+                                        label: category?.name,
+                                        value: category?._id
+                                    }
+                                ))}
                             />
                         </Form.Item>
                         <Form.Item
-                            name={`Eligible Swap Level`}
+                            name={`EligibleSwapLevel`}
                             label={`Eligible swap level`}
                             rules={[
                                 {
                                     message: 'Eligible swap level is required',
-
+                                    required: true,
                                 }
                             ]}
                         >
                             <Select
                                 labelInValue
                                 defaultValue={{
-                                    value: 'lucy',
-                                    label: 'Lucy (101)',
+                                    value: 'Gold',
+                                    label: 'Gold',
                                 }}
-                                style={{
-                                    // width: ,
-                                }}
-                                onChange={handleEligibleSwapChange}
+
                                 options={[
                                     {
-                                        value: 'jack',
-                                        label: 'Jack (100)',
+                                        value: 'Gold',
+                                        label: 'Gold',
                                     },
                                     {
-                                        value: 'lucy',
-                                        label: 'Lucy (101)',
+                                        value: 'Platinum',
+                                        label: 'Platinum',
+                                    },
+                                    {
+                                        value: 'Diamond',
+                                        label: 'Diamond',
                                     },
                                 ]}
                             />
@@ -196,7 +245,7 @@ const ManageItemTable = () => {
                             <button className='flex items-center gap-1 py-2 px-4 bg-[#3475F1]  text-white font-semibold rounded-sm'>
                                 <TbCopyCheck /> save
                             </button>
-                            <button className='py-2 px-4 flex items-center gap-1 bg-red-600 text-white font-semibold rounded-sm'>
+                            <button onClick={()=> setOpenAddModal(false)} className='py-2 px-4 flex items-center gap-1 bg-red-600 text-white font-semibold rounded-sm'>
                                 <RxCross2 /> Cancel
                             </button>
                         </div>

@@ -42,7 +42,7 @@ const ManageItems = () => {
                         </button>
                         <button onClick={() => setCategory(false)} className={` ${category ? 'border border-[#3475F1] text-[#3475F1]' : 'bg-[#3475F1] text-white'}  px-4 rounded-sm start-center gap-1 py-2  flex justify-center items-center whitespace-nowrap`}>
 
-                            Items
+                            Sub Category
                         </button>
                     </div>
 
