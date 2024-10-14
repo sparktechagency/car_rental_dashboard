@@ -1,16 +1,30 @@
-import { Popconfirm, Table } from "antd";
-import { useState } from "react";
+import { Form, Input, Modal, Popconfirm, Table, Upload } from "antd";
+import { useEffect, useState } from "react";
 import { CiEdit } from "react-icons/ci";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import CategoryModal from "../CategoryModal/CategoryModal";
-import { useDeleteCategoryMutation, useGetAllCategoryQuery } from "../../redux/Api/dashboardApi";
+import { useDeleteCategoryMutation, useEditCategoryMutation, useGetAllCategoryQuery } from "../../redux/Api/dashboardApi";
 import { imageUrl } from "../../redux/Api/baseApi";
 import { toast } from "sonner";
+import { RxCross2 } from "react-icons/rx";
+import { TbCopyCheck } from "react-icons/tb";
+import { PlusOutlined } from "@ant-design/icons";
 
 const ManageCategoryTable = () => {
     const [openAddModal, setOpenAddModal] = useState(false);
+    const [editOpenModal, setOpenEditModal] = useState(false)
+    const [fileList, setFileList] = useState([]);
+    const [form] = Form.useForm()
     const { data: getAllCategory } = useGetAllCategoryQuery()
-    const [deleteCategory, { isLoading }] = useDeleteCategoryMutation()
+    const [editCategory, { isLoading }] = useEditCategoryMutation()
+    const [editData, setEditData] = useState()
+    const [deleteCategory] = useDeleteCategoryMutation()
+
+
+    const handleUploadChange = ({ fileList: newFileList }) => {
+        setFileList(newFileList);
+    };
+
     const columns = [
         {
             title: 'SL No.',
@@ -35,7 +49,10 @@ const ManageCategoryTable = () => {
             key: 'action',
             render: (text, record) => (
                 <div className="flex items-center gap-2">
-                    <a href="#edit" onClick={() => setOpenAddModal(true)} className="bg-[#3475F1] text-white p-1 rounded-md"><CiEdit size={20} /></a>
+                    <a href="#edit" onClick={() => {
+                        setOpenEditModal(true)
+                        setEditData(record)
+                    }} className="bg-[#3475F1] text-white p-1 rounded-md"><CiEdit size={20} /></a>
                     <Popconfirm
                         title="Delete the category!"
                         description="Are you sure to delete this category?"
@@ -52,7 +69,6 @@ const ManageCategoryTable = () => {
 
     /** Delete category */
     const handleDeleteCategory = (values) => {
-        console.log(values);
         deleteCategory(values).unwrap()
             .then((payload) => toast.success(payload?.message))
             .catch((error) => toast.error(error?.data?.message));
@@ -69,6 +85,51 @@ const ManageCategoryTable = () => {
 
         }
     ))
+
+
+    const handleEditCategory = (values) => {
+        const id = editData?.key
+        console.log(values?.name);
+        const formData = new FormData();
+        if (!values?.name) {
+            return toast.error('Please enter category name!');
+        }
+        /** Check image is missing or not */
+        if (fileList[0]?.originFileObj) {
+           formData.append('image', fileList[0].originFileObj)
+        }
+        formData.append('name', values?.name)
+        editCategory( {formData, id} ).unwrap()
+            .then((payload) => {
+                toast.success(payload?.message)
+                setOpenEditModal(false)
+                console.log(payload);
+            })
+            .catch((error) => {
+                toast.error(error?.data?.message)
+            });
+
+    }
+
+    /** edit modal initial data  */
+    useEffect(() => {
+        if (editData) {
+            form.setFieldsValue({
+                name: editData?.category
+            })
+            if (editData?.imageUrl) {
+                setFileList([
+                    {
+                        uid: '-1',
+                        name: 'image.png',
+                        status: 'done',
+                        url: editData?.imageUrl,
+                    },
+                ]);
+            }
+
+        }
+    }, [editData, form])
 
 
 
@@ -89,20 +150,21 @@ const ManageCategoryTable = () => {
             />
             <CategoryModal openAddModal={openAddModal} setOpenAddModal={setOpenAddModal} />
 
-            {/* <Modal
-                open={openAddModal}
+            <Modal
+                open={editOpenModal}
                 centered
                 footer={false}
-                onCancel={() => setOpenAddModal(false)}
+                onCancel={() => setOpenEditModal(false)}
             >
                 <div>
-                    <p className='text-xl text-center py-2 font-semibold'>Edit</p>
+                    <p className='text-xl text-center py-2 font-semibold'>Edit Category</p>
                     <Form className=''
+                        form={form}
                         layout='vertical'
-                        onFinish={onFinish}
+                        onFinish={handleEditCategory}
                     >
                         <Form.Item
-                            name={`Category Name`}
+                            name={`name`}
                             label={`Category Name`}
                             rules={[
                                 {
@@ -113,18 +175,25 @@ const ManageCategoryTable = () => {
                         >
                             <Input className=' border outline-none' placeholder='' />
                         </Form.Item>
-                        <Form.Item
-                            name="image"
-                            label="Image"
-                        >
-                            <Upload.Dragger {...uploadProps}>
-                               
-                                <p className="ant-upload-text">Drop image file here to upload (or click)</p>
-                                <p className="ant-upload-hint">Suggested dimension [344x184]</p>
-                                <p className="ant-upload-drag-icon">
-                                    <FileImageOutlined />
-                                </p>
-                            </Upload.Dragger>
+                        <Form.Item label="Image" style={{ width: '100%' }}>
+                            <div style={{ width: '100%' }}>
+                                <Upload
+                                    listType="picture-card"
+                                    fileList={fileList}
+                                    onChange={handleUploadChange}
+                                    beforeUpload={() => false}
+                                    multiple={false}
+                                    className="upload-full-width"
+                                    maxCount={1}
+                                >
+                                    {fileList.length >= 1 ? null : (
+                                        <div className='flex items-center gap-2'>
+                                            <PlusOutlined />
+                                            <div>Add Image</div>
+                                        </div>
+                                    )}
+                                </Upload>
+                            </div>
                         </Form.Item>
 
 
@@ -132,14 +201,17 @@ const ManageCategoryTable = () => {
                             <button className='flex items-center gap-1 py-2 px-4 bg-[#3475F1]  text-white font-semibold rounded-sm'>
                                 <TbCopyCheck /> save
                             </button>
-                            <button className='py-2 px-4 flex items-center gap-1 bg-red-600 text-white font-semibold rounded-sm'>
+                            <button onClick={() => {
+                                setOpenEditModal(false)
+
+                            }} className='py-2 px-4 flex items-center gap-1 bg-red-600 text-white font-semibold rounded-sm'>
                                 <RxCross2 /> Cancel
                             </button>
                         </div>
 
                     </Form>
                 </div>
-            </Modal> */}
+            </Modal>
 
         </div>
     );

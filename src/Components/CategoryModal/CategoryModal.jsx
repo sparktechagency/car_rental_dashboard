@@ -15,7 +15,6 @@ const CategoryModal = ({ openAddModal, setOpenAddModal }) => {
     };
 
 
-
     const onFinish = (value) => {
         const formData = new FormData();
         /** Check name is missing or not */
@@ -46,7 +45,7 @@ const CategoryModal = ({ openAddModal, setOpenAddModal }) => {
             onCancel={() => setOpenAddModal(false)}
         >
             <div>
-                <p className='text-xl text-center py-2 font-semibold'>Edit</p>
+                <p className='text-xl text-center py-2 font-semibold'>Create Category</p>
                 <Form className=''
                 form={form}
                     layout='vertical'

@@ -54,13 +54,25 @@ const useApi = baseApi.injectEndpoints({
             },
             invalidatesTags: ['allCategory']
         }),
+        editCategory : builder.mutation({
+            query : ({formData, id})=>{
+                console.log(formData , id);
+                return {
+                    url : `/category/edit/${id}`,
+                    method : 'PATCH',
+                    body : formData
+                }
+            },
+            invalidatesTags: ['allCategory']
+        }),
         getSingleSubscribePlan: builder.query({
             query: (id) => {
                 return {
                     url: `/plan/subscribe/${id}`,
                     method: 'GET'
                 }
-            }
+            },
+            invalidatesTags: ['allCategory']
         }),
         approveDeclineMemberRequest: builder.mutation({
             query: ({ id, status }) => {
@@ -173,4 +185,4 @@ const useApi = baseApi.injectEndpoints({
     })
 })
 
-export const { useTotalUserCountQuery, useGetUserGrowthQuery, usePlanSubscriberQuery, useGetAllCategoryQuery, useCreateCategoryMutation, useGetSingleSubscribePlanQuery, useApproveDeclineMemberRequestMutation , useGetAllNotificationQuery , useDeleteNotificationMutation, useGetAllUserQuery , useBlockUserMutation , useUpdateAboutUsMutation , useGetAboutUsQuery , useGetRulesAndRegulationQuery, useUpdateRulesAndRegulationMutation , useUpdateFactsMutation, useGetFactsQuery , useDeleteCategoryMutation} = useApi
+export const { useTotalUserCountQuery, useGetUserGrowthQuery, usePlanSubscriberQuery, useGetAllCategoryQuery, useCreateCategoryMutation, useGetSingleSubscribePlanQuery, useApproveDeclineMemberRequestMutation , useGetAllNotificationQuery , useDeleteNotificationMutation, useGetAllUserQuery , useBlockUserMutation , useUpdateAboutUsMutation , useGetAboutUsQuery , useGetRulesAndRegulationQuery, useUpdateRulesAndRegulationMutation , useUpdateFactsMutation, useGetFactsQuery , useDeleteCategoryMutation , useEditCategoryMutation} = useApi
