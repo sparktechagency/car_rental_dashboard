@@ -29,8 +29,18 @@ const subCategory = baseApi.injectEndpoints({
                 }
             },
             invalidatesTags :['subCategory']
+        }),
+        createSubCategory : builder.mutation({
+            query : (data)=>{
+                return {
+                    url : '/sub-category/add',
+                    method : 'POST',
+                    body : data
+                }
+            },
+            invalidatesTags :['subCategory']
         })
         
     })
 })
-export const {useGetAllSubCategoryQuery , useDeleteSubCategoryMutation , useEditSubCategoryMutation} = subCategory
+export const {useGetAllSubCategoryQuery , useDeleteSubCategoryMutation , useEditSubCategoryMutation , useCreateSubCategoryMutation} = subCategory

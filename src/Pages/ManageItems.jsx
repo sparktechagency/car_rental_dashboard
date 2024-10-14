@@ -1,5 +1,5 @@
 import { Col, Form, Input, Modal, Row, } from 'antd';
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { FaPlus } from 'react-icons/fa6';
 import { GoArrowLeft } from 'react-icons/go';
 import { Select } from 'antd'
@@ -8,11 +8,21 @@ import { RxCross2 } from 'react-icons/rx';
 import ManageItemTable from '../Components/ManageItemTable.jsx/ManageItemTable';
 import ManageCategoryTable from '../Components/ManageCategoryTable/ManageCategoryTable';
 import CategoryModal from '../Components/CategoryModal/CategoryModal';
+import { useGetAllCategoryQuery } from '../redux/Api/dashboardApi';
 const { Option } = Select;
 const ManageItems = () => {
     const [openAddModal, setOpenAddModal] = useState(false)
+    const [categories, setCategories] = useState([]);
     const [category, setCategory] = useState(true)
+    const {data : getAllCategory} = useGetAllCategoryQuery()
     const [openCategoryModal, setOpenCategoryModal] = useState(false)
+
+    /** Get all category */
+    useEffect(() => {
+        if (getAllCategory?.data) {
+            setCategories(getAllCategory?.data)
+        }
+    }, [getAllCategory])
 
     const onFinish = (value) => {
         console.log(value);
@@ -52,7 +62,7 @@ const ManageItems = () => {
                             Add category
                         </button> : <button onClick={() => setOpenAddModal(true)} className='bg-[#3475F1] px-4 rounded-sm start-center gap-1 py-2 text-white flex justify-center items-center whitespace-nowrap'>
                             <FaPlus />
-                            Add Item
+                            Add Sub Category
                         </button>
                     }
                 </div>
@@ -110,14 +120,14 @@ const ManageItems = () => {
                 onCancel={() => setOpenAddModal(false)}
             >
                 <div>
-                    <p className='text-xl text-center py-2 font-semibold'>Add Item</p>
+                    <p className='text-xl text-center py-2 font-semibold'>Add Sub Category</p>
                     <Form className=''
                         layout='vertical'
                         onFinish={onFinish}
                     >
                         <Form.Item
-                            name={`Item Name`}
-                            label={`Item Name`}
+                            name={`name`}
+                            label={`Sub Category Name`}
                             rules={[
                                 {
                                     message: 'Item Name is required',
@@ -125,7 +135,7 @@ const ManageItems = () => {
                                 }
                             ]}
                         >
-                            <Input className=' border outline-none' placeholder='' />
+                            <Input className=' border outline-none' placeholder='Sub category name' />
                         </Form.Item>
                         <Form.Item
                             name={`Category`}
@@ -139,28 +149,22 @@ const ManageItems = () => {
                         >
                             <Select
                                 labelInValue
-                                defaultValue={{
-                                    value: 'lucy',
-                                    label: 'Lucy (101)',
-                                }}
-                                style={{
-                                    // width: ,
-                                }}
-                                onChange={handleCategoryChange}
-                                options={[
+                                // defaultValue={{
+                                //     value: 'lucy',
+                                //     label: 'Lucy (101)',
+                                // }}
+                                placeholder ='Select a category'
+                                
+                                options={categories?.map(category => (
                                     {
-                                        value: 'jack',
-                                        label: 'Jack (100)',
-                                    },
-                                    {
-                                        value: 'lucy',
-                                        label: 'Lucy (101)',
-                                    },
-                                ]}
+                                        label: category?.name,
+                                        value: category?._id
+                                    }
+                                ))}
                             />
                         </Form.Item>
                         <Form.Item
-                            name={`Eligible Swap Level`}
+                            name={`EligibleSwapLevel`}
                             label={`Eligible swap level`}
                             rules={[
                                 {
@@ -171,22 +175,19 @@ const ManageItems = () => {
                         >
                             <Select
                                 labelInValue
-                                defaultValue={{
-                                    value: 'lucy',
-                                    label: 'Lucy (101)',
-                                }}
-                                style={{
-                                    // width: ,
-                                }}
-                                onChange={handleEligibleSwapChange}
+                               placeholder='Select A swap level'
                                 options={[
                                     {
-                                        value: 'jack',
-                                        label: 'Jack (100)',
+                                        value: 'Gold',
+                                        label: 'Gold',
                                     },
                                     {
-                                        value: 'lucy',
-                                        label: 'Lucy (101)',
+                                        value: 'Platinum',
+                                        label: 'Platinum',
+                                    },
+                                    {
+                                        value: 'Diamond',
+                                        label: 'Diamond',
                                     },
                                 ]}
                             />
