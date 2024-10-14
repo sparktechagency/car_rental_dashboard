@@ -23,6 +23,7 @@ const Sidebar = () => {
     const [openIndex, setOpenIndex] = useState(null);
     const contentRefs = useRef([]);
     const { pathname } = useLocation();
+    const navigate = useNavigate();
 
     // const admin = false;
 
@@ -107,10 +108,11 @@ const Sidebar = () => {
 
     ]
 
-    const navigate = useNavigate();
     const handleLogOut = () => {
         localStorage.removeItem('token')
-        navigate("/auth/login")
+        setTimeout(() => {
+            navigate("/auth/login");
+        }, 1000);
     }
     const toggleAccordion = (index) => {
         setOpenIndex((prevIndex) => (prevIndex === index ? null : index));

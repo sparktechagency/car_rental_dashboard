@@ -4,7 +4,10 @@ import { useGetProfileQuery } from '../redux/Api/userApi';
 
 const PrivateLogin = ({ children }) => {
     const location = useLocation()
-    const { data: getUserInfo, isError, isLoading, isFetching } = useGetProfileQuery();
+    const token = localStorage.getItem('token');
+    const { data: getUserInfo, isError, isLoading, isFetching } = useGetProfileQuery(undefined, {
+        skip: !token,  
+    });
     if (getUserInfo?.data?.role === 'ADMIN') {
         return <Navigate to={'/'} state={{ from: location }} />
     }
