@@ -9,17 +9,16 @@ import { toast } from "sonner";
 import { imageUrl } from "../../redux/Api/baseApi";
 import { useGetAllCategoryQuery } from "../../redux/Api/dashboardApi";
 
-const ManageItemTable = () => {
+const ManageItemTable = ({search}) => {
     const [categories, setCategories] = useState([]);
     const [editSubCategoryData, setEditSubCategoryData] = useState()
     /** All Apis */
-    const { data: getAllSubCategory } = useGetAllSubCategoryQuery();
+    const { data: getAllSubCategory } = useGetAllSubCategoryQuery(search);
     const { data: getAllCategory } = useGetAllCategoryQuery()
     const [updateSubCategory] = useEditSubCategoryMutation()
     const [deleteSubCategory] = useDeleteSubCategoryMutation()
     const [openAddModal, setOpenAddModal] = useState(false)
     const [form] = Form.useForm()
-
     /** Get all category */
     useEffect(() => {
         if (getAllCategory?.data) {

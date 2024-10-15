@@ -9,14 +9,20 @@ import ManageItemTable from '../Components/ManageItemTable.jsx/ManageItemTable';
 import ManageCategoryTable from '../Components/ManageCategoryTable/ManageCategoryTable';
 import CategoryModal from '../Components/CategoryModal/CategoryModal';
 import { useGetAllCategoryQuery } from '../redux/Api/dashboardApi';
+import { useCreateSubCategoryMutation } from '../redux/Api/subCategoryApi';
+import { toast } from 'sonner';
 const { Option } = Select;
 const ManageItems = () => {
     const [openAddModal, setOpenAddModal] = useState(false)
     const [categories, setCategories] = useState([]);
     const [category, setCategory] = useState(true)
-    const {data : getAllCategory} = useGetAllCategoryQuery()
+    const { data: getAllCategory } = useGetAllCategoryQuery()
+    const [createSubCategory, { isLoading }] = useCreateSubCategoryMutation()
     const [openCategoryModal, setOpenCategoryModal] = useState(false)
+    const [search , setSearch] =  useState({})
 
+
+   
     /** Get all category */
     useEffect(() => {
         if (getAllCategory?.data) {
@@ -25,18 +31,26 @@ const ManageItems = () => {
     }, [getAllCategory])
 
     const onFinish = (value) => {
-        console.log(value);
+        
+        const data = {
+            name: value?.name,
+            swapLevel: value?.EligibleSwapLevel?.label,
+            category: value?.Category?.value
+
+        }
+        createSubCategory(data).unwrap()
+            .then((payload) => {
+                toast.success(payload?.message)
+                setOpenAddModal(false)
+            })
+            .catch((error) => toast.error(error?.data?.message));
     }
 
 
-    const handleCategoryChange = (value) => {
-        console.log(value);
-    };
-    const handleEligibleSwapChange = (value) => {
-        console.log(value);
-    };
 
-
+    const handleSelectChange =(value , label)=>{
+        setSearch({value , label})
+    }
     return (
         <div className='shadow-md rounded-md px-2'>
             <div className='  my-2 pt-5'>
@@ -76,10 +90,13 @@ const ManageItems = () => {
                     <Row gutter={16}>
                         <Col span={8}>
                             <Form.Item label="Category" labelCol={{ span: 24 }} wrapperCol={{ span: 24 }}>
-                                <Select defaultValue="All">
-                                    <Option value="all">All</Option>
-                                    <Option value="category1">Category 1</Option>
-                                    <Option value="category2">Category 2</Option>
+                                <Select  onChange={(value) => handleSelectChange(value, 'category')} defaultValue="All">
+                                    <Option value="">All</Option>
+                                    {getAllCategory?.data?.map((category) => (
+                                    <Option key={category._id} value={category.name}>
+                                        {category.name}
+                                    </Option>
+                                ))}
                                 </Select>
                             </Form.Item>
                         </Col>
@@ -96,8 +113,9 @@ const ManageItems = () => {
                             <Form.Item label="Eligible Swap Member" labelCol={{ span: 24 }} wrapperCol={{ span: 24 }} >
                                 <Select defaultValue="All">
                                     <Option value="all">All</Option>
-                                    <Option value="member1">Member 1</Option>
-                                    <Option value="member2">Member 2</Option>
+                                    <Option value="Gold">Gold</Option>
+                                    <Option value="Platinum">Platinum</Option>
+                                    <Option value="Diamond">Diamond</Option>
                                 </Select>
                             </Form.Item>
                         </Col>
@@ -108,7 +126,7 @@ const ManageItems = () => {
 
 
             {
-                category ? <ManageCategoryTable /> : <ManageItemTable />
+                category ? <ManageCategoryTable /> : <ManageItemTable search={search} />
             }
 
             <CategoryModal setOpenAddModal={setOpenCategoryModal} openAddModal={openCategoryModal} />
@@ -143,18 +161,15 @@ const ManageItems = () => {
                             rules={[
                                 {
                                     message: 'Category is required',
-
+                                    required: true
                                 }
                             ]}
                         >
                             <Select
                                 labelInValue
-                                // defaultValue={{
-                                //     value: 'lucy',
-                                //     label: 'Lucy (101)',
-                                // }}
-                                placeholder ='Select a category'
-                                
+
+                                placeholder='Select a category'
+
                                 options={categories?.map(category => (
                                     {
                                         label: category?.name,
@@ -169,13 +184,13 @@ const ManageItems = () => {
                             rules={[
                                 {
                                     message: 'Eligible swap level is required',
-
+                                    required: true
                                 }
                             ]}
                         >
                             <Select
                                 labelInValue
-                               placeholder='Select A swap level'
+                                placeholder='Select A swap level'
                                 options={[
                                     {
                                         value: 'Gold',

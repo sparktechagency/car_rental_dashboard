@@ -3,9 +3,10 @@ import { baseApi } from "./baseApi";
 const subCategory = baseApi.injectEndpoints({
     endpoints : (builder)=>({
         getAllSubCategory  : builder.query({
-            query  :()=>{
+            query  :(search)=>{
+                console.log(search);
                 return  {
-                    url : '/sub-category/get-all',
+                    url : `/sub-category/get-all?${search?.label}=${search?.value}`,
                     method : 'GET'
                 }
             },
