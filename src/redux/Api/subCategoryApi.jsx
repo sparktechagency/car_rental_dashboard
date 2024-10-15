@@ -4,9 +4,15 @@ const subCategory = baseApi.injectEndpoints({
     endpoints : (builder)=>({
         getAllSubCategory  : builder.query({
             query  :(search)=>{
-                console.log(search);
+                let queryParams = '';
+
+                if (search?.value !== 'all') {
+                    const value = search?.value;
+                    const label = search?.label;
+                    queryParams = `${label}=${value}`;
+                }
                 return  {
-                    url : `/sub-category/get-all?${search?.label}=${search?.value}`,
+                    url : `/sub-category/get-all${queryParams ? `?${queryParams}` : ''}`,
                     method : 'GET'
                 }
             },

@@ -9,7 +9,7 @@ import ManageItemTable from '../Components/ManageItemTable.jsx/ManageItemTable';
 import ManageCategoryTable from '../Components/ManageCategoryTable/ManageCategoryTable';
 import CategoryModal from '../Components/CategoryModal/CategoryModal';
 import { useGetAllCategoryQuery } from '../redux/Api/dashboardApi';
-import { useCreateSubCategoryMutation } from '../redux/Api/subCategoryApi';
+import { useCreateSubCategoryMutation, useGetAllSubCategoryQuery } from '../redux/Api/subCategoryApi';
 import { toast } from 'sonner';
 const { Option } = Select;
 const ManageItems = () => {
@@ -18,6 +18,10 @@ const ManageItems = () => {
     const [category, setCategory] = useState(true)
     const { data: getAllCategory } = useGetAllCategoryQuery()
     const [createSubCategory, { isLoading }] = useCreateSubCategoryMutation()
+    const { data: getAllSubCategory } = useGetAllSubCategoryQuery();
+
+    console.log(getAllSubCategory?.data);
+
     const [openCategoryModal, setOpenCategoryModal] = useState(false)
     const [search , setSearch] =  useState({})
 
@@ -90,8 +94,8 @@ const ManageItems = () => {
                     <Row gutter={16}>
                         <Col span={8}>
                             <Form.Item label="Category" labelCol={{ span: 24 }} wrapperCol={{ span: 24 }}>
-                                <Select  onChange={(value) => handleSelectChange(value, 'category')} defaultValue="All">
-                                    <Option value="">All</Option>
+                                <Select  onChange={(value) => handleSelectChange(value, 'category')} defaultValue="all">
+                                    <Option value="all">All</Option>
                                     {getAllCategory?.data?.map((category) => (
                                     <Option key={category._id} value={category.name}>
                                         {category.name}
@@ -102,16 +106,20 @@ const ManageItems = () => {
                         </Col>
                         <Col span={8}>
                             <Form.Item label="Sub Category" labelCol={{ span: 24 }} wrapperCol={{ span: 24 }} className='pb-0' >
-                                <Select defaultValue="All">
+                                <Select onChange={(value) => handleSelectChange(value, 'sub_category')} defaultValue="all">
                                     <Option value="all">All</Option>
-                                    <Option value="subcategory1">Sub Category 1</Option>
-                                    <Option value="subcategory2">Sub Category 2</Option>
+                                    {
+                                        getAllSubCategory?.data?.map((subCategory)=>(
+                                            <Option value={subCategory?.name}>{subCategory?.name}</Option>
+                                        ))
+                                    }
+                                   
                                 </Select>
                             </Form.Item>
                         </Col>
                         <Col span={8}>
                             <Form.Item label="Eligible Swap Member" labelCol={{ span: 24 }} wrapperCol={{ span: 24 }} >
-                                <Select defaultValue="All">
+                                <Select onChange={(value) => handleSelectChange(value, 'swapLevel')} defaultValue="all">
                                     <Option value="all">All</Option>
                                     <Option value="Gold">Gold</Option>
                                     <Option value="Platinum">Platinum</Option>

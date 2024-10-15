@@ -26,8 +26,6 @@ const ManageItemTable = ({search}) => {
         }
     }, [getAllCategory])
 
-
-
     const columns = [
         {
             title: 'SL No.',
