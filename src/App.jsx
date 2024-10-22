@@ -10,10 +10,25 @@ import income from './assets/images/income.png'
 import platinum from './assets/images/platinumn.png'
 import gold from './assets/images/dollar_gold.png'
 import diamond from './assets/images/daimond.png'
-import { useTotalUserCountQuery } from './redux/Api/dashboardApi'
+import { usePlanSubscriberQuery, useTotalUserCountQuery } from './redux/Api/dashboardApi'
 function App() {
   /** Get total user statistics API */
   const {data :  allUser} =useTotalUserCountQuery()
+  const { data: getSubscriber } = usePlanSubscriberQuery()
+
+
+  const tableData = getSubscriber?.data?.data?.slice(0,3).map((user, i) => (
+    {
+      key: i + 1,
+      id : user?._id,
+      name: user?.user_id?.name,
+      img: user?.user_id?.profile_image,
+      contact : user?.phone_number,
+      email : user?.email,
+      location : user?.place_of_birth
+
+    }
+  ))
 
   const data = [
     {
@@ -70,7 +85,7 @@ function App() {
           View All
           </Link>
         </div>
-        <JoinRequest />
+        <JoinRequest tableData={tableData} />
       </div>
     </>
   )

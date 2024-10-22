@@ -1,26 +1,10 @@
 import { Table } from "antd";
 import React from "react";
 import { Link } from "react-router-dom";
-import { usePlanSubscriberQuery } from "../../redux/Api/dashboardApi";
 
 
-const JoinRequest = () => {
-  /** Get new member request */
-  const { data: getSubscriber } = usePlanSubscriberQuery()
-  const tableData = getSubscriber?.data?.data?.map((user, i) => (
-    {
-      key: i + 1,
-      id : user?._id,
-      name: user?.user_id?.name,
-      img: user?.user_id?.profile_image,
-      contact : user?.phone_number,
-      email : user?.email,
-      location : user?.place_of_birth
-
-    }
-  ))
-  // console.log(tableData);
-  // console.log(getSubscriber?.data?.data);
+const JoinRequest = ({tableData}) => {
+ 
   const columns = [
     {
       title: "Sl No.",

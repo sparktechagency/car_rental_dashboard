@@ -62,6 +62,7 @@ const MediaSettings = () => {
             </div>
 
 
+
             {
                 ads ? <MediaSettingTable getAllAds={getAllAds} /> : <MediaSettingVideoTable getAllVideos={getAllVideos} />
             }

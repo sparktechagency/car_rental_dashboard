@@ -1,11 +1,23 @@
 import React from 'react'
 import JoinRequest from '../Components/Dashboard/JoinRequest'
-import { Input } from 'antd'
-import { CiSearch } from 'react-icons/ci'
 import { Link } from 'react-router-dom'
 import { IoArrowBackSharp } from 'react-icons/io5'
+import { usePlanSubscriberQuery } from '../redux/Api/dashboardApi'
 
 const TotalJoinRequest = () => {
+    const { data: getSubscriber } = usePlanSubscriberQuery()
+    const tableData = getSubscriber?.data?.data?.map((user, i) => (
+      {
+        key: i + 1,
+        id : user?._id,
+        name: user?.user_id?.name,
+        img: user?.user_id?.profile_image,
+        contact : user?.phone_number,
+        email : user?.email,
+        location : user?.place_of_birth
+  
+      }
+    ))
     return (
         <div>
             <div className='between-center  my-2 pt-5'>
@@ -15,7 +27,7 @@ const TotalJoinRequest = () => {
                 </div>
                 {/* <Input className='max-w-[250px] h-10' prefix={<CiSearch className='text-2xl' />} placeholder="Search" /> */}
             </div>
-            <JoinRequest />
+            <JoinRequest tableData={tableData} />
         </div>
     )
 }

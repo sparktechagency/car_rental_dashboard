@@ -20,7 +20,6 @@ const ManageItems = () => {
     const [createSubCategory, { isLoading }] = useCreateSubCategoryMutation()
     const { data: getAllSubCategory } = useGetAllSubCategoryQuery();
 
-    console.log(getAllSubCategory?.data);
 
     const [openCategoryModal, setOpenCategoryModal] = useState(false)
     const [search , setSearch] =  useState({})
