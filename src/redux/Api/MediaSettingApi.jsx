@@ -17,7 +17,8 @@ const mediaSettingApi = baseApi.injectEndpoints({
                     url : '/adds/all-video-adds',
                     method : 'GET'
                 }
-            }
+            },
+            providesTags : ['videoAds']
         }),
         createAds : builder.mutation({
             query : (data)=>{
@@ -28,8 +29,26 @@ const mediaSettingApi = baseApi.injectEndpoints({
                 }
             },
             invalidatesTags : ['ads']
+        }),
+        deleteAds : builder.mutation({
+            query : (id)=>{
+                return {
+                    url : `/adds/delete-adds/${id}`,
+                    method : 'DELETE'
+                }
+            },
+            invalidatesTags : ['ads']
+        }),
+        deleteVideoAds : builder.mutation({
+            query : (id)=>{
+                return {
+                    url : `/adds/delete-video-adds/${id}`,
+                    method : 'DELETE'
+                }
+            },
+            invalidatesTags : ['videoAds']
         })
     })
 })
 
-export const {useGetAllAdsQuery, useGetAllVideosQuery, useCreateAdsMutation} = mediaSettingApi;
+export const {useGetAllAdsQuery, useGetAllVideosQuery, useCreateAdsMutation , useDeleteAdsMutation , useDeleteVideoAdsMutation} = mediaSettingApi;
