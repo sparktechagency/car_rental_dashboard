@@ -5,28 +5,60 @@ import './App.css'
 import Overview from './Components/Dashboard/Overview'
 import SubscriptionGrowth from './Components/Dashboard/SubscriptionGrowth'
 import JoinRequest from './Components/Dashboard/JoinRequest'
-import user from './assets/images/user.png'
-import income from './assets/images/income.png'
-import platinum from './assets/images/platinumn.png'
-import gold from './assets/images/dollar_gold.png'
-import diamond from './assets/images/daimond.png'
+import user from './assets/images/use4.png'
+import car1 from './assets/images/car.png'
+import car2 from './assets/images/car2.png'
+import car3 from './assets/images/car3.png'
+
+
 function App() {
   /** Get total user statistics API */
 
 
 
-  // const tableData = getSubscriber?.data?.data?.slice(0,3).map((user, i) => (
-  //   {
-  //     key: i + 1,
-  //     id : user?._id,
-  //     name: user?.user_id?.name,
-  //     img: user?.user_id?.profile_image,
-  //     contact : user?.phone_number,
-  //     email : user?.email,
-  //     location : user?.place_of_birth
+  const tableData =[
+    {
+      key: 1,
+      id : 1,
+      name: 'dindiniya',
+      img: user,
+      contact : '08 +123 456',
+      email : 'bockelboy@att.com',
+      location : 'Kent, Utha',
+      car : 'AIM Mychro',
+      carLocation : 'United State',
+      carImg : car1
 
-  //   }
-  // ))
+    },
+    {
+      key: 2,
+      id : 2,
+      name: 'dindiniya',
+      img: user,
+      contact : '08 +123 456',
+      email : 'bockelboy@att.com',
+      location : 'Kent, Utha',
+      car : 'AIM Mychro',
+      carLocation : 'United State',
+      carImg : car2
+
+    },
+    {
+      key: 3,
+      id : 3,
+      name: 'dindiniya',
+      img: user,
+      contact : '08 +123 456',
+      email : 'bockelboy@att.com',
+      location : 'Kent, Utha',
+      car : 'AIM Mychro',
+      carLocation : 'United State',
+      carImg : car3
+
+    }
+  ]
+   
+  
 
   const data = [
     {
@@ -71,11 +103,11 @@ function App() {
       </div>
       <div className='mt-3 bg-white rounded-md'>
         <div className='between-center gap-2 mb-3 p-5'>
-          <p className='text-xl'>New Membership Request</p> <Link to={`/total-join-request`}>
+          <p className='text-xl'>New Hosts Request</p> <Link to={`/total-join-request`}>
             View All
           </Link>
         </div>
-        {/* <JoinRequest tableData={tableData} /> */}
+        <JoinRequest tableData={tableData} />
       </div>
     </>
   )
