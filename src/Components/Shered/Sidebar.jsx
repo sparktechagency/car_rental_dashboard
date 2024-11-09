@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { IoIosArrowForward } from 'react-icons/io'
 import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom'
-import { CiLogout } from "react-icons/ci";
+import { CiLocationOn, CiLogout, CiUser } from "react-icons/ci";
 import media from '../../assets/images/media.png'
 import sub from '../../assets/images/sub.png'
 import dash from '../../assets/images/dashboard.png'
@@ -17,7 +17,13 @@ import user2 from '../../assets/images/user_color.png'
 import cat2 from '../../assets/images/item_cat.png'
 import media2 from '../../assets/images/media_color.png'
 import setting2 from '../../assets/images/setting_color.png'
-import logo  from "../../../src/assets/logo.png"
+import logo  from "../../../src/assets/images/logo.png"
+import { AiOutlineDashboard } from 'react-icons/ai';
+import { RiDashboard3Line, RiUserSearchLine } from 'react-icons/ri';
+import { BiDollarCircle } from 'react-icons/bi';
+import { FaRegUser } from 'react-icons/fa';
+import { FiPhone } from 'react-icons/fi';
+import { IoSettingsOutline } from 'react-icons/io5';
 
 const Sidebar = () => {
     const [openIndex, setOpenIndex] = useState(null);
@@ -31,54 +37,53 @@ const Sidebar = () => {
         {
             path: '/',
             label: 'Dashboard',
-            icon: <img src={dash} style={{ fill: 'black' }} />,
-            icon2: <img src={dash2} style={{ fill: 'black' }} />,
+            icon: <RiDashboard3Line size={22} className='text-white' />,
             sub_menu: false
         },
 
         {
-            path: '/income',
-            label: 'Income',
-            icon: <img src={income1} />,
-            icon2: <img src={inc2} />,
+            path: '/transaction',
+            label: 'Transaction',
+            icon:<BiDollarCircle size={22} className='text-white' />,
             sub_menu: false
         },
         {
-            path: '/subscription',
-            label: 'Subscription',
-            icon: <img src={sub} />,
-            icon2: <img src={sub2} />,
+            path: '/total-user',
+            label: 'Total User',
+            icon: <FaRegUser size={22} className='text-white' />,
             sub_menu: false
         },
         {
-            path: '/user-details',
-            label: 'User Details',
-            icon: <img src={user} />,
-            icon2: <img src={user2} />,
+            path: '/total-host',
+            label: 'Total Host',
+            icon:<RiUserSearchLine size={22} className='text-white' />,
             sub_menu: false
         },
 
         {
-            path: '/manage-items',
-            label: 'Manage Items',
-            icon: <img src={category} />,
-            icon2: <img src={cat2} />,
+            path: '/destination',
+            label: 'Destination',
+            icon: <CiLocationOn size={22} className='text-white' />,
             sub_menu: false
         },
         {
-            path: '/media-settings',
-            label: 'Media Settings',
-            icon: <img src={media} />,
-            icon2: <img src={media2} />,
+            path: '/trip-management',
+            label: 'Trip management',
+            icon: <CiLocationOn size={22} className='text-white' />,
             sub_menu: false
         },
-
+        {
+            path: '/contact-us',
+            label: 'Contact Management',
+            icon: <FiPhone size={22} className='text-white' />,
+            sub_menu: false
+        },
+       
 
         {
             path: '#',
             label: 'Settings',
-            icon: <img src={setting} />,
-            icon2: <img src={setting2} />,
+            icon: <IoSettingsOutline size={22} className='text-white'  />,
             sub_menu: [
                 {
                     path: '/profile',
@@ -126,9 +131,9 @@ const Sidebar = () => {
         });
     }, [openIndex]);
     return (
-        <div id='sidebar' className=' w-full h-full mt-10'>
-            <div className="log mb-5 ml-10">
-                <Link to={`/`}><img src={logo} alt="Logo" /></Link>
+        <div id='sidebar' className=' w-full h-full '>
+            <div className="log mb-5 w-full  ">
+                <Link to={`/`}><img src={logo} alt="Logo" className='w-full' /></Link>
             </div>
 
             <div className='start-start flex-col gap-4 mt-5 text-black '>
@@ -140,7 +145,7 @@ const Sidebar = () => {
                             return (
                                 <div key={index} className='w-full mt-5'>
                                     {
-                                        isSubMenuActive ? <div className='absolute left-0  bg-white h-[38px] w-2  ' style={{
+                                        isSubMenuActive ? <div className='absolute left-0  bg-[#6A6A6A] h-[38px] w-2  ' style={{
                                             borderRadius: "0 10px 10px 0",
                                         }}>
                                         </div> : ''
@@ -186,17 +191,17 @@ const Sidebar = () => {
 
                                 <div className='w-full relative'>
                                     {
-                                        isActive ? <div className='absolute left-0 mt-5 bg-white h-[38px] w-2  ' style={{
+                                        isActive ? <div className='absolute left-0 mt-5 bg-[#6A6A6A] h-[38px] w-2  ' style={{
                                             borderRadius: "0 10px 10px 0",
                                         }}>
                                         </div> : ''
                                     }
                                     <NavLink
                                         key={index}
-                                        className={`mt-4 start-center ml-10  gap-2 w-full py-2 px-4 cursor-pointer ${isActive ? "text-blue-500" : "bg-[var(--color-7)]"}`}
+                                        className={`mt-4 start-center ml-10  gap-2 w-full py-2 px-4 cursor-pointer ${isActive ? "text-white" : "bg-[#8D8D8D]"}`}
                                         to={item?.path}
                                     >
-                                        {isActive ? item?.icon2 : item?.icon}
+                                        { item?.icon}
                                         {item?.label}
                                     </NavLink>
 
@@ -214,7 +219,7 @@ const Sidebar = () => {
 
             <div
                 onClick={handleLogOut}
-                className="flex text-[4E4E4E]  items-center bg-white gap-3 ml-10 cursor-pointer px-6 hover:bg-white-500 py-2 mt-32 transition-all"
+                className="flex text-[4E4E4E]  items-center bg-[#6A6A6A] gap-3 text-white ml-10 cursor-pointer px-6 hover:bg-white-500 py-2 mt-32 transition-all"
             >
                 <CiLogout size={24} color="text-[4E4E4E]" />
                 Log Out

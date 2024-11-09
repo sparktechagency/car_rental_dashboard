@@ -45,7 +45,7 @@ import PrivateLogin from "./PrivateLogin.jsx";
 export const router = createBrowserRouter([
     {
         path: "/",
-        element:<PrivateRoute> <Root /> </PrivateRoute>,
+        element: <Root />,
         //   errorElement: <ErrorPage />,
         children: [
             {
