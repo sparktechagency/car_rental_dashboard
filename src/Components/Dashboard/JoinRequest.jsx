@@ -3,7 +3,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 
-const JoinRequest = ({ tableData }) => {
+const JoinRequest = ({ tableData , pagination }) => {
 
   const columns = [
     {
@@ -77,10 +77,10 @@ const JoinRequest = ({ tableData }) => {
       render: (_, record) => {
         return (
           <div className="flex justify-center gap-2">
-            <Link className="px-6 py-2 rounded-3xl  font-semibold bg-transparent border text-white bg-[#34C759]  hover:text-white" to={`/single-user-details/${record?.id}`}>
+            <Link className="px-6 py-2 rounded-3xl  font-semibold bg-transparent border text-white bg-[#34C759]  hover:text-white">
               Approved
             </Link>
-            <Link className="px-6 py-2 rounded-3xl text-red-500 font-semibold bg-transparent border border-red-500 hover:bg-red-500 hover:text-white" to={`/single-user-details/${record?.id}`}>
+            <Link className="px-6 py-2 rounded-3xl text-red-500 font-semibold bg-transparent border border-red-500 hover:bg-red-500 hover:text-white">
               Cancel
             </Link>
           </div>
@@ -90,7 +90,7 @@ const JoinRequest = ({ tableData }) => {
   ];
   return (
     <div className="font-lora rounded-md ">
-      <Table dataSource={tableData} columns={columns} className="custom-pagination font-lora" pagination={false
+      <Table dataSource={tableData} columns={columns} className="custom-pagination font-lora" pagination={pagination
         //   {
         //   pageSize: 5,
         //   showTotal: (total, range) => `Showing ${range[0]}-${range[1]} out of ${total}`,

@@ -28,7 +28,6 @@ import SCompanyManage from "../Pages/SuperAdmin/CompanyManage.jsx";
 import SCompanyDetails from "../Pages/SuperAdmin/SCompanyDetails.jsx";
 import Otp from "../Pages/Auth/Otp.jsx";
 import UpdatePassword from "../Pages/Auth/UpdatePassword.jsx";
-import SingleUserDetails from "../Pages/SingleUserDetails.jsx";
 import Income from "../Pages/Income.jsx";
 import Subscription from "../Pages/Subscription.jsx";
 import UserDetails from "../Pages/UserDetails.jsx";
@@ -184,10 +183,7 @@ export const router = createBrowserRouter([
                 element: <SCompanyDetails />,
             },
 
-            {
-                path: '/single-user-details/:id',
-                element: <SingleUserDetails />,
-            }
+           
 
         ]
     },

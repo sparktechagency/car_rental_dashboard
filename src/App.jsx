@@ -107,7 +107,7 @@ function App() {
             View All
           </Link>
         </div>
-        <JoinRequest tableData={tableData} />
+        <JoinRequest tableData={tableData} pagination={false} />
       </div>
     </>
   )
