@@ -58,7 +58,7 @@ const TotalJoinRequest = () => {
             <div className='between-center  my-2 pt-5'>
                 <div className='start-center  mb-3 '>
                     <Link to={-1} className=' py-1 px-2 rounded-md start-center gap-1'><IoArrowBackSharp /></Link>
-                    <p className='text-xl'>New Join Request</p>
+                    <p className='text-xl'>New Host Request</p>
                 </div>
                 {/* <Input className='max-w-[250px] h-10' prefix={<CiSearch className='text-2xl' />} placeholder="Search" /> */}
             </div>

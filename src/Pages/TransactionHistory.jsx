@@ -1,38 +1,24 @@
 import { BsArrowLeftShort } from "react-icons/bs"
 import { CiSearch } from "react-icons/ci"
-import TransactionHistoryTable from "../Components/TransactionHistoryTable/TransactionHistoryTable"
 import TransactionTable from "../Components/TranstactionTable/TransactionTable"
-import { ConfigProvider } from "antd"
-import YearSelect from "../Components/YearSelect/YearSelect"
-import MonthSelect from "../Components/SelectMonth/SelectMonth"
+import { Link } from "react-router-dom"
+import { Input } from "antd"
 
 const TransactionHistory = () => {
 
 
     return (
         <div className="p-2 shadow-md">
-            <div className="flex justify-between item-center ">
-                <div className="flex items-center gap-2">
-                    <BsArrowLeftShort />
-                    Transaction History</div>
-                <div className="flex items-center">
-                    <div className="flex items-center ">
-                        Month :
-                        <ConfigProvider>
-                            <div style={{ padding: 20 }}>
-                                <MonthSelect />
-                            </div>
-                        </ConfigProvider>
+            <div className="flex justify-between item-center pb-5 ">
+                <div className="flex justify-between items-center  w-full">
+                    <div className="flex items-center gap-2">
+                        <Link to={-1}><BsArrowLeftShort size={25} /></Link>
+                        Transaction
+
                     </div>
-                    <div className="flex items-center ">
-                        Year :
-                        <ConfigProvider>
-                            <div style={{ padding: 20 }}>
-                                <YearSelect />
-                            </div>
-                        </ConfigProvider>
-                    </div>
+                    <Input className='max-w-[250px] h-10' prefix={<CiSearch className='text-2xl' />} placeholder="Search here..." />
                 </div>
+                
             </div>
 
             {/* User Details table */}
@@ -46,7 +32,7 @@ const TransactionHistory = () => {
                     next_page: 'Next',
                 },
             }}
-              />
+            />
 
 
         </div>

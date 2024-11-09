@@ -56,7 +56,7 @@ export const router = createBrowserRouter([
                 element: <TotalJoinRequest />,
             },
             {
-                path : "/transaction-history",
+                path : "/transaction",
                 element : <TransactionHistory/>
             },
             {
