@@ -87,7 +87,7 @@ const Profile = () => {
                             style={{ width: 140, height: 140, borderRadius: "100%" }}
                             src={`${image ? URL.createObjectURL(image) : `${imageUrl}${getProfile?.data?.profile_image}`}`}
                             alt=""
-                            className="border-blue-500 border-2 shadow-2xl"
+                            className="shadow-2xl"
                         />
 
                         {
@@ -116,7 +116,7 @@ const Profile = () => {
                     <p
                         onClick={() => handlePageChange("Profile")}
                         className={`
-                        ${tab === "Profile" ? "border-[#3475F1] border-b-2 font-semibold text-[#3475F1]" : "border-b-2 border-transparent font-normal text-gray-600"}
+                        ${tab === "Profile" ? "border-black border-b-2 font-semibold text-black" : "border-b-2 border-transparent font-normal text-gray-600"}
                         pb-2 cursor-pointer text-[16px] leading-5  
                     `}
                     >
@@ -125,7 +125,7 @@ const Profile = () => {
                     <p
                         onClick={() => handlePageChange("Change Password")}
                         className={`
-                        ${tab === "Change Password" ? "border-[#3475F1] border-b-2 font-semibold text-[#3475F1]" : "border-b-2 border-transparent font-normal  text-gray-600"}
+                        ${tab === "Change Password" ? "border-black border-b-2 font-semibold text-black" : "border-b-2 border-transparent font-normal  text-gray-600"}
                         pb-2 cursor-pointer text-base leading-[18px]  
                     `}
                     >
@@ -239,7 +239,7 @@ const Profile = () => {
                                             width: 197,
                                             height: 48,
                                             color: "#FCFCFC",
-                                            background: '#3475F1'
+                                            background: '#272121'
                                         }}
                                         disabled={isLoading}
                                         className='font-normal text-[16px] leading-6 bg-primary'
@@ -359,7 +359,7 @@ const Profile = () => {
                                             width: 197,
                                             height: 48,
                                             color: "#FFFFFF",
-                                            background: '#3475F1'
+                                            background: '#272121'
                                         }}
                                         disabled={changePasswordLoading}
                                         className='font-normal text-[16px] leading-6 bg-primary'

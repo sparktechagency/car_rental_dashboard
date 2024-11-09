@@ -7,25 +7,9 @@ import UserTable from "../Components/Dashboard/UserTable";
 import PrivacyPolicy from "../Pages/PrivacyPolicy";
 import Terms from "../Pages/Terms";
 import Profile from "../Pages/Profile";
-// import FeedBack from "../Pages/FeedBack";
-// import CreateProject from "../Pages/CreateProject";
-import CreateSurvey from "../Pages/CreateSurvey";
-import ManageCompany from "../Pages/ManageCompany";
-import AddProject from "../Pages/AddProject";
-import ManageEvent from "../Pages/ManageEvent";
-import ArchiveProject from "../Pages/ArchiveProject";
-import SurveyResult from "../Pages/SurveyResult";
 import Notification from "../Pages/Notification.jsx";
-import ProjectDetails from "../Pages/ProjectDetails.jsx";
-import SurveyComment from "../Pages/SurveyComment.jsx";
-import SurveyBasedUser from "../Pages/SurveyBasedUser.jsx";
-// import Login from "../Pages/Auth/Login.jsx";
-import ProjectUsers from "../Pages/ProjectUsers.jsx";
 import Login from "../Pages/Auth/Login.jsx";
 import ForgotPassword from "../Pages/Auth/ForgotPassword.jsx";
-import SuperAdminDashboard from "../Pages/SuperAdmin/SuperAdminDashboard.jsx";
-import SCompanyManage from "../Pages/SuperAdmin/CompanyManage.jsx";
-import SCompanyDetails from "../Pages/SuperAdmin/SCompanyDetails.jsx";
 import Otp from "../Pages/Auth/Otp.jsx";
 import UpdatePassword from "../Pages/Auth/UpdatePassword.jsx";
 import Income from "../Pages/Income.jsx";
@@ -38,7 +22,6 @@ import Facts from "../Pages/Facts.jsx";
 import TransactionHistory from "../Pages/TransactionHistory.jsx";
 import PrivateRoute from "./PrivateRoute.jsx";
 import PrivateLogin from "./PrivateLogin.jsx";
-// import Otp from "../Pages/Auth/Otp.jsx";
 
 
 export const router = createBrowserRouter([
@@ -108,82 +91,12 @@ export const router = createBrowserRouter([
                 path: '/profile',
                 element: <Profile />,
             }, 
-            // {
-            //     path: '/create-project',
-            //     element: <CreateProject />,
-            // },
-            {
-                path: '/create-survey',
-                element: <CreateSurvey />,
-            },
-            {
-                path: '/manage-company',
-                element: <ManageCompany />,
-            },
-            {
-                path: '/manage-event',
-                element: <ManageEvent />,
-            },
-            {
-                path: '/archive',
-                element: <ArchiveProject />,
-            },
-            {
-                path: '/add-project',
-                element: <AddProject />,
-            },
-
-            {
-                path: '/survey-result',
-                element: <SurveyResult />,
-            },
+            
 
             {
                 path: '/notification',
                 element: <Notification />,
-            },
-
-            {
-                path: '/project-details/:id',
-                element: <ProjectDetails />,
-            },
-
-            {
-                path: '/project-users/:id',
-                element: <ProjectUsers/>,
-            },
-            {
-                path: '/survey-comments/:id',
-                element: <SurveyComment/>,
-            },
-
-            {
-                path: '/line-chart/id',
-                element: <chart/>,
-            },
-
-            {
-                path: '/survey-user/id',
-                element: <SurveyBasedUser/>,
-            },
-
-            // super admin dashboard pages
-            {
-                path: '/super-admin',
-                element: <SuperAdminDashboard/>,
-            },
-
-            {
-                path: '/super-admin/company-manage',
-                element: <SCompanyManage />,
-            },
-
-            {
-                path: '/super-admin/company-details',
-                element: <SCompanyDetails />,
-            },
-
-           
+            }, 
 
         ]
     },
