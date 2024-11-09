@@ -78,7 +78,7 @@ const SubscriptionGrowth = () => {
     return (
         <>
             <div className='between-center'>
-                <p className='text-2xl'>Subscription Growth</p>
+                <p className='text-xl font-medium'>Host Growth</p>
                 <Select
                     defaultValue="2024"
                     style={{ width: 120 }}
@@ -103,7 +103,7 @@ const SubscriptionGrowth = () => {
                         <XAxis dataKey="name" />
                         <YAxis />
                         <Tooltip />
-                        <Area type="monotone" dataKey="uv" stroke="#3475F1" opacity={1} fillOpacity={1} fill="#3475F1" />
+                        <Area type="monotone" dataKey="uv" stroke="#0044B4" opacity={1} fillOpacity={1} fill="#001D4E" />
                     </AreaChart>
                 </ResponsiveContainer>
             </div>
