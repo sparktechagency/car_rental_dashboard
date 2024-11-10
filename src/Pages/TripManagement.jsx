@@ -147,9 +147,7 @@ const TripManagement = () => {
             dataIndex: 'status',
             key: 'status',
             render: (status) => (
-                // <Tag color={statusColors[status]} style={{ fontWeight: 'bold' }}>
-                //     {status}
-                // </Tag>
+               
                 <div>
                     {
                         status == "completed" && <button className='bg-[#34C759] text-white px-4 py-2 rounded-md'>Completed</button>

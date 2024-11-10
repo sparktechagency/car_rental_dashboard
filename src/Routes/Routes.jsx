@@ -12,7 +12,6 @@ import Login from "../Pages/Auth/Login.jsx";
 import ForgotPassword from "../Pages/Auth/ForgotPassword.jsx";
 import Otp from "../Pages/Auth/Otp.jsx";
 import UpdatePassword from "../Pages/Auth/UpdatePassword.jsx";
-import Income from "../Pages/Income.jsx";
 import Subscription from "../Pages/Subscription.jsx";
 import UserDetails from "../Pages/UserDetails.jsx";
 import ManageItems from "../Pages/ManageItems.jsx";
@@ -58,10 +57,7 @@ export const router = createBrowserRouter([
                 element : <TripManagement/>
             },
 
-            {
-                path: '/income',
-                element: <Income />,
-            },
+           
             {
                 path : '/subscription',
                 element : <Subscription/>
@@ -92,7 +88,7 @@ export const router = createBrowserRouter([
                 element: <PrivacyPolicy />,
             },
             {
-                path: '/facts',
+                path: '/faqs',
                 element: <Facts />,
             },
             {

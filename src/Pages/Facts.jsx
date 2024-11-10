@@ -1,60 +1,85 @@
-import JoditEditor from "jodit-react";
-import { useEffect, useRef, useState } from "react";
+import { Form, Input, Modal } from "antd";
+import TextArea from "antd/es/input/TextArea";
+import { useState } from "react";
+import { ImCancelCircle } from "react-icons/im";
+import { IoMdAdd } from "react-icons/io";
 import { IoArrowBackSharp } from "react-icons/io5";
 import { Link } from "react-router-dom";
-import { useGetFactsQuery, useUpdateFactsMutation } from "../redux/Api/dashboardApi";
-import { toast } from "sonner";
 
 const Facts = () => {
-    const { data: getFacts } = useGetFactsQuery()
-    const [updateFacts] = useUpdateFactsMutation()
-    const editor = useRef(null);
-    const [content, setContent] = useState('');
-    const [isLoading, setLoading] = useState(false)
-    const handleTerms = () => {
-        const data = {
-            description: content
-        }
-        updateFacts(data).unwrap()
-            .then((payload) => toast.success(payload?.message))
-            .catch((error) => toast.error(error?.data?.message));
-    }
-    const config = {
-        readonly: false,
-        placeholder: 'Start typings...',
-        style: {
-            height: 400,
+    const [openModal, setOpenModal] = useState(false)
+    const data = [
+        {
+            question: 'What is an affiliate e-commerce website? What is an affiliate e-commerce website?',
+            answer: 'convallis. Praesent felis, placerat Ut ac quis dui volutpat vitae elementum quis adipiscing malesuada tempor non ipsum non, nec vitae amet, Donec tincidunt efficitur. in In ipsum Cras turpis viverra laoreet ullamcorper placerat diam sed leo. faucibus vitae eget vitae vehicula, luctus id Lorem fringilla tempor faucibus ipsum Vestibulum tincidunt ullamcorper elit diam turpis placerat vitae Nunc vehicula, ex faucibus venenatis at, maximus commodo urna. Nam ex quis sit non vehicula, massa urna at '
         },
-        buttons: [
-            'image', 'fontsize', 'bold', 'italic', 'underline', '|',
-            'font', 'brush',
-            'align'
-        ]
-    }
+        {
+            question: 'What is an affiliate e-commerce website?',
+            answer: 'convallis. Praesent felis, placerat Ut ac quis dui volutpat vitae elementum quis adipiscing malesuada tempor non ipsum non, nec vitae amet, Donec tincidunt efficitur. in In ipsum Cras turpis viverra laoreet ullamcorper placerat diam sed leo. faucibus vitae eget vitae vehicula, luctus id Lorem fringilla tempor faucibus ipsum Vestibulum tincidunt ullamcorper elit diam turpis placerat vitae Nunc vehicula, ex faucibus venenatis at, maximus commodo urna. Nam ex quis sit non vehicula, massa urna at '
+        },
+        {
+            question: 'What is an affiliate e-commerce website?',
+            answer: 'convallis. Praesent felis, placerat Ut ac quis dui volutpat vitae elementum quis adipiscing malesuada tempor non ipsum non, nec vitae amet, Donec tincidunt efficitur. in In ipsum Cras turpis viverra laoreet ullamcorper placerat diam sed leo. faucibus vitae eget vitae vehicula, luctus id Lorem fringilla tempor faucibus ipsum Vestibulum tincidunt ullamcorper elit diam turpis placerat vitae Nunc vehicula, ex faucibus venenatis at, maximus commodo urna. Nam ex quis sit non vehicula, massa urna at '
+        }
+    ]
 
-    useEffect(()=>{
-        setContent(getFacts?.data?.description)
-    },[getFacts])
     return (
-        <div>
-            <div className='start-center gap-2 mb-3 relative'>
-                <div className='absolute top-6 left-2 flex items-center'>
-                    <Link to={-1} className='py-1 px-2 rounded-md start-center gap-1 '><IoArrowBackSharp /></Link> <p>Facts</p>
+        <div className="bg-white p-5 rounded-md">
+            <div className=' flex items-center justify-between'>
+                <div className="flex items-center">
+                    <Link to={-1} className='py-1 px-2 rounded-md start-center gap-1 '><IoArrowBackSharp /></Link> <p>FAQ</p>
                 </div>
+                <button onClick={() => setOpenModal(true)} className="bg-black  text-white  px-8 py-2 rounded-md flex items-center gap-2"> <IoMdAdd /> Add FAQ</button>
             </div>
-            <div className="custom-jodit-editor">
-                <JoditEditor
-                    ref={editor}
-                    value={content}
-                    config={config}
-                    tabIndex={1}
-                    onBlur={newContent => setContent(newContent)}
-                    onChange={newContent => { }}
-                />
+
+
+            <div>
+                {
+                    data?.map(faq => (
+                        <div className="mt-8">
+                            <div className="flex  items-center gap-5 w-full">
+                                <p className="bg-black text-white py-3 rounded-md px-5 min-w-[95%]">{faq?.question}</p>
+                                <ImCancelCircle size={25} className="cursor-pointer hover:text-red-600" />
+                            </div>
+                            <p className="bg-[#BCBABA26] p-4 rounded-md mt-5">{faq?.answer}</p>
+                        </div>
+                    ))
+                }
             </div>
-            <div className='text-center mt-3'>
-                <button disabled={isLoading} onClick={handleTerms} className='px-8 py-2 rounded-sm bg-[#3475F1]  text-[var(--color-7)]' >Save</button>
-            </div>
+            <Modal open={openModal} onCancel={() => setOpenModal(false)} centered footer={false} >
+                <p className='text-xl text-center py-2 font-semibold'>Add FAQ</p>
+                <Form className=''
+                    layout='vertical'
+                // onFinish={onFinish}
+                // form={form}
+                >
+                    <Form.Item name={`question`}
+                        label={`Question`}
+                        rules={[
+                            {
+                                message: 'view Order is required',
+
+                            }
+                        ]}>
+                        <Input />
+
+                    </Form.Item>
+                    <Form.Item name={`Answer`}
+                        label={`Answer`}
+                        rules={[
+                            {
+                                message: 'view Order is required',
+
+                            }
+                        ]}>
+                        <TextArea />
+
+                    </Form.Item>
+                    <Form.Item className="flex items-center justify-center">
+                        <button className="bg-black text-white px-8 py-4 rounded-md  ">Publish</button>
+                    </Form.Item>
+                </Form>
+            </Modal>
         </div>
     );
 };

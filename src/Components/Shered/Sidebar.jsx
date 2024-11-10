@@ -92,17 +92,17 @@ const Sidebar = () => {
                 },
                 {
                     path: '/terms',
-                    label: 'About Us',
+                    label: 'Terms & Condition',
                     icon: <></>,
                 },
                 {
-                    path: '/rules-regulation',
-                    label: 'Rules & Regulations',
+                    path: '/privacy-policy',
+                    label: 'Privacy policy',
                     icon: <></>,
                 },
                 {
-                    path: '/facts',
-                    label: 'Facts',
+                    path: '/faqs',
+                    label: 'FAQ',
                     icon: <></>,
                 },
 
@@ -152,9 +152,9 @@ const Sidebar = () => {
                                     }
                                     <div
                                         onClick={() => toggleAccordion(index)}
-                                        className={`start-center ml-10 gap-2 w-full py-2 px-4 cursor-pointer ${isSubMenuActive ? "text-blue-500 bg-white" : "bg-[var(--color-7)]"}`}
+                                        className={`start-center ml-10 gap-2 w-full py-2 px-4 cursor-pointer ${isSubMenuActive ? "text-white bg-[#8D8D8D]" : "bg-[var(--color-7)]"}`}
                                     >
-                                        {isSubMenuActive ? item?.icon2 : item?.icon}
+                                         {item?.icon}
                                         {item?.label}
                                         <IoIosArrowForward />
                                     </div>
@@ -174,7 +174,7 @@ const Sidebar = () => {
                                                     <NavLink
                                                         to={sub_item?.path}
                                                         key={subIndex}
-                                                        className={`start-center px-10 gap-2 w-full py-2 cursor-pointer  ${isSubItemActive ? "text-blue-500 bg-white " : "bg-[var(--color-7)]"}`}
+                                                        className={`start-center px-5 gap-2 w-full py-2 cursor-pointer  ${isSubItemActive ? "text-white bg-[#8D8D8D]" : "bg-[var(--color-7)]"}`}
                                                     >
                                                         {sub_item?.icon}
                                                         {sub_item?.label}

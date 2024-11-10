@@ -20,10 +20,14 @@ const PrivacyPolicy = () => {
     }
     return (
         <>
-            <div className='start-center gap-2 mb-3'>
-                <Link to={-1} className='bg-[#ECB206] py-1 px-2 rounded-md start-center gap-1 text-white'><IoArrowBackSharp />back</Link> <p>Privacy Policy</p>
+            <>
+            <div className='start-center gap-2 mb-3 relative'>
+                <div className='absolute top-6 left-2 flex items-center'>
+                    <Link to={-1} className='py-1 px-2 rounded-md start-center gap-1  '><IoArrowBackSharp /></Link> <p>Terms & Condition</p>
+                </div>
             </div>
-            <div>
+
+            <div className="custom-jodit-editor">
                 <JoditEditor
                     ref={editor}
                     value={content}
@@ -34,8 +38,9 @@ const PrivacyPolicy = () => {
                 />
             </div>
             <div className='text-center mt-3'>
-                <button disabled={isLoading} onClick={handleTerms} className='px-8 py-2 rounded-2xl bg-[#ECB206] text-[var(--color-7)]' >Save</button>
+                <button  onClick={handleTerms} className='px-8 py-2 rounded-sm  bg-black text-white' >Save & </button>
             </div>
+        </>
         </>
     )
 }

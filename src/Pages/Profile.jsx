@@ -6,10 +6,9 @@ import { toast } from "sonner";
 import { LoadingOutlined } from "@ant-design/icons";
 import { imageUrl } from "../redux/Api/baseApi";
 import { useNavigate } from "react-router-dom";
+import img from "../assets/images/use4.png"
 
 
-
-const admin = false;
 const Profile = () => {
     /** all API */
     const { data: getProfile } = useGetProfileQuery()
@@ -85,7 +84,8 @@ const Profile = () => {
                         <input type="file" onInput={handleChange} id='img' style={{ display: "none" }} />
                         <img
                             style={{ width: 140, height: 140, borderRadius: "100%" }}
-                            src={`${image ? URL.createObjectURL(image) : `${imageUrl}${getProfile?.data?.profile_image}`}`}
+                            // src={`${image ? URL.createObjectURL(image) : `${imageUrl}${getProfile?.data?.profile_image}`}`}
+                            src={img}
                             alt=""
                             className="shadow-2xl"
                         />

@@ -25,7 +25,7 @@ const Terms = () => {
         readonly: false,
         placeholder: 'Start typings...',
         style: {
-            height: 400,
+            height: 650,
         },
         buttons: [
             'image', 'fontsize', 'bold', 'italic', 'underline', '|',
@@ -41,7 +41,7 @@ const Terms = () => {
         <>
             <div className='start-center gap-2 mb-3 relative'>
                 <div className='absolute top-6 left-2 flex items-center'>
-                    <Link to={-1} className='py-1 px-2 rounded-md start-center gap-1  '><IoArrowBackSharp /></Link> <p>About Us</p>
+                    <Link to={-1} className='py-1 px-2 rounded-md start-center gap-1  '><IoArrowBackSharp /></Link> <p>Terms & Condition</p>
                 </div>
             </div>
 
@@ -56,7 +56,7 @@ const Terms = () => {
                 />
             </div>
             <div className='text-center mt-3'>
-                <button  onClick={handleTerms} className='px-8 py-2 rounded-sm  bg-[#3475F1] text-[var(--color-7)]' >Update</button>
+                <button  onClick={handleTerms} className='px-8 py-2 rounded-sm  bg-black text-white' >Update</button>
             </div>
         </>
     )
