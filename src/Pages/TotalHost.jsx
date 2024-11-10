@@ -80,7 +80,7 @@ const TotalHost = () => {
             key: 'action',
             render: () => (
                 <Space size="middle">
-                    <EyeOutlined style={{ fontSize: '18px', cursor: 'pointer' }} />
+                    <Link to={'/total-host/:id'}><EyeOutlined  style={{ fontSize: '18px', cursor: 'pointer' }} /></Link>
                     <StopOutlined style={{ fontSize: '18px', cursor: 'pointer' }} />
                 </Space>
             ),

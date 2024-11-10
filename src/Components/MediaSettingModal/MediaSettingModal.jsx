@@ -91,7 +91,7 @@ const MediaSettingModal = ({ openAddModal, setOpenAddModal  }) => {
                     </Form.Item>
 
                     <div className='flex justify-center items-center gap-2'>
-                        <button disabled={isLoading} className='flex items-center gap-1 py-2 px-4 bg-black  text-white font-semibold rounded-sm px-8'>
+                        <button disabled={isLoading} className='flex items-center gap-1 py-2  bg-black  text-white font-semibold rounded-sm px-8'>
                             {isLoading  ? <Spin indicator={<LoadingOutlined style={{ fontSize: 24, color: '#ffffff' }} spin />} />  : <>save</>}
                         </button>
                     

@@ -24,6 +24,7 @@ import PrivateLogin from "./PrivateLogin.jsx";
 import TotalHost from "../Pages/TotalHost.jsx";
 import ContactUs from "../Pages/ContactUs/ContactUs.jsx";
 import TripManagement from "../Pages/TripManagement.jsx";
+import HostDetails from "../Pages/HostDetails.jsx";
 
 
 export const router = createBrowserRouter([
@@ -47,6 +48,10 @@ export const router = createBrowserRouter([
             {
                 path : "/total-host",
                 element : <TotalHost/>
+            },
+            {
+                path : "/total-host/:id",
+                element : <HostDetails/>
             },
             {
                 path : "/contact-us",
