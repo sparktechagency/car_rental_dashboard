@@ -7,7 +7,7 @@ import { useCreateAdsMutation } from "../../redux/Api/MediaSettingApi";
 import { toast } from "sonner";
 import { LoadingOutlined } from "@ant-design/icons";
 // eslint-disable-next-line react/prop-types
-const MediaSettingModal = ({ openAddModal, setOpenAddModal, modalTitle  }) => {
+const MediaSettingModal = ({ openAddModal, setOpenAddModal  }) => {
     const [createAds, { isLoading }] = useCreateAdsMutation()
     const [fileList, setFileList] = useState([]);
     const [isPrivate, setIsPrivate] = useState()
@@ -15,20 +15,7 @@ const MediaSettingModal = ({ openAddModal, setOpenAddModal, modalTitle  }) => {
 
 
     const onFinish = (value) => {
-        console.log(value);
-        const formData = new FormData();
-        formData.append('image', fileList[0].originFileObj)
-        formData.append('isPrivate', isPrivate)
-        formData.append('isActive', isActive)
-        formData.append('url', value?.Url)
-        formData.append('order', value?.viewOrder)
-        console.log();
-        createAds(formData).unwrap()
-            .then((payload) => {
-                toast.success(payload?.message)
-                setOpenAddModal(false)
-            })
-            .catch((error) => toast.error(error?.data?.message));
+      
     }
 
 
@@ -64,15 +51,15 @@ const MediaSettingModal = ({ openAddModal, setOpenAddModal, modalTitle  }) => {
             onCancel={() => setOpenAddModal(false)}
         >
             <div>
-                <p className='text-xl text-center py-2 font-semibold'>{modalTitle}</p>
+                <p className='text-xl text-center py-2 font-lora'>{"Add Destination"}</p>
                 <Form className=''
                     layout='vertical'
                     onFinish={onFinish}
                 >
 
 
-                    <Form.Item name={`viewOrder`}
-                        label={`View Order`}
+                    <Form.Item name={`name`}
+                        label={`Name`}
                         rules={[
                             {
                                 message: 'view Order is required',
@@ -82,22 +69,9 @@ const MediaSettingModal = ({ openAddModal, setOpenAddModal, modalTitle  }) => {
                         <Input />
 
                     </Form.Item>
-                    <Checkbox className="my-2" onChange={handleIsActive} >Active</Checkbox>
 
-                    <Form.Item
-                        name={`Url`}
-                        label={`url`}
-                        rules={[
-                            {
-                                message: 'Url is required',
-
-                            }
-                        ]}
-                    >
-                        <Input className=' border outline-none' placeholder='' />
-                    </Form.Item>
-                    <Checkbox onChange={onChange}>Private</Checkbox>
-                    <p className="pb-5">By making a video private, it will be visible only the selected members. </p>
+                   
+                    
 
                     <Form.Item
                         name="image"
@@ -112,17 +86,15 @@ const MediaSettingModal = ({ openAddModal, setOpenAddModal, modalTitle  }) => {
                             maxCount={1}
                         >
                             <PlusOutlined />
-                            <div >Add Image</div>
+                            <div  >Add Image</div>
                         </Upload>
                     </Form.Item>
 
                     <div className='flex justify-center items-center gap-2'>
-                        <button disabled={isLoading} className='flex items-center gap-1 py-2 px-4 bg-[#3475F1]  text-white font-semibold rounded-sm'>
-                            {isLoading  ? <Spin indicator={<LoadingOutlined style={{ fontSize: 24, color: '#ffffff' }} spin />} />  : <><TbCopyCheck /> save</>}
+                        <button disabled={isLoading} className='flex items-center gap-1 py-2 px-4 bg-black  text-white font-semibold rounded-sm px-8'>
+                            {isLoading  ? <Spin indicator={<LoadingOutlined style={{ fontSize: 24, color: '#ffffff' }} spin />} />  : <>save</>}
                         </button>
-                        <button onClick={()=> setOpenAddModal(false)} disabled={isLoading} className='py-2 px-4 flex items-center gap-1 bg-red-600 text-white font-semibold rounded-sm'>
-                            <RxCross2 /> Cancel
-                        </button>
+                    
                     </div>
 
                 </Form>

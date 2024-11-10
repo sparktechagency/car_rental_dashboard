@@ -22,6 +22,8 @@ import Facts from "../Pages/Facts.jsx";
 import TransactionHistory from "../Pages/TransactionHistory.jsx";
 import PrivateRoute from "./PrivateRoute.jsx";
 import PrivateLogin from "./PrivateLogin.jsx";
+import TotalHost from "../Pages/TotalHost.jsx";
+import ContactUs from "../Pages/ContactUs/ContactUs.jsx";
 
 
 export const router = createBrowserRouter([
@@ -43,6 +45,15 @@ export const router = createBrowserRouter([
                 element : <TransactionHistory/>
             },
             {
+                path : "/total-host",
+                element : <TotalHost/>
+            },
+            {
+                path : "/contact-us",
+                element : <ContactUs/>
+            },
+
+            {
                 path: '/income',
                 element: <Income />,
             },
@@ -59,7 +70,7 @@ export const router = createBrowserRouter([
                 element : <ManageItems/>
             },
             {
-                path : '/media-settings',
+                path : '/trip-management',
                 element : <MediaSettings/>
             },
 
