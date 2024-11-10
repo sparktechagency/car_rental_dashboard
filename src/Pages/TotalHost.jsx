@@ -4,7 +4,9 @@ import { EyeOutlined, StopOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
 import { CiSearch } from 'react-icons/ci';
 import { BsArrowLeftShort } from 'react-icons/bs';
-
+import img1 from '../assets/images/use4.png'
+import img2 from '../assets/images/user02.png'
+// import img3 from '../assets/images/use03.png'
 const TotalHost = () => {
     const data = [
         {
@@ -12,7 +14,7 @@ const TotalHost = () => {
             serialNo: '#12333',
             name: 'Ashiqur Rahman',
             phone: '08+ 123 456 789',
-            avatar: 'https://example.com/avatar1.jpg',
+            avatar: img1,
             car: 10,
             totalTrip: 125,
             email: 'bockelboy@att.com',
@@ -23,7 +25,7 @@ const TotalHost = () => {
             serialNo: '#12333',
             name: 'Hasibur Rashid Mah',
             phone: '08+ 123 456 789',
-            avatar: 'https://example.com/avatar2.jpg',
+            avatar: img2,
             car: 10,
             totalTrip: 252,
             email: 'csilvers@verizon.com',
@@ -45,7 +47,7 @@ const TotalHost = () => {
             key: 'name',
             render: (text, record) => (
                 <div style={{ display: 'flex', alignItems: 'center' }}>
-                    <Avatar src={record.avatar} alt={record.name} />
+                    <img src={record.avatar} className='h-10' alt={record.name} />
                     <div style={{ marginLeft: '10px' }}>
                         <div>{record.name}</div>
                         <div style={{ color: 'gray', fontSize: '12px' }}>{record.phone}</div>
