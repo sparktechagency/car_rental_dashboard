@@ -34,7 +34,7 @@ const MediaSettings = () => {
     }
 
     return (
-        <div className='rounded-md'>
+        <div className='rounded-md bg-white pb-5'>
             <div className='  my-2 pt-5'>
 
                 <div className='flex justify-between items-center'>

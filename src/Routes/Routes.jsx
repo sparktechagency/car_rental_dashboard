@@ -24,6 +24,7 @@ import PrivateRoute from "./PrivateRoute.jsx";
 import PrivateLogin from "./PrivateLogin.jsx";
 import TotalHost from "../Pages/TotalHost.jsx";
 import ContactUs from "../Pages/ContactUs/ContactUs.jsx";
+import TripManagement from "../Pages/TripManagement.jsx";
 
 
 export const router = createBrowserRouter([
@@ -52,6 +53,10 @@ export const router = createBrowserRouter([
                 path : "/contact-us",
                 element : <ContactUs/>
             },
+            {
+                path : "/trip-management",
+                element : <TripManagement/>
+            },
 
             {
                 path: '/income',
@@ -70,7 +75,7 @@ export const router = createBrowserRouter([
                 element : <ManageItems/>
             },
             {
-                path : '/trip-management',
+                path : '/destination',
                 element : <MediaSettings/>
             },
 
