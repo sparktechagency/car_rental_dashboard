@@ -1,4 +1,4 @@
-import { Input, } from 'antd';
+import { Input, Modal, } from 'antd';
 import React, { useState } from 'react'
 import { CiSearch } from 'react-icons/ci';
 import { Table, Avatar, Space } from 'antd';
@@ -8,6 +8,8 @@ import img2 from '../../assets/images/user02.png'
 import img3 from '../../assets/images/user03.png'
 
 const UserTable = () => {
+    const [openModal, setOpenModal] = useState(false);
+    const [userData, setUserData] = useState()
     const columns = [
         {
             title: 'S no.',
@@ -51,9 +53,12 @@ const UserTable = () => {
         {
             title: 'Action',
             key: 'action',
-            render: () => (
+            render: (_, record) => (
                 <Space size="middle">
-                    <EyeOutlined style={{ fontSize: '18px', cursor: 'pointer' }} />
+                    <EyeOutlined onClick={() => {
+                        setOpenModal(true)
+                        setUserData(record)
+                    }} style={{ fontSize: '18px', cursor: 'pointer' }} />
                     <StopOutlined style={{ fontSize: '18px', cursor: 'pointer' }} />
                 </Space>
             ),
@@ -97,6 +102,7 @@ const UserTable = () => {
             location: 'Kent, Utah',
         },
     ];
+    console.log(userData);
     return (
         <div className=' rounded-md'>
             <div className='between-center px-3 my-2 pt-5'>
@@ -112,6 +118,21 @@ const UserTable = () => {
                 }}
                 rowKey="key"
             />
+
+            <Modal centered open={openModal} footer={false} onCancel={() => setOpenModal(false)} >
+                <p className='text-center font-lora text-xl'>User Profile</p>
+                <div className='flex flex-col items-center justify-center'>
+                    <img src={userData?.avatar} className='mx-auto mt-5 rounded-full w-20' alt="" />
+                    <p className='font-lora text-xl mt-5'>User Profile</p>
+                    <div className='space-y-4 font-lora mt-5 text-xl'>
+                        <p>User Name : {userData?.name}</p>
+                        <p>Contact Number : {userData?.phone}</p>
+                        <p>Email : {userData?.email} </p>
+                        <p>Address : {userData?.location}</p>
+                        <p>Driving License  Number : 123654478924 </p>
+                    </div>
+                </div>
+            </Modal>
 
         </div>
     )

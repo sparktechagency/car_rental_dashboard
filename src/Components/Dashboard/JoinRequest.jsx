@@ -77,10 +77,10 @@ const JoinRequest = ({ tableData , pagination }) => {
       render: (_, record) => {
         return (
           <div className="flex justify-center gap-2">
-            <Link className="px-6 py-2 rounded-3xl  font-semibold bg-transparent border text-white bg-[#34C759]  hover:text-white">
+            <Link className="px-6 py-2 rounded-3xl  font-semibold border text-white bg-[#34C759]  hover:text-white">
               Approved
             </Link>
-            <Link className="px-6 py-2 rounded-3xl text-red-500 font-semibold bg-transparent border border-red-500 hover:bg-red-500 hover:text-white">
+            <Link className="px-6 py-2 rounded-3xl text-red-500 font-semibold  border border-red-500 hover:bg-red-500 hover:text-white">
               Cancel
             </Link>
           </div>
