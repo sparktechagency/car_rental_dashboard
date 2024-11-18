@@ -2,7 +2,7 @@ import { Button, Checkbox, Form, Input } from "antd";
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
-import img from '../../assets/images/login.png'
+// import img from '../../assets/images/login.png'
 import { useLoginAdminMutation } from "../../redux/Api/userApi";
 import { toast } from "sonner";
 

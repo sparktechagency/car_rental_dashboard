@@ -1,24 +1,9 @@
 import { useEffect, useRef, useState } from 'react'
 import { IoIosArrowForward } from 'react-icons/io'
 import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom'
-import { CiLocationOn, CiLogout, CiUser } from "react-icons/ci";
-import media from '../../assets/images/media.png'
-import sub from '../../assets/images/sub.png'
-import dash from '../../assets/images/dashboard.png'
-import income1 from '../../assets/images/income1.png'
-import user from '../../assets/images/userSide.png'
-import category from '../../assets/images/category.png'
-import setting from '../../assets/images/setting.png'
+import { CiLocationOn, CiLogout, } from "react-icons/ci";
 
-import dash2 from '../../assets/images/dash_color.png'
-import inc2 from '../../assets/images/inc_color.png'
-import sub2 from '../../assets/images/sub_color.png'
-import user2 from '../../assets/images/user_color.png'
-import cat2 from '../../assets/images/item_cat.png'
-import media2 from '../../assets/images/media_color.png'
-import setting2 from '../../assets/images/setting_color.png'
 import logo  from "../../../src/assets/images/logo.png"
-import { AiOutlineDashboard } from 'react-icons/ai';
 import { RiDashboard3Line, RiUserSearchLine } from 'react-icons/ri';
 import { BiDollarCircle } from 'react-icons/bi';
 import { FaRegUser } from 'react-icons/fa';

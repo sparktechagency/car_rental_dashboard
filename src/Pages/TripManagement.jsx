@@ -16,7 +16,7 @@ const TripManagement = () => {
             price: '$120.00',
             carName: 'Volkswagen Beetle',
             location: 'Kent, Utah',
-            status: 'PayNow',
+            status: 'completed',
         },
         {
             key: '2',
@@ -30,7 +30,7 @@ const TripManagement = () => {
             price: '$120.00',
             carName: 'Seat Tarraco',
             location: 'Great Falls, Maryland',
-            status: 'OrderStart',
+            status: 'ongoing',
         },
         {
             key: '3',
@@ -161,12 +161,8 @@ const TripManagement = () => {
                     {
                         status == "Requested" && <button className='bg-[#F3A638] text-white px-4 py-2 rounded-md' >Requested</button>
                     }
-                    {
-                        status == "OrderStart" && <button className='bg-[#007AFF] text-white px-4 py-2 rounded-md'>Order Start</button>
-                    }
-                    {
-                        status == "PayNow" && <button className='bg-[#34C759] text-white px-6 py-2 rounded-md'>Pay Now</button>
-                    }
+                   
+                    
                 </div>
             ),
         },
