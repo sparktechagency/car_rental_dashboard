@@ -1,20 +1,21 @@
 import { Table } from "antd";
 import React from "react";
+import { LuEye } from "react-icons/lu";
 import { Link } from "react-router-dom";
 
 
-const JoinRequest = ({ tableData , pagination }) => {
+const JoinRequest = ({ tableData, pagination }) => {
 
   const columns = [
     {
       title: "Sl No.",
       dataIndex: "key",
-      className : "font-lora",
+      className: "font-lora",
       key: "key",
     },
     {
       title: "Name",
-      className : "font-lora",
+      className: "font-lora",
       dataIndex: "name",
       key: "name",
       render: (_, record) => {
@@ -35,7 +36,7 @@ const JoinRequest = ({ tableData , pagination }) => {
     },
     {
       title: "Car",
-      className : "font-lora",
+      className: "font-lora",
       dataIndex: "car",
       key: "car",
       render: (_, record) => {
@@ -56,12 +57,12 @@ const JoinRequest = ({ tableData , pagination }) => {
     },
     {
       title: "Email",
-      className : "font-lora",
+      className: "font-lora",
       dataIndex: "email",
       key: "email  ",
     },
 
-   ,
+    ,
 
     {
       title: "Location",
@@ -73,11 +74,14 @@ const JoinRequest = ({ tableData , pagination }) => {
       title: "Actions",
       dataIndex: "key",
       key: "key",
-      className : "font-lora flex justify-center",
+      className: "font-lora flex justify-center",
       render: (_, record) => {
         return (
           <div className="flex justify-center gap-2">
-            <Link to={'/total-host/:id'} className="px-6 py-2 rounded-3xl  font-semibold border text-white bg-[#34C759]  hover:text-white">
+            <Link to={'/request-host-details/:id'} className="px-6 py-2 rounded-3xl flex items-center font-semibold border text-white bg-[#001D4E]  hover:text-white">
+              <LuEye size={25} />
+            </Link>
+            <Link  className="px-6 py-2 rounded-3xl  font-semibold border text-white bg-[#34C759]  hover:text-white">
               Approved
             </Link>
             <Link className="px-6 py-2 rounded-3xl text-red-500 font-semibold  border border-red-500 hover:bg-red-500 hover:text-white">

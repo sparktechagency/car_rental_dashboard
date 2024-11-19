@@ -25,6 +25,7 @@ import TotalHost from "../Pages/TotalHost.jsx";
 import ContactUs from "../Pages/ContactUs/ContactUs.jsx";
 import TripManagement from "../Pages/TripManagement.jsx";
 import HostDetails from "../Pages/HostDetails.jsx";
+import RequestHostDetails from "../Pages/RequestHostDetails/RequestHostDetails.jsx";
 
 
 export const router = createBrowserRouter([
@@ -40,6 +41,9 @@ export const router = createBrowserRouter([
             {
                 path: '/total-join-request',
                 element: <TotalJoinRequest />,
+            },
+            {
+                path : '/request-host-details/:id',element : <RequestHostDetails/>
             },
             {
                 path : "/transaction",
