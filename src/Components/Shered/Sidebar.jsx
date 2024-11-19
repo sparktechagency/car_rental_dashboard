@@ -2,13 +2,12 @@ import { useEffect, useRef, useState } from 'react'
 import { IoIosArrowForward } from 'react-icons/io'
 import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom'
 import { CiLocationOn, CiLogout, } from "react-icons/ci";
-
 import logo  from "../../../src/assets/images/logo.png"
 import { RiDashboard3Line, RiUserSearchLine } from 'react-icons/ri';
 import { BiDollarCircle } from 'react-icons/bi';
 import { FaRegUser } from 'react-icons/fa';
 import { FiPhone } from 'react-icons/fi';
-import { IoSettingsOutline } from 'react-icons/io5';
+import { IoGitMergeOutline, IoSettingsOutline } from 'react-icons/io5';
 
 const Sidebar = () => {
     const [openIndex, setOpenIndex] = useState(null);
@@ -22,45 +21,45 @@ const Sidebar = () => {
         {
             path: '/',
             label: 'Dashboard',
-            icon: <RiDashboard3Line size={22} className='text-white' />,
+            icon: <RiDashboard3Line size={22}  />,
             sub_menu: false
         },
 
         {
             path: '/transaction',
             label: 'Transaction',
-            icon:<BiDollarCircle size={22} className='text-white' />,
+            icon:<BiDollarCircle size={22}  />,
             sub_menu: false
         },
         {
             path: '/total-user',
             label: 'Total User',
-            icon: <FaRegUser size={22} className='text-white' />,
+            icon: <FaRegUser size={22}  />,
             sub_menu: false
         },
         {
             path: '/total-host',
             label: 'Total Host',
-            icon:<RiUserSearchLine size={22} className='text-white' />,
+            icon:<RiUserSearchLine size={22}  />,
             sub_menu: false
         },
 
         {
             path: '/destination',
             label: 'Destination',
-            icon: <CiLocationOn size={22} className='text-white' />,
+            icon: <CiLocationOn size={22}  />,
             sub_menu: false
         },
         {
             path: '/trip-management',
             label: 'Trip management',
-            icon: <CiLocationOn size={22} className='text-white' />,
+            icon: <IoGitMergeOutline size={22}  />,
             sub_menu: false
         },
         {
             path: '/contact-us',
             label: 'Contact Management',
-            icon: <FiPhone size={22} className='text-white' />,
+            icon: <FiPhone size={22}  />,
             sub_menu: false
         },
        
@@ -68,7 +67,7 @@ const Sidebar = () => {
         {
             path: '#',
             label: 'Settings',
-            icon: <IoSettingsOutline size={22} className='text-white'  />,
+            icon: <IoSettingsOutline size={22}   />,
             sub_menu: [
                 {
                     path: '/profile',
@@ -128,7 +127,7 @@ const Sidebar = () => {
                         const isSubMenuActive = item.sub_menu && item.sub_menu.some(subItem => subItem.path === pathname);
                         if (item?.sub_menu) {
                             return (
-                                <div key={index} className='w-full mt-5'>
+                                <div key={index} className='w-full mt-5 relative'>
                                     {
                                         isSubMenuActive ? <div className='absolute left-0  bg-[#6A6A6A] h-[38px] w-2  ' style={{
                                             borderRadius: "0 10px 10px 0",
@@ -137,7 +136,7 @@ const Sidebar = () => {
                                     }
                                     <div
                                         onClick={() => toggleAccordion(index)}
-                                        className={`start-center ml-10 gap-2 w-full py-2 px-4 cursor-pointer ${isSubMenuActive ? "text-white bg-[#8D8D8D]" : "bg-[var(--color-7)]"}`}
+                                        className={`start-center ml-10 gap-2 w-full py-2 px-4  cursor-pointer ${isSubMenuActive ? "text-black bg-white " : "bg-[#8D8D8D]"}`}
                                     >
                                          {item?.icon}
                                         {item?.label}
@@ -146,7 +145,7 @@ const Sidebar = () => {
 
                                     <div
                                         ref={(el) => (contentRefs.current[index] = el)}
-                                        className='accordion-content ml-10 overflow-hidden transition-max-height duration-300 ease-in-out cursor-pointer mt-1 bg-[var(--color-8)]'
+                                        className='accordion-content ml-10 overflow-hidden transition-max-height duration-300 ease-in-out cursor-pointer mt-1'
                                         style={{
                                             maxHeight: openIndex === index ? `${contentRefs.current[index]?.scrollHeight}px` : '0px'
                                         }}
@@ -159,7 +158,7 @@ const Sidebar = () => {
                                                     <NavLink
                                                         to={sub_item?.path}
                                                         key={subIndex}
-                                                        className={`start-center px-5 gap-2 w-full py-2 cursor-pointer  ${isSubItemActive ? "text-white bg-[#8D8D8D]" : "bg-[var(--color-7)]"}`}
+                                                        className={`start-center px-5 gap-2 w-full py-2 cursor-pointer  ${isSubItemActive ? " bg-white mt-1" : "bg-[#8D8D8D] mt-1"}`}
                                                     >
                                                         {sub_item?.icon}
                                                         {sub_item?.label}
@@ -183,7 +182,7 @@ const Sidebar = () => {
                                     }
                                     <NavLink
                                         key={index}
-                                        className={`mt-4 start-center ml-10  gap-2 w-full py-2 px-4 cursor-pointer ${isActive ? "text-white" : "bg-[#8D8D8D]"}`}
+                                        className={`mt-4 start-center ml-10  gap-2 w-full py-2 px-4 cursor-pointer  ${isActive ? " bg-white" : "bg-[#8D8D8D]"}`}
                                         to={item?.path}
                                     >
                                         { item?.icon}

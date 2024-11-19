@@ -5,12 +5,12 @@
 
 :root {
   --color-1: #38393E;
-  --color-2: #ECB206;
+  /* --color-2: #ECB206; */
   --color-3: #2C2C30;
-  --color-4: #6BAE46;
+  /* --color-4: #6BAE46;
   --color-5: #F3FBEE;
-  --color-6: #F7F7FB;
-  --color-7: #6A6A6A;
+  --color-6: #F7F7FB; */
+  --color-7: white;
   --color-8: #242424;
   font-family: "Poppins", sans-serif;
 }

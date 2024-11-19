@@ -2,7 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import Root from "../Pages/Root";
 import App from "../App";
 import TotalJoinRequest from "../Pages/TotalJoinRequest.jsx";
-import DriverProfile from "../Pages/DriverProfile";
+// import DriverProfile from "../Pages/DriverProfile";
 import UserTable from "../Components/Dashboard/UserTable";
 import PrivacyPolicy from "../Pages/PrivacyPolicy";
 import Terms from "../Pages/Terms";
@@ -80,10 +80,10 @@ export const router = createBrowserRouter([
                 element : <MediaSettings/>
             },
 
-            {
-                path: '/driver-details/:id',
-                element: <DriverProfile />,
-            },
+            // {
+            //     path: '/driver-details/:id',
+            //     element: <DriverProfile />,
+            // },
             {
                 path: '/total-user',
                 element: <UserTable />,
