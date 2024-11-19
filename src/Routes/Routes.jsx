@@ -26,6 +26,9 @@ import ContactUs from "../Pages/ContactUs/ContactUs.jsx";
 import TripManagement from "../Pages/TripManagement.jsx";
 import HostDetails from "../Pages/HostDetails.jsx";
 import RequestHostDetails from "../Pages/RequestHostDetails/RequestHostDetails.jsx";
+import TipsTricks from "../Pages/TipsTricks/TipsTricks.jsx";
+import TrustSafety from "../Pages/TrustSafety/TrustSafety.jsx";
+import HostingGuide from "../Components/HostingGuide/HostingGuide.jsx";
 
 
 export const router = createBrowserRouter([
@@ -95,6 +98,22 @@ export const router = createBrowserRouter([
             {
                 path: '/privacy-policy',
                 element: <PrivacyPolicy />,
+            },
+            {
+                path: '/tips-tricks',
+                element: <TipsTricks />,
+            },
+            {
+                path: '/trust-safety',
+                element: <TrustSafety/>,
+            },
+            {
+                path: '/hosting-guide',
+                element: <HostingGuide/>,
+            },
+            {
+                path: '/tips-tricks',
+                element: <TipsTricks />,
             },
             {
                 path: '/faqs',

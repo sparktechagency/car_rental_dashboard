@@ -89,6 +89,21 @@ const Sidebar = () => {
                     label: 'FAQ',
                     icon: <></>,
                 },
+                {
+                    path: '/trust-safety',
+                    label: 'Trust & Safety',
+                    icon: <></>,
+                },
+                {
+                    path: '/hosting-guide',
+                    label: 'Hosting Guide',
+                    icon: <></>,
+                },
+                {
+                    path: '/tips-tricks',
+                    label: 'Tips & Tricks',
+                    icon: <></>,
+                },
 
 
             ]
