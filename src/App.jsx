@@ -1,7 +1,5 @@
-
 import { Link } from 'react-router-dom'
 import './App.css'
-
 import Overview from './Components/Dashboard/Overview'
 import SubscriptionGrowth from './Components/Dashboard/SubscriptionGrowth'
 import JoinRequest from './Components/Dashboard/JoinRequest'
@@ -9,12 +7,13 @@ import user from './assets/images/use4.png'
 import car1 from './assets/images/car.png'
 import car2 from './assets/images/car2.png'
 import car3 from './assets/images/car3.png'
+import { useTotalUserCountQuery } from './redux/Api/dashboardApi'
 
 
 function App() {
   /** Get total user statistics API */
 
-
+  const {data: getDashboardInfo } = useTotalUserCountQuery();
 
   const tableData =[
     {
@@ -63,19 +62,19 @@ function App() {
   const data = [
     {
       title: 'Total User',
-      count: 18.6,
+      count: getDashboardInfo?.data?.totalUser,
     },
     {
       title: 'Total Host',
-      count: 18.6,
+      count: getDashboardInfo?.data?.totalHost,
     },
     {
       title: 'Total Cars',
-      count: 20.9,
+      count: getDashboardInfo?.data?.totalCar,
     },
     {
       title: 'Total Earning',
-      count: 20.9,
+      count: getDashboardInfo?.data?.totalEarning,
     },
 
   ]
@@ -86,7 +85,7 @@ function App() {
         {
           data?.map((item, index) => <div className='w-full h-full border-r-2 center-center flex-col gap-3  bg-[white]  ' key={index}>
             <div className='my-10 text-center space-y-4'>
-              <p className='text-3xl font-semibold'>{item?.count}K</p>
+              <p className='text-3xl font-semibold'>{item?.count}</p>
               <p className=' text-[#B47000]'>{item?.title}</p>
             </div>
           </div>)

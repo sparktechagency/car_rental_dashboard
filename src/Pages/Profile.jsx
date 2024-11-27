@@ -14,7 +14,7 @@ const Profile = () => {
     const { data: getProfile } = useGetProfileQuery()
     const [updateProfile, { isLoading }] = useUpdateProfileMutation()
     const [changePassword, { isLoading: changePasswordLoading }] = useChangePasswordMutation()
-    
+    console.log(getProfile?.data?.profile_image);
     const navigate = useNavigate()
 
     const [image, setImage] = useState();
@@ -57,7 +57,7 @@ const Profile = () => {
             formData.append("profile_image", image);
         }
         formData.append('name', values?.fullName)
-        formData.append('email', values?.email)
+        // formData.append('email', values?.email)
         formData.append('phone_number', values?.mobileNumber)
         formData.append('address', values?.address)
         updateProfile(formData).unwrap()
@@ -84,10 +84,10 @@ const Profile = () => {
                         <input type="file" onInput={handleChange} id='img' style={{ display: "none" }} />
                         <img
                             style={{ width: 140, height: 140, borderRadius: "100%" }}
-                            // src={`${image ? URL.createObjectURL(image) : `${imageUrl}${getProfile?.data?.profile_image}`}`}
-                            src={img}
+                            src={`${image ? URL.createObjectURL(image) : `${imageUrl}${getProfile?.data?.profile_image}`}`}
+                            // src={img}
                             alt=""
-                            className="shadow-2xl"
+                            className="shadow-2xl object-cover"
                         />
 
                         {
