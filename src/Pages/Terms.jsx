@@ -3,11 +3,11 @@ import React, { useState, useRef, useMemo, useEffect } from 'react';
 import JoditEditor from 'jodit-react';
 import { Link } from 'react-router-dom';
 import { IoArrowBackSharp } from 'react-icons/io5';
-import { useGetAboutUsQuery, useUpdateAboutUsMutation } from '../redux/Api/dashboardApi';
+import { useGetTermsConditionsQuery, useUpdateTermsConditionMutation } from '../redux/Api/dashboardApi';
 import { toast } from 'sonner';
 const Terms = () => {
-    const { data: getAbout } = useGetAboutUsQuery();
-    const [updateAbout] = useUpdateAboutUsMutation()
+    const { data: getTerms } = useGetTermsConditionsQuery();
+    const [updateAbout] = useUpdateTermsConditionMutation()
     const editor = useRef(null);
     const [content, setContent] = useState('');
     const [isLoading, seLoading] = useState(false)
@@ -16,7 +16,6 @@ const Terms = () => {
         const data = {
             description: content
         }
-        console.log(data);
         updateAbout(data).unwrap()
             .then((payload) => toast.success("Update about successfully!"))
             .catch((error) => toast.error(error?.data?.message));
@@ -35,8 +34,8 @@ const Terms = () => {
     }
 
     useEffect(()=>{
-        setContent(getAbout?.data?.description)
-    },[getAbout])
+        setContent(getTerms?.data?.description)
+    },[getTerms])
     return (
         <>
             <div className='start-center gap-2 mb-3 relative'>

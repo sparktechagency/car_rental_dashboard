@@ -124,23 +124,23 @@ const useApi = baseApi.injectEndpoints({
             invalidatesTags : ['blockUser']
         }),
         /** Setting APIs */
-        getAboutUs : builder.query({
+        getTermsConditions : builder.query({
             query : ()=>{
                 return {
-                    url : '/rules/get-about-us',
+                    url : '/manage/get-terms-conditions',
                     method : 'GET'
                 }
             },
-            providesTags : ['aboutUs']
+            providesTags : ['terms']
         }),
-        updateAboutUs : builder.mutation({
+        updateTermsCondition : builder.mutation({
             query : (data)=>{
                 return {
-                    url : '/rules/add-about-us',
+                    url : '/manage/add-terms-conditions',
                     method : "POST",
                     body :  data
                 }
-            },invalidatesTags :['aboutUs']
+            },invalidatesTags :['terms']
         }),
         getRulesAndRegulation :  builder.query({
             query : ()=>{
@@ -185,4 +185,4 @@ const useApi = baseApi.injectEndpoints({
     })
 })
 
-export const { useTotalUserCountQuery, useGetUserGrowthQuery, usePlanSubscriberQuery, useGetAllCategoryQuery, useCreateCategoryMutation, useGetSingleSubscribePlanQuery, useApproveDeclineMemberRequestMutation , useGetAllNotificationQuery , useDeleteNotificationMutation, useGetAllUserQuery , useBlockUserMutation , useUpdateAboutUsMutation , useGetAboutUsQuery , useGetRulesAndRegulationQuery, useUpdateRulesAndRegulationMutation , useUpdateFactsMutation, useGetFactsQuery , useDeleteCategoryMutation , useEditCategoryMutation} = useApi
+export const { useTotalUserCountQuery, useGetUserGrowthQuery, usePlanSubscriberQuery, useGetAllCategoryQuery, useCreateCategoryMutation, useGetSingleSubscribePlanQuery, useApproveDeclineMemberRequestMutation , useGetAllNotificationQuery , useDeleteNotificationMutation, useGetAllUserQuery , useBlockUserMutation , useUpdateTermsConditionMutation  , useGetRulesAndRegulationQuery, useUpdateRulesAndRegulationMutation , useUpdateFactsMutation, useGetFactsQuery , useDeleteCategoryMutation , useEditCategoryMutation , useGetTermsConditionsQuery} = useApi
