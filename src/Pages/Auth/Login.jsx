@@ -13,26 +13,22 @@ const Login = () => {
     const onFinish = (values) => {
         loginAdmin(values).unwrap()
             .then((payload) => {
-                if(payload?.data?.user?.role === 'ADMIN'){
-
-                    localStorage.setItem('token', JSON.stringify(payload?.data?.accessToken));
-                    toast.success(payload?.message)
-                   return navigate('/')
-                }else{
-                    return toast.error('You are not authorized!')
+                if(payload?.data?.user?.authId?.role === "ADMIN"){
+                    localStorage.setItem('token' , JSON.stringify(payload?.data?.accessToken))
+                    toast.success(payload?.message);
+                    return navigate('/')
                 }
+            }).catch((error) => {
+                toast.error(error?.data?.message);
             })
-            .catch((error) => {
-                toast.error(error?.data?.message)
-            });
     };
 
     return (
-        <div className="grid grid-cols-2 items-center h-[100vh]">
-            <div className="bg-[#C0D4FB] h-full flex items-center justify-center">
+        <div className="grid grid-cols-1 bg-black items-center min-h-[100vh]">
+            {/* <div className="bg-[#C0D4FB] h-full flex items-center justify-center">
                 <img src={img} className="" alt="" />
-            </div>
-            <div className="bg-white flex justify-center items-center">
+            </div> */}
+            <div className=" flex justify-center items-center">
                 <Form
                     name="normal_login"
                     className="login-form"

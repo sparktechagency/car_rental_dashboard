@@ -34,8 +34,7 @@ import HostingGuide from "../Components/HostingGuide/HostingGuide.jsx";
 export const router = createBrowserRouter([
     {
         path: "/",
-        element: <Root />,
-        //   errorElement: <ErrorPage />,
+        element: <PrivateRoute><Root /></PrivateRoute>,
         children: [
             {
                 path: '/',

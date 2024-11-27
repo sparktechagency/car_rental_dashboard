@@ -6,11 +6,11 @@ import { Skeleton } from 'antd';
 const PrivateRoute = ({children}) => {
     const location = useLocation()
     const { data: getUserInfo,isError, isLoading  , isFetching} = useGetProfileQuery();
-    
+    console.log(getUserInfo);
     if(isLoading || isFetching){
         return <div className="flex items-center justify-center"><Skeleton active /></div>;
     }
-    if(isError || !getUserInfo?.data?.email || getUserInfo?.data?.role !== 'ADMIN' ){
+    if(isError || !getUserInfo?.data?.email || getUserInfo?.data?.authId?.role !== 'ADMIN' ){
         return <Navigate to={'/auth/login'}  state={{ from: location }} />
     }
   return children
