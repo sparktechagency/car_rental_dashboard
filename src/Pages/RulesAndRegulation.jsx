@@ -2,23 +2,23 @@ import JoditEditor from "jodit-react";
 import { useEffect, useRef, useState } from "react";
 import { IoArrowBackSharp } from "react-icons/io5";
 import { Link } from "react-router-dom";
-import { useGetRulesAndRegulationQuery, useUpdateRulesAndRegulationMutation } from "../redux/Api/dashboardApi";
+// import { useGetRulesAndRegulationQuery, useUpdateRulesAndRegulationMutation } from "../redux/Api/dashboardApi";
 import { toast } from "sonner";
 
 const RulesAndRegulation = () => {
-    const { data: getRulesAndRegulation } = useGetRulesAndRegulationQuery()
-    const [updateRules, { isLoading }] = useUpdateRulesAndRegulationMutation()
+    // const { data: getRulesAndRegulation } = useGetRulesAndRegulationQuery()
+    // const [updateRules, { isLoading }] = useUpdateRulesAndRegulationMutation()
     const editor = useRef(null);
     const [content, setContent] = useState('');
     // const [isLoading, seLoading] = useState(false)
-    const handleTerms = () => {
-        const data = {
-            description: content
-        }
-        updateRules(data).unwrap()
-            .then((payload) => toast.success(payload?.message))
-            .catch((error) => toast.error(error?.data?.message));
-    }
+    // const handleTerms = () => {
+    //     const data = {
+    //         description: content
+    //     }
+    //     updateRules(data).unwrap()
+    //         .then((payload) => toast.success(payload?.message))
+    //         .catch((error) => toast.error(error?.data?.message));
+    // }
     const config = {
         readonly: false,
         placeholder: 'Start typings...',
@@ -31,9 +31,9 @@ const RulesAndRegulation = () => {
             'align'
         ]
     }
-    useEffect(() => {
-        setContent(getRulesAndRegulation?.data?.description);
-    }, [getRulesAndRegulation])
+    // useEffect(() => {
+    //     setContent(getRulesAndRegulation?.data?.description);
+    // }, [getRulesAndRegulation])
     return (
         <div>
             <div className='start-center gap-2 mb-3 relative'>
