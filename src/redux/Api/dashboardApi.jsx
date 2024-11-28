@@ -161,28 +161,38 @@ const useApi = baseApi.injectEndpoints({
                 }
             },invalidatesTags:['privacy']
         }),
-        getFacts :  builder.query({
+       
+        getFaqs : builder.query({
             query : ()=>{
                 return {
-                    url : '/rules/get-facts',
-                    method : 'GET'
+                    url : '/manage/get-faq',
+                    method : "GET"
                 }
             },
-
-            providesTags : ['terms']
+            providesTags : ['FAQ']
         }),
-        updateFacts : builder.mutation({
-            query :  (data)=>{
+        deleteFaq : builder.mutation({
+            query : (id)=>{
+                return { 
+                    url : `/manage/delete-faq?id=${id}`,
+                    method : 'DELETE',
+                }
+            },
+            invalidatesTags : ['FAQ']
+        }),
+        createFaq : builder.mutation({
+            query : (data) =>{
                 return {
-                    url : '/rules/add-facts',
-                    method : 'POST',
+                    url : '/manage/add-faq',
+                    method  : 'POST',
                     body : data
                 }
-            }
-        }),
-        
+            },
+            invalidatesTags : ['FAQ']
+        })
+       
 
     })
 })
 
-export const { useTotalUserCountQuery, useGetUserGrowthQuery, usePlanSubscriberQuery, useGetAllCategoryQuery, useCreateCategoryMutation, useGetSingleSubscribePlanQuery, useApproveDeclineMemberRequestMutation , useGetAllNotificationQuery , useDeleteNotificationMutation, useGetAllUserQuery , useBlockUserMutation , useUpdateTermsConditionMutation  , useGetPrivacyPolicyQuery, useUpdatePrivacyPolicyMutation , useUpdateFactsMutation, useGetFactsQuery , useDeleteCategoryMutation , useEditCategoryMutation , useGetTermsConditionsQuery} = useApi
+export const { useTotalUserCountQuery, useGetUserGrowthQuery, usePlanSubscriberQuery, useGetAllCategoryQuery, useCreateCategoryMutation, useGetSingleSubscribePlanQuery, useApproveDeclineMemberRequestMutation , useGetAllNotificationQuery , useDeleteNotificationMutation, useGetAllUserQuery , useBlockUserMutation , useUpdateTermsConditionMutation  , useGetPrivacyPolicyQuery, useUpdatePrivacyPolicyMutation ,useDeleteCategoryMutation , useEditCategoryMutation , useGetTermsConditionsQuery , useGetFaqsQuery , useDeleteFaqMutation , useCreateFaqMutation} = useApi
