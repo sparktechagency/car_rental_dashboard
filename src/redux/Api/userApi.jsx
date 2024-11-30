@@ -65,10 +65,18 @@ const useApi = baseApi.injectEndpoints({
                     body : data
                 }
             }
-        })
+        }),
+        getHostUser : builder.query({
+            query : ({user , page , search})=>{
+                return {
+                    url : `/dashboard/get-all-user?role=${user}&page=${page}&searchTerm=${search}`,
+                    method : "GET"
+                }
+            }
+        }) 
     })
 })
 
-export const {useLoginAdminMutation , useGetProfileQuery , useForgotPasswordMutation , useVerifyOtpMutation , useResetPasswordMutation , useUpdateProfileMutation , useChangePasswordMutation
+export const {useLoginAdminMutation , useGetProfileQuery , useForgotPasswordMutation , useVerifyOtpMutation , useResetPasswordMutation , useUpdateProfileMutation , useChangePasswordMutation, useGetHostUserQuery
 
  } = useApi

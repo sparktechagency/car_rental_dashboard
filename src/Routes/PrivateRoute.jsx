@@ -6,7 +6,6 @@ import { Skeleton } from 'antd';
 const PrivateRoute = ({children}) => {
     const location = useLocation()
     const { data: getUserInfo,isError, isLoading  , isFetching} = useGetProfileQuery();
-    console.log(getUserInfo);
     if(isLoading || isFetching){
         return <div className="flex items-center justify-center"><Skeleton active /></div>;
     }
