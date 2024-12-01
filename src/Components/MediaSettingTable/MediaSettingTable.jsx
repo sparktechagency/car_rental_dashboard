@@ -6,7 +6,6 @@ import { MdCheck } from "react-icons/md";
 import { IoMdClose } from "react-icons/io";
 import MediaSettingModal from "../MediaSettingModal/MediaSettingModal";
 import { imageUrl } from "../../redux/Api/baseApi";
-import { useDeleteAdsMutation } from "../../redux/Api/MediaSettingApi";
 import { toast } from "sonner";
 import EditAddModal from "../EditAddModal";
 const MediaSettingTable = ({ getAllAds }) => {

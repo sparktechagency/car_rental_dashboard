@@ -3,12 +3,10 @@ import { RxCross2 } from "react-icons/rx";
 import { TbCopyCheck } from "react-icons/tb";
 import { PlusOutlined } from '@ant-design/icons';
 import { useState } from "react";
-import { useCreateAdsMutation } from "../../redux/Api/MediaSettingApi";
 import { toast } from "sonner";
 import { LoadingOutlined } from "@ant-design/icons";
 // eslint-disable-next-line react/prop-types
 const MediaSettingModal = ({ openAddModal, setOpenAddModal  }) => {
-    const [createAds, { isLoading }] = useCreateAdsMutation()
     const [fileList, setFileList] = useState([]);
     const [isPrivate, setIsPrivate] = useState()
     const [isActive, setIsActive] = useState()
@@ -91,8 +89,8 @@ const MediaSettingModal = ({ openAddModal, setOpenAddModal  }) => {
                     </Form.Item>
 
                     <div className='flex justify-center items-center gap-2'>
-                        <button disabled={isLoading} className='flex items-center gap-1 py-2  bg-black  text-white font-semibold rounded-sm px-8'>
-                            {isLoading  ? <Spin indicator={<LoadingOutlined style={{ fontSize: 24, color: '#ffffff' }} spin />} />  : <>save</>}
+                        <button className='flex items-center gap-1 py-2  bg-black  text-white font-semibold rounded-sm px-8'>
+                            {/* {isLoading  ? <Spin indicator={<LoadingOutlined style={{ fontSize: 24, color: '#ffffff' }} spin />} />  : <>save</>} */}
                         </button>
                     
                     </div>

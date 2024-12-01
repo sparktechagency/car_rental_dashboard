@@ -2,37 +2,18 @@ import { useState } from "react";
 import { FaPlus } from "react-icons/fa6";
 import { GoArrowLeft } from "react-icons/go";
 import MediaSettingModal from "../../Components/MediaSettingModal/MediaSettingModal";
-import MediaSettingTable from "../../Components/MediaSettingTable/MediaSettingTable";
 import MediaSettingVideoTable from "../../Components/MediaSettingVideoTable/MediaSettingVideoTable";
-import { useGetAllAdsQuery, useGetAllVideosQuery } from "../../redux/Api/MediaSettingApi";
-import EditAddModal from "../../Components/EditAddModal";
 import { Link } from "react-router-dom";
 import { Input } from "antd";
 import { CiSearch } from "react-icons/ci";
 
 const MediaSettings = () => {
+  
 
-    /** all APIs */
-    const { data: getAllAds } = useGetAllAdsQuery();
-    const { data: getAllVideos } = useGetAllVideosQuery()
-
-
-
-    const [ads, setAds] = useState(true)
     const [openAddModal, setOpenAddModal] = useState(false)
     const [modalTitle, setModalTitle] = useState('')
-    // const [openCategoryModal, setOpenCategoryModal] = useState(false)
 
-    const handleAdsModal = () => {
-        setModalTitle('Add New Ads')
-        setAds(true)
-    }
-
-    const handleVideoModal = () => {
-        setModalTitle('Add New Video')
-        setAds(false)
-    }
-
+   
     return (
         <div className='rounded-md bg-white pb-5'>
             <div className='  my-2 pt-5'>
@@ -55,7 +36,7 @@ const MediaSettings = () => {
             </div>
 
 
-            <MediaSettingVideoTable getAllVideos={getAllVideos} />
+            <MediaSettingVideoTable  />
 
 
 

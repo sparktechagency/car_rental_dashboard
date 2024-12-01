@@ -2,19 +2,17 @@ import { Popconfirm, Table } from "antd";
 import { useState } from "react";
 import MediaSettingModal from "../MediaSettingModal/MediaSettingModal";
 import { AiOutlineDelete } from "react-icons/ai";
-import img from '../../assets/images/car4.png'
-import img2 from '../../assets/images/car5.png'
-import img3 from '../../assets/images/car6.png'
-const MediaSettingVideoTable = ({ getAllVideos }) => {
+import { useGetAllDestinationQuery } from "../../redux/Api/destinationApi";
+import { imageUrl } from "../../redux/Api/baseApi";
+
+
+const MediaSettingVideoTable = () => {
+    const { data: getAllDestination } = useGetAllDestinationQuery()
+
     const [openAddModal, setOpenAddModal] = useState(false)
-    const [modalTitle, setModalTitle] = useState('')
 
 
-    const handelEditVideo = () => {
-        setModalTitle('Edit')
-        setOpenAddModal(true)
-    }
-
+    
 
     const columns = [
         {
@@ -22,13 +20,13 @@ const MediaSettingVideoTable = ({ getAllVideos }) => {
             dataIndex: 'slNo',
             key: 'slNo',
         },
-        
+
         {
             title: 'Destination Image',
             dataIndex: 'image',
             key: 'image',
-            render : (_, record)=>(
-                <img src={record?.image}  className="w-20" alt="" />
+            render: (_, record) => (
+                <img src={record?.image} className="w-20" alt="" />
             )
         },
         {
@@ -37,7 +35,7 @@ const MediaSettingVideoTable = ({ getAllVideos }) => {
             key: 'destination',
 
         },
-       
+
 
         {
             title: 'Action',
@@ -47,7 +45,7 @@ const MediaSettingVideoTable = ({ getAllVideos }) => {
             render: (text, record) => (
                 <div className="flex items-center gap-2">
                     <Popconfirm
-                    title ="Are you sure to delete this Destination?"
+                        title="Are you sure to delete this Destination?"
                     >
 
                         <a href="#delete" className=" p-1 rounded-md hover:text-red-600"><AiOutlineDelete size={25} /></a>
@@ -58,29 +56,15 @@ const MediaSettingVideoTable = ({ getAllVideos }) => {
     ];
 
     // Columns data
-    const formattedTableData = [
-        {
-            slNo : '#11223',
-            image : img,
-            destination : 'Kent, Utah'
-        },
-        {
-            slNo : '#11223',
-            image : img2,
-            destination : 'Great Falls, Maryland'
-        },
-        {
-            slNo : '#11223',
-            image : img3,
-            destination : 'Lansing, Illinois'
-        },
-        {
-            slNo : '#11223',
-            image : img,
-            destination : 'Lafayette, California'
+    const formattedTableData = getAllDestination?.data?.destinations?.map((dest, i) => {
+        return {
+            key: dest?.id || i,
+            slNo: i+1,
+            image: `${imageUrl}${dest?.destination_image}`,
+            destination: dest?.name
         }
-    ]
-
+    })
+   
 
 
 
@@ -95,7 +79,7 @@ const MediaSettingVideoTable = ({ getAllVideos }) => {
                 pagination={false}
 
             />
-            <MediaSettingModal openAddModal={openAddModal} setOpenAddModal={setOpenAddModal}  />
+            <MediaSettingModal openAddModal={openAddModal} setOpenAddModal={setOpenAddModal} />
 
 
 
