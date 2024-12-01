@@ -189,10 +189,29 @@ const useApi = baseApi.injectEndpoints({
                 }
             },
             invalidatesTags : ['FAQ']
-        })
-       
+        }),
+
+       crateTrustSafety :  builder.mutation({
+        query : (data)=>{
+            return {
+                url :'/manage/add-trust-safety',
+                method : 'POST',
+                body : data
+            }
+        },
+        invalidatesTags : ['Trust']
+       }),
+       getTrustSafety : builder.query({
+        query : ()=>{
+            return  {
+                url :'/manage/get-trust-safety',
+                method : 'GET'
+            }
+        },
+        providesTags : ['Trust']
+       })
 
     })
 })
 
-export const { useTotalUserCountQuery, useGetUserGrowthQuery, usePlanSubscriberQuery, useGetAllCategoryQuery, useCreateCategoryMutation, useGetSingleSubscribePlanQuery, useApproveDeclineMemberRequestMutation , useGetAllNotificationQuery , useDeleteNotificationMutation, useGetAllUserQuery , useBlockUserMutation , useUpdateTermsConditionMutation  , useGetPrivacyPolicyQuery, useUpdatePrivacyPolicyMutation ,useDeleteCategoryMutation , useEditCategoryMutation , useGetTermsConditionsQuery , useGetFaqsQuery , useDeleteFaqMutation , useCreateFaqMutation} = useApi
+export const { useTotalUserCountQuery, useGetUserGrowthQuery, usePlanSubscriberQuery, useGetAllCategoryQuery, useCreateCategoryMutation, useGetSingleSubscribePlanQuery, useApproveDeclineMemberRequestMutation , useGetAllNotificationQuery , useDeleteNotificationMutation, useGetAllUserQuery , useBlockUserMutation , useUpdateTermsConditionMutation  , useGetPrivacyPolicyQuery, useUpdatePrivacyPolicyMutation ,useDeleteCategoryMutation , useEditCategoryMutation , useGetTermsConditionsQuery , useGetFaqsQuery , useDeleteFaqMutation , useCreateFaqMutation , useCrateTrustSafetyMutation , useGetTrustSafetyQuery} = useApi

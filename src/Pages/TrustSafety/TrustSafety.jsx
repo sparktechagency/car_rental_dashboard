@@ -2,21 +2,32 @@ import React, { useState, useRef, useMemo, useEffect } from 'react';
 import JoditEditor from 'jodit-react';
 import { Link } from 'react-router-dom';
 import { IoArrowBackSharp } from 'react-icons/io5';
+import { useCrateTrustSafetyMutation, useGetTrustSafetyQuery } from '../../redux/Api/dashboardApi';
+import { toast } from 'sonner';
 
 const TrustSafety = () => {
+    const {data : createTrustSafety} = useGetTrustSafetyQuery()
+    const [trustSafety] = useCrateTrustSafetyMutation()
     const editor = useRef(null);
     const [content, setContent] = useState('');
-    const [isLoading, seLoading] = useState(false)
     const handleTerms = () => {
-        console.log(content)
+        const data = {
+            description :  content
+        }
+        trustSafety(data).unwrap()
+        .then(res=>toast.success(res?.message))
+        .catch(error=>toast.error(error?.data?.message))
     }
     const config = {
         readonly: false,
         placeholder: 'Start typings...',
         style: {
-            height: 400,
+            height: 600,
         }
     }
+    useEffect(()=>{
+        setContent(createTrustSafety?.data?.description)
+    },[createTrustSafety?.data])
     return (
         <>
             <div className='start-center gap-2 mb-3 relative'>
@@ -36,7 +47,7 @@ const TrustSafety = () => {
                 />
             </div>
             <div className='text-center mt-3'>
-                <button onClick={handleTerms} className='px-8 py-2 rounded-sm  bg-black text-white' >Save & </button>
+                <button onClick={handleTerms} className='px-8 py-2 rounded-sm  bg-black text-white' >Save  </button>
             </div>
         </>
     )
