@@ -1,35 +1,29 @@
-import { Checkbox, Form, Input, Modal, Select, Spin, Upload } from "antd";
-import { RxCross2 } from "react-icons/rx";
-import { TbCopyCheck } from "react-icons/tb";
-import { PlusOutlined } from '@ant-design/icons';
+import {  Form, Input, Modal,Spin,Upload } from "antd";
+import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
 import { useState } from "react";
+import { useCreateDestinationMutation } from "../../redux/Api/destinationApi";
 import { toast } from "sonner";
-import { LoadingOutlined } from "@ant-design/icons";
 // eslint-disable-next-line react/prop-types
 const MediaSettingModal = ({ openAddModal, setOpenAddModal  }) => {
     const [fileList, setFileList] = useState([]);
-    const [isPrivate, setIsPrivate] = useState()
-    const [isActive, setIsActive] = useState()
-
+    const [addDestination , {isLoading} ] = useCreateDestinationMutation()
 
     const onFinish = (value) => {
-      
+      console.log(fileList);
+      const formData = new FormData();
+      formData.append('name' , value?.name)
+      formData.append("destination_image",fileList[0].originFileObj)
+      addDestination(formData).unwrap()
+      .then((payload) => {
+        toast.success(payload?.message)
+        setOpenAddModal(false)
+      })
+      .catch((error) => toast.error(error?.data?.message));
     }
 
 
 
-    //   Checkbox value
-    const onChange = (e) => {
-        setIsPrivate(e.target.checked);
-    };
-    const handleIsActive = (e) => {
-        setIsActive(e.target.checked);
-    }
-
-    const handleSelectItemChange = (value) => {
-        console.log(value);
-    }
-
+    
 
     // handle upload image 
     const handleUploadChange = ({ fileList: newFileList }) => {
@@ -60,7 +54,7 @@ const MediaSettingModal = ({ openAddModal, setOpenAddModal  }) => {
                         label={`Name`}
                         rules={[
                             {
-                                message: 'view Order is required',
+                                message: 'Destination name is required',
 
                             }
                         ]}>
@@ -89,8 +83,8 @@ const MediaSettingModal = ({ openAddModal, setOpenAddModal  }) => {
                     </Form.Item>
 
                     <div className='flex justify-center items-center gap-2'>
-                        <button className='flex items-center gap-1 py-2  bg-black  text-white font-semibold rounded-sm px-8'>
-                            {/* {isLoading  ? <Spin indicator={<LoadingOutlined style={{ fontSize: 24, color: '#ffffff' }} spin />} />  : <>save</>} */}
+                        <button disabled={isLoading} className='flex items-center gap-1 py-2  bg-black  text-white font-semibold rounded-sm px-8'>
+                            {isLoading  ? <Spin indicator={<LoadingOutlined style={{ fontSize: 24, color: '#ffffff' }} spin />} />  : <>save</>}
                         </button>
                     
                     </div>

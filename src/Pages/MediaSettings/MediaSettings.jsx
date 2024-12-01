@@ -37,15 +37,8 @@ const MediaSettings = () => {
 
 
             <MediaSettingVideoTable  />
-
-
-
-
-
-
             {/* Media setting Modal */}
             <MediaSettingModal openAddModal={openAddModal} setOpenAddModal={setOpenAddModal} modalTitle={modalTitle} />
-            {/* <EditAddModal openAddModal={openAddModal} setOpenAddModal={setOpenAddModal}  /> */}
         </div>
     );
 };
