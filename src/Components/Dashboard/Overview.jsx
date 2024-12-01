@@ -1,6 +1,6 @@
 
 import { Select } from 'antd';
-import React, { PureComponent, useState } from 'react';
+import React, {useState } from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { useGetHostUserGrowthQuery } from '../../redux/Api/DashboardHomeApi';
 
@@ -8,12 +8,11 @@ const Overview = () => {
     const chartData = []
     const [year, setYear] = useState('2024')
     const {data : getUserGrowth} =  useGetHostUserGrowthQuery({ role : 'USER' ,year : year});
-    console.log(getUserGrowth?.data?.monthlyRegistration);
+    
     /**user growth API */
     for (const key in getUserGrowth?.data?.monthlyRegistration) {
         chartData.push({name :key?.slice(0,3), uv : getUserGrowth?.data?.monthlyRegistration[key] })
         
-
     }
     
 

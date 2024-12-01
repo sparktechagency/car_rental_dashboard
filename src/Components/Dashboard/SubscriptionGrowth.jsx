@@ -1,79 +1,31 @@
 
 import { Select } from 'antd';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
-const data = [
-    {
-        name: 'Jan',
-        uv: 20,
-        mt: 10,
-    },
-    {
-        name: 'Feb',
-        uv: 30,
-        mt: 20,
-    },
-    {
-        name: 'Mar',
-        uv: 90,
-        mt: 30,
-    },
-    {
-        name: 'Apr',
-        uv: 100,
-        mt: 40,
-    },
-    {
-        name: 'May',
-        uv: 30,
-        mt: 50,
-    },
-    {
-        name: 'Jun',
-        uv: 10,
-        mt: 60,
-    },
-    {
-        name: 'Aug',
-        uv: 15,
-        mt: 70,
-    },
-    {
-        name: 'Sep',
-        uv: 20,
-        mt: 80,
-    },
-    {
-        name: 'Nov',
-        uv: 30,
-        mt: 90,
-    },
-    {
-        name: 'Dec',
-        uv: 10,
-        mt: 100,
-    },
-];
-const items = [
-    {
-        label: 2023,
-        key: "2023",
-    },
-    {
-        label: 2024,
-        key: "2024",
-    },
-    {
-        label: 2025,
-        key: "2025",
-    },
-    {
-        label: 2026,
-        key: "2026",
-    },
-];
+import { useGetHostUserGrowthQuery } from '../../redux/Api/DashboardHomeApi';
+import { useState } from 'react';
+
+
 const SubscriptionGrowth = () => {
+    const data = []
+    const [year, setYear] = useState('2024')
+    const { data: getUserGrowth } = useGetHostUserGrowthQuery({ role: 'HOST', year: year });
+
+    const items = getUserGrowth?.data?.total_years?.map((year) => {
+        return {
+            label: year,
+            value: year
+        }
+    })
+     /**user growth API */
+     for (const key in getUserGrowth?.data?.monthlyRegistration) {
+        data.push({name :key?.slice(0,3), uv : getUserGrowth?.data?.monthlyRegistration[key] })
+        
+    }
+    
+
+
     const handleChange = (value) => {
-        console.log(`selected ${value}`);
+        setYear(value)
     };
     return (
         <>
