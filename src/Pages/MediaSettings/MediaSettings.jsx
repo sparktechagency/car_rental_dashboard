@@ -8,8 +8,7 @@ import { Input } from "antd";
 import { CiSearch } from "react-icons/ci";
 
 const MediaSettings = () => {
-  
-
+    const [search, setSearch] = useState('')
     const [openAddModal, setOpenAddModal] = useState(false)
     const [modalTitle, setModalTitle] = useState('')
 
@@ -25,7 +24,7 @@ const MediaSettings = () => {
                     </div>
 
                     <div className="flex items-center  gap-2" >
-                        <Input className="h-10 min-w-[200px]" prefix={<CiSearch className='text-2xl' />} placeholder="Search here..."/>
+                        <Input className="h-10 min-w-[200px]" onChange={(e)=> setSearch(e.target.value)} prefix={<CiSearch className='text-2xl' />} placeholder="Search here..."/>
                         <button onClick={() => setOpenAddModal(true)} className='bg-black px-4 rounded-sm start-center gap-1 py-2 text-white flex justify-center items-center whitespace-nowrap mr-2'>
                             <FaPlus />
                             Add Destination
@@ -36,7 +35,7 @@ const MediaSettings = () => {
             </div>
 
 
-            <MediaSettingVideoTable  />
+            <MediaSettingVideoTable search={search}  />
             {/* Media setting Modal */}
             <MediaSettingModal openAddModal={openAddModal} setOpenAddModal={setOpenAddModal} modalTitle={modalTitle} />
         </div>

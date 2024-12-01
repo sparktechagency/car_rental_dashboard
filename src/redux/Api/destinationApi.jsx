@@ -3,10 +3,10 @@ import { baseApi } from "./baseApi";
 const destinationApi = baseApi.injectEndpoints({
     endpoints : (builder) =>({
         getAllDestination : builder.query({
-            query : ({page})=>{
-                console.log(page);
+            query : ({page , search})=>{
+                console.log(search);
                 return {
-                    url : `/dashboard/get-all-destination?page=${page}`,
+                    url : `/dashboard/get-all-destination?searchTerm=${search}&page=${page}&`,
                     method :  'GET'
                 }
             },

@@ -7,9 +7,9 @@ import { imageUrl } from "../../redux/Api/baseApi";
 import { toast } from "sonner";
 
 
-const MediaSettingVideoTable = () => {
+const MediaSettingVideoTable = ({search}) => {
     const [page, setPage] = useState(1)
-    const { data: getAllDestination } = useGetAllDestinationQuery({ page: page });
+    const { data: getAllDestination } = useGetAllDestinationQuery({ page: page , search : search  });
     const [deleteDestination] = useDeleteDestinationMutation()
 
     const [openAddModal, setOpenAddModal] = useState(false)

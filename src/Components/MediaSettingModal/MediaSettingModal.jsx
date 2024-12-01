@@ -5,6 +5,7 @@ import { useCreateDestinationMutation } from "../../redux/Api/destinationApi";
 import { toast } from "sonner";
 // eslint-disable-next-line react/prop-types
 const MediaSettingModal = ({ openAddModal, setOpenAddModal  }) => {
+    const [form] = Form.useForm()
     const [fileList, setFileList] = useState([]);
     const [addDestination , {isLoading} ] = useCreateDestinationMutation()
 
@@ -16,6 +17,7 @@ const MediaSettingModal = ({ openAddModal, setOpenAddModal  }) => {
       addDestination(formData).unwrap()
       .then((payload) => {
         toast.success(payload?.message)
+        form.resetFields()
         setOpenAddModal(false)
       })
       .catch((error) => toast.error(error?.data?.message));
@@ -40,6 +42,7 @@ const MediaSettingModal = ({ openAddModal, setOpenAddModal  }) => {
             open={openAddModal}
             centered
             footer={false}
+            
             onCancel={() => setOpenAddModal(false)}
         >
             <div>
@@ -47,6 +50,7 @@ const MediaSettingModal = ({ openAddModal, setOpenAddModal  }) => {
                 <Form className=''
                     layout='vertical'
                     onFinish={onFinish}
+                    form={form}
                 >
 
 
