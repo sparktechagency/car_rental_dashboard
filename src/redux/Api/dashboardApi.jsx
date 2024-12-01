@@ -229,7 +229,26 @@ const useApi = baseApi.injectEndpoints({
             },
             invalidatesTags: ['guide']
         }),
+        getTipsTricks: builder.query({
+            query: () => {
+                return {
+                    url: '/manage/get-tips-tricks',
+                    method: 'GET'
+                }
+            },
+            providesTags: ['tips']
+        }),
+        createTipsTricks: builder.mutation({
+            query: (data) => {
+                return {
+                    url: '/manage/add-tips-tricks',
+                    method: 'POST',
+                    body: data
+                }
+            },
+            invalidatesTags: ['tips']
+        }),
     })
 })
 
-export const { useTotalUserCountQuery, useGetUserGrowthQuery, usePlanSubscriberQuery, useGetAllCategoryQuery, useCreateCategoryMutation, useGetSingleSubscribePlanQuery, useApproveDeclineMemberRequestMutation, useGetAllNotificationQuery, useDeleteNotificationMutation, useGetAllUserQuery, useBlockUserMutation, useUpdateTermsConditionMutation, useGetPrivacyPolicyQuery, useUpdatePrivacyPolicyMutation, useDeleteCategoryMutation, useEditCategoryMutation, useGetTermsConditionsQuery, useGetFaqsQuery, useDeleteFaqMutation, useCreateFaqMutation, useCrateTrustSafetyMutation, useGetTrustSafetyQuery, useGetHostingGuideQuery , useCreateHostingGuideMutation } = useApi
+export const { useTotalUserCountQuery, useGetUserGrowthQuery, usePlanSubscriberQuery, useGetAllCategoryQuery, useCreateCategoryMutation, useGetSingleSubscribePlanQuery, useApproveDeclineMemberRequestMutation, useGetAllNotificationQuery, useDeleteNotificationMutation, useGetAllUserQuery, useBlockUserMutation, useUpdateTermsConditionMutation, useGetPrivacyPolicyQuery, useUpdatePrivacyPolicyMutation, useDeleteCategoryMutation, useEditCategoryMutation, useGetTermsConditionsQuery, useGetFaqsQuery, useDeleteFaqMutation, useCreateFaqMutation, useCrateTrustSafetyMutation, useGetTrustSafetyQuery, useGetHostingGuideQuery , useCreateHostingGuideMutation, useCreateTipsTricksMutation, useGetTipsTricksQuery } = useApi
