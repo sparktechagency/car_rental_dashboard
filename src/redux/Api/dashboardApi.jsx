@@ -45,22 +45,22 @@ const useApi = baseApi.injectEndpoints({
             },
             invalidatesTags: ['allCategory']
         }),
-        deleteCategory : builder.mutation({
-            query : (id)=>{
+        deleteCategory: builder.mutation({
+            query: (id) => {
                 return {
-                    url : `/category/delete/${id}`,
-                    method : 'DELETE'
+                    url: `/category/delete/${id}`,
+                    method: 'DELETE'
                 }
             },
             invalidatesTags: ['allCategory']
         }),
-        editCategory : builder.mutation({
-            query : ({formData, id})=>{
-                console.log(formData , id);
+        editCategory: builder.mutation({
+            query: ({ formData, id }) => {
+                console.log(formData, id);
                 return {
-                    url : `/category/edit/${id}`,
-                    method : 'PATCH',
-                    body : formData
+                    url: `/category/edit/${id}`,
+                    method: 'PATCH',
+                    body: formData
                 }
             },
             invalidatesTags: ['allCategory']
@@ -90,128 +90,146 @@ const useApi = baseApi.injectEndpoints({
                     method: 'GET'
                 }
             },
-            providesTags : ['notification']
+            providesTags: ['notification']
         }),
         /** Delete Notification */
-        deleteNotification : builder.mutation({
-            query : (id)=>{
+        deleteNotification: builder.mutation({
+            query: (id) => {
                 return {
-                    url : `/notification/delete/${id}`,
-                    method : 'DELETE'
+                    url: `/notification/delete/${id}`,
+                    method: 'DELETE'
                 }
             },
-            invalidatesTags :['notification']
+            invalidatesTags: ['notification']
         }),
         /** Get all user */
-        getAllUser : builder.query({
-            query : ({search})=>{
+        getAllUser: builder.query({
+            query: ({ search }) => {
                 return {
-                    url : `/auth/users?searchTerm=${search}`,
-                    method : 'GET'
+                    url: `/auth/users?searchTerm=${search}`,
+                    method: 'GET'
                 }
             },
-            providesTags : ['blockUser']
+            providesTags: ['blockUser']
         }),
         /** Block user */
-        blockUser : builder.mutation({
-            query : (id)=>{
+        blockUser: builder.mutation({
+            query: (id) => {
                 return {
-                    url : `/auth/user-block-unblock/${id}`,
-                    method : 'PATCH',
-                
+                    url: `/auth/user-block-unblock/${id}`,
+                    method: 'PATCH',
+
                 }
             },
-            invalidatesTags : ['blockUser']
+            invalidatesTags: ['blockUser']
         }),
         /** Setting APIs */
-        getTermsConditions : builder.query({
-            query : ()=>{
+        getTermsConditions: builder.query({
+            query: () => {
                 return {
-                    url : '/manage/get-terms-conditions',
-                    method : 'GET'
+                    url: '/manage/get-terms-conditions',
+                    method: 'GET'
                 }
             },
-            providesTags : ['terms']
+            providesTags: ['terms']
         }),
-        updateTermsCondition : builder.mutation({
-            query : (data)=>{
+        updateTermsCondition: builder.mutation({
+            query: (data) => {
                 return {
-                    url : '/manage/add-terms-conditions',
-                    method : "POST",
-                    body :  data
+                    url: '/manage/add-terms-conditions',
+                    method: "POST",
+                    body: data
                 }
-            },invalidatesTags :['terms']
+            }, invalidatesTags: ['terms']
         }),
-        getPrivacyPolicy :  builder.query({
-            query : ()=>{
+        getPrivacyPolicy: builder.query({
+            query: () => {
                 return {
-                    url : '/manage/get-privacy-policy',
-                    method : 'GET'
+                    url: '/manage/get-privacy-policy',
+                    method: 'GET'
                 }
             },
 
-            providesTags : ['privacy']
+            providesTags: ['privacy']
         }),
-        updatePrivacyPolicy : builder.mutation({
-            query :  (data)=>{
+        updatePrivacyPolicy: builder.mutation({
+            query: (data) => {
                 return {
-                    url : '/manage/add-privacy-policy',
-                    method : 'POST',
-                    body : data
+                    url: '/manage/add-privacy-policy',
+                    method: 'POST',
+                    body: data
                 }
-            },invalidatesTags:['privacy']
-        }),
-       
-        getFaqs : builder.query({
-            query : ()=>{
-                return {
-                    url : '/manage/get-faq',
-                    method : "GET"
-                }
-            },
-            providesTags : ['FAQ']
-        }),
-        deleteFaq : builder.mutation({
-            query : (id)=>{
-                return { 
-                    url : `/manage/delete-faq?id=${id}`,
-                    method : 'DELETE',
-                }
-            },
-            invalidatesTags : ['FAQ']
-        }),
-        createFaq : builder.mutation({
-            query : (data) =>{
-                return {
-                    url : '/manage/add-faq',
-                    method  : 'POST',
-                    body : data
-                }
-            },
-            invalidatesTags : ['FAQ']
+            }, invalidatesTags: ['privacy']
         }),
 
-       crateTrustSafety :  builder.mutation({
-        query : (data)=>{
-            return {
-                url :'/manage/add-trust-safety',
-                method : 'POST',
-                body : data
-            }
-        },
-        invalidatesTags : ['Trust']
-       }),
-       getTrustSafety : builder.query({
-        query : ()=>{
-            return  {
-                url :'/manage/get-trust-safety',
-                method : 'GET'
-            }
-        },
-        providesTags : ['Trust']
-       })
+        getFaqs: builder.query({
+            query: () => {
+                return {
+                    url: '/manage/get-faq',
+                    method: "GET"
+                }
+            },
+            providesTags: ['FAQ']
+        }),
+        deleteFaq: builder.mutation({
+            query: (id) => {
+                return {
+                    url: `/manage/delete-faq?id=${id}`,
+                    method: 'DELETE',
+                }
+            },
+            invalidatesTags: ['FAQ']
+        }),
+        createFaq: builder.mutation({
+            query: (data) => {
+                return {
+                    url: '/manage/add-faq',
+                    method: 'POST',
+                    body: data
+                }
+            },
+            invalidatesTags: ['FAQ']
+        }),
 
+        crateTrustSafety: builder.mutation({
+            query: (data) => {
+                return {
+                    url: '/manage/add-trust-safety',
+                    method: 'POST',
+                    body: data
+                }
+            },
+            invalidatesTags: ['Trust']
+        }),
+        getTrustSafety: builder.query({
+            query: () => {
+                return {
+                    url: '/manage/get-trust-safety',
+                    method: 'GET'
+                }
+            },
+            providesTags: ['Trust']
+        }),
+        getHostingGuide: builder.query({
+            query: () => {
+                return {
+                    url: '/manage/get-host-guidelines',
+                    method: 'GET'
+                }
+            },
+            providesTags: ['guide']
+        }),
+        createHostingGuide: builder.mutation({
+            query: (data) => {
+                return {
+                    url: '/manage/add-host-guidelines',
+                    method: 'POST',
+                    body: data
+                }
+            },
+            invalidatesTags: ['guide']
+        }),
     })
 })
 
-export const { useTotalUserCountQuery, useGetUserGrowthQuery, usePlanSubscriberQuery, useGetAllCategoryQuery, useCreateCategoryMutation, useGetSingleSubscribePlanQuery, useApproveDeclineMemberRequestMutation , useGetAllNotificationQuery , useDeleteNotificationMutation, useGetAllUserQuery , useBlockUserMutation , useUpdateTermsConditionMutation  , useGetPrivacyPolicyQuery, useUpdatePrivacyPolicyMutation ,useDeleteCategoryMutation , useEditCategoryMutation , useGetTermsConditionsQuery , useGetFaqsQuery , useDeleteFaqMutation , useCreateFaqMutation , useCrateTrustSafetyMutation , useGetTrustSafetyQuery} = useApi
+export const { useTotalUserCountQuery, useGetUserGrowthQuery, usePlanSubscriberQuery, useGetAllCategoryQuery, useCreateCategoryMutation, useGetSingleSubscribePlanQuery, useApproveDeclineMemberRequestMutation, useGetAllNotificationQuery, useDeleteNotificationMutation, useGetAllUserQuery, useBlockUserMutation, useUpdateTermsConditionMutation, useGetPrivacyPolicyQuery, useUpdatePrivacyPolicyMutation, useDeleteCategoryMutation, useEditCategoryMutation, useGetTermsConditionsQuery, useGetFaqsQuery, useDeleteFaqMutation, useCreateFaqMutation, useCrateTrustSafetyMutation, useGetTrustSafetyQuery, useGetHostingGuideQuery , useCreateHostingGuideMutation } = useApi
