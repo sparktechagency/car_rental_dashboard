@@ -2,60 +2,20 @@
 import { Select } from 'antd';
 import React, { PureComponent, useState } from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { useGetHostUserGrowthQuery } from '../../redux/Api/DashboardHomeApi';
 
 const Overview = () => {
+    const chartData = []
     const [year, setYear] = useState('2024')
+    const {data : getUserGrowth} =  useGetHostUserGrowthQuery({ role : 'USER' ,year : year});
+    console.log(getUserGrowth?.data?.monthlyRegistration);
     /**user growth API */
-    const chartData = [
-        {
-            name: "Jan",
-            uv: 7
-        },
-        {
-            name: "Feb",
-            uv: 6
-        },
-        {
-            name: "Mar",
-            uv: 11
-        },
-        {
-            name: "Apr",
-            uv: 10
-        },
-        {
-            name: "May",
-            uv: 11
-        },
-        {
-            name: "Jun",
-            uv: 5
-        },
-        {
-            name: "July",
-            uv: 5
-        },
-        {
-            name: "Aug",
-            uv: 9
-        },
-        {
-            name: "Sep",
-            uv: 5
-        },
-        {
-            name: "Oct",
-            uv: 8
-        },
-        {
-            name: "Nov",
-            uv: 5
-        },
-        {
-            name: "Dec",
-            uv: 6
-        }
-    ]
+    for (const key in getUserGrowth?.data?.monthlyRegistration) {
+        chartData.push({name :key?.slice(0,3), uv : getUserGrowth?.data?.monthlyRegistration[key] })
+        
+
+    }
+    
 
 
 
@@ -63,25 +23,16 @@ const Overview = () => {
     const handleChange = (value) => {
         setYear(value);
     };
-    const items = [
 
-        {
-            label: 2024,
-            value: "2024",
-        },
-        {
-            label: 2025,
-            value: "2025",
-        },
-        {
-            label: 2026,
-            value: "2026",
-        },
-        {
-            label: 2027,
-            value: "2027",
-        },
-    ];
+
+    const items = getUserGrowth?.data?.total_years?.map((year)=>{
+        return {
+            label : year,
+            value : year
+        }
+    })
+
+    
     return (
         <>
             <div className='between-center'>
