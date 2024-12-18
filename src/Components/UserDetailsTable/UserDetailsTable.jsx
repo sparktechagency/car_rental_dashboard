@@ -6,6 +6,7 @@ import { toast } from "sonner";
 const UserDetailsTable = ({ search }) => {
     const { data: getAllUser, isLoading } = useGetAllUserQuery({ search })
     const [blockUser] = useBlockUserMutation()
+    
     const columns = [
         {
             title: 'S. No.',

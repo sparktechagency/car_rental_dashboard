@@ -10,6 +10,7 @@ const useApi = baseApi.injectEndpoints({
                 }
             }
         }),
+        
         getUserGrowth: builder.query({
             query: (year) => {
                 return {
@@ -251,4 +252,4 @@ const useApi = baseApi.injectEndpoints({
     })
 })
 
-export const { useTotalUserCountQuery, useGetUserGrowthQuery, usePlanSubscriberQuery, useGetAllCategoryQuery, useCreateCategoryMutation, useGetSingleSubscribePlanQuery, useApproveDeclineMemberRequestMutation, useGetAllNotificationQuery, useDeleteNotificationMutation, useGetAllUserQuery, useBlockUserMutation, useUpdateTermsConditionMutation, useGetPrivacyPolicyQuery, useUpdatePrivacyPolicyMutation, useDeleteCategoryMutation, useEditCategoryMutation, useGetTermsConditionsQuery, useGetFaqsQuery, useDeleteFaqMutation, useCreateFaqMutation, useCrateTrustSafetyMutation, useGetTrustSafetyQuery, useGetHostingGuideQuery , useCreateHostingGuideMutation, useCreateTipsTricksMutation, useGetTipsTricksQuery } = useApi
+export const { useTotalUserCountQuery, useGetUserGrowthQuery, usePlanSubscriberQuery, useGetAllCategoryQuery, useCreateCategoryMutation, useGetSingleSubscribePlanQuery, useApproveDeclineMemberRequestMutation, useGetAllNotificationQuery, useDeleteNotificationMutation, useGetAllUserQuery, useBlockUserMutation, useUpdateTermsConditionMutation, useGetPrivacyPolicyQuery, useUpdatePrivacyPolicyMutation, useDeleteCategoryMutation, useEditCategoryMutation, useGetTermsConditionsQuery, useGetFaqsQuery, useDeleteFaqMutation, useCreateFaqMutation, useCrateTrustSafetyMutation, useGetTrustSafetyQuery, useGetHostingGuideQuery , useCreateHostingGuideMutation, useCreateTipsTricksMutation, useGetTipsTricksQuery  } = useApi

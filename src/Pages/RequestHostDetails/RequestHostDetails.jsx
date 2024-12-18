@@ -7,7 +7,10 @@ import { GrLocation } from 'react-icons/gr'
 import { CiImageOn } from 'react-icons/ci'
 import { MdOutlineDirectionsCar, MdOutlineDoorBack } from 'react-icons/md'
 import { RiBriefcase3Line } from 'react-icons/ri'
+import { useGetSingleHostQuery } from '../../redux/Api/totalHost'
 const RequestHostDetails = () => {
+
+    const {data, isLoading, isError} = useGetSingleHostQuery();
     return (
         <div>
             <p> <Link to={-1}><ArrowLeftOutlined /></Link> Host Details</p>

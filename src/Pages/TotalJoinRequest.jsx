@@ -1,86 +1,70 @@
-import React from 'react'
-import JoinRequest from '../Components/Dashboard/JoinRequest'
-import { Link } from 'react-router-dom'
-import { IoArrowBackSharp } from 'react-icons/io5'
-import user from '../assets/images/use4.png'
-import car1 from '../assets/images/car.png'
-import car2 from '../assets/images/car2.png'
-import car3 from '../assets/images/car3.png'
-import { Pagination } from 'antd'
+import React from 'react';
+import JoinRequest from '../Components/Dashboard/JoinRequest';
+import { Link } from 'react-router-dom';
+import { IoArrowBackSharp } from 'react-icons/io5';
+import { Pagination } from 'antd';
+import { useGetAllNewHostQuery } from '../redux/Api/hostReq';
 
 const TotalJoinRequest = () => {
-    const totalItems = 1239; // Total number of items
-    const pageSize = 11;
-    const tableData = [
-        {
-            key: 1,
-            id: 1,
-            name: 'dindiniya',
-            img: user,
-            contact: '08 +123 456',
-            email: 'bockelboy@att.com',
-            location: 'Kent, Utha',
-            car: 'AIM Mychro',
-            carLocation: 'United State',
-            carImg: car1
+  const { data, isLoading, isError } = useGetAllNewHostQuery();
 
-        },
-        {
-            key: 2,
-            id: 2,
-            name: 'dindiniya',
-            img: user,
-            contact: '08 +123 456',
-            email: 'bockelboy@att.com',
-            location: 'Kent, Utha',
-            car: 'AIM Mychro',
-            carLocation: 'United State',
-            carImg: car2
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
 
-        },
-        {
-            key: 3,
-            id: 3,
-            name: 'dindiniya',
-            img: user,
-            contact: '08 +123 456',
-            email: 'bockelboy@att.com',
-            location: 'Kent, Utha',
-            car: 'AIM Mychro',
-            carLocation: 'United State',
-            carImg: car3
+  if (isError || !data?.data?.allAddCarReq) {
+    return <div>Error loading data.</div>;
+  }
 
-        }
-    ]
+  const allRequests = data.data.allAddCarReq;
+  const totalItems = data.data.meta.total;
+  const pageSize = data.data.meta.limit;
 
-    return (
-        <div className=' bg-white '>
-            <div className='between-center  my-2 pt-5'>
-                <div className='start-center  mb-3 '>
-                    <Link to={-1} className=' py-1 px-2 rounded-md start-center gap-1'><IoArrowBackSharp /></Link>
-                    <p className='text-xl'>New Host Request</p>
-                </div>
-                {/* <Input className='max-w-[250px] h-10' prefix={<CiSearch className='text-2xl' />} placeholder="Search" /> */}
-            </div>
-            <JoinRequest tableData={tableData} pagination={false} />
-            <div className='mt-10 pb-5' style={{ display: 'flex', alignItems: 'center', justifyContent:'center' ,  gap: '10px' }}>
-                {/* Displaying total items info */}
-                <span style={{ color: '#0044B4' }}>
-                    Showing 1-{pageSize} out of {totalItems}
-                </span>
-                {/* Ant Design Pagination component */}
-                <Pagination
-                    total={totalItems}
-                    pageSize={pageSize}
-                    defaultCurrent={1}
-                    showSizeChanger={false}
-                    showQuickJumper={false}
-                    hideOnSinglePage
-                    style={{ display: 'flex', alignItems: 'center' }}
-                />
-            </div>
+  // Map API data to tableData structure
+  const tableData = allRequests.map((request, index) => ({
+    key: index + 1,
+    id: request._id,
+    name: request.user.name,
+    img: request.user.profile_image, // User profile image
+    contact: request.user.phone_number,
+    email: request.user.email,
+    location: request.carAddress, // Car location from API
+    car: `${request.make} ${request.model}`, // Combine car make and model
+    carLocation: request.destination, // Car destination
+    carImg: request.car_image[0], // Use first car image
+    status: request.status, // Status (pending, approved, etc.)
+  }));
+
+  return (
+    <div className="bg-white">
+      <div className="between-center my-2 pt-5">
+        <div className="start-center mb-3">
+          <Link to={-1} className="py-1 px-2 rounded-md start-center gap-1">
+            <IoArrowBackSharp />
+          </Link>
+          <p className="text-xl">New Host Request</p>
         </div>
-    )
-}
+      </div>
+      <JoinRequest tableData={tableData} pagination={false} />
+      <div
+        className="mt-10 pb-5"
+        style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px' }}
+      >
+        <span style={{ color: '#0044B4' }}>
+          Showing 1-{pageSize} out of {totalItems}
+        </span>
+        <Pagination
+          total={totalItems}
+          pageSize={pageSize}
+          defaultCurrent={1}
+          showSizeChanger={false}
+          showQuickJumper={false}
+          hideOnSinglePage
+          style={{ display: 'flex', alignItems: 'center' }}
+        />
+      </div>
+    </div>
+  );
+};
 
-export default TotalJoinRequest
+export default TotalJoinRequest;

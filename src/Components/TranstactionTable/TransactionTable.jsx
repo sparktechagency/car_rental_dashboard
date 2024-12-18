@@ -1,185 +1,140 @@
 import React, { useState } from 'react';
-import { Modal, Table } from 'antd';
+import { Table } from 'antd';
 import user1 from '../../assets/images/user01.png';
 import user2 from '../../assets/images/user02.png';
 import user3 from '../../assets/images/user03.png';
-
-
-const data = [
-  {
-    key: '#12333',
-    name: 'John Brown',
-    rentContact: '08+ 123 456 789',
-    hostName: "Md. Nazrul ",
-    hostImage: user1,
-    hostContact: '08+ 123 456 789',
-    carName: "Volkswagen Beetle",
-    price: "$120.00",
-    status: "payable",
-    location: "Great Falls"
-  },
-  {
-    key: '#12333',
-    name: 'John Brown',
-    rentContact: '08+ 123 456 789',
-    hostName: "Md. Nazrul ",
-    hostImage: user2,
-    hostContact: '08+ 123 456 789',
-    carName: "Volkswagen Beetle",
-    price: "$120.00",
-    status: "inProgress",
-    location: "Great Falls"
-  },
-  {
-    key: '#12333',
-    name: 'John Brown',
-    rentContact: '08+ 123 456 789',
-    hostName: "Md. Nazrul ",
-    hostImage: user3,
-    hostContact: '08+ 123 456 789',
-    carName: "Volkswagen Beetle",
-    price: "$120.00",
-    status: "orderStart",
-    location: "Great Falls"
-  },
-  {
-    key: '#12333',
-    name: 'John Brown',
-    rentContact: '08+ 123 456 789',
-    hostName: "Md. Nazrul ",
-    hostImage: user1,
-    hostContact: '08+ 123 456 789',
-    carName: "Volkswagen Beetle",
-    price: "$120.00",
-    status: "inProgress",
-    location: "Great Falls"
-  },
-
-
-
-];
+import { useGetAllTransactionQuery } from '../../redux/Api/transactionApi';
 
 const TransactionTable = ({ pagination }) => {
-  const [openModal, setOpenModal] = useState(false)
+  const { data, isLoading, isError } = useGetAllTransactionQuery();
+  const [openModal, setOpenModal] = useState(false);
 
+  if (isLoading) return <p>Loading...</p>;
+  if (isError) return <p>Error loading transactions</p>;
 
+  
+  const transactions = data?.data?.result || [];
 
   const columns = [
     {
       title: 'S no',
       dataIndex: 'key',
       key: 'key',
-      className: "font-lora",
-      rowScope: 'row',
+      render: (_, __, index) => index + 1, 
     },
     {
       title: 'Renter Name',
-      dataIndex: 'name',
-      className: "font-lora",
-      key: 'name',
-      render: (text, record) => (
+      dataIndex: 'user',
+      key: 'renterName',
+      render: (user) => (
         <div style={{ display: 'flex', alignItems: 'center' }}>
           <img src={user1} alt="user" style={{ width: 30, height: 30, marginRight: 8 }} />
           <div>
-            <p className='text-[18px]'>{text}</p>
-            <p className='text-sm'>{record?.rentContact}</p>
+            <p className="text-[18px]">{user?.name}</p>
+            <p className="text-sm">{user?.phone_number}</p>
           </div>
         </div>
       ),
     },
     {
-      className: "font-lora",
       title: 'Host Name',
-      dataIndex: 'hostName',
+      dataIndex: 'host',
       key: 'hostName',
-      render: (text, record) => (
+      render: (host) => (
         <div style={{ display: 'flex', alignItems: 'center' }}>
-          <img src={user2} alt="user" style={{ width: 30, height: 30, marginRight: 8 }} />
+          <img src={user2} alt="host" style={{ width: 30, height: 30, marginRight: 8 }} />
           <div>
-            <p className='text-[18px]'>{text}</p>
-            <p className='text-sm'>{record?.hostContact}</p>
+            <p className="text-[18px]">{host?.name}</p>
+            <p className="text-sm">{host?.phone_number}</p>
           </div>
         </div>
       ),
     },
     {
-      title: 'Price',
-      dataIndex: 'price',
-      key: 'price',
-    },
-    {
-      title: 'Car Name',
-      dataIndex: 'carName',
-      className: "font-lora",
-      key: 'carName',
+      title: 'Id',
+      dataIndex: 'payment_intent_id',
+      key: 'payment_intent_id',
+      render: (payment_intent_id) => `${payment_intent_id}`,
     },
 
     {
+      title: 'Price',
+      dataIndex: 'amount',
+      key: 'price',
+      render: (amount) => `$${amount}`,
+    },
+
+    {
+      title: 'Car Name',
+      dataIndex: 'car',
+      key: 'carName',
+      render: (car) => `${car?.make} ${car?.model}`,
+    },
+    {
       title: 'Location',
-      dataIndex: 'location',
-      className: "font-lora",
+      dataIndex: 'car',
       key: 'location',
+      render: (car) => car?.carAddress,
     },
     {
-      title: 'Status',
-      className: "font-lora",
-      dataIndex: 'status',
-      key: 'status',
-      render: (_, record) => {
-        return (
-          <div>
-            {
-              record?.status === "payable" ? <button onClick={() => setOpenModal(true)} className="bg-[#34C759] text-white px-8 py-2 rounded-md">
-                Pay Now
-              </button> : record?.status === "orderStart" ? <button className="bg-[#007AFF] text-white px-5 py-2 rounded-md">
-                Order Start
-              </button> : <button className="bg-[#262626] text-white px-6 py-2 rounded-md">
-                In Progress
-              </button>
-            }
-          </div>
-        )
-      },
-    },
-    {
-      title: 'View Received',
-      dataIndex: 'viewReceived',
-      className: "font-lora",
-      key: 'viewReceived',
-      render: (_, record) => {
-        const handleRedirect = () => {
-          // Open the Stripe payment receipt link in a new tab
-          window.open(
-            'https://pay.stripe.com/receipts/payment/CAcaFwoVYWNjdF8xTDBrM3BCWGIyb01Td29PKOLv4LkGMgZBYNICwC86LBZilN4A5IJRSFluwiDBhsMwFDgozl3SAWuYER3ojK1OZ68q0jiKKs9b9WI7',
-            '_blank'
-          );
-        };
-        return (
-          <div>
-            <button onClick={handleRedirect} className="bg-[#262626] text-white px-3 py-2 rounded-md">
-              View Received
+      title: "Status",
+      key: "status",
+      dataIndex: "status",
+      render: (status) => {
+        if (status === "payable") {
+          return (
+            <button
+              onClick={() => setOpenModal(true)}
+              className="bg-[#34C759] text-white px-8 py-2 rounded-md"
+            >
+              Pay Now
             </button>
-          </div>
-        )
+          );
+        } else if (status === "orderStart") {
+          return (
+            <button className="bg-[#007AFF] text-white px-5 py-2 rounded-md">
+              Order Start
+            </button>
+          );
+        } else {
+          return (
+            <button className="bg-[#262626] text-white px-6 py-2 rounded-md">
+              In Progress
+            </button>
+          );
+        }
       },
+    },
+    {
+      title: 'View Receipt',
+      dataIndex: 'receipt_url',
+      key: 'viewReceipt',
+      render: (url) =>
+        url ? (
+          <a
+            href={url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bg-[#262626] text-white px-6 py-2 rounded-md hover:text-white"
+          >
+            View Receipt
+          </a>
+        ) : (
+          <span className="text-gray-500">No Receipt</span>
+        ),
     },
   ];
 
   return (
-    <div className='pb-10'>
-      <Table columns={columns} dataSource={data} pagination={pagination} className="custom-pagination py-10 bg-white" />
-      <Modal centered footer={false} open={openModal} onCancel={() => setOpenModal(false)}  >
-        <div className='mt-4 font-lora space-y-2 ml-5'>
-          <p className='text-xl'><span className='font-semibold'>Account Number : </span> 9876543210</p>
-          <p className='text-xl'><span className='font-semibold'>Routing Number:</span> 123456789</p>
-          <p className='text-xl'><span className='font-semibold'>Email : </span> saad@gmail.com</p>
-          <div className='text-center'>
-            <button className='bg-black text-white px-4 py-2  rounded-md mt-2' onClick={() => setOpenModal(false)} >Confirm Pay</button>
-          </div>
-        </div>
-      </Modal>
+    <div>
+      <Table
+        dataSource={transactions}
+        columns={columns}
+        pagination={pagination}
+        rowKey={(record) => record._id} 
+      />
     </div>
-  )
+  );
 };
 
 export default TransactionTable;

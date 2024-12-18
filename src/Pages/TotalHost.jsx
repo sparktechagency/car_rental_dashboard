@@ -1,117 +1,136 @@
-import React from 'react';
-import { Table, Avatar, Space, Input } from 'antd';
-import { EyeOutlined, StopOutlined } from '@ant-design/icons';
-import { Link } from 'react-router-dom';
-import { CiSearch } from 'react-icons/ci';
-import { BsArrowLeftShort } from 'react-icons/bs';
-import img1 from '../assets/images/use4.png'
-import img2 from '../assets/images/user02.png'
-// import img3 from '../assets/images/use03.png'
+import React, { useState } from "react";
+import { Table, Space, Input, Pagination } from "antd";
+import { EyeOutlined, StopOutlined } from "@ant-design/icons";
+import { Link } from "react-router-dom";
+import { CiSearch } from "react-icons/ci";
+import { BsArrowLeftShort } from "react-icons/bs";
+import { useGetAllTotalHostQuery } from "../redux/Api/totalHost";
+import profile from "../assets/images/profile.png";
 const TotalHost = () => {
-    const data = [
-        {
-            key: '1',
-            serialNo: '#12333',
-            name: 'Ashiqur Rahman',
-            phone: '08+ 123 456 789',
-            avatar: img1,
-            car: 10,
-            totalTrip: 125,
-            email: 'bockelboy@att.com',
-            location: 'Kent, Utah',
-        },
-        {
-            key: '2',
-            serialNo: '#12333',
-            name: 'Hasibur Rashid Mah',
-            phone: '08+ 123 456 789',
-            avatar: img2,
-            car: 10,
-            totalTrip: 252,
-            email: 'csilvers@verizon.com',
-            location: 'Great Falls, Maryland',
-        },
-        // Add more data objects here
-    ];
+  const [page, setPage] = useState(1);
+  const [search, setSearch] = useState("");
+  const { data } = useGetAllTotalHostQuery({
+    host: "HOST",
+    page: page,
+    search: search,
+  });
 
-    const columns = [
-        {
-            title: 'S no.',
-            dataIndex: 'serialNo',
-            key: 'serialNo',
-            render: (text) => <span style={{ fontWeight: 'bold' }}>{text}</span>,
-        },
-        {
-            title: 'Name',
-            dataIndex: 'name',
-            key: 'name',
-            render: (text, record) => (
-                <div style={{ display: 'flex', alignItems: 'center' }}>
-                    <img src={record.avatar} className='h-10' alt={record.name} />
-                    <div style={{ marginLeft: '10px' }}>
-                        <div>{record.name}</div>
-                        <div style={{ color: 'gray', fontSize: '12px' }}>{record.phone}</div>
-                    </div>
-                </div>
-            ),
-        },
-        {
-            title: 'Car',
-            dataIndex: 'car',
-            key: 'car',
-            align: 'center',
-        },
-        {
-            title: 'Total Trip',
-            dataIndex: 'totalTrip',
-            key: 'totalTrip',
-            align: 'center',
-        },
-        {
-            title: 'Email',
-            dataIndex: 'email',
-            key: 'email',
-        },
-        {
-            title: 'Location',
-            dataIndex: 'location',
-            key: 'location',
-        },
-        {
-            title: 'Action',
-            key: 'action',
-            render: () => (
-                <Space size="middle">
-                    <Link to={'/total-host/:id'}><EyeOutlined  style={{ fontSize: '18px', cursor: 'pointer' }} /></Link>
-                    <StopOutlined style={{ fontSize: '18px', cursor: 'pointer' }} />
-                </Space>
-            ),
-        },
-    ];
+  const users = data?.data || [];
+  console.log("user hosf ", users)
 
-    return (
-        <div className='bg-white p-4 rounded-md'>
-            <div className="flex justify-between items-center  w-full pb-8" >
-                <div className="flex items-center gap-2">
-                    <Link to={-1}><BsArrowLeftShort size={25} /></Link>
-                    Total Host
-
-                </div>
-                <Input className='max-w-[250px] h-10' prefix={<CiSearch className='text-2xl' />} placeholder="Search here..." />
+  const columns = [
+    {
+      title: "S no.",
+      dataIndex: "serialNo",
+      key: "serialNo",
+      render: (text) => <span style={{ fontWeight: "bold" }}>{text}</span>,
+    },
+    {
+      title: "Name",
+      dataIndex: "name",
+      key: "name",
+      render: (text, record) => (
+        <div style={{ display: "flex", alignItems: "center" }}>
+          <img src={profile} className="h-10" alt={record.name} />
+          <div style={{ marginLeft: "10px" }}>
+            <div>{record.name}</div>
+            <div style={{ color: "gray", fontSize: "12px" }}>
+              {record.phone_number}
             </div>
-
-            <Table
-                columns={columns}
-                dataSource={data}
-                pagination={{
-                    pageSize: 10,
-                    showTotal: (total, range) => `Showing ${range[0]}-${range[1]} out of ${total}`,
-                    showSizeChanger: false,
-                }}
-                rowKey="key"
-            />
+          </div>
         </div>
-    )
+      ),
+    },
+    {
+      title: "Car",
+      dataIndex: "carCount",
+      key: "carCount",
+      align: "center",
+    },
+    {
+      title: "Totla Trip",
+      dataIndex: "trip",
+      key: "trip",
+      align: "center",
+    },
+    {
+      title: "Email",
+      dataIndex: "email",
+      key: "email",
+    },
+    {
+      title: "Rating",
+      dataIndex: "rating",
+      key: "rating",
+      align: "center",
+      render: (text) => (
+        <span>
+          {text} <i className="fa fa-star" style={{ color: "gold" }} />
+        </span>
+      ),
+    },
+    {
+  title: "Action",
+  key: "_id",
+  render: (text, record) => {
+    console.log(record)
+    return (
+    
+    <Space size="middle">
+      <Link to={`/total-host/${record.key}`}>
+      {/* Use the record's _id */}
+        <EyeOutlined style={{ fontSize: "18px", cursor: "pointer" }} />
+      </Link>
+      <StopOutlined style={{ fontSize: "18px", cursor: "pointer" }} />
+    </Space>
+  )},
 }
 
-export default TotalHost
+  ];
+
+  return (
+    <div className="bg-white p-4 rounded-md">
+      <div className="flex justify-between items-center w-full pb-8">
+        <div className="flex items-center gap-2">
+          <Link to={-1}>
+            <BsArrowLeftShort size={25} />
+          </Link>
+          Total Host
+        </div>
+        <Input
+          className="max-w-[250px] h-10"
+          onChange={(e)=>setSearch(e.target.value)}
+          prefix={<CiSearch className="text-2xl" />}
+          placeholder="Search here..."
+        />
+      </div>
+
+      <Table
+        columns={columns}
+        dataSource={users.map((user, index) => ({
+          key: user._id,
+          serialNo: `#${index + 1}`,
+          name: user.name,
+          phone_number: user.phone_number,
+          profile_image: user.profile_image,
+          carCount: user.carCount,
+          trip: user.trip,
+          email: user.email,
+          rating: user.rating || "Not Rated",
+        }))}
+        
+        rowKey="key"
+      />
+
+      <div className="flex items-center justify-center mt-2">
+        <Pagination
+          total={data?.meta?.total}
+          pageSize={data?.meta?.limit}
+          onChange={(page) => setPage(page)}
+        />
+      </div>
+    </div>
+  );
+};
+
+export default TotalHost;
