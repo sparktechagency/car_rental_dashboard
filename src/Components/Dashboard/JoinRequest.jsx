@@ -2,9 +2,19 @@ import { Table } from "antd";
 import React from "react";
 import { LuEye } from "react-icons/lu";
 import { Link } from "react-router-dom";
-
+import { useApproveHostRequestMutation } from "../../redux/Api/hostReq";
+import { toast } from "sonner";
 
 const JoinRequest = ({ tableData, pagination }) => {
+  const [approveHostRequest, isLoading, isError] =
+    useApproveHostRequestMutation();
+
+  const handleApprove = (carId) => {
+    approveHostRequest({ carId, status: "approved" })
+      .unwrap()
+      .then((payload) => toast.success(payload?.message))
+      .catch((error) => toast.error(error?.data?.message));
+  };
 
   const columns = [
     {
@@ -63,38 +73,37 @@ const JoinRequest = ({ tableData, pagination }) => {
     },
 
     ,
-
     {
       title: "Location",
       dataIndex: "location",
       key: "location  ",
     },
 
-     {
+    {
       title: "Actions",
       dataIndex: "key",
-      key: "actions",
+      key: "_id",
       className: "font-lora flex justify-center",
       render: (_, record) => {
         return (
           <div className="flex justify-center gap-2">
-            <Link 
-              to={`/request-host-details/${record.id}`} 
+            <Link
+              to={`/request-host-details/${record.id}`}
               className="px-6 py-2 rounded-3xl flex items-center font-semibold border text-white bg-[#001D4E] hover:text-white"
             >
               <LuEye size={25} />
             </Link>
-            {'pending' && (
+            {record.status === "pending" && (
               <>
-                <button 
+                <button
                   className="px-6 py-2 rounded-3xl font-semibold border text-white bg-[#34C759] hover:text-white"
-                  // Add onClick handler for approval
+                  onClick={() => handleApprove(record.id)}
                 >
                   Approve
                 </button>
                 <Link className="px-6 py-2 rounded-3xl text-red-500 font-semibold  border border-red-500 hover:bg-red-500 hover:text-white">
-              Cancel
-            </Link>
+                  Cancel
+                </Link>
               </>
             )}
           </div>
@@ -104,18 +113,23 @@ const JoinRequest = ({ tableData, pagination }) => {
   ];
   return (
     <div className="font-lora rounded-md ">
-      <Table dataSource={tableData} columns={columns} className="custom-pagination font-lora" pagination={pagination
-        //   {
-        //   pageSize: 5,
-        //   showTotal: (total, range) => `Showing ${range[0]}-${range[1]} out of ${total}`,
-        //   locale: {
-        //     items_per_page: '',
-        //     prev_page: 'Previous',
-        //     next_page: 'Next',
-        //   },
-        // }
-      } />
-
+      <Table
+        dataSource={tableData}
+        columns={columns}
+        className="custom-pagination font-lora"
+        pagination={
+          pagination
+          //   {
+          //   pageSize: 5,
+          //   showTotal: (total, range) => `Showing ${range[0]}-${range[1]} out of ${total}`,
+          //   locale: {
+          //     items_per_page: '',
+          //     prev_page: 'Previous',
+          //     next_page: 'Next',
+          //   },
+          // }
+        }
+      />
     </div>
   );
 };

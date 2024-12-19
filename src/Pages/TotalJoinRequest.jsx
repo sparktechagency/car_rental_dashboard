@@ -20,19 +20,19 @@ const TotalJoinRequest = () => {
   const totalItems = data.data.meta.total;
   const pageSize = data.data.meta.limit;
 
-  // Map API data to tableData structure
+  
   const tableData = allRequests.map((request, index) => ({
     key: index + 1,
     id: request._id,
     name: request.user.name,
-    img: request.user.profile_image, // User profile image
+    img: request.user.profile_image, 
     contact: request.user.phone_number,
     email: request.user.email,
-    location: request.carAddress, // Car location from API
-    car: `${request.make} ${request.model}`, // Combine car make and model
-    carLocation: request.destination, // Car destination
-    carImg: request.car_image[0], // Use first car image
-    status: request.status, // Status (pending, approved, etc.)
+    location: request.carAddress, 
+    car: `${request.make} ${request.model}`, 
+    carLocation: request.destination,
+    carImg: request.car_image[0],
+    status: request.status, 
   }));
 
   return (
