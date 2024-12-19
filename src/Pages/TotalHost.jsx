@@ -4,8 +4,9 @@ import { EyeOutlined, StopOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 import { CiSearch } from "react-icons/ci";
 import { BsArrowLeftShort } from "react-icons/bs";
-import { useGetAllTotalHostQuery } from "../redux/Api/totalHost";
+import { useBlockHostMutation, useGetAllTotalHostQuery } from "../redux/Api/totalHost";
 import profile from "../assets/images/profile.png";
+
 const TotalHost = () => {
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState("");
@@ -15,8 +16,31 @@ const TotalHost = () => {
     search: search,
   });
 
+  const [blocHost] = useBlockHostMutation();
+
+  const handleBlockUnblock = async (record) => {
+    console.log(record);
+
+    // console.log("id", authId);
+
+    try {
+      const response = await blocHost({
+        authId: record._id,
+        isBlocked: !record.isBlocked,
+      }).unwrap();
+      console.log(response);
+      if (response.success) {
+        message.success(response.message);
+      } else {
+        message.error(response.message || "Failed to update user status.");
+      }
+    } catch (error) {
+      console.log("tr5tgr");
+    }
+  };
+
   const users = data?.data || [];
-  console.log("user hosf ", users)
+  console.log("user hosf ", users);
 
   const columns = [
     {
@@ -70,22 +94,28 @@ const TotalHost = () => {
       ),
     },
     {
-  title: "Action",
-  key: "_id",
-  render: (text, record) => {
-    console.log(record)
-    return (
-    
-    <Space size="middle">
-      <Link to={`/total-host/${record.key}`}>
-      {/* Use the record's _id */}
-        <EyeOutlined style={{ fontSize: "18px", cursor: "pointer" }} />
-      </Link>
-      <StopOutlined style={{ fontSize: "18px", cursor: "pointer" }} />
-    </Space>
-  )},
-}
-
+      title: "Action",
+      key: "_id",
+      render: (text, record) => {
+        console.log(record);
+        return (
+          <Space size="middle">
+            <Link to={`/total-host/${record.key}`}>
+              {/* Use the record's _id */}
+              <EyeOutlined style={{ fontSize: "18px", cursor: "pointer" }} />
+            </Link>
+            <StopOutlined
+              onClick={() => handleBlockUnblock(record)}
+              style={{
+                fontSize: "18px",
+                cursor: "pointer",
+                color: record.isBlocked ? "red" : "black",
+              }}
+            />
+          </Space>
+        );
+      },
+    },
   ];
 
   return (
@@ -99,7 +129,7 @@ const TotalHost = () => {
         </div>
         <Input
           className="max-w-[250px] h-10"
-          onChange={(e)=>setSearch(e.target.value)}
+          onChange={(e) => setSearch(e.target.value)}
           prefix={<CiSearch className="text-2xl" />}
           placeholder="Search here..."
         />
@@ -117,8 +147,9 @@ const TotalHost = () => {
           trip: user.trip,
           email: user.email,
           rating: user.rating || "Not Rated",
+          _id: user?.authId?._id,
+          isBlocked: user?.authId?.isBlocked,
         }))}
-        
         rowKey="key"
       />
 

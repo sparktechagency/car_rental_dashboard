@@ -9,7 +9,7 @@ const newHost = baseApi.injectEndpoints({
           method: "GET",
         };
       },
-      providesTags: ["newHost"],
+      providesTags: ["host"],
     }),
 
     getSingleHostreq: builder.query({
@@ -19,7 +19,7 @@ const newHost = baseApi.injectEndpoints({
           method: "GET",
         };
       },
-      // providesTags: ["newHost"],
+      providesTags: ["newHost"],
     }),
 
     approveHostRequest: builder.mutation({
@@ -29,7 +29,17 @@ const newHost = baseApi.injectEndpoints({
           method: "PATCH",
         };
       },
-      invalidatesTags: ["newHost"],
+      invalidatesTags: ["host"],
+    }),
+
+    caneleHostRequest: builder.mutation({
+      query: ({ carId, status }) => {
+        return {
+          url: `/dashboard/approve-car?carId=${carId}&status=${status}`,
+          method: "PATCH",
+        };
+      },
+      invalidatesTags: ["host"],
     }),
 
     // approveHostRequest: builder.mutation({
@@ -48,4 +58,5 @@ export const {
   useGetAllNewHostQuery,
   useGetSingleHostreqQuery,
   useApproveHostRequestMutation,
+  useCaneleHostRequestMutation
 } = newHost;

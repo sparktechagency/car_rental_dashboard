@@ -16,6 +16,16 @@ const JoinRequest = ({ tableData, pagination }) => {
       .catch((error) => toast.error(error?.data?.message));
   };
 
+
+  const handleCanceled = (carId) => {
+    approveHostRequest({ carId, status: "canceled" })
+      .unwrap()
+      .then((payload) => toast.success(payload?.message))
+      .catch((error) => toast.error(error?.data?.message));
+  };
+
+
+
   const columns = [
     {
       title: "Sl No.",
@@ -101,7 +111,7 @@ const JoinRequest = ({ tableData, pagination }) => {
                 >
                   Approve
                 </button>
-                <Link className="px-6 py-2 rounded-3xl text-red-500 font-semibold  border border-red-500 hover:bg-red-500 hover:text-white">
+                <Link onClick={() => handleCanceled(record.id)} className="px-6 py-2 rounded-3xl text-red-500 font-semibold  border border-red-500 hover:bg-red-500 hover:text-white">
                   Cancel
                 </Link>
               </>
