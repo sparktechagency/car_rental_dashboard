@@ -17,7 +17,7 @@ const SubscriptionGrowth = () => {
         }
     })
      /**user growth API */
-     for (const key in getUserGrowth?.data?.monthlyRegistration) {
+    for (const key in getUserGrowth?.data?.monthlyRegistration) {
         data.push({name :key?.slice(0,3), uv : getUserGrowth?.data?.monthlyRegistration[key] })
         
     }

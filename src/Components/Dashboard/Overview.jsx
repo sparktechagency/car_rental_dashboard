@@ -15,23 +15,15 @@ const Overview = () => {
         
     }
     
-
-
-
-
     const handleChange = (value) => {
         setYear(value);
     };
-
-
     const items = getUserGrowth?.data?.total_years?.map((year)=>{
         return {
             label : year,
             value : year
         }
     })
-
-    
     return (
         <>
             <div className='between-center'>

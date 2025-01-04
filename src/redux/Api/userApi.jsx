@@ -11,6 +11,7 @@ const useApi = baseApi.injectEndpoints({
         };
       },
     }),
+    
     getProfile: builder.query({
       query: () => {
         return {
