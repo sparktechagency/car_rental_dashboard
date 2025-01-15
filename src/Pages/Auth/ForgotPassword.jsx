@@ -2,7 +2,7 @@ import { Button, Form, Input, } from "antd";
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useForgotPasswordMutation } from "../../redux/Api/userApi";
-// import img from '../../assets/images/forget.png'
+import img from '../../assets/images/car2.png'
 import { toast } from "sonner";
 
 const ForgotPassword = () => {
@@ -20,7 +20,7 @@ const ForgotPassword = () => {
         // navigate("/auth/otp")
     };
     return (
-        <div className="grid grid-cols-2 items-center h-[100vh]"
+        <div className="grid grid-cols-2 bg-[#C0D4FB] items-center h-[100vh]"
             style={{
                 width: "100%",
                 // background: "#BD8E05",
@@ -29,9 +29,7 @@ const ForgotPassword = () => {
         >
 
 
-            <div className="bg-[#C0D4FB] h-full flex items-center justify-center ">
-                <img src={img} className="object-contain h-[50%]" alt="" />
-            </div>
+            
             <div className=" bg-white flex justify-center items-center">
                 <Form
                     name="normal_login"
