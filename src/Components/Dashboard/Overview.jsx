@@ -11,8 +11,7 @@ const Overview = () => {
     
     /**user growth API */
     for (const key in getUserGrowth?.data?.monthlyRegistration) {
-        chartData.push({name :key?.slice(0,3), uv : getUserGrowth?.data?.monthlyRegistration[key] })
-        
+        chartData.push({name :key?.slice(0,3), uv : getUserGrowth?.data?.monthlyRegistration[key] })   
     }
     
     const handleChange = (value) => {
