@@ -14,7 +14,7 @@ const TransactionTable = ({ pagination }) => {
 
   
   const transactions = data?.data?.result || [];
-
+console.log(transactions)
   const columns = [
     {
       title: 'S no',

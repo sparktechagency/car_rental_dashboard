@@ -1,27 +1,68 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { GoArrowLeft } from 'react-icons/go';
 import { Link } from 'react-router-dom';
-import { Table, Avatar, Spin, Alert } from 'antd';
+import { Table, Avatar, Spin, Alert, Pagination } from 'antd';
 import { useGetAllTripQuery } from '../redux/Api/tripApi';
+import { imageUrl } from '../redux/Api/baseApi';
 
 const TripManagement = () => {
-  const { data, isLoading, isError } = useGetAllTripQuery();
+  const [currentPage, setCurrentPage] = useState(1);
+  const pageSize = 10;
+
+  // Fetch Data with Pagination
+  const { data, isLoading, isError } = useGetAllTripQuery({
+    page: currentPage,
+    limit: pageSize,
+  });
+
+  if (isLoading) {
+    return (
+      <div className="flex justify-center items-center h-full">
+        <Spin size="large" />
+      </div>
+    );
+  }
+
+  if (isError || !data?.data?.trips) {
+    return (
+      <Alert
+        message="Error"
+        description="Failed to load trips. Please try again later."
+        type="error"
+        showIcon
+      />
+    );
+  }
+
+  const allTrips = data.data.trips;
+  const totalItems = data.data.meta?.total || 0; // Ensure total count is correct
+
+  const handlePageChange = (page) => {
+    console.log("Page Changed to:", page);
+    setCurrentPage(page);
+  };
+
+  const startItem = (currentPage - 1) * pageSize + 1;
+  const endItem = Math.min(currentPage * pageSize, totalItems);
 
   // Transform API data to match the table format
-  const transformedData = data?.data?.trips?.map((trip, index) => ({
-    key: trip._id,
-    serialNo: `#${index + 1}`, // Generate serial numbers
-    renterName: trip.user.name,
-    renterPhone: trip.user.phone_number,
-    renterAvatar: trip.user.profile_image, // Assuming it's the avatar image
-    hostName: `${trip.car.hostFirstName} ${trip.car.hostLastName}`,
-    hostPhone: trip.car.user.phone_number, // Assuming phone number is present
-    hostAvatar: trip.car.car_image[0], // Using the first car image for the host
-    price: `$${trip.tripPrice}`,
-    carName: `${trip.car.make} ${trip.car.model}`,
-    location: trip.returnLocation,
-    status: trip.status,
-  }));
+  const transformedData = allTrips.map((trip, index) => ({
+    key: trip?._id || `temp-${index}`, // Ensure a unique key even if `_id` is missing
+    serialNo: `#${startItem + index}`, // Generate serial numbers correctly across pages
+    renterName: trip?.user?.name || "N/A",
+    renterPhone: trip?.user?.phone_number || "N/A",
+    renterAvatar: trip?.user?.profile_image ? `${imageUrl}/${trip.user.profile_image}` : null, 
+    hostName: trip?.car?.hostFirstName && trip?.car?.hostLastName
+        ? `${trip.car.hostFirstName} ${trip.car.hostLastName}`
+        : "N/A",
+    hostPhone: trip?.car?.user?.phone_number || "N/A",
+    hostAvatar: trip?.car?.car_image?.length ? `${imageUrl}/${trip.car.car_image[0]}` : null, 
+    price: trip?.tripPrice ? `$${trip.tripPrice}` : "N/A",
+    carName: trip?.car?.make && trip?.car?.model ? `${trip.car.make} ${trip.car.model}` : "N/A",
+    location: trip?.returnLocation || "N/A",
+    status: trip?.status || "Unknown",
+}));
+
 
   // Define table columns
   const columns = [
@@ -36,10 +77,11 @@ const TripManagement = () => {
       key: 'renterName',
       render: (text, record) => (
         <div style={{ display: 'flex', alignItems: 'center' }}>
-          <Avatar src={record.renterAvatar} alt={record.renterName} />
+          {/* <Avatar src={record.renterAvatar} alt={record.renterName} /> */}
+          <img className='w-[50px]' src={`${record?.renterAvatar}`} alt="sdf" />
           <div style={{ marginLeft: '10px' }}>
-            <div>{record.renterName}</div>
-            <div style={{ color: 'gray', fontSize: '12px' }}>{record.renterPhone}</div>
+            <div>{record?.renterName}</div>
+            <div style={{ color: 'gray', fontSize: '12px' }}>{record?.renterPhone}</div>
           </div>
         </div>
       ),
@@ -48,15 +90,20 @@ const TripManagement = () => {
       title: 'Hosts Name',
       dataIndex: 'hostName',
       key: 'hostName',
-      render: (text, record) => (
-        <div style={{ display: 'flex', alignItems: 'center' }}>
-          <Avatar src={record.hostAvatar} alt={record.hostName} />
-          <div style={{ marginLeft: '10px' }}>
-            <div>{record.hostName}</div>
-            <div style={{ color: 'gray', fontSize: '12px' }}>{record.hostPhone}</div>
+      render: (text, record) => {
+        console.log("Renter Record:", record); // Logging the record object
+    
+        return (
+          <div style={{ display: 'flex', alignItems: 'center' }}>
+            {/* <Avatar src={record.renterAvatar} alt={record.renterName} /> */}
+            <img className='w-[50px]' src={`${record?.hostAvatar}`} alt="sdf" />
+            <div style={{ marginLeft: '10px' }}>
+              <div>{record?.renterName}</div>
+              <div style={{ color: 'gray', fontSize: '12px' }}>{record?.renterPhone}</div>
+            </div>
           </div>
-        </div>
-      ),
+        );
+      },
     },
     {
       title: 'Price',
@@ -86,9 +133,7 @@ const TripManagement = () => {
           requested: 'bg-[#F3A638]',
         };
         return (
-          <button
-            className={`${statusColors[status.toLowerCase()]} text-white px-4 py-2 rounded-md`}
-          >
+          <button className={`${statusColors[status.toLowerCase()]} text-white px-4 py-2 rounded-md`}>
             {status.charAt(0).toUpperCase() + status.slice(1)}
           </button>
         );
@@ -96,28 +141,9 @@ const TripManagement = () => {
     },
   ];
 
-  if (isLoading) {
-    return (
-      <div className="flex justify-center items-center h-full">
-        <Spin size="large" />
-      </div>
-    );
-  }
-
-  if (isError) {
-    return (
-      <Alert
-        message="Error"
-        description="Failed to load trips. Please try again later."
-        type="error"
-        showIcon
-      />
-    );
-  }
-
   return (
     <div className="bg-white rounded-md p-5">
-      <Link to={-1} className="flex items-center gap-2">
+      <Link to={-1} className="flex items-center gap-2 mb-4">
         <GoArrowLeft />
         Trip Management
       </Link>
@@ -125,13 +151,21 @@ const TripManagement = () => {
       <Table
         columns={columns}
         dataSource={transformedData}
-        pagination={{
-          pageSize: 10,
-          showTotal: (total, range) => `Showing ${range[0]}-${range[1]} out of ${total}`,
-          showSizeChanger: false,
-        }}
         rowKey="key"
+        pagination={false} // Disable built-in pagination to use Ant Design's custom pagination
       />
+
+      {/* Custom Pagination Controls */}
+      <div className="mt-10 pb-5 flex items-center justify-end">
+        
+        <Pagination
+          current={currentPage}
+          pageSize={pageSize}
+          total={totalItems}
+          onChange={handlePageChange}
+          showSizeChanger={false}
+        />
+      </div>
     </div>
   );
 };

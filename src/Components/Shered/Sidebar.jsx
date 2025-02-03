@@ -26,10 +26,29 @@ const Sidebar = () => {
         },
 
         {
-            path: '/transaction',
+            path: '#',
             label: 'Transaction',
             icon:<BiDollarCircle size={22}  />,
-            sub_menu: false
+            sub_menu: [
+                {
+                    path: '/transaction',
+                    label: 'Transaction',
+                    icon: <></>,
+                },
+                {
+                    path: '/refund',
+                    label: 'Refund',
+                    icon: <></>,
+                },
+                {
+                    path: '/bank-transfer',
+                    label: 'Bank Transfer',
+                    icon: <></>,
+                },
+                
+
+
+            ]
         },
         {
             path: '/total-user',

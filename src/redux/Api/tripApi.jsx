@@ -5,9 +5,9 @@ const tripApi = baseApi.injectEndpoints({
 
     endpoints: (builder)=>({
         getAllTrip :  builder.query({
-            query : ()=>{
+            query : ({page,limit})=>{
                 return {
-                    url : "/trip/get-all-trip",
+                    url : `/trip/get-all-trip?page=${page}&limit=${limit}`,
                     method : 'GET'
                 }
             },

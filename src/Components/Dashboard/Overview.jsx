@@ -6,7 +6,7 @@ import { useGetHostUserGrowthQuery } from '../../redux/Api/DashboardHomeApi';
 
 const Overview = () => {
     const chartData = []
-    const [year, setYear] = useState('2024')
+    const [year, setYear] = useState('2025')
     const {data : getUserGrowth} =  useGetHostUserGrowthQuery({ role : 'USER' ,year : year});
     
     /**user growth API */
@@ -14,29 +14,21 @@ const Overview = () => {
         chartData.push({name :key?.slice(0,3), uv : getUserGrowth?.data?.monthlyRegistration[key] })   
     }
     
-
-
-
-
     const handleChange = (value) => {
         setYear(value);
     };
-
-
     const items = getUserGrowth?.data?.total_years?.map((year)=>{
         return {
             label : year,
             value : year
         }
     })
-
-    
     return (
         <>
             <div className='between-center'>
                 <p className='text-xl font-medium'>User Growth</p>
                 <Select
-                    defaultValue="2024"
+                    defaultValue="2025"
                     style={{ width: 120 }}
                     onChange={handleChange}
                     options={items}

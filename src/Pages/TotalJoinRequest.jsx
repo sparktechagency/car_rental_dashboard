@@ -1,12 +1,19 @@
-import React from 'react';
-import JoinRequest from '../Components/Dashboard/JoinRequest';
-import { Link } from 'react-router-dom';
-import { IoArrowBackSharp } from 'react-icons/io5';
-import { Pagination } from 'antd';
-import { useGetAllNewHostQuery } from '../redux/Api/hostReq';
+import React, { useState } from "react";
+import JoinRequest from "../Components/Dashboard/JoinRequest";
+import { Link } from "react-router-dom";
+import { IoArrowBackSharp } from "react-icons/io5";
+import { Pagination } from "antd";
+import { useGetAllNewHostQuery } from "../redux/Api/hostReq";
 
 const TotalJoinRequest = () => {
-  const { data, isLoading, isError } = useGetAllNewHostQuery();
+  const [currentPage, setCurrentPage] = useState(1);
+  const pageSize = 10;
+
+  // Fetch Data with Pagination
+  const { data, isLoading, isError } = useGetAllNewHostQuery({
+    page: currentPage,
+    limit: pageSize,
+  });
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -17,22 +24,28 @@ const TotalJoinRequest = () => {
   }
 
   const allRequests = data.data.allAddCarReq;
-  const totalItems = data.data.meta.total;
-  const pageSize = data.data.meta.limit;
+  const totalItems = data.data.meta.total; // Corrected total items for pagination
 
-  // Map API data to tableData structure
+  const handlePageChange = (page) => {
+    console.log("Page Changed to:", page);
+    setCurrentPage(page);
+  };
+
+  const startItem = (currentPage - 1) * pageSize + 1;
+  const endItem = Math.min(currentPage * pageSize, totalItems);
+
   const tableData = allRequests.map((request, index) => ({
-    key: index + 1,
+    key: startItem + index,
     id: request._id,
     name: request.user.name,
-    img: request.user.profile_image, // User profile image
+    img: request.user.profile_image,
     contact: request.user.phone_number,
     email: request.user.email,
-    location: request.carAddress, // Car location from API
-    car: `${request.make} ${request.model}`, // Combine car make and model
-    carLocation: request.destination, // Car destination
-    carImg: request.car_image[0], // Use first car image
-    status: request.status, // Status (pending, approved, etc.)
+    location: request.carAddress,
+    car: `${request.make} ${request.model}`,
+    carLocation: request.destination,
+    carImg: request.car_image[0],
+    status: request.status,
   }));
 
   return (
@@ -45,22 +58,19 @@ const TotalJoinRequest = () => {
           <p className="text-xl">New Host Request</p>
         </div>
       </div>
+
+      {/* Pass Table Data */}
       <JoinRequest tableData={tableData} pagination={false} />
-      <div
-        className="mt-10 pb-5"
-        style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px' }}
-      >
-        <span style={{ color: '#0044B4' }}>
-          Showing 1-{pageSize} out of {totalItems}
-        </span>
+
+      {/* Pagination Section */}
+      <div className="mt-10 pb-5 flex items-center justify-end gap-2">
+        
         <Pagination
-          total={totalItems}
+          current={currentPage}
           pageSize={pageSize}
-          defaultCurrent={1}
+          total={totalItems}
+          onChange={handlePageChange}
           showSizeChanger={false}
-          showQuickJumper={false}
-          hideOnSinglePage
-          style={{ display: 'flex', alignItems: 'center' }}
         />
       </div>
     </div>

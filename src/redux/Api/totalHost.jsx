@@ -12,6 +12,15 @@ const totalHost = baseApi.injectEndpoints({
             providesTags: ['totalHost'],
         }),
 
+
+        blockHost: builder.mutation({
+          query: (data) => ({
+            url: `/dashboard/block-unblock-user`,
+            method: "PATCH",
+            body: data,
+          }),
+          invalidatesTags: ["totalHost"], 
+        }),
         
 
         getSingleHost: builder.query({
@@ -26,4 +35,4 @@ const totalHost = baseApi.injectEndpoints({
     }),
 });
 
-export const { useGetAllTotalHostQuery , useGetSingleHostQuery} = totalHost;
+export const { useGetAllTotalHostQuery , useGetSingleHostQuery, useBlockHostMutation} = totalHost;
