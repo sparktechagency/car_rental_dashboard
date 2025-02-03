@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import img from "../../assets/images/place.png";
 const baseQuery = fetchBaseQuery({
-  baseUrl: "http://209.97.134.184:8002",
+  baseUrl: "http://178.128.174.197:8001",
   prepareHeaders: (headers) => {
     const token = JSON.parse(localStorage.getItem("token"));
     if (token) {
@@ -18,5 +18,5 @@ export const baseApi = createApi({
   endpoints: () => ({}),
 });
 
-export const imageUrl = "http://209.97.134.184:8002";
+export const imageUrl = "http://178.128.174.197:8001";
 export const placeImage = img;
