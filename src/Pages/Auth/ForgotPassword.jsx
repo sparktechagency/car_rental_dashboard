@@ -2,7 +2,7 @@ import { Button, Form, Input, } from "antd";
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useForgotPasswordMutation } from "../../redux/Api/userApi";
-import img from '../../assets/images/car2.png'
+
 import { toast } from "sonner";
 import img from '../../assets/images/auth.jpg'
 const ForgotPassword = () => {
