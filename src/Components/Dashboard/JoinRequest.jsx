@@ -4,8 +4,11 @@ import { LuEye } from "react-icons/lu";
 import { Link } from "react-router-dom";
 import { useApproveHostRequestMutation } from "../../redux/Api/hostReq";
 import { toast } from "sonner";
+import { imageUrl } from "../../redux/Api/baseApi";
+
 
 const JoinRequest = ({ tableData, pagination }) => {
+  console.log(tableData)
   const [approveHostRequest, isLoading, isError] =
     useApproveHostRequestMutation();
 
@@ -42,7 +45,7 @@ const JoinRequest = ({ tableData, pagination }) => {
         return (
           <div className="start-center gap-2">
             <img
-              src={record?.img}
+              src={`${imageUrl}/${record?.img}`}
               className="w-[40px] h-[40px] rounded-[8px]"
               alt=""
             />
@@ -63,7 +66,7 @@ const JoinRequest = ({ tableData, pagination }) => {
         return (
           <div className="start-center gap-2">
             <img
-              src={record?.carImg}
+              src={`${imageUrl}/${record?.carImg}`}
               className="w-[40px] h-[40px] rounded-[8px]"
               alt=""
             />

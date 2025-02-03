@@ -31,6 +31,10 @@ import TrustSafety from "../Pages/TrustSafety/TrustSafety.jsx";
 import HostingGuide from "../Components/HostingGuide/HostingGuide.jsx";
 
 
+import Refund from "../Pages/Refound/Refund.jsx";
+import BankTransfer from "../Pages/BankTransfer/BankTransfer.jsx";
+
+
 export const router = createBrowserRouter([
     {
         path: "/",
@@ -50,6 +54,14 @@ export const router = createBrowserRouter([
             {
                 path : "/transaction",
                 element : <TransactionHistory/>
+            },
+            {
+                path: '/refund',
+                element: <Refund></Refund>
+            },
+            {
+                path: '/bank-transfer',
+                element: <BankTransfer></BankTransfer>
             },
             {
                 path : "/total-host",
@@ -110,6 +122,7 @@ export const router = createBrowserRouter([
                 path: '/hosting-guide',
                 element: <HostingGuide/>,
             },
+            
             {
                 path: '/tips-tricks',
                 element: <TipsTricks />,

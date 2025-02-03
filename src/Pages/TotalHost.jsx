@@ -6,6 +6,7 @@ import { CiSearch } from "react-icons/ci";
 import { BsArrowLeftShort } from "react-icons/bs";
 import { useBlockHostMutation, useGetAllTotalHostQuery } from "../redux/Api/totalHost";
 import profile from "../assets/images/profile.png";
+import { imageUrl } from "../redux/Api/baseApi";
 
 const TotalHost = () => {
   const [page, setPage] = useState(1);
@@ -20,25 +21,28 @@ const TotalHost = () => {
   const [blocHost] = useBlockHostMutation();
 
   const handleBlockUnblock = async (record) => {
-    console.log(record);
-
-    // console.log("id", authId);
-
+    console.log("Blocking/Unblocking Host:", record);
+  
     try {
+      const isBlocking = !record.isBlocked; // Check if blocking or unblocking
       const response = await blocHost({
         authId: record._id,
-        isBlocked: !record.isBlocked,
+        isBlocked: isBlocking,
       }).unwrap();
-      console.log(response);
+  
+      console.log("Response:", response);
+  
       if (response.success) {
-        message.success(response.message);
+        message.success(isBlocking ? "Host Blocked Successfully!" : "Host Unblocked Successfully!");
       } else {
-        message.error(response.message || "Failed to update user status.");
+        message.error(response.message || "Failed to update host status.");
       }
     } catch (error) {
-      console.log("tr5tgr");
+      console.error("Error updating host status:", error);
+      message.error("An error occurred. Please try again.");
     }
   };
+  
 
   const users = data?.data || [];
   console.log("user hosf ", users);
@@ -54,17 +58,21 @@ const TotalHost = () => {
       title: "Name",
       dataIndex: "name",
       key: "name",
-      render: (text, record) => (
-        <div style={{ display: "flex", alignItems: "center" }}>
-          <img src={profile} className="h-10" alt={record.name} />
-          <div style={{ marginLeft: "10px" }}>
-            <div>{record.name}</div>
-            <div style={{ color: "gray", fontSize: "12px" }}>
-              {record.phone_number}
+      render: (text, record) => {
+        console.log("Record Data:", record); // Logging the record object
+    
+        return (
+          <div style={{ display: "flex", alignItems: "center" }}>
+            <img src={`${imageUrl}/${record?.profile_image}`} className="h-[60px] w-[60px]" alt={record?.name || "User"} />
+            <div style={{ marginLeft: "10px" }}>
+              <div>{record?.name || "N/A"}</div>
+              <div style={{ color: "gray", fontSize: "12px" }}>
+                {record?.phone_number || "N/A"}
+              </div>
             </div>
           </div>
-        </div>
-      ),
+        );
+      },
     },
     {
       title: "Car",

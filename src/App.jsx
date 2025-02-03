@@ -8,13 +8,13 @@ import car1 from './assets/images/car.png';
 import car2 from './assets/images/car2.png';
 import car3 from './assets/images/car3.png';
 import { useTotalUserCountQuery } from './redux/Api/dashboardApi';
-import { useGetAllNewHostQuery } from './redux/Api/hostReq';
+import { useGetAllNewHostQuery, useGetAllNewHostUserQuery } from './redux/Api/hostReq';
 
 function App() {
   /** Get total user statistics API */
   const { data: dashboardInfo, isLoading: isDashboardLoading, isError: isDashboardError } = useTotalUserCountQuery();
-  const { data: hostData, isLoading: isHostLoading, isError: isHostError } = useGetAllNewHostQuery();
-
+  const { data: hostData, isLoading: isHostLoading, isError: isHostError } = useGetAllNewHostUserQuery();
+console.log(hostData)
   if (isDashboardLoading || isHostLoading) {
     return <div>Loading...</div>;
   }
@@ -22,7 +22,8 @@ function App() {
  
 
   const allRequests = hostData?.data?.allAddCarReq;
-  const tableData = allRequests?.map((request, index) => ({
+  console.log(allRequests)
+  const tableData = allRequests?.slice(0,3).map((request, index) => ({
     key: index + 1,
     id: request._id,
     name: request.user.name,

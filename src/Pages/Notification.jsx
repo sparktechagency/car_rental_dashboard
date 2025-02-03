@@ -7,6 +7,7 @@ import { toast } from 'sonner';
 
 const Notification = () => {
     const { data: getAllNotification, isLoading } = useGetAllNotificationQuery()
+    
     const [deleteNotification] = useDeleteNotificationMutation()
     const timeAgo = (timestamp) => {
         const now = new Date();
@@ -23,13 +24,14 @@ const Notification = () => {
         return `${days} day${days > 1 ? 's' : ''} ago`;
     };
 
-    const allNotification = getAllNotification?.data?.allNotification?.map((notification, i) => {
+    const allNotification = getAllNotification?.data?.result?.map((notification, i) => {
         return {
             key: notification?._id,
             notification: notification?.message,
             time: timeAgo(notification?.createdAt)
         }
     })
+    console.log(allNotification)
 
     const columns = [
         {
@@ -43,13 +45,7 @@ const Notification = () => {
             width: '150px',
             render: text => <span>{text}</span>,
         },
-        {
-            key: 'action',
-            width: '50px',
-            render: (text, record) => (
-                <Button type="text" icon={<RiDeleteBin6Line size={20} className='text-[#D9000A]' />} onClick={() => handleDelete(record.key)} />
-            ),
-        },
+        
     ];
     const handleDelete = (id) => {
         // console.log(`Delete notification with key: ${key}`);

@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useForgotPasswordMutation } from "../../redux/Api/userApi";
 // import img from '../../assets/images/forget.png'
 import { toast } from "sonner";
-
+import img from '../../assets/images/auth.jpg'
 const ForgotPassword = () => {
     const [forgotPassword] = useForgotPasswordMutation()
     const navigate = useNavigate();
@@ -89,13 +89,13 @@ const ForgotPassword = () => {
                                 marginTop: "30px",
                             }}
                         >
-                            <Link
+                            <button
                                 className="login-form-forgot "
                                 style={{ color: "#FFF" }}
-                                to="/auth/otp"
+                                
                             >
                                 Send a Code
-                            </Link>
+                            </button>
 
                         </Button>
                     </Form.Item>

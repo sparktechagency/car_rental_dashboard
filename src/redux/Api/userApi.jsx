@@ -33,7 +33,7 @@ const useApi = baseApi.injectEndpoints({
     verifyOtp: builder.mutation({
       query: (data) => {
         return {
-          url: "/auth/verify-otp",
+          url: "/auth/forget-pass-otp-verify",
           method: "POST",
           body: data,
         };

@@ -24,24 +24,27 @@ const UserTable = () => {
 
   const handleBlockUnblock = async (record) => {
     console.log(record);
-
-    // console.log("id", authId);
-
+  
     try {
-    const response = await blockUser({
-      authId: record._id,
-      isBlocked: !record.isBlocked,
-    }).unwrap();
-    console.log(response);
-    if (response.success) {
-      message.success(response.message);
-    } else {
-      message.error(response.message || "Failed to update user status.");
-    }
+      const isBlocking = !record.isBlocked; // Check if it's blocking or unblocking
+      const response = await blockUser({
+        authId: record._id,
+        isBlocked: isBlocking,
+      }).unwrap();
+  
+      console.log(response);
+  
+      if (response.success) {
+        message.success(isBlocking ? "User Blocked Successfully!" : "User Unblocked Successfully!");
+      } else {
+        message.error(response.message || "Failed to update user status.");
+      }
     } catch (error) {
-    console.log("tr5tgr");
+      console.error("Error updating user status:", error);
+      message.error("An error occurred. Please try again.");
     }
   };
+  
 
   const columns = [
     {

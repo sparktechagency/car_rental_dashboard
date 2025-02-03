@@ -7,7 +7,7 @@ import { useState } from 'react';
 
 const SubscriptionGrowth = () => {
     const data = []
-    const [year, setYear] = useState('2024')
+    const [year, setYear] = useState('2025')
     const { data: getUserGrowth } = useGetHostUserGrowthQuery({ role: 'HOST', year: year });
 
     const items = getUserGrowth?.data?.total_years?.map((year) => {
@@ -32,7 +32,7 @@ const SubscriptionGrowth = () => {
             <div className='between-center'>
                 <p className='text-xl font-medium'>Host Growth</p>
                 <Select
-                    defaultValue="2024"
+                    defaultValue="2025"
                     style={{ width: 120 }}
                     onChange={handleChange}
                     options={items}
