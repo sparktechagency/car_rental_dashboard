@@ -44,16 +44,22 @@ const TransactionHistory = () => {
 
   const handleRefund1 = (record, payment_intent_id) => {
     console.log(payment_intent_id._id);
-
+  
     const data = {
       paymentId: payment_intent_id._id,
     };
-
-    updateTransfer(data).then((response) => {
-      console.log(response.data.message)
-      message.success(response.data.message)
-    });
+  
+    updateTransfer(data)
+      .then((response) => {
+        console.log(response?.data?.message);
+        message.success(response.data.message);
+      })
+      .catch((error) => {
+        console.error("Error during refund:", error); // Log the error to the console
+        message.error("Already Transfer.");
+      });
   };
+  
 
   const handleOpenModal = (record) => {
     setSelectedTransaction(record);
