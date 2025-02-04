@@ -15,6 +15,7 @@ import { MdOutlineDirectionsCar, MdOutlineDoorBack } from "react-icons/md";
 import { RiBriefcase3Line } from "react-icons/ri";
 import { Modal } from "antd";
 import { useGetSingleHostQuery } from "../redux/Api/totalHost";
+import { imageUrl } from "../redux/Api/baseApi";
 
 const HostDetails = () => {
   const { id } = useParams();
@@ -46,7 +47,7 @@ const HostDetails = () => {
         Host Details
       </p>
       <div className="mt-10 flex items-center gap-5">
-        <img src={img} className="rounded-full w-20 h-20" alt="" />
+        <img src={`${imageUrl}/${host?.profile_image}`} className="rounded-full w-20 h-20" alt="" />
         <div>
           <p className="text-xl font-lora">{host?.name}</p>
           <div className="text-sm space-y-1 mt-4">
@@ -60,36 +61,48 @@ const HostDetails = () => {
       <div className="mt-10">
         <p>Total Cars: {cars.length}</p>
         {cars.map((car, index) => (
-          <div
-            key={car._id}
-            className="flex items-center justify-between bg-[#F6F6F6]  hover:bg-[#EBEBEB] p-4 mt-5 rounded-md"
-          >
-            <p>S.n {index + 1}</p>
-            <img src={img} />
-            <div>
-              <p>
-                {car.make} {car.model} {car.year}
-              </p>
-              <p>{car.carType} car</p>
-            </div>
-            <p className="flex items-center gap-2">
-              <GrLocation />
-              {car.destination}
-            </p>
-            <p>Total Trip: {car.trip || 0}</p>
-            <div className="text-[#1E3F66]">
-              <p>Price</p>
-              <p>£{car.pricePerDay || 0}/per day</p>
-            </div>
-            <p
-              onClick={() => setOpenModal(true)}
-              className="flex items-center gap-2 bg-white px-4 py-2 cursor-pointer"
-            >
-              <CiImageOn />
-              View {car.car_image?.length || 0} photos
-            </p>
-          </div>
-        ))}
+  <div
+    key={car._id}
+    className="flex items-center justify-between bg-[#F6F6F6] hover:bg-[#EBEBEB] p-4 mt-5 rounded-md"
+  >
+    <p>S.n {index + 1}</p>
+
+    {/* Display the first image of the car */}
+    {car.car_image && car.car_image.length > 0 ? (
+      <img
+        src={`${imageUrl}/${car.car_image[0]}`} // Use the first image URL in the car_image array
+        alt={`Car image ${index + 1}`}
+        className="w-20 h-20 object-cover rounded-md"
+      />
+    ) : (
+      <img src={img} alt="No image available" className="w-20 h-20 object-cover rounded-md" />
+    )}
+
+    <div>
+      <p>
+        {car.make} {car.model} {car.year}
+      </p>
+      <p>{car.carType} car</p>
+    </div>
+    <p className="flex items-center gap-2">
+      <GrLocation />
+      {car.destination}
+    </p>
+    <p>Total Trip: {car.trip || 0}</p>
+    <div className="text-[#1E3F66]">
+      <p>Price</p>
+      <p>£{car.pricePerDay || 0}/per day</p>
+    </div>
+    <p
+      onClick={() => setOpenModal(true)}
+      className="flex items-center gap-2 bg-white px-4 py-2 cursor-pointer"
+    >
+      <CiImageOn />
+      View {car.car_image?.length || 0} photos
+    </p>
+  </div>
+))}
+
 
         {cars.length > 0 && (
           <div className=" grid grid-cols-2 items-center mt-20 px-5">
@@ -201,25 +214,31 @@ const HostDetails = () => {
         onCancel={() => setOpenModal(false)}
       >
         <p className="text-center font-medium text-xl mb-5">All Images</p>
-        <div className="flex items-center gap-5">
+        <div className="grid grid-cols-2 gap-5">
           <div className="space-y-5">
             {cars[0]?.car_image?.slice(0, 3).map((image, index) => (
-              <img
-                key={index}
-                src={image}
-                className="h-52 w-full"
-                alt={`Car image ${index + 1}`}
-              />
+              <div key={index} className="flex items-center gap-3">
+                <img
+                  src={`${imageUrl}/${image}`}
+                  className="h-52 w-full"
+                  alt={`Car image ${index + 1}`}
+                />
+                
+                {/* Display image URL next to the image */}
+              </div>
             ))}
           </div>
           <div className="space-y-5">
             {cars[0]?.car_image?.slice(3, 6).map((image, index) => (
-              <img
-                key={index}
-                src={image}
-                className="h-52 w-full"
-                alt={`Car image ${index + 4}`}
-              />
+              <div key={index} className="flex items-center gap-3">
+                <img
+                  src={`${imageUrl}/${image}`}
+                  className="h-52 w-full"
+                  alt={`Car image ${index + 4}`}
+                />
+        
+                {/* Display image URL next to the image */}
+              </div>
             ))}
           </div>
         </div>

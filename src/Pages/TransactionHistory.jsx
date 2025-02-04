@@ -43,24 +43,30 @@ const TransactionHistory = () => {
   };
 
   const handleRefund1 = (record, payment_intent_id) => {
-    console.log(payment_intent_id._id);
+    Modal.confirm({
+      title: 'Are you sure you want to process the transfer?',
+      content: `You are about to process a transfer for payment ID: ${payment_intent_id._id}. This action cannot be undone.`,
+      onOk() {
+        const data = {
+          paymentId: payment_intent_id._id,
+        };
   
-    const data = {
-      paymentId: payment_intent_id._id,
-    };
-  
-    updateTransfer(data)
-      .then((response) => {
-        console.log(response?.data?.message);
-        message.success(response.data.message);
-      })
-      .catch((error) => {
-        console.error("Error during refund:", error); // Log the error to the console
-        message.error("Already Transfer.");
-      });
+        updateTransfer(data)
+          .then((response) => {
+            console.log(response?.data?.message);
+            message.success(response.data.message);
+          })
+          .catch((error) => {
+            console.error("Error during transfer:", error);
+            message.error("Already Transferred.");
+          });
+      },
+      onCancel() {
+        console.log('Transfer cancelled');
+      },
+    });
   };
   
-
   const handleOpenModal = (record) => {
     setSelectedTransaction(record);
     setModalVisible(true);
@@ -71,29 +77,42 @@ const TransactionHistory = () => {
     setSelectedTransaction(null);
   };
 
+
+
   const handleRefund = (record, payment_intent_id) => {
-    try {
-      console.log("Payment Intent ID:", payment_intent_id.payment_intent_id);
-      console.log("Amount:", payment_intent_id.amount);
+    console.log(payment_intent_id);
+    Modal.confirm({
+      title: 'Are you sure you want to process the refund?',
+      content: `You are about to refund an amount of ${payment_intent_id.amount}. This action cannot be undone.`,
+      onOk() {
+      
+        const data = {
+          payment_intent_id: payment_intent_id.payment_intent_id,
+          amount: payment_intent_id.amount,
+        };
   
-      const data = {
-        payment_intent_id: payment_intent_id.payment_intent_id,
-        amount: payment_intent_id.amount,
-      };
-  
-      updateRefund(data)
-        .then((response) => {
-          message.success(response.data.message);
-        })
-        .catch((error) => {
-          console.error("Refund Error:", error);
-          message.error("Already Payment");
-        });
-    } catch (error) {
-      console.error("Unexpected Error:", error);
-      message.error("An unexpected error occurred. Please contact support.");
-    }
+        updateRefund(data)
+          .then((response) => {
+            if (response?.error) {
+              console.log("Refund Error:", response.error.data.message);
+              message.error(response.error.data.message);
+            } else {
+              console.log("Refund Response:", response.data.message);
+              message.success(response.data.message);
+            }
+          })
+          .catch((error) => {
+            console.error("Refund Error:", error);
+            message.error("An unexpected error occurred. Please contact support.");
+          });
+      },
+      onCancel() {
+        console.log('Refund cancelled');
+      },
+    });
   };
+  
+
   
   const columns = [
     {
@@ -174,30 +193,38 @@ const TransactionHistory = () => {
         ),
     },
     {
-      title: "Location",
-      dataIndex: "car",
-      key: "location",
-      render: (record, payment_intent_id) => (
-        <button
-          onClick={() => handleRefund1(record, payment_intent_id)}
-          className="bg-[#970b4d] text-white px-8 py-2 rounded-md"
-        >
-          Transfer
-        </button>
-      ),
+      title: "Transfer",
+      dataIndex: "transfer",
+      key: "transfer",
+      render: (record, payment_intent_id) => {
+        const isSucceeded = payment_intent_id.status === "succeeded"; // Check if the status is 'succeeded'
+        return (
+          <button
+            onClick={() => handleRefund1(record, payment_intent_id)}
+            className={`bg-[#970b4d] text-white px-8 py-2 rounded-md ${!isSucceeded ? "cursor-not-allowed opacity-50" : ""}`}
+            disabled={!isSucceeded} // Disable button if status is not 'succeeded'
+          >
+            Transfer
+          </button>
+        );
+      },
     },
     {
-      title: "Location",
-      dataIndex: "car",
-      key: "location",
-      render: (record, payment_intent_id) => (
-        <button
-          onClick={() => handleRefund(record, payment_intent_id)}
-          className="bg-[#34C759] text-white px-8 py-2 rounded-md"
-        >
-          Refund
-        </button>
-      ),
+      title: "Refund",
+      dataIndex: "refund",
+      key: "refund",
+      render: (record, payment_intent_id) => {
+        const isSucceeded = payment_intent_id.status === "succeeded"; // Check if the status is 'succeeded'
+        return (
+          <button
+            onClick={() => handleRefund(record, payment_intent_id)}
+            className={`bg-[#34C759] text-white px-8 py-2 rounded-md ${!isSucceeded ? "cursor-not-allowed opacity-50" : ""}`}
+            disabled={!isSucceeded} // Disable button if status is not 'succeeded'
+          >
+            Refund
+          </button>
+        );
+      },
     },
     {
       title: "Status",

@@ -287,19 +287,7 @@ const Refund = () => {
       key: "carName",
       render: (car) => `${car?.make} ${car?.model}`,
     },
-    {
-      title: "Location",
-      dataIndex: "car",
-      key: "location",
-      render: (record, payment_intent_id) => (
-        <button
-          onClick={() => handleRefund(record, payment_intent_id)}
-          className="bg-[#34C759] text-white px-8 py-2 rounded-md"
-        >
-          Refund
-        </button>
-      ),
-    },
+   
     {
       title: "Status",
       key: "status",

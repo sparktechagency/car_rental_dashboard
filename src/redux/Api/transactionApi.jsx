@@ -6,7 +6,7 @@ const transactionApi = baseApi.injectEndpoints({
         getAllTransaction :  builder.query({
             query : ({page,limit,searchTerm})=>{
                 return {
-                    url : `/payment/get-all-payment?page=${page}&limit=${limit}&searchTerm=${searchTerm}`,
+                    url : `/payment/get-all-payment?page=${page}&limit=${limit}&searchTerm=${searchTerm}&sort=-createdAt`,
                     method : 'GET'
                 }
             },
