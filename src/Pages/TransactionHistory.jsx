@@ -158,7 +158,7 @@ const TransactionHistory = () => {
       ),
     },
     {
-      title: "Id",
+      title: "Transaction Id",
       dataIndex: "payment_intent_id",
       key: "payment_intent_id",
     },
