@@ -6,7 +6,7 @@ import Header from '../Components/Shered/Header'
 const Root = () => {
     return (
         <div className='between-start gap-0 bg-[#F2F2F2]'>
-            <div className='w-[300px] bg-[#242424] overflow-y-scroll h-screen '>
+            <div className='w-[300px] bg-[#F9F9F9] overflow-y-scroll h-screen '>
                 <Sidebar />
             </div>
             <div className=' w-full h-screen overflow-y-scroll'>
