@@ -8,13 +8,15 @@ import { BiDollarCircle } from "react-icons/bi";
 import { FaRegUser } from "react-icons/fa";
 import { FiPhone } from "react-icons/fi";
 import { IoGitMergeOutline, IoSettingsOutline } from "react-icons/io5";
+import { logout } from "../../redux/features/auth/authSlice";
+import { useDispatch } from "react-redux";
 
 const Sidebar = () => {
   const [openIndex, setOpenIndex] = useState(null);
   const contentRefs = useRef([]);
   const { pathname } = useLocation();
   const navigate = useNavigate();
-
+  const dispatch = useDispatch();
   // const admin = false;
 
   const links = [
@@ -124,7 +126,9 @@ const Sidebar = () => {
   ];
 
   const handleLogOut = () => {
-    localStorage.removeItem("token");
+    // localStorage.removeItem("token");
+    // navigate("/auth/login");
+    dispatch(logout())
     navigate("/auth/login");
   };
   const toggleAccordion = (index) => {

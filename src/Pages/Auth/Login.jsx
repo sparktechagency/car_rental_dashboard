@@ -5,16 +5,19 @@ import { Link } from "react-router-dom";
 // import img from '../../assets/images/login.png'
 import { useLoginAdminMutation } from "../../redux/Api/userApi";
 import { toast } from "sonner";
+import { useDispatch } from "react-redux";
+import { setToken } from "../../redux/features/auth/authSlice";
 
 const Login = () => {
     const [loginAdmin] = useLoginAdminMutation()
     const navigate = useNavigate();
-
+    const dispatch = useDispatch();
     const onFinish = (values) => {
         loginAdmin(values).unwrap()
             .then((payload) => {
-                if(payload?.data?.user?.authId?.role === "ADMIN"){
-                    localStorage.setItem('token' , JSON.stringify(payload?.data?.accessToken))
+                if(payload?.success){
+                    // localStorage.setItem('token' , JSON.stringify(payload?.data?.accessToken))
+                    dispatch(setToken(payload?.data?.accessToken))
                     toast.success(payload?.message);
                     return navigate('/')
                 }

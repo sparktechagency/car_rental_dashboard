@@ -154,7 +154,7 @@ export const router = createBrowserRouter([
     },
     {
         path: '/auth/login',
-        element: <PrivateLogin><Login/></PrivateLogin>
+        element: <Login/>
     },
     {
         path: '/auth/forgot-password',
