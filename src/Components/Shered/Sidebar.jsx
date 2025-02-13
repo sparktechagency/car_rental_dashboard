@@ -121,6 +121,11 @@ const Sidebar = () => {
           label: "Tips & Tricks",
           icon: <></>,
         },
+        {
+          path: "/feedback",
+          label: "feedback",
+          icon: <></>,
+        },
       ],
     },
   ];

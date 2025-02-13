@@ -33,6 +33,8 @@ import HostingGuide from "../Components/HostingGuide/HostingGuide.jsx";
 
 import Refund from "../Pages/Refound/Refund.jsx";
 import BankTransfer from "../Pages/BankTransfer/BankTransfer.jsx";
+import Feedback from "../Pages/feedback/Feedback.jsx";
+
 
 
 export const router = createBrowserRouter([
@@ -113,6 +115,10 @@ export const router = createBrowserRouter([
             {
                 path: '/tips-tricks',
                 element: <TipsTricks />,
+            },
+            {
+                path: '/feedback',
+                element: <Feedback></Feedback>
             },
             {
                 path: '/trust-safety',

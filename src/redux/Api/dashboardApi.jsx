@@ -241,6 +241,16 @@ const useApi = baseApi.injectEndpoints({
       },
       providesTags: ["tips"],
     }),
+
+    getFeedback: builder.query({
+      query: () => {
+        return {
+          url: "/feedback/get-all-feedback",
+          method: "GET",
+        };
+      },
+      providesTags: ["tips"],
+    }),
     createTipsTricks: builder.mutation({
       query: (data) => {
         return {
@@ -292,5 +302,6 @@ export const {
   useCreateHostingGuideMutation,
   useCreateTipsTricksMutation,
   useGetTipsTricksQuery,
-  useAddContactMutation
+  useAddContactMutation,
+  useGetFeedbackQuery
 } = useApi;
