@@ -63,13 +63,14 @@ const MediaSettingVideoTable = ({search}) => {
 
     // Columns data
     const formattedTableData = getAllDestination?.data?.destinations?.map((dest, i) => {
+        
         return {
             key: dest?._id,
             slNo: i + 1,
             image: `${imageUrl}${dest?.destination_image}`,
             destination: dest?.name
         }
-    })
+    })?.reverse()
 
 
 
