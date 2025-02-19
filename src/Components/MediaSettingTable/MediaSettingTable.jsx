@@ -38,7 +38,7 @@ const MediaSettingTable = ({ getAllAds }) => {
             title: 'Ads',
             dataIndex: 'imageUrl',
             key: 'ads',
-            render: (text, record) => <img src={record.imageUrl} alt={record.name} style={{ width: 50, height: 50 }} />,
+            render: (text, record) => <img src={record.imageUrl} alt={record?.name} style={{ width: 50, height: 50 }} />,
         },
         {
             title: 'View Order',

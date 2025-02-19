@@ -23,18 +23,18 @@ console.log(hostData)
 
   const allRequests = hostData?.data?.allAddCarReq;
   console.log(allRequests)
-  const tableData = allRequests?.slice(0,3).map((request, index) => ({
+  const tableData = allRequests?.slice(0,3)?.map((request, index) => ({
     key: index + 1,
     id: request._id,
-    name: request.user.name,
-    img: request.user.profile_image,
-    contact: request.user.phone_number,
-    email: request.user.email,
-    location: request.carAddress,
+    name: request?.user?.name,
+    img: request?.user?.profile_image,
+    contact: request?.user?.phone_number,
+    email: request?.user?.email,
+    location: request?.carAddress,
     car: `${request.make} ${request.model}`,
-    carLocation: request.destination,
-    carImg: request.car_image[0],
-    status: request.status,
+    carLocation: request?.destination,
+    carImg: request?.car_image[0],
+    status: request?.status,
   }));
 
   const statsData = [
@@ -59,14 +59,14 @@ console.log(hostData)
   return (
     <>
       <div className="grid-4 ">
-        {statsData.map((item, index) => (
+        {statsData?.map((item, index) => (
           <div
             className="w-full h-full border-r-2 center-center flex-col gap-3 bg-[white]"
             key={index}
           >
             <div className="my-10 text-center space-y-4">
-              <p className="text-3xl font-semibold">{item.count}</p>
-              <p className="text-[#B47000]">{item.title}</p>
+              <p className="text-3xl font-semibold">{item?.count}</p>
+              <p className="text-[#B47000]">{item?.title}</p>
             </div>
           </div>
         ))}

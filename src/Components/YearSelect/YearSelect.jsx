@@ -9,7 +9,7 @@ const YearSelect= () => {
 
   return (
     <Select defaultValue={2024} style={{ width: 120 }}>
-      {years.map((year) => (
+      {years?.map((year) => (
         <Option key={year} value={year}>
           {year}
         </Option>

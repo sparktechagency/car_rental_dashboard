@@ -401,8 +401,8 @@ const Refund = () => {
             </div>
 
             <h3 className="text-lg font-semibold mt-4">User Details</h3>
-            <p>Renter: {selectedTransaction.user.name}</p>
-            <p>Host: {selectedTransaction.host.name}</p>
+            <p>Renter: {selectedTransaction?.user?.name}</p>
+            <p>Host: {selectedTransaction?.host?.name}</p>
           </div>
         )}
       </Modal>

@@ -30,11 +30,11 @@ const RequestHostDetails = () => {
       <div className="mt-10 flex items-center gap-5">
         <img src={img} className="rounded-full w-20 h-20" alt="" />
         <div>
-          <p className="text-xl font-lora">{user.name}</p>
+          <p className="text-xl font-lora">{user?.name}</p>
           <div className="text-sm space-y-1 mt-4">
-            <p>Contact Number : {user.phone_number}</p>
-            <p>Email : {user.email}</p>
-            <p>Location : {user.address}K</p>
+            <p>Contact Number : {user?.phone_number}</p>
+            <p>Email : {user?.email}</p>
+            <p>Location : {user?.address}K</p>
             {/* <p>Location : London , UK</p> */}
           </div>
         </div>

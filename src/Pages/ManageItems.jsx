@@ -96,8 +96,8 @@ const ManageItems = () => {
                                 <Select  onChange={(value) => handleSelectChange(value, 'category')} defaultValue="all">
                                     <Option value="all">All</Option>
                                     {getAllCategory?.data?.map((category) => (
-                                    <Option key={category._id} value={category.name}>
-                                        {category.name}
+                                    <Option key={category._id} value={category?.name}>
+                                        {category?.name}
                                     </Option>
                                 ))}
                                 </Select>

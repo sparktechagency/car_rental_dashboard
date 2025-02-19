@@ -363,11 +363,11 @@ const TransactionHistory = () => {
             className="w-20 h-20 object-cover rounded-full border"
           />
           <div>
-            <p className="text-md font-semibold">{selectedTransaction.host.name}</p>
-            <p>📧 {selectedTransaction.host.email}</p>
-            <p>📞 {selectedTransaction.host.phone_number}</p>
-            <p>⭐ Rating: {selectedTransaction.host.rating}</p>
-            <p>🚗 Total Cars: {selectedTransaction.host.carCount}</p>
+            <p className="text-md font-semibold">{selectedTransaction.host?.name}</p>
+            <p>📧 {selectedTransaction?.host?.email}</p>
+            <p>📞 {selectedTransaction?.host?.phone_number}</p>
+            <p>⭐ Rating: {selectedTransaction?.host?.rating}</p>
+            <p>🚗 Total Cars: {selectedTransaction?.host?.carCount}</p>
           </div>
         </div>
       </div>
@@ -377,15 +377,15 @@ const TransactionHistory = () => {
         <h3 className="text-lg font-semibold mb-3">👤 Renter Details</h3>
         <div className="flex gap-4">
           <img
-            src={`${imageUrl}/${selectedTransaction.user.profile_image}`}
+            src={`${imageUrl}/${selectedTransaction?.user?.profile_image}`}
             alt="User"
             className="w-20 h-20 object-cover rounded-full border"
           />
           <div>
-            <p className="text-md font-semibold">{selectedTransaction.user.name}</p>
-            <p>📧 {selectedTransaction.user.email}</p>
-            <p>📞 {selectedTransaction.user.phone_number}</p>
-            <p>⭐ Rating: {selectedTransaction.user.rating}</p>
+            <p className="text-md font-semibold">{selectedTransaction?.user?.name}</p>
+            <p>📧 {selectedTransaction?.user?.email}</p>
+            <p>📞 {selectedTransaction?.user?.phone_number}</p>
+            <p>⭐ Rating: {selectedTransaction?.user?.rating}</p>
           </div>
         </div>
       </div>

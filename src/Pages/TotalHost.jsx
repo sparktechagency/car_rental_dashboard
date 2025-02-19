@@ -146,16 +146,16 @@ const TotalHost = () => {
 
       <Table
         columns={columns}
-        dataSource={users.map((user, index) => ({
-          key: user._id,
+        dataSource={users?.map((user, index) => ({
+          key: user?._id,
           serialNo: `#${index + 1}`,
-          name: user.name,
-          phone_number: user.phone_number,
-          profile_image: user.profile_image,
-          carCount: user.carCount,
-          trip: user.trip,
-          email: user.email,
-          rating: user.rating || "Not Rated",
+          name: user?.name,
+          phone_number: user?.phone_number,
+          profile_image: user?.profile_image,
+          carCount: user?.carCount,
+          trip: user?.trip,
+          email: user?.email,
+          rating: user?.rating || "Not Rated",
           _id: user?.authId?._id,
           isBlocked: user?.authId?.isBlocked,
         }))}

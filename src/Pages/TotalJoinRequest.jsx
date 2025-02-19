@@ -34,18 +34,18 @@ const TotalJoinRequest = () => {
   const startItem = (currentPage - 1) * pageSize + 1;
   const endItem = Math.min(currentPage * pageSize, totalItems);
 
-  const tableData = allRequests.map((request, index) => ({
+  const tableData = allRequests?.map((request, index) => ({
     key: startItem + index,
-    id: request._id,
-    name: request.user.name,
-    img: request.user.profile_image,
-    contact: request.user.phone_number,
-    email: request.user.email,
-    location: request.carAddress,
+    id: request?._id,
+    name: request?.user?.name,
+    img: request?.user?.profile_image,
+    contact: request?.user?.phone_number,
+    email: request?.user?.email,
+    location: request?.carAddress,
     car: `${request.make} ${request.model}`,
-    carLocation: request.destination,
-    carImg: request.car_image[0],
-    status: request.status,
+    carLocation: request?.destination,
+    carImg: request?.car_image[0],
+    status: request?.status,
   }));
 
   return (

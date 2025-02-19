@@ -11,7 +11,7 @@ const MonthSelect= () => {
 
   return (
     <Select defaultValue="July" style={{ width: 120 }}>
-      {months.map((month, index) => (
+      {months?.map((month, index) => (
         <Option key={index} value={month}>
           {month}
         </Option>

@@ -165,7 +165,7 @@ const Sidebar = () => {
       </div>
 
       <div className="start-start flex-col gap-4 mt-5 text-black ">
-        {links.map((item, index) => {
+        {links?.map((item, index) => {
           const isActive = item.path === pathname;
           const isSubMenuActive =
             item.sub_menu &&

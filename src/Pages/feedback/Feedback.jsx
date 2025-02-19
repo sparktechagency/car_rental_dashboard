@@ -98,8 +98,8 @@ const Feedback = () => {
             </tr>
           </thead>
           <tbody>
-            {feedbackData.map((feedback) => (
-              <tr key={feedback._id} className="border-b">
+            {feedbackData?.map((feedback) => (
+              <tr key={feedback?._id} className="border-b">
                 <td className="py-2 px-4"><img className="w-[70px] h-[70px] rounded-full" src={`${imageUrl}/${feedback?.user?.profile_image}`} alt="" /></td>
                 <td className="py-2 px-4">{feedback?.feedback}</td>
                 <td className="py-2 px-4">{feedback?.user?.email}</td>

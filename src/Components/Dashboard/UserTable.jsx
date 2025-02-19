@@ -61,12 +61,12 @@ const UserTable = () => {
           <img
             src={record.avatar}
             className="h-12 rounded-md"
-            alt={record.name}
+            alt={record?.name}
           />
           <div className="ml-2">
-            <div>{record.name}</div>
+            <div>{record?.name}</div>
             <div style={{ color: "gray", fontSize: "12px" }}>
-              {record.phone}
+              {record?.phone}
             </div>
           </div>
         </div>

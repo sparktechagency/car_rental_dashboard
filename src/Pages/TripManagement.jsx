@@ -46,7 +46,7 @@ const TripManagement = () => {
   const endItem = Math.min(currentPage * pageSize, totalItems);
 
   // Transform API data to match the table format
-  const transformedData = allTrips.map((trip, index) => ({
+  const transformedData = allTrips?.map((trip, index) => ({
     key: trip?._id || `temp-${index}`, // Ensure a unique key even if `_id` is missing
     serialNo: `#${startItem + index}`, // Generate serial numbers correctly across pages
     renterName: trip?.user?.name || "N/A",

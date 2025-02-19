@@ -60,7 +60,7 @@ const HostDetails = () => {
       </div>
       <div className="mt-10">
         <p>Total Cars: {cars.length}</p>
-        {cars.map((car, index) => (
+        {cars?.map((car, index) => (
   <div
     key={car._id}
     className="flex items-center justify-between bg-[#F6F6F6] hover:bg-[#EBEBEB] p-4 mt-5 rounded-md"
@@ -216,7 +216,7 @@ const HostDetails = () => {
         <p className="text-center font-medium text-xl mb-5">All Images</p>
         <div className="grid grid-cols-2 gap-5">
           <div className="space-y-5">
-            {cars[0]?.car_image?.slice(0, 3).map((image, index) => (
+            {cars[0]?.car_image?.slice(0, 3)?.map((image, index) => (
               <div key={index} className="flex items-center gap-3">
                 <img
                   src={`${imageUrl}/${image}`}
@@ -229,7 +229,7 @@ const HostDetails = () => {
             ))}
           </div>
           <div className="space-y-5">
-            {cars[0]?.car_image?.slice(3, 6).map((image, index) => (
+            {cars[0]?.car_image?.slice(3, 6)?.map((image, index) => (
               <div key={index} className="flex items-center gap-3">
                 <img
                   src={`${imageUrl}/${image}`}

@@ -41,7 +41,7 @@ const ManageCategoryTable = () => {
             title: 'Image',
             dataIndex: 'imageUrl',
             key: 'image',
-            render: (text, record) => <img className="object-contain" src={record.imageUrl} alt={record.name} style={{ width: 60, height: 60 }} />,
+            render: (text, record) => <img className="object-contain" src={record.imageUrl} alt={record?.name} style={{ width: 60, height: 60 }} />,
         },
         {
             title: 'Action',
