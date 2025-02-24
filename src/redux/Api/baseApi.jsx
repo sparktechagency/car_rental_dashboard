@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import img from "../../assets/images/place.png";
 const baseQuery = fetchBaseQuery({
-  baseUrl: "http://178.128.174.197:8001",
+  baseUrl: "https://api.nardo.app",
   // prepareHeaders: (headers) => {
   //   const token = JSON.parse(localStorage.getItem("token"));
   //   if (token) {
@@ -27,5 +27,5 @@ export const baseApi = createApi({
   endpoints: () => ({}),
 });
 
-export const imageUrl = "http://178.128.174.197:8001";
+export const imageUrl = "https://api.nardo.app";
 export const placeImage = img;
