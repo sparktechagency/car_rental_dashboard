@@ -51,14 +51,14 @@ const TripManagement = () => {
     serialNo: `#${startItem + index}`, // Generate serial numbers correctly across pages
     renterName: trip?.user?.name || "N/A",
     renterPhone: trip?.user?.phone_number || "N/A",
-    renterAvatar: trip?.user?.profile_image ? `${imageUrl}/${trip.user.profile_image}` : null, 
+    renterAvatar: trip?.user?.profile_image ? `${imageUrl}/${trip?.user?.profile_image}` : null, 
     hostName: trip?.car?.hostFirstName && trip?.car?.hostLastName
-        ? `${trip.car.hostFirstName} ${trip.car.hostLastName}`
+        ? `${trip?.car?.hostFirstName} ${trip?.car?.hostLastName}`
         : "N/A",
     hostPhone: trip?.car?.user?.phone_number || "N/A",
-    hostAvatar: trip?.car?.car_image?.length ? `${imageUrl}/${trip.car.car_image[0]}` : null, 
-    price: trip?.tripPrice ? `$${trip.tripPrice}` : "N/A",
-    carName: trip?.car?.make && trip?.car?.model ? `${trip.car.make} ${trip.car.model}` : "N/A",
+    hostAvatar: trip?.car?.car_image?.length ? `${imageUrl}/${trip?.car?.car_image[0]}` : null, 
+    price: trip?.tripPrice ? `$${trip?.tripPrice}` : "N/A",
+    carName: trip?.car?.make && trip?.car?.model ? `${trip?.car?.make} ${trip?.car?.model}` : "N/A",
     location: trip?.returnLocation || "N/A",
     status: trip?.status || "Unknown",
 }));

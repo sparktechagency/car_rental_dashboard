@@ -128,7 +128,7 @@ const TransactionHistory = () => {
       render: (user) => (
         <div style={{ display: "flex", alignItems: "center" }}>
           <img
-            src={`${imageUrl}/${user.profile_image}`}
+            src={`${imageUrl}/${user?.profile_image}`}
             alt="user"
             style={{ width: 50, height: 50, marginRight: 8 }}
           />
@@ -146,7 +146,7 @@ const TransactionHistory = () => {
       render: (host) => (
         <div style={{ display: "flex", alignItems: "center" }}>
           <img
-            src={`${imageUrl}/${host.profile_image}`}
+            src={`${imageUrl}/${host?.profile_image}`}
             alt="user"
             style={{ width: 50, height: 50, marginRight: 8 }}
           />
@@ -337,18 +337,18 @@ const TransactionHistory = () => {
         <h3 className="text-lg font-semibold mb-3">🚗 Car Details</h3>
         <div className="flex gap-4">
           <img
-            src={`${imageUrl}/${selectedTransaction.car.car_image[0]}`}
+            src={`${imageUrl}/${selectedTransaction?.car?.car_image[0]}`}
             alt="Car"
             className="w-40 h-28 object-cover rounded-md border"
           />
           <div>
             <p className="text-md font-semibold">
-              {selectedTransaction.car.make} {selectedTransaction.car.model} ({selectedTransaction.car.year})
+              {selectedTransaction.car.make} {selectedTransaction?.car?.model} ({selectedTransaction.car.year})
             </p>
-            <p>📍 Location: {selectedTransaction.car.carAddress}</p>
-            <p>💰 Price per Day: ${selectedTransaction.car.pricePerDay}</p>
-            <p>⛽ Fuel Type: {selectedTransaction.car.fuelType}</p>
-            <p>🛠 Features: {selectedTransaction.car.features.slice(0, 5).join(", ")}...</p>
+            <p>📍 Location: {selectedTransaction?.car?.carAddress}</p>
+            <p>💰 Price per Day: ${selectedTransaction?.car?.pricePerDay}</p>
+            <p>⛽ Fuel Type: {selectedTransaction?.car?.fuelType}</p>
+            <p>🛠 Features: {selectedTransaction?.car?.features?.slice(0, 5).join(", ")}...</p>
           </div>
         </div>
       </div>
@@ -358,12 +358,12 @@ const TransactionHistory = () => {
         <h3 className="text-lg font-semibold mb-3">🏠 Host Details</h3>
         <div className="flex gap-4">
           <img
-            src={`${imageUrl}/${selectedTransaction.host.profile_image}`}
+            src={`${imageUrl}/${selectedTransaction?.host?.profile_image}`}
             alt="Host"
             className="w-20 h-20 object-cover rounded-full border"
           />
           <div>
-            <p className="text-md font-semibold">{selectedTransaction.host?.name}</p>
+            <p className="text-md font-semibold">{selectedTransaction?.host?.name}</p>
             <p>📧 {selectedTransaction?.host?.email}</p>
             <p>📞 {selectedTransaction?.host?.phone_number}</p>
             <p>⭐ Rating: {selectedTransaction?.host?.rating}</p>

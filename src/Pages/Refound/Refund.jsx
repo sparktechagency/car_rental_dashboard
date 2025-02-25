@@ -248,7 +248,7 @@ const Refund = () => {
           render: (user) => (
             <div style={{ display: "flex", alignItems: "center" }}>
                 
-              <img  src={`${imageUrl}/${user.profile_image}`} alt="user" style={{ width: 50, height: 50, marginRight: 8, }} />
+              <img  src={`${imageUrl}/${user?.profile_image}`} alt="user" style={{ width: 50, height: 50, marginRight: 8, }} />
               <div>
                 <p className="text-[18px]">{user?.name}</p>
                 <p className="text-sm">{user?.phone_number}</p>
@@ -262,7 +262,7 @@ const Refund = () => {
           key: "hostName",
           render: (host) => (
             <div style={{ display: "flex", alignItems: "center" }}>
-              <img  src={`${imageUrl}/${host.profile_image}`} alt="user" style={{ width: 50, height: 50, marginRight: 8, }} />
+              <img  src={`${imageUrl}/${host?.profile_image}`} alt="user" style={{ width: 50, height: 50, marginRight: 8, }} />
               <div>
                 <p className="text-[18px]">{host?.name}</p>
                 <p className="text-sm">{host?.phone_number}</p>
@@ -394,9 +394,9 @@ const Refund = () => {
               /> */}
               <div>
                 <p className="text-md font-semibold">
-                  {selectedTransaction.car.make} {selectedTransaction.car.model}
+                  {selectedTransaction?.car?.make} {selectedTransaction?.car?.model}
                 </p>
-                <p>Year: {selectedTransaction.car.year}</p>
+                <p>Year: {selectedTransaction?.car?.year}</p>
               </div>
             </div>
 

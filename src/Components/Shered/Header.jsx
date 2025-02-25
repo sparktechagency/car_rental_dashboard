@@ -13,7 +13,7 @@ const Header = () => {
     // Extract necessary data safely
     const userData = getProfile?.data || {};
     const userName = userData?.authId?.name || "N/A"; // Extract name from authId
-    const userImage = userData?.profile_image ? `${imageUrl}${userData.profile_image}` : defaultProfile; // Fallback to default image
+    const userImage = userData?.profile_image ? `${imageUrl}${userData?.profile_image}` : defaultProfile; // Fallback to default image
 console.log(userImage)
     const navigate = useNavigate();
 
