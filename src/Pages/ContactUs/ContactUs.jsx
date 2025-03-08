@@ -41,7 +41,7 @@ const ContactUs = () => {
 
             <div className='flex items-center justify-between max-w-5xl mx-auto mt-20'>
                 {/* Call To Us Section */}
-                <div className='space-y-5'>
+                {/* <div className='space-y-5'>
                     <p className='flex items-center gap-2'><FiPhone size={22} /> Call To Us</p>
                     <Input
                         placeholder='+999999999'
@@ -53,7 +53,7 @@ const ContactUs = () => {
                         value={formData.callToUs[1]}
                         onChange={(e) => handleChange(e, 1, "callToUs")}
                     />
-                </div>
+                </div> */}
 
                 {/* Write To Us Section */}
                 <div className='space-y-5'>
