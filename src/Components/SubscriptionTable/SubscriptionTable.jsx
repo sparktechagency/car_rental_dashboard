@@ -17,7 +17,7 @@ const data = [
     {
         key: '1',
         subscriptionPlan: 'Gold',
-        membershipFee: '$19.99',
+        membershipFee: ' £19.99',
         pointsRange: '0-24,999',
         pointsPerSwap: '20% of product value',
         pointsPerPositiveComment: '5',
@@ -26,7 +26,7 @@ const data = [
     {
         key: '2',
         subscriptionPlan: 'Platinum',
-        membershipFee: '$19.99',
+        membershipFee: ' £19.99',
         pointsRange: '25,000-99,999',
         pointsPerSwap: '20% of product value',
         pointsPerPositiveComment: '25',
@@ -35,7 +35,7 @@ const data = [
     {
         key: '3',
         subscriptionPlan: 'Diamond',
-        membershipFee: '$19.99',
+        membershipFee: '19.99',
         pointsRange: '100,000+',
         pointsPerSwap: '20% of product value',
         pointsPerPositiveComment: '50',

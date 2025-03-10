@@ -167,7 +167,7 @@ const TransactionHistory = () => {
       dataIndex: "amount",
       key: "price",
       render: (amount) =>
-        amount ? `$${amount}` : <span className="text-gray-500">Not</span>,
+        amount ? `£${amount}` : <span className="text-gray-500">Not</span>,
     },
     {
       title: "Refund Amount",
@@ -175,7 +175,7 @@ const TransactionHistory = () => {
       key: "refund_amount",
       render: (refund_amount) =>
         refund_amount ? (
-          `$${refund_amount}`
+          `£${refund_amount}`
         ) : (
           <span className="text-gray-500">Not</span>
         ),
@@ -187,7 +187,7 @@ const TransactionHistory = () => {
       key: "transferred_amount",
       render: (transferred_amount) =>
         transferred_amount ? (
-          `$${transferred_amount}`
+          `£${transferred_amount}`
         ) : (
           <span className="text-gray-500">Not</span>
         ),
@@ -346,7 +346,7 @@ const TransactionHistory = () => {
               {selectedTransaction.car.make} {selectedTransaction?.car?.model} ({selectedTransaction.car.year})
             </p>
             <p>📍 Location: {selectedTransaction?.car?.carAddress}</p>
-            <p>💰 Price per Day: ${selectedTransaction?.car?.pricePerDay}</p>
+            <p>💰 Price per Day: £{selectedTransaction?.car?.pricePerDay}</p>
             <p>⛽ Fuel Type: {selectedTransaction?.car?.fuelType}</p>
             <p>🛠 Features: {selectedTransaction?.car?.features?.slice(0, 5).join(", ")}...</p>
           </div>

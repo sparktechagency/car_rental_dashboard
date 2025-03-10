@@ -279,7 +279,7 @@ const Refund = () => {
       title: "Price",
       dataIndex: "amount",
       key: "price",
-      render: (amount) => `$${amount}`,
+      render: (amount) => `£${amount}`,
     },
     {
       title: "Car Name",

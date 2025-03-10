@@ -52,7 +52,7 @@ console.log(hostData)
     },
     {
       title: 'Total Earning',
-      count: `$${dashboardInfo?.data?.totalEarning || 0}`,
+      count: ` £${dashboardInfo?.data?.totalEarning || 0}`,
     },
   ];
 

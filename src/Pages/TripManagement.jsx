@@ -57,7 +57,7 @@ const TripManagement = () => {
         : "N/A",
     hostPhone: trip?.car?.user?.phone_number || "N/A",
     hostAvatar: trip?.car?.car_image?.length ? `${imageUrl}/${trip?.car?.car_image[0]}` : null, 
-    price: trip?.tripPrice ? `$${trip?.tripPrice}` : "N/A",
+    price: trip?.tripPrice ? `£${trip?.tripPrice}` : "N/A",
     carName: trip?.car?.make && trip?.car?.model ? `${trip?.car?.make} ${trip?.car?.model}` : "N/A",
     location: trip?.returnLocation || "N/A",
     status: trip?.status || "Unknown",
