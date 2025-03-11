@@ -81,7 +81,7 @@ const TotalHost = () => {
       align: "center",
     },
     {
-      title: "Totla Trip",
+      title: "Total Trip",
       dataIndex: "trip",
       key: "trip",
       align: "center",
