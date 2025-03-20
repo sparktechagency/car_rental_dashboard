@@ -19,6 +19,7 @@ const UserTable = () => {
   });
   const [openModal, setOpenModal] = useState(false);
   const [userData, setUserData] = useState();
+console.log(userData)
 
   const [blockUser] = useBlockUserHostMutation();
 
@@ -124,6 +125,7 @@ const UserTable = () => {
       isBlocked: user?.authId?.isBlocked,
     };
   });
+  console.log(formattedTableData)
 
   return (
     <div className=" rounded-md bg-white p-4">
@@ -156,14 +158,14 @@ const UserTable = () => {
         footer={false}
         onCancel={() => setOpenModal(false)}
       >
-        <p className="text-center font-lora text-xl">User Profile</p>
+  
         <div className="flex flex-col items-center justify-center">
           <img
-            src={userData?.avatar}
+            src={userData?.avatar} 
             className="mx-auto mt-5 rounded-full w-20"
             alt=""
           />
-          <p className="font-lora text-xl mt-5">User Profile</p>
+
           <div className="space-y-4 font-lora mt-5 text-xl ">
             <p>User Name : {userData?.name}</p>
             <p>Contact Number : {userData?.phone}</p>

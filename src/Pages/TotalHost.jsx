@@ -24,7 +24,7 @@ const TotalHost = () => {
     console.log("Blocking/Unblocking Host:", record);
   
     try {
-      const isBlocking = !record.isBlocked; // Check if blocking or unblocking
+      const isBlocking = !record.isBlocked; 
       const response = await blocHost({
         authId: record._id,
         isBlocked: isBlocking,

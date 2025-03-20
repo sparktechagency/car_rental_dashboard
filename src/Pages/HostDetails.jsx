@@ -31,8 +31,15 @@ const HostDetails = () => {
   const host = data?.data?.host || {};
 
   const cars = data?.data?.cars || [];
+ const [carData,setCarData] = useState({});
+  console.log(cars)
+  console.log(cars?.year)
+  console.log("card data",carData)
 
-  console.log(cars);
+  const handleModalOpen = (item)=>{
+    setCarData(item);
+    setOpenModal(true)
+  }
 
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error loading host details</div>;
@@ -47,13 +54,13 @@ const HostDetails = () => {
         Host Details
       </p>
       <div className="mt-10 flex items-center gap-5">
-        <img src={`${imageUrl}/${host?.profile_image}`} className="rounded-full w-20 h-20" alt="" />
+        <img src={`${imageUrl}/${host?.profile_image}`} className="rounded-full object-cover w-20 h-20" alt="" />
         <div>
           <p className="text-xl font-lora">{host?.name}</p>
           <div className="text-sm space-y-1 mt-4">
             <p>Contact Number : {host?.phone_number}</p>
             <p>Email : {host?.email}</p>
-            <p>Location : N</p>
+           
             {/* <p>Location : London , UK</p> */}
           </div>
         </div>
@@ -94,7 +101,7 @@ const HostDetails = () => {
       <p>£{car.pricePerDay || 0}/per day</p>
     </div>
     <p
-      onClick={() => setOpenModal(true)}
+      onClick={()=>handleModalOpen(car)}
       className="flex items-center gap-2 bg-white px-4 py-2 cursor-pointer"
     >
       <CiImageOn />
@@ -104,143 +111,135 @@ const HostDetails = () => {
 ))}
 
 
-        {cars.length > 0 && (
-          <div className=" grid grid-cols-2 items-center mt-20 px-5">
-            <div className="">
-              <p className="font-medium text-xl">
-                {cars[0].make} {cars[0].model} {cars[0].year}
-              </p>
-              <div className="mt-10 flex items-center gap-10">
-                <p className="bg-[#EBEBEB] inline-block px-5 py-2 rounded-full">
-                  {cars[0].carType} car
-                </p>
-                <p className="flex items-center gap-1">
-                  <GrLocation />
-                  {cars[0].destination}
-                </p>
-              </div>
-              <p className="mt-5">Discount: {cars[0].discountAmount || 0}%</p>
-              <p className="mt-5">Total Trip: {cars[0].trip || 0}</p>
-              <p className="mt-5">£{cars[0].pricePerDay}/day</p>
-              <div className="flex  gap-5 mt-10">
-                <p className="flex items-center gap-1">
-                  <MdOutlineDirectionsCar /> {cars[0].seats} Passenger
-                </p>
-                <p className="flex items-center gap-1">
-                  <MdOutlineDoorBack />
-                  {cars[0].doors} Door
-                </p>
-                <p className="flex items-center gap-1">
-                  <RiBriefcase3Line />
-                  {cars[0].bags} Bags
-                </p>
-                <p className="flex items-center gap-1">
-                  <RiBriefcase3Line />
-                  {cars[0].transmission}
-                </p>
-              </div>
-              <p className="my-8 font-medium text-xl">Description:</p>
-              <p className="max-w-[50%]">{cars[0].description}</p>
-              <p className="py-8">Delivery Location:</p>
-              <p>{cars[0].carAddress}</p>
-            </div>
+       <div className=" mt-11">
+       <div className="">
+        <p className="font-semibold">Host Name:</p>
+        {host?.name}
+        <p className="font-semibold">Location:</p>
+        {host?.address}
+        <p className="font-semibold">Rating:</p>
+        {host?.rating}
 
-            <div className=" w-full text-[#272121]">
-              <div className="font-normal tex-[16px] space-y-2">
-                <p>Driver’s license number</p>
-                <p>{cars[0].hostLicenseNumber}</p>
-              </div>
-              <div className="flex items-center gap-10 mt-10">
+
+       </div>
+       <div>
+       <div className="font-normal tex-[16px] space-y-2">
+                <p className="font-medium text-xl">Host license Image</p>
+                <div className="grid grid-cols-2 gap-4">
+                <div><p className="font-semibold"> Back Image:</p>
+                <img className="w-full" src={`${imageUrl}/${host.licenseBackImage}`} alt="" /></div>
                 <div>
-                  <p>maximum travel distance for one day</p>
-                  <p className="text-sm">{cars[0].maxTravelDistancePerDay}Km</p>
+                <p className="font-semibold">Front Image</p>
+                <img className="w-full" src={`${imageUrl}/${host.licenseFrontImage}`} alt="" />
                 </div>
-                <div>
-                  <p>Per kilometer charge after crossing maximum distance </p>
-                  <p className="text-sm">£{cars[0].finePerKm}</p>
                 </div>
               </div>
-              <div className="mt-10">
-                <p>User Name </p>
-                <p className="text-sm">
-                  {cars[0].hostFirstName} {cars[0].hostLastName}
-                </p>
-              </div>
-              <div className="mt-10">
-                <p>License Expiration date</p>
-                <p className="text-sm">{cars[0].hostLicenseExpiryDate}</p>
-              </div>
-              <div className="mt-10">
-                <p>License Date of birth</p>
-                <p className="text-sm">{cars[0].hostLicenseDateOfBirth}</p>
-              </div>
-            </div>
-          </div>
-        )}
+       </div>
+       </div>
 
-        <div className="flex items-center gap-5 mt-5 px-5 mb-10">
-          <div className="border border-gray-100 p-4">
-            <p>New York City, USA</p>
-            <p>Population: 8.4 million</p>
-            <p>
-              Known for: Statue of Liberty, Times Square, Central Park, Empire
-              State Building
-            </p>
-          </div>
-          <div className="border border-gray-100 p-4">
-            <p>Tokyo, japan</p>
-            <p>Population: 8.4 million</p>
-            <p>
-              Known for: Statue of Liberty, Times Square, Central Park, Empire
-              State Building
-            </p>
-          </div>
-          <div className="border border-gray-100 p-4">
-            <p>Paris France</p>
-            <p>Population: 8.4 million</p>
-            <p>
-              Known for: Statue of Liberty, Times Square, Central Park, Empire
-              State Building
-            </p>
-          </div>
-        </div>
+       
       </div>
 
       <Modal
-        width={800}
+        width={1000}
         centered
         footer={false}
         open={openModal}
         onCancel={() => setOpenModal(false)}
       >
         <p className="text-center font-medium text-xl mb-5">All Images</p>
-        <div className="grid grid-cols-2 gap-5">
-          <div className="space-y-5">
-            {cars[0]?.car_image?.slice(0, 3)?.map((image, index) => (
-              <div key={index} className="flex items-center gap-3">
-                <img
-                  src={`${imageUrl}/${image}`}
-                  className="h-52 w-full"
-                  alt={`Car image ${index + 1}`}
-                />
-                
-                {/* Display image URL next to the image */}
+        <div className="">
+        <div>
+  
+
+  <div className=" grid grid-cols-2  ">
+            <div className="">
+              <p className="font-medium text-xl">
+                {carData.make} {carData.model} {carData.year}
+              </p>
+              <div className="mt-5 flex items-center gap-10">
+                <p className="bg-[#EBEBEB] inline-block px-5 py-2 rounded-full">
+                  {carData.carType} car
+                </p>
+                <p className="flex items-center gap-1">
+                  <GrLocation />
+                  {carData.destination}
+                </p>
               </div>
-            ))}
-          </div>
-          <div className="space-y-5">
-            {cars[0]?.car_image?.slice(3, 6)?.map((image, index) => (
-              <div key={index} className="flex items-center gap-3">
-                <img
-                  src={`${imageUrl}/${image}`}
-                  className="h-52 w-full"
-                  alt={`Car image ${index + 4}`}
-                />
-        
-                {/* Display image URL next to the image */}
+              <p className="mt-5"><span className="font-semibold">Discount:</span> {carData.discountAmount || 0}%</p>
+              <p className=""><span className="font-semibold"> Total Trip:</span> {carData.trip || 0}</p>
+              <p className="">£{carData.pricePerDay}/day</p>
+              <div className="flex  gap-5 mt-5 text-base mb-2">
+                <p className="flex items-center gap-1">
+                  <MdOutlineDirectionsCar /> {carData.seats} Passenger
+                </p>
+                <p className="flex items-center gap-1">
+                  <MdOutlineDoorBack />
+                  {carData.doors} Door
+                </p>
+                <p className="flex items-center gap-1">
+                  <RiBriefcase3Line />
+                  {carData.bags} Bags
+                </p>
+                <p className="flex items-center gap-1">
+                  <RiBriefcase3Line />
+                  {carData.transmission}
+                </p>
               </div>
-            ))}
+              <p className="font-medium text-xl">Description:</p>
+              <p className="max-w-[50%]">{carData.description}</p>
+              <p className="font-semibold mt-5">Delivery Location:</p>
+              <p className="mb-3">{carData.carAddress}</p>
+            </div>
+
+            <div className=" w-full text-[#272121]">
+              <div className="font-normal tex-[16px] space-y-2">
+                <p className="font-medium text-xl">Driver’s license Image</p>
+                <p className="font-semibold"> Back Image:</p>
+                <img className="w-[200px] object-cover" src={`${imageUrl}/${carData.hostLicenseBackImage}`} alt="" />
+                <p className="font-semibold">Front Image</p>
+                <img className="w-[200px] object-cover" src={`${imageUrl}/${carData.hostLicenseFrontImage}`} alt="" />
+              </div>
+              
+             
+            </div>
           </div>
+</div>
+          <div className="grid grid-cols-2 gap-5">
+          {/* {cars?.map((item, carIndex) => (
+  item.car_image?.map((image, index) => {
+    // console.log(`Car ${carIndex + 1}, Image ${index + 1}:`, image); // Console log each image
+    
+    return (
+      <div key={`${carIndex}-${index}`} className="flex items-center gap-3">
+        <img
+          src={`${imageUrl}/${image}`}
+          className="h-52 w-full"
+          alt={`Car ${carIndex + 1} Image ${index + 1}`}
+        />
+      </div>
+    );
+  })
+))} */}
+
+
+{
+  carData?.car_image?.map((image,index)=>
+
+<div key={index} className="flex items-center gap-3">
+  
+        <img
+          src={`${imageUrl}/${image}`}
+          className="h-52 w-full object-cover"
+          alt={`Car ${index + 1} Image ${index + 1}`}
+        />
+      </div>
+ )
+}
+
+
+          </div>
+          
         </div>
       </Modal>
     </div>
