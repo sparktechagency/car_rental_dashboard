@@ -17,6 +17,7 @@ const UserTable = () => {
     page: page,
     search: search,
   });
+  console.log(getAllUser)
   const [openModal, setOpenModal] = useState(false);
   const [userData, setUserData] = useState();
 console.log(userData)
@@ -112,6 +113,7 @@ console.log(userData)
   ];
 
   const formattedTableData = getAllUser?.data?.map((user, i) => {
+    console.log(user?.licenseFrontImage)
     return {
       serialNo: i + 1,
       name: user?.name,
@@ -123,6 +125,8 @@ console.log(userData)
       location: user?.address,
       _id: user?.authId?._id,
       isBlocked: user?.authId?.isBlocked,
+      licenseFrontImage:user?.licenseFrontImage,
+      licenseBackImage:user?.licenseBackImage
     };
   });
   console.log(formattedTableData)
@@ -172,7 +176,36 @@ console.log(userData)
             <p>Email : {userData?.email} </p>
             <p>Address : {userData?.location}</p>
           </div>
+
+          
         </div>
+        <div className="grid grid-cols-2 gap-4 mt-5">
+  <div className="flex flex-col items-center">
+    <h1 className="font-semibold">License Front Image:</h1>
+    {userData?.licenseFrontImage ? (
+      <img
+        src={`${imageUrl}/${userData.licenseFrontImage}`}
+        alt="License Front"
+        className="w-32 h-32 object-cover rounded shadow"
+      />
+    ) : (
+      "No licenseFrontImage"
+    )}
+  </div>
+
+  <div className="flex flex-col items-center">
+    <h1 className="font-semibold">License Back Image:</h1>
+    {userData?.licenseBackImage ? (
+      <img
+        src={`${imageUrl}/${userData.licenseBackImage}`}
+        alt="License Back"
+        className="w-32 h-32 object-cover rounded shadow"
+      />
+    ) : (
+      "No licenseBackImage"
+    )}
+  </div>
+</div>
       </Modal>
     </div>
   );
