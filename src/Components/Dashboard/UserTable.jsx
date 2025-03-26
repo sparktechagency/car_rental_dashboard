@@ -28,7 +28,7 @@ console.log(userData)
     console.log(record);
   
     try {
-      const isBlocking = !record.isBlocked; // Check if it's blocking or unblocking
+      const isBlocking = !record.isBlocked; 
       const response = await blockUser({
         authId: record._id,
         isBlocked: isBlocking,
@@ -181,11 +181,11 @@ console.log(userData)
         </div>
         <div className="grid grid-cols-2 gap-4 mt-5">
   <div className="flex flex-col items-center">
-    <h1 className="font-semibold">License Front Image:</h1>
+    <h1 className="font-semibold">Licence Front Image:</h1>
     {userData?.licenseFrontImage ? (
       <img
         src={`${imageUrl}/${userData.licenseFrontImage}`}
-        alt="License Front"
+        alt="Licence Front"
         className="w-32 h-32 object-cover rounded shadow"
       />
     ) : (
@@ -194,15 +194,15 @@ console.log(userData)
   </div>
 
   <div className="flex flex-col items-center">
-    <h1 className="font-semibold">License Back Image:</h1>
+    <h1 className="font-semibold">Licence Back Image:</h1>
     {userData?.licenseBackImage ? (
       <img
         src={`${imageUrl}/${userData.licenseBackImage}`}
-        alt="License Back"
+        alt="Licence Back"
         className="w-32 h-32 object-cover rounded shadow"
       />
     ) : (
-      "No licenseBackImage"
+      "No licenceBackImage"
     )}
   </div>
 </div>

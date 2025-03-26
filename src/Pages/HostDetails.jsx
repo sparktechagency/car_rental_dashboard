@@ -70,11 +70,12 @@ const HostDetails = () => {
         {cars?.map((car, index) => (
   <div
     key={car._id}
-    className="flex items-center justify-between bg-[#F6F6F6] hover:bg-[#EBEBEB] p-4 mt-5 rounded-md"
+    className="grid grid-cols-12 bg-[#F6F6F6] hover:bg-[#EBEBEB] p-4 mt-5 rounded-md"
   >
-    <p>S.n {index + 1}</p>
+    <p className="col-span-1 flex items-center">S.n {index + 1}</p>
 
     {/* Display the first image of the car */}
+    <div className="col-span-1 flex items-center">
     {car.car_image && car.car_image.length > 0 ? (
       <img
         src={`${imageUrl}/${car.car_image[0]}`} // Use the first image URL in the car_image array
@@ -84,29 +85,34 @@ const HostDetails = () => {
     ) : (
       <img src={img} alt="No image available" className="w-20 h-20 object-cover rounded-md" />
     )}
+    </div>
 
-    <div>
+    <div className="col-span-3 flex items-center">
+    <div >
       <p>
         {car.make} {car.model} {car.year}
       </p>
       <p>{car.carType} car</p>
     </div>
-    <p className="flex items-center gap-2">
+    </div>
+    <p className="flex items-center gap-2 col-span-2">
       <GrLocation />
       {car.destination}
     </p>
-    <p>Total Trip: {car.trip || 0}</p>
-    <div className="text-[#1E3F66]">
+    <p className="col-span-1 flex items-center"> Total Trip: {car.trip || 0}</p>
+    <div className="text-[#1E3F66] justify-center col-span-2 flex items-center">
       <p>Price</p>
       <p>£{car.pricePerDay || 0}/per day</p>
     </div>
+    <div className="flex col-span-2 items-center justify-end gap-2">
     <p
       onClick={()=>handleModalOpen(car)}
-      className="flex items-center gap-2 bg-white px-4 py-2 cursor-pointer"
+      className="flex gap-2 items-center bg-white px-4 py-2 cursor-pointer"
     >
       <CiImageOn />
       View {car.car_image?.length || 0} photos
     </p>
+    </div>
   </div>
 ))}
 
@@ -124,7 +130,7 @@ const HostDetails = () => {
        </div>
        <div>
        <div className="font-normal tex-[16px] space-y-2">
-                <p className="font-medium text-xl">Host license Image</p>
+                <p className="font-medium text-xl">Host Licence Image</p>
                 <div className="grid grid-cols-2 gap-4">
                 <div><p className="font-semibold"> Back Image:</p>
                 <img className="w-full" src={`${imageUrl}/${host.licenseBackImage}`} alt="" /></div>
@@ -194,7 +200,7 @@ const HostDetails = () => {
 
             <div className=" w-full text-[#272121]">
               <div className="font-normal tex-[16px] space-y-2">
-                <p className="font-medium text-xl">Driver’s license Image</p>
+                <p className="font-medium text-xl">Driver’s Licence Image</p>
                 <p className="font-semibold"> Back Image:</p>
                 <img className="w-[200px] object-cover" src={`${imageUrl}/${carData.hostLicenseBackImage}`} alt="" />
                 <p className="font-semibold">Front Image</p>

@@ -108,7 +108,7 @@ const RequestHostDetails = () => {
          </div>
          <div>
          <div className="font-normal tex-[16px] space-y-2">
-                  <p className="font-medium text-xl">Host license Image</p>
+                  <p className="font-medium text-xl">Host Licence Image</p>
                   <div className="grid grid-cols-2 gap-4">
                   <div>
                   <p className="font-semibold"> Back Image:</p>
@@ -181,7 +181,7 @@ const RequestHostDetails = () => {
 
             <div className=" w-full text-[#272121]">
               <div className="font-normal tex-[16px] space-y-2">
-                <p className="font-medium text-xl">Driver’s license Image</p>
+                <p className="font-medium text-xl">Driver’s Licence Image</p>
                 <p className="font-semibold"> Back Image:</p>
                 <img className="w-[200px] object-cover" src={`${imageUrl}/${carData.hostLicenseBackImage}`} alt="" />
                 <p className="font-semibold">Front Image</p>
