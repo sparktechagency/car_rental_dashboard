@@ -4,10 +4,13 @@ import { CiMail } from 'react-icons/ci';
 import { FiPhone } from 'react-icons/fi';
 import { GoArrowLeft } from 'react-icons/go';
 import { Link } from 'react-router-dom';
-import { useAddContactMutation } from '../../redux/Api/dashboardApi';
+import { useAddContactMutation, useGetConactUsQuery } from '../../redux/Api/dashboardApi';
 
 const ContactUs = () => {
     const [contact, { isLoading }] = useAddContactMutation();
+    const {data:contacatUs} = useGetConactUsQuery();
+    console.log(contacatUs?.data?.writeToUs)
+    
     const [formData, setFormData] = useState({
         callToUs: ["", ""],
         writeToUs: ["", ""]
@@ -39,25 +42,11 @@ const ContactUs = () => {
                 </Link>
             </div>
 
-            <div className='flex items-center justify-between max-w-5xl mx-auto mt-20'>
-                {/* Call To Us Section */}
-                {/* <div className='space-y-5'>
-                    <p className='flex items-center gap-2'><FiPhone size={22} /> Call To Us</p>
-                    <Input
-                        placeholder='+999999999'
-                        value={formData.callToUs[0]}
-                        onChange={(e) => handleChange(e, 0, "callToUs")}
-                    />
-                    <Input
-                        placeholder='+999999999'
-                        value={formData.callToUs[1]}
-                        onChange={(e) => handleChange(e, 1, "callToUs")}
-                    />
-                </div> */}
-
-                {/* Write To Us Section */}
+     
+           <div className=' max-w-5xl mx-auto mt-20'>
+                <div className='grid grid-cols-2 gap-20'>
                 <div className='space-y-5'>
-                    <p className='flex items-center gap-2'><CiMail size={22} /> Write To Us</p>
+                    <p className='flex items-center gap-2 text-xl'><CiMail size={22} /> Write To Us</p>
                     <Input
                         placeholder='example@gmail.com'
                         value={formData.writeToUs[0]}
@@ -69,7 +58,16 @@ const ContactUs = () => {
                         onChange={(e) => handleChange(e, 1, "writeToUs")}
                     />
                 </div>
+                <div>
+                    <h1 className='text-xl  pb-5'>All Write</h1>
+                    {contacatUs?.data?.writeToUs?.map((item,index)=> <div key={index}>
+                        <p className='bg-gray-100 p-1 px-4'>{item}</p>
+                    </div>)}
+                   
+                </div>
+                </div>
             </div>
+          
 
             {/* Save Button */}
             <div className='flex items-center justify-center mt-[45vh]'>

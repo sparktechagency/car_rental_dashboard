@@ -272,6 +272,16 @@ const useApi = baseApi.injectEndpoints({
         },
         invalidatesTags: ["tips"],
       }),
+
+      getConactUs: builder.query({
+        query: () => {
+          return {
+            url: "/manage/get-contact-us",
+            method: "GET",
+          };
+        },
+        providesTags: ["tips"],
+      }),
   }),
 });
 
@@ -303,5 +313,6 @@ export const {
   useCreateTipsTricksMutation,
   useGetTipsTricksQuery,
   useAddContactMutation,
-  useGetFeedbackQuery
+  useGetFeedbackQuery,
+  useGetConactUsQuery
 } = useApi;

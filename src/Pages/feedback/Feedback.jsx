@@ -104,7 +104,10 @@ const Feedback = () => {
                 <td className="py-2 px-4">{feedback?.feedback}</td>
                 <td className="py-2 px-4">{feedback?.user?.email}</td>
                 <td className="py-2 px-4">
-                  {new Date(feedback.createdAt).toLocaleTimeString()}
+                <div className="flex gap-7">
+                {new Date(feedback.createdAt).toLocaleDateString()}
+                <span>{new Date(feedback.createdAt).toLocaleTimeString()}</span>
+                </div>
                 </td>
                
               </tr>
