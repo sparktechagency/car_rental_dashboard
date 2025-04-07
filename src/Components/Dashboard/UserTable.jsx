@@ -1,10 +1,11 @@
 import { Input, message, Modal, Pagination } from "antd";
-import  { useState } from "react";
+import { useState } from "react";
 import { CiSearch } from "react-icons/ci";
 import { Table, Space } from "antd";
-import { EyeOutlined, StopOutlined } from "@ant-design/icons";
+import { DeleteOutlined, EyeOutlined, StopOutlined } from "@ant-design/icons";
 import {
   useBlockUserHostMutation,
+  useDeleteUserMutation,
   useGetHostUserQuery,
 } from "../../redux/Api/userApi";
 import { imageUrl, placeImage } from "../../redux/Api/baseApi";
@@ -12,32 +13,37 @@ import { imageUrl, placeImage } from "../../redux/Api/baseApi";
 const UserTable = () => {
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState("");
+  const [deleteUser] = useDeleteUserMutation()
   const { data: getAllUser } = useGetHostUserQuery({
     user: "USER",
     page: page,
     search: search,
   });
-  console.log(getAllUser)
+  console.log(getAllUser);
   const [openModal, setOpenModal] = useState(false);
   const [userData, setUserData] = useState();
-console.log(userData)
+  console.log(userData);
 
   const [blockUser] = useBlockUserHostMutation();
 
   const handleBlockUnblock = async (record) => {
     console.log(record);
-  
+
     try {
-      const isBlocking = !record.isBlocked; 
+      const isBlocking = !record.isBlocked;
       const response = await blockUser({
         authId: record._id,
         isBlocked: isBlocking,
       }).unwrap();
-  
+
       console.log(response);
-  
+
       if (response.success) {
-        message.success(isBlocking ? "User Blocked Successfully!" : "User Unblocked Successfully!");
+        message.success(
+          isBlocking
+            ? "User Blocked Successfully!"
+            : "User Unblocked Successfully!"
+        );
       } else {
         message.error(response.message || "Failed to update user status.");
       }
@@ -46,7 +52,23 @@ console.log(userData)
       message.error("An error occurred. Please try again.");
     }
   };
-  
+
+  const handleDeleteCategory = async (user) => {
+    console.log(user?._id)
+    console.log(user?.id)
+    const data ={
+      authId : user?._id,
+      userId : user?.id
+
+    }
+
+    try {
+      const res = await deleteUser( data ).unwrap(); 
+      message.success(res?.message);
+    } catch (error) {
+      message.error(error?.data?.message || 'Error deleting FAQ');
+    }
+  };
 
   const columns = [
     {
@@ -107,16 +129,18 @@ console.log(userData)
               color: record.isBlocked ? "red" : "black",
             }}
           />
+          <DeleteOutlined onClick={() => handleDeleteCategory(record)} className="text-lg "/>
         </Space>
       ),
     },
   ];
 
   const formattedTableData = getAllUser?.data?.map((user, i) => {
-    console.log(user?.licenseFrontImage)
+    console.log(user?.licenseFrontImage);
     return {
       serialNo: i + 1,
       name: user?.name,
+      id:user?._id,
       avatar: user?.profile_image
         ? `${imageUrl}/${user?.profile_image}`
         : placeImage,
@@ -125,11 +149,11 @@ console.log(userData)
       location: user?.address,
       _id: user?.authId?._id,
       isBlocked: user?.authId?.isBlocked,
-      licenseFrontImage:user?.licenseFrontImage,
-      licenseBackImage:user?.licenseBackImage
+      licenseFrontImage: user?.licenseFrontImage,
+      licenseBackImage: user?.licenseBackImage,
     };
   });
-  console.log(formattedTableData)
+  console.log(formattedTableData);
 
   return (
     <div className=" rounded-md bg-white p-4">
@@ -162,10 +186,9 @@ console.log(userData)
         footer={false}
         onCancel={() => setOpenModal(false)}
       >
-  
         <div className="flex flex-col items-center justify-center">
           <img
-            src={userData?.avatar} 
+            src={userData?.avatar}
             className="mx-auto mt-5 rounded-full w-20"
             alt=""
           />
@@ -176,36 +199,34 @@ console.log(userData)
             <p>Email : {userData?.email} </p>
             <p>Address : {userData?.location}</p>
           </div>
-
-          
         </div>
         <div className="grid grid-cols-2 gap-4 mt-5">
-  <div className="flex flex-col items-center">
-    <h1 className="font-semibold">Licence Front Image:</h1>
-    {userData?.licenseFrontImage ? (
-      <img
-        src={`${imageUrl}/${userData.licenseFrontImage}`}
-        alt="Licence Front"
-        className="w-32 h-32 object-cover rounded shadow"
-      />
-    ) : (
-      "No licenseFrontImage"
-    )}
-  </div>
+          <div className="flex flex-col items-center">
+            <h1 className="font-semibold">Licence Front Image:</h1>
+            {userData?.licenseFrontImage ? (
+              <img
+                src={`${imageUrl}/${userData.licenseFrontImage}`}
+                alt="Licence Front"
+                className="w-32 h-32 object-cover rounded shadow"
+              />
+            ) : (
+              "No licenseFrontImage"
+            )}
+          </div>
 
-  <div className="flex flex-col items-center">
-    <h1 className="font-semibold">Licence Back Image:</h1>
-    {userData?.licenseBackImage ? (
-      <img
-        src={`${imageUrl}/${userData.licenseBackImage}`}
-        alt="Licence Back"
-        className="w-32 h-32 object-cover rounded shadow"
-      />
-    ) : (
-      "No licenceBackImage"
-    )}
-  </div>
-</div>
+          <div className="flex flex-col items-center">
+            <h1 className="font-semibold">Licence Back Image:</h1>
+            {userData?.licenseBackImage ? (
+              <img
+                src={`${imageUrl}/${userData.licenseBackImage}`}
+                alt="Licence Back"
+                className="w-32 h-32 object-cover rounded shadow"
+              />
+            ) : (
+              "No licenceBackImage"
+            )}
+          </div>
+        </div>
       </Modal>
     </div>
   );

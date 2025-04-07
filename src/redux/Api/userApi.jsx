@@ -86,6 +86,17 @@ const useApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["host"], 
     }),
+
+    deleteUser :  builder.mutation({
+      query : (data)=>{
+          return {
+              url : `/dashboard/delete-user`,
+              method : 'DELETE',
+              body: data,
+          }
+      },
+      invalidatesTags :['host']
+  }),
   }),
 });
 
@@ -99,4 +110,5 @@ export const {
   useChangePasswordMutation,
   useGetHostUserQuery,
   useBlockUserHostMutation,
+  useDeleteUserMutation
 } = useApi;
