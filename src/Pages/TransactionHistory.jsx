@@ -28,6 +28,7 @@ const TransactionHistory = () => {
     limit: pageSize,
     searchTerm: searchTerm,
   });
+  console.log(data)
 
   if (isError) {
     message.error("Error loading transactions.");
@@ -121,6 +122,13 @@ const TransactionHistory = () => {
       key: "key",
       render: (_, __, index) => (currentPage - 1) * pageSize + index + 1,
     },
+    {
+      title: "Date",
+      dataIndex: "updatedAt",
+      key: "updatedAt",
+      render: (text) => new Date(text).toLocaleString(), 
+    },
+    
     {
       title: "Renter Name",
       dataIndex: "user",
@@ -306,12 +314,15 @@ const TransactionHistory = () => {
         <p>Loading transactions...</p>
       ) : (
         <div>
-          <Table
-            dataSource={transactions}
-            columns={columns}
-            rowKey={(record) => record._id}
-            pagination={false}
-          />
+         <Table
+  dataSource={transactions}
+  columns={columns}
+  rowKey={(record) => record._id}
+  pagination={false}
+  scroll={{ x: 1000 }} // <-- এটায় horizontal scroll আসবে
+/>
+
+
           <div className="mt-4 flex justify-end">
             <Pagination
               current={currentPage}

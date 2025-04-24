@@ -385,6 +385,12 @@ const BankTransfer = () => {
       key: "key",
       render: (_, __, index) => (currentPage - 1) * pageSize + index + 1,
     },
+    {
+      title: "Date",
+      dataIndex: "updatedAt",
+      key: "updatedAt",
+      render: (text) => new Date(text).toLocaleString(), 
+    },
      {
           title: "Renter Name",
           dataIndex: "user",
